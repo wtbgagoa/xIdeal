@@ -1,3 +1,3 @@
 PacletUninstall["xIdeal"]
-xIdeal=CreatePacletArchive[Directory[]]
+xIdeal=CreatePacletArchive[NotebookDirectory[]]
 PacletInstall[xIdeal]

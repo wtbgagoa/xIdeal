@@ -13,7 +13,7 @@ PacletObject[
 			}
 		},
 		"URL" -> "http://www.xact.es",
-		"Description" -> "IDEAL characterizations in General Relativity",
+		"Description" -> "Identification of exact solutions in xAct",
 		"Creator" -> "Alfonso García-Parrado and Salvador Mengual © 2023 under GPL."
 	|>
 ]
