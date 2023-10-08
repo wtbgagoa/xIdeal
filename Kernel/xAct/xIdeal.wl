@@ -79,14 +79,18 @@ You should have received a copy of the GNU General Public License along with thi
 
 (* :Limitations: - ?? *)
 
-(*********************** 1.3 BeginPackage *********************************)
+(* ::Section:: *)
 
-With[{
+(* BeginPackage *)
+
+With[
+	{
 		xAct`xIdeal`Private`xIdealSymbols = 
-		DeleteCases[
-			Join[Names["xAct`xIdeal`*"], Names["xAct`xIdeal`Private`*"]], 
-			"$Version" | "xAct`xIdeal`$Version" | "$xTensorVersionExpected" | "xAct`xIdeal`$xTensorVersionExpected"
-		]
+			DeleteCases[
+				Join[Names["xAct`xIdeal`*"], Names["xAct`xIdeal`Private`*"]], 
+				"$Version" | "xAct`xIdeal`$Version" | "$xTensorVersionExpected" | 
+				"xAct`xIdeal`$xTensorVersionExpected"
+			]
 	},
 	Unprotect /@ xAct`xIdeal`Private`xIdealSymbols;
 	Clear /@ xAct`xIdeal`Private`xIdealSymbols;
@@ -99,15 +103,19 @@ If[Unevaluated[xAct`xCore`Private`$LastPackage] === xAct`xCore`Private`$LastPack
 
 (* Explicit (not hidden) import of xTensor, xPerm and xCore: *)
 
-BeginPackage["xAct`xIdeal`", {"xAct`xCoba`", "xAct`xTensor`", "xAct`xPerm`", "xAct`xCore`"}]
+BeginPackage["xAct`xIdeal`", {"xAct`xCoba`", "xAct`xTensor`", "xAct`xPerm`",
+	 "xAct`xCore`"}]
 
-If[Not @ OrderedQ @ Map[Last, {xAct`xIdeal`$xTensorVersionExpected, xAct`xTensor`$Version}],
-	Throw @ Message[General::versions, "xTensor", xAct`xTensor`$Version, xAct`xIdeal`$xTensorVersionExpected]
+If[Not @ OrderedQ @ Map[Last, {xAct`xIdeal`$xTensorVersionExpected, xAct`xTensor`$Version
+	}],
+	Throw @ Message[General::versions, "xTensor", xAct`xTensor`$Version,
+		 xAct`xIdeal`$xTensorVersionExpected]
 ]
 
 Print[xAct`xCore`Private`bars]
 
-Print["Package xAct`xIdeal`  version ", xAct`xIdeal`$Version[[1]], ", ", xAct`xIdeal`$Version[[2]]];
+Print["Package xAct`xIdeal`  version ", xAct`xIdeal`$Version[[1]], ", ",
+	 xAct`xIdeal`$Version[[2]]];
 
 Print["Copyright (C) 2023, Alfonso Garcia-Parrado Gomez-Lobo and Salvador Mengual Sendra, under the General Public License."
 	];
@@ -115,7 +123,7 @@ Print["Copyright (C) 2023, Alfonso Garcia-Parrado Gomez-Lobo and Salvador Mengua
 Off[General::shdw]
 
 xAct`xIdeal`Disclaimer[] :=
-	Print[                                             "These are points 11 and 12 of the General Public License:\n\n
+	Print[                                                   "These are points 11 and 12 of the General Public License:\n\n
 BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. 
 EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM `AS IS\.b4 
 WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
@@ -146,15 +154,22 @@ If[xAct`xCore`Private`$LastPackage === "xAct`xIdeal`",
 
 $PrePrint = ScreenDollarIndices;
 
-(***************************** 1.5. Usage messages  ********************************************)
-
-(* Definition and undefinition of a differential form (just a wrapper for DefTensor with the option GradeOfTensor\[Rule]{Wedge})*)
+(* ::Section:: *)
+(* Usage information *)
 
 PetrovType::usage = " ";
 
 DebeverNullDirections::usage = " ";
 
-(************************************** 1.6 BeginPrivate *********************************)
+TypeDClassify::usage = " ";
+
+(* ::Section:: *)
+(* Messages *)
+
+PetrovType::nometric = "Metric `1` has not been registered as a metric";
+
+(* ::Section:: *)
+(* BeginPrivate *)
 
 Begin["`Private`"]
 
@@ -164,7 +179,8 @@ Begin["`Private`"]
 
 (******************************************************************************)
 
-(***************** 2.1 Computation of Petrov type ************************)
+(* ::Section:: *)
+(* Computation of the Petrov types *)
 
 (*
 Explanation
@@ -221,32 +237,11 @@ PetrovType[metric_CTensor] :=
 			]
 		]
 
-SymbolicPositiveQ[x_, opts : OptionsPattern[]] :=
-	Block[{$Assumptions = $Assumptions},
-		Print[$Assumptions];
-		$Assumptions = Join[{OptionValue[Assumptions]}, $Assumptions];
-		Print[$Assumptions];
-		Which[
-			Simplify[x] === 0,
-				False
-			,
-			Simplify[x] === Zero,
-				False
-			,
-			Simplify[x + Abs[x]] === 0,
-				False
-			,
-			Simplify[x - Abs[x]] === 0,
-				True
-			,
-			True,
-				"Undefined"
-		]
-	]
 
-(***************** 2.1 Computation of Deveber null directions for each Petrov type ************************)
+(* ::Section:: *)
+(* Computation of Deveber null directions for each Petrov type *)
 
-(* We should have private or public functions for the different \
+(* TODO: we should have private or public functions for the different 
 concommitants *)
 
 DebeverNullDirections[metric_CTensor, u_CTensor, w_CTensor] :=
@@ -322,6 +317,132 @@ DebeverNullDirections[metric_CTensor, u_CTensor, w_CTensor] :=
 				Print["Type I"]
 		]
 	]
+
+(* ::Section:: *)
+(*  Classification of type D metrics*)
+
+(* Test when a symbolic function is non-negative *)
+Options[SymbolicPositiveQ] := {Assumptions -> True};
+SymbolicPositiveQ[x_, opts : OptionsPattern[]] :=
+	Block[{$Assumptions = $Assumptions},	
+		$Assumptions = Join[{OptionValue[Assumptions]}, $Assumptions];
+		Which[
+			Simplify[x] === 0,
+				False
+			,
+			Simplify[x] === Zero,
+				False
+			,
+			Simplify[x + Abs[x]] === 0,
+				False
+			,
+			Simplify[x - Abs[x]] === 0,
+				True
+			,
+			True,
+				"Undefined"
+		]
+	]
+
+Options[TypeDClassify] = {Assumptions -> True}
+
+TypeDClassify[metric_CTensor, w_CTensor, OptionsPattern[]] :=
+	Catch @
+		Module[{cart, CD, W, RiemannCD, RicciCD, RicciScalarCD, epsilonmetric,
+			 W2, W3, TrW3, rho, drho, dlogrho, alpha, S, P, Q, C3, a, b, c, d, e,
+			 f, i, j, k, l, C5, assumptionsC5},
+			If[Not @ MetricQ @ metric,
+				Throw[Message[PetrovType::nometric, metric]]
+			];
+			assumptionsC5 = OptionValue[Assumptions];
+			cart = Part[metric, 2, 1, -1];
+			{a, b, c, d, e, f, i, j, k, l} = GetIndicesOfVBundle[Tangent @ ManifoldOfChart
+				 @ cart, 10];
+			MetricCompute[metric, cart, All, Parallelize -> True, Verbose -> True
+				];
+			CD = CovDOfMetric[metric];
+			W = Weyl[CD];
+			RiemannCD = Riemann[CD];
+			RicciCD = Ricci[CD];
+			RicciScalarCD = RicciScalar[CD];
+			epsilonmetric = epsilon[metric];
+			W2 = HeadOfTensor[1/2 W[-a, -b, i, j] W[-i, -j, -c, -d], {-a, -b, -c, -d}] // Simplify;
+			W3 = HeadOfTensor[1/2 W2[-a, -b, i, j] W[-i, -j, -c, -d], {-a, -b, -c, -d}] // Simplify;
+			TrW3 = 1/2 W3[-i, -j, i, j] // Simplify;
+			rho = -(1/12 TrW3) ^ (1/3) // FullSimplify;
+			drho = CTensor[Grad[rho, ScalarsOfChart @ cart], {-cart}] // Simplify;
+			dlogrho = CTensor[Grad[Log[rho], ScalarsOfChart @ cart], {-cart}] // Simplify;
+			alpha = 1/9 metric[-i, -j] dlogrho[i] dlogrho[j] - 2 rho // FullSimplify;
+			S = HeadOfTensor[1 / (3 rho) (W[-a, -b, -c, -d] - 
+			rho (metric[-a, -c] metric[-b, -d] - metric[-a, -d] metric[-b, -c])), {-a, -b, -c, -d}] // Simplify;
+			P = HeadOfTensor[epsilonmetric[-a, -b, -i, -j] W[-k, i, -l, j] drho[k] drho[l], {-a, -b}] // Simplify;
+			Q = HeadOfTensor[S[-i, -a, -j, -b] drho[i] drho[j], {-a, -b}] // Simplify;
+			C3 = 1/2 S[-a, -b, -i, -j] S[i, j, -c, -d] + S[-a, -b, -c, -d] // Simplify;
+			C5 = 2 Q[-i, -j] w[i] w[j] + Q[-k, k] // Simplify;
+			Which[
+				RicciCD =!= Zero,
+					Print["No vacuum"]
+				,
+				rho === Zero || C3 =!= 0,
+					Print["Vacuum no Type D"]
+				,
+				P === Zero,
+					Which[
+						SymbolicPositiveQ[C5, Assumptions -> assumptionsC5] === "Undefined",
+							
+							"Undefined sign in C5"
+						,
+						SymbolicPositiveQ[C5, Assumptions -> assumptionsC5],
+							Which[
+								SymbolicPositiveQ[alpha, Assumptions -> assumptionsC5] === "Undefined",
+									
+									"Undefined sign in \[Alpha]"
+								,
+								SymbolicPositiveQ[alpha, Assumptions -> assumptionsC5],
+									"\!\(\*SubscriptBox[\(A\), \(1\)]\)-metric"
+								,
+								alpha === Zero,
+									"\!\(\*SubscriptBox[\(A\), \(3\)]\)-metric"
+								,
+								Not @ SymbolicPositiveQ[alpha, Assumptions -> assumptionsC5],
+									
+									"\!\(\*SubscriptBox[\(A\), \(2\)]\)-metric"
+								,
+								True,
+									(*Should be "Undefined" *)SymbolicPositiveQ[alpha, Assumptions
+										 -> assumptionsC5]
+							]
+						,
+						Not @ SymbolicPositiveQ[C5, Assumptions -> assumptionsC5],
+							Which[
+								SymbolicPositiveQ[alpha, Assumptions -> assumptionsC5] === "Undefined",
+									
+									"Undefined sign in \[Alpha]"
+								,
+								SymbolicPositiveQ[alpha, Assumptions -> assumptionsC5],
+									"\!\(\*SubscriptBox[\(B\), \(1\)]\)-metric"
+								,
+								alpha === Zero,
+									"\!\(\*SubscriptBox[\(B\), \(3\)]\)-metric"
+								,
+								Not @ SymbolicPositiveQ[alpha, Assumptions -> assumptionsC5],
+									
+									"\!\(\*SubscriptBox[\(B\), \(2\)]\)-metric"
+								,
+								True,
+									(*Should be "Undefined" *)
+									SymbolicPositiveQ[alpha, Assumptions -> assumptionsC5]
+							]
+						,
+						True,
+							(*Should be "Undefined" *)
+							SymbolicPositiveQ[alpha, Assumptions -> assumptionsC5]
+					]
+				,
+				True,
+					Print["C-metric"];
+			]
+		]
 
 (****************************************************************)
 
