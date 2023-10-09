@@ -322,6 +322,7 @@ DebeverNullDirections[metric_CTensor, u_CTensor, w_CTensor] :=
 (*  Classification of type D metrics*)
 
 (* Test when a symbolic function is non-negative *)
+(*To do: fix the fact that assumptions added through options don't work properly.*)
 Options[SymbolicPositiveQ] := {Assumptions -> True};
 SymbolicPositiveQ[x_, opts : OptionsPattern[]] :=
 	Block[{$Assumptions = $Assumptions},	
