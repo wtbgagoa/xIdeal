@@ -22,8 +22,9 @@
     manipulation of abstract and component tensor expressions. xTensor and xCoba can be downloaded from http://www.xact.es/
 *)
 
-(* ::Input::Initialization:: *)
 
+
+(* ::Input::Initialization:: *)
 xAct`xIdeal`$xTensorVersionExpected = {"1.1.2", {2015, 8, 23}};
 
 xAct`xIdeal`$Version = {"0.0.1", {2023, 10, 3}};
@@ -79,9 +80,11 @@ You should have received a copy of the GNU General Public License along with thi
 
 (* :Limitations: - ?? *)
 
-(* ::Section:: *)
 
+
+(* ::Section:: *)
 (* BeginPackage *)
+
 
 With[
 	{
@@ -154,8 +157,11 @@ If[xAct`xCore`Private`$LastPackage === "xAct`xIdeal`",
 
 $PrePrint = ScreenDollarIndices;
 
+
+
 (* ::Section:: *)
 (* Usage information *)
+
 
 PetrovType::usage = " ";
 
@@ -163,13 +169,19 @@ DebeverNullDirections::usage = " ";
 
 TypeDClassify::usage = " ";
 
+
+
 (* ::Section:: *)
 (* Messages *)
 
+
 PetrovType::nometric = "Metric `1` has not been registered as a metric";
+
+
 
 (* ::Section:: *)
 (* BeginPrivate *)
+
 
 Begin["`Private`"]
 
@@ -179,11 +191,15 @@ Begin["`Private`"]
 
 (******************************************************************************)
 
+
+
 (* ::Section:: *)
 (* Computation of the Petrov types *)
 
+
 (*
-Explanation
+TODO: there are different algorithms for doing this computation. Add Method option
+to be able to choose between them. Add names for each method option.
 *)
 
 PetrovType[metric_CTensor] :=
@@ -241,8 +257,12 @@ PetrovType[metric_CTensor] :=
 (* ::Section:: *)
 (* Computation of Deveber null directions for each Petrov type *)
 
-(* TODO: we should have private or public functions for the different 
-concommitants *)
+
+(* TODO: we should have private or public functions for the different concommitants *)
+(*
+TODO: there are different algorithms for doing this computation. Add Method option
+to be able to choose between them. Add names for each method option.
+*)
 
 DebeverNullDirections[metric_CTensor, u_CTensor, w_CTensor] :=
 	Module[{cart, a, b, c, d, e, f, i, j, CD, WeylCD, RiemannCD, RicciCD,
@@ -318,15 +338,20 @@ DebeverNullDirections[metric_CTensor, u_CTensor, w_CTensor] :=
 		]
 	]
 
+
+
 (* ::Section:: *)
 (*  Classification of type D metrics*)
 
+
 (* Test when a symbolic function is non-negative *)
-(*To do: fix the fact that assumptions added through options don't work properly.*)
+(* 
+Recall that the value of Assumptions option is always logical statement. 
+Therefore it should be expressed in terms of the logical syntax  
+*)
 Options[SymbolicPositiveQ] := {Assumptions -> True};
 SymbolicPositiveQ[x_, opts : OptionsPattern[]] :=
-	Block[{$Assumptions = $Assumptions},	
-		$Assumptions = Join[{OptionValue[Assumptions]}, $Assumptions];
+	Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
 		Which[
 			Simplify[x] === 0,
 				False
@@ -344,6 +369,7 @@ SymbolicPositiveQ[x_, opts : OptionsPattern[]] :=
 				"Undefined"
 		]
 	]
+
 
 Options[TypeDClassify] = {Assumptions -> True}
 
