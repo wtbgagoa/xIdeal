@@ -171,6 +171,8 @@ TypeDClassify::usage = " ";
 
 PSimplify::usage = " ";
 
+IsometryGroupDimension::usage = " ";
+
 
 (* ::Section:: *)
 (* Messages *)
@@ -462,6 +464,151 @@ TypeDClassify[metric_CTensor, w_CTensor, OptionsPattern[]] :=
 					Print["C-metric"];
 			]
 		]
+
+
+
+(* ::Section:: *)
+(*  Determination of the dimension of the isometry group*)
+
+
+IsometryGroupDimension[metric_CTensor, e0_CTensor, e1_CTensor, e2_CTensor, e3_CTensor] :=
+ 	Catch@ 
+  		Module[{cart, CD,
+    			epsilonmetric, H, C1, C2, C3, C4, C11, C12, C122, C123, C1233, 
+    			C1234, C1222, C1223, C111, C112, C1122, C1123, C1111, C1112, a, b,
+     			c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z},
+   			If[Not@MetricQ@metric, 
+    				Throw[Message[IsometryGroupDimension::nometric, metric]]];
+   			cart = Part[metric, 2, 1, -1];
+   			{a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, r, s, t, u, v, w,
+     			 x, y, z} = GetIndicesOfVBundle[Tangent@ManifoldOfChart@cart, 25];
+   			MetricCompute[metric, cart, All, Parallelize -> True, 
+    				Verbose -> True];
+   			CD = CovDOfMetric[metric];
+   			epsilonmetric = epsilon[metric];
+   			H = HeadOfTensor[-(1/2) (-(CD[a][e0[b]] e0[c] - CD[a][e0[c]] e0[b]) + (CD[a][e1[b]] e1[c] - CD[a][e1[c]] e1[b]) + (CD[a][e2[b]] e2[c] - 
+           			CD[a][e2[c]] e2[b]) + (CD[a][e3[b]] e3[c] - CD[a][e3[c]] e3[b])), {a, b, c}] // Simplify;
+   			C1 = Simplify[HeadOfTensor[CD[-a][H[-b, -c, -d]] + H[-a, -b, i] H[-i, -c, -d] + H[-a, -c, j] H[-b, -j, -d] + 
+				H[-a, -d, k] H[-b, -c, -k], {-a, -b, -c, -d}]];
+   			Which[
+      
+    				C1 === Zero,
+    					Print["\!\(\*SubscriptBox[\(G\), \(4\)]\)"],
+	 
+    				C11 = Simplify[HeadOfTensor[epsilonmetric[i, j, a, b] C1[-i, -c, -d, -e] C1[-j, -f, -g, -h], {a, b, -c, -d, -e, -f, -g, -h}]];
+    				C11 === Zero,
+    					Which[
+	 
+     						C2 = Simplify[HeadOfTensor[CD[-a][C1[-b, -c, -d, -e]] + H[-a, -b, i] C1[-i, -c, -d, -e] +
+	   						H[-a, -c, j] C1[-b, -j, -d, -e] + H[-a, -d, k] C1[-b, -c, -k, -e] + 
+         						H[-a, -e, l] C1[-b, -c, -d, -l], {-a, -b, -c, -d, -e}]];
+     						C12 = Simplify[HeadOfTensor[epsilonmetric[i, j, a, b] C1[-i, -c, -d, -e] C2[-j, -f, -g, -h, -k], 
+	   						{a, b, -c, -d, -e, -f, -g, -h, -k}]];
+     						C12 === Zero,
+     							Print["\!\(\*SubscriptBox[\(G\), \(3\)]\)"],
+     				
+     						C122 = Simplify[HeadOfTensor[epsilonmetric[i, j, k, a] C1[-i, -b, -c, -d] C2[-j, -e, -f, -g, -h] 
+	   						C2[-k, -l, -m, -n, -o], {a, -b, -c, -d, -e, -f, -g, -h, -l, -m, -n, -o}]];
+     						C122 === Zero,
+     							Which[
+	    
+      						  		C3 = Simplify[HeadOfTensor[CD[-a][C2[-b, -c, -d, -e, -f]] + H[-a, -b, i] C2[-i, -c, -d, -e, -f] + 
+              								H[-a, -c, j] C2[-b, -j, -d, -e, -f] + H[-a, -d, k] C2[-b, -c, -k, -e, -f] + 
+          								H[-a, -e, l] C2[-b, -c, -d, -l, -f] + H[-a, -f, m] C2[-b, -c, -d, -e, -m], 
+		  							{-a, -b, -c, -d, -e, -f}]];
+      								C123 = Simplify[HeadOfTensor[epsilonmetric[i, j, k, a] C1[-i, -b, -c, -d] C2[-j, -e, -f, -g, -h] 
+	      								C3[-k, -l, -m, -n, -o, -p], {a, -b, -c, -d, -e, -f, -g, -h, -l, -m, -n, -o, -p}]];
+      								C123 === Zero,
+      									Print["\!\(\*SubscriptBox[\(G\), \(2  b\)]\)"],
+      						
+      								C1233 = Simplify[HeadOfTensor[epsilonmetric[i, j, k, l] C1[-i, -a, -b, -c] C2[-j, -d, -e, -f, -g] 
+	      								C3[-k, -h, -m, -n, -o, -p] C3[-l, -q, -r, -s, -t, -u], 
+	      								{-a, -b, -c, -d, -e, -f, -g, -h, -m, -n, -o, -p, -q, -r, -s, -t, -u}]];
+      								Not[C1233 == Zero],
+      									Print["No symmetries"],
+      						
+      								C4 = Simplify[HeadOfTensor[CD[-a][C3[-b, -c, -d, -e, -f, -g]] + H[-a, -b, i] C3[-i, -c, -d, -e, -f, -g] + 
+          								H[-a, -c, j] C3[-b, -j, -d, -e, -f, -g] + H[-a, -d, k] C3[-b, -c, -k, -e, -f, -g] + 
+           								H[-a, -e, l] C3[-b, -c, -d, -l, -f, -g] + H[-a, -f, m] C3[-b, -c, -d, -e, -m, -g] + 
+          								H[-a, -g, n] C3[-b, -c, -d, -e, -f, -n], {-a, -b, -c, -d, -e, -f, -g}]];
+      								 C1234 = Simplify[HeadOfTensor[epsilonmetric[i, j, k, l] C1[-i, -a, -b, -c] C2[-j, -d, -e, -f, -g] 
+	       								C3[-k, -h, -m, -n, -o, -p] C4[-l, -q, -r, -s, -t, -u, -v], 
+									{-a, -b, -c, -d, -e, -f, -g, -h, -m, -n, -o, -p, -q, -r, -s, -t, -u, -v}]];
+      								C1234 === Zero,
+      									Print["\!\(\*SubscriptBox[\(G\), \(1  d\)]\)"],
+	       
+      								True,
+      									Print["No symmetries"]
+      							],
+     				
+     						C1222 = Simplify[HeadOfTensor[epsilonmetric[i, j, k, l] C1[-i, -a, -b, -c] C2[-j, -d, -e, -f, -g] 
+	   						C2[-k, -h, -m, -n, -o] C2[-l, -p, -q, -r, -s], 
+	  						{-a, -b, -c, -d, -e, -f, -g, -h, -m, -n, -o, -p, -q, -r, -s}]];
+     						Not[C1222 === Zero],
+     							Print["No symmetries"],
+     				
+     						C3 = Simplify[HeadOfTensor[CD[-a][C2[-b, -c, -d, -e, -f]] + H[-a, -b, i] C2[-i, -c, -d, -e, -f] + 
+         						H[-a, -c, j] C2[-b, -j, -d, -e, -f] + H[-a, -d, k] C2[-b, -c, -k, -e, -f] + 
+         						H[-a, -e, l] C2[-b, -c, -d, -l, -f] + H[-a, -f, m] C2[-b, -c, -d, -e, -m],
+	       						{-a, -b, -c, -d, -e, -f}]];
+     						C1223 = Simplify[HeadOfTensor[epsilonmetric[i, j, k, l] C1[-i, -a, -b, -c] C2[-j, -d, -e, -f, -g] 
+	   						C2[-k, -h, -m, -n, -o] C3[-l, -p, -q, -r, -s, -t], 
+	  						{-a, -b, -c, -d, -e, -f, -g, -h, -m, -n, -o, -p, -q, -r, -s, -t}]];
+     						C1223 === Zero,
+     							Print["\!\(\*SubscriptBox[\(G\), \(1  c\)]\)"],
+	    
+     						True,
+     							Print["No symmetries"]
+     					],
+    				C111 = Simplify[HeadOfTensor[epsilonmetric[i, j, k, a] C1[-i, -b, -c, -d] C1[-j, -e, -f, -g] C1[-k, -h, -m, -n],
+					{a, -b, -c, -d, -e, -f, -g, -h, -m, -n}]];
+    				C111 === Zero,
+    					Which[
+     				
+     						C2 = Simplify[HeadOfTensor[CD[-a][C1[-b, -c, -d, -e]] + H[-a, -b, i] C1[-i, -c, -d, -e] +
+          						H[-a, -c, j] C1[-b, -j, -d, -e] + H[-a, -d, k] C1[-b, -c, -k, -e] + H[-a, -e, l] C1[-b, -c, -d, -l], 
+	       						{-a, -b, -c, -d, -e}]];
+     						C112 = Simplify[HeadOfTensor[epsilonmetric[i, j, k, a] C1[-i, -b, -c, -d] C1[-j, -e, -f, -g] C2[-k, -h, -m, -n, -o], 
+	   						{a, -b, -c, -d, -e, -f, -g, -h, -m, -n, -o}]];
+     						C112 === Zero,
+     							Print["\!\(\*SubscriptBox[\(G\), \(2  a\)]\)"],
+     				
+     						C1122 = Simplify[HeadOfTensor[epsilonmetric[i, j, k, l] C1[-i, -a, -b, -c] C1[-j, -d, -e, -f] C2[-k, -g, -h, -m, -n] 
+	   						C2[-l, -o, -p, -q, -r], {-a, -b, -c, -d, -e, -f, -g, -h, -m, -n, -o, -p, -q, -r}]];
+     						Not[C1122 === Zero],
+     							Print["No symmetries"],
+     				
+     						C3 = Simplify[HeadOfTensor[CD[-a][C2[-b, -c, -d, -e, -f]] + H[-a, -b, i] C2[-i, -c, -d, -e, -f] + 
+         						H[-a, -c, j] C2[-b, -j, -d, -e, -f] + H[-a, -d, k] C2[-b, -c, -k, -e, -f] + 
+         						H[-a, -e, l] C2[-b, -c, -d, -l, -f] + H[-a, -f, m] C2[-b, -c, -d, -e, -m], 
+	       							{-a, -b, -c, -d, -e, -f}]];
+     						C1123 = Simplify[HeadOfTensor[epsilonmetric[i, j, k, l] C1[-i, -a, -b, -c] C1[-j, -d, -e, -f] C2[-k, -g, -h, -m, -n] 
+	   						C3[-l, -o, -p, -q, -r, -s], {-a, -b, -c, -d, -e, -f, -g, -h, -m, -n, -o, -p, -q, -r, -s}]];
+     						C1123 === Zero,
+     							Print["\!\(\*SubscriptBox[\(G\), \(1  b\)]\)"],
+	    
+     						True,
+     							Print["No symmetries"]
+     					],
+    				C1111 = Simplify[HeadOfTensor[epsilonmetric[i, j, k, l] C1[-i, -a, -b, -c] C1[-j, -d, -e, -f] C1[-k, -g, -h, -m] C1[-l, -n, -o, -p], 
+					{-a, -b, -c, -d, -e, -f, -g, -h, -m, -n, -o, -p}]];
+    				Not[C1111 === Zero],
+    					Print["No symmetries"],
+	 
+    				C2 = Simplify[HeadOfTensor[CD[-a][C1[-b, -c, -d, -e]] + H[-a, -b, i] C1[-i, -c, -d, -e] + H[-a, -d, j] C1[-b, -c, -j, -e] + 
+        				H[-a, -d, k] C1[-b, -c, -k, -e] + H[-a, -e, l] C1[-b, -c, -d, -l], {-a, -b, -c, -d, -e}]];
+    				C1112 = Simplify[HeadOfTensor[epsilonmetric[i, j, k, l] C1[-i, -a, -b, -c] C1[-j, -d, -e, -f] C1[-k, -g, -h, -m] C2[-l, -n, -o, -p, -q], 
+					{-a, -b, -c, -d, -e, -f, -g, -h, -m, -n, -o, -p, -q}]];
+    				C1112 === Zero,
+    					Print["\!\(\*SubscriptBox[\(G\), \(1  a\)]\)"],
+	 
+    				True,
+    					Print["No symmetries C1112"]		
+    			]
+   
+   		]
+
+
 
 (****************************************************************)
 
