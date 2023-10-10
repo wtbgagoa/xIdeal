@@ -169,6 +169,7 @@ DebeverNullDirections::usage = " ";
 
 TypeDClassify::usage = " ";
 
+PSimplify::usage = " ";
 
 
 (* ::Section:: *)
@@ -201,39 +202,30 @@ Begin["`Private`"]
 TODO: there are different algorithms for doing this computation. Add Method option
 to be able to choose between them. Add names for each method option.
 *)
-
-PetrovType[metric_CTensor] :=
+Options[PetrovType] = {Method -> "Default", PSimplify -> $CVSimplify}
+PetrovType[metric_CTensor, OptionsPattern[]] :=
 	Catch @
-		Module[{cart, CD, WeylCD, RiemannCD, RicciCD, RicciScalarCD, epsilonmetric,
-			 WeylDual, WeylSelfDual, G2Form, WeylSelfDual2, WeylSelfDual3, aa, bb,
-			 rho, a, b, c, d, e, f, i, j},
+		Module[{cart, cd, weylcd, epsilonmetric, WeylDual, WeylSelfDual, G2Form, WeylSelfDual2, WeylSelfDual3, aa, bb,
+			 rho, a1, b1, c1, d1, e1, f1, i, j, simplf},
 			If[Not @ MetricQ @ metric,
 				Throw[Message[PetrovType::nometric, metric]]
 			];
+			simplf = OptionValue[PSimplify];
 			cart = Part[metric, 2, 1, -1];
-			{a, b, c, d, e, f, i, j} = GetIndicesOfVBundle[Tangent @ ManifoldOfChart
-				 @ cart, 8];
-			MetricCompute[metric, cart, All, Parallelize -> True, Verbose -> True
-				];
-			CD = CovDOfMetric[metric];
-			WeylCD = Weyl[CD];
-			RiemannCD = Riemann[CD];
-			RicciCD = Ricci[CD];
-			RicciScalarCD = RicciScalar[CD];
+			{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[Tangent @ ManifoldOfChart@ cart, 6];
+			MetricCompute[metric, cart, "Weyl"[-1, -1, -1, -1], Parallelize -> True, Verbose -> True];
+			cd = CovDOfMetric[metric];
+			weylcd = Weyl[cd];
 			epsilonmetric = epsilon[metric];
-			WeylDual = Simplify[HeadOfTensor[1/2 epsilonmetric[-c, -d, -e, -f]
-				 WeylCD[e, f, -a, -b], {-c, -d, -a, -b}]];
-			WeylSelfDual = Simplify[1/2 (WeylCD - I * WeylDual)];
-			G2Form = Simplify[HeadOfTensor[1/2 (-I epsilonmetric[-a, -b, -c, -
-				d] + metric[-a, -c] metric[-b, -d] - metric[-a, -d] metric[-b, -c]), 
-				{-a, -b, -c, -d}]];
-			WeylSelfDual2 = Simplify[HeadOfTensor[1/2 WeylSelfDual[-a, -b, i, 
-				j] WeylSelfDual[-i, -j, -c, -d], {-a, -b, -c, -d}]];
-			aa = Simplify[1/2 WeylSelfDual2[-a, -b, a, b]];
-			WeylSelfDual3 = Simplify[HeadOfTensor[1/2 WeylSelfDual2[-a, -b, i,
-				 j] WeylSelfDual[-i, -j, -c, -d], {-a, -b, -c, -d}]];
-			bb = Simplify[WeylSelfDual3[-a, -b, a, b] / 2];
-			rho = Simplify[-bb / aa];
+			WeylDual = simplf[HeadOfTensor[1/2 epsilonmetric[-c1, -d1, -e1, -f1] weylcd[e1, f1, -a1, -b1], {-c1, -d1, -a1, -b1}]];
+			WeylSelfDual = simplf[1/2 (weylcd - I * WeylDual)];
+			G2Form = simplf[HeadOfTensor[1/2 (-I epsilonmetric[-a1, -b1, -c1, -d1] + metric[-a1, -c1] metric[-b1, -d1] - metric[-a1, -d1] metric[-b1, -c1]), 
+				{-a1, -b1, -c1, -d1}]];
+			WeylSelfDual2 = simplf[HeadOfTensor[1/2 WeylSelfDual[-a1, -b1, e1, f1] WeylSelfDual[-e1, -f1, -c1, -d1], {-a1, -b1, -c1, -d1}]];
+			aa = simplf[1/2 WeylSelfDual2[-a1, -b1, a1, b1]];
+			WeylSelfDual3 = simplf[HeadOfTensor[1/2 WeylSelfDual2[-a1, -b1, e1, f1] WeylSelfDual[-e1, -f1, -c1, -d1], {-a1, -b1, -c1, -d1}]];
+			bb = simplf[WeylSelfDual3[-a1, -b1, a1, b1] / 2];
+			rho = simplf[-bb / aa];
 			Which[
 				WeylSelfDual2 === Zero,
 					Print["Type N"]
@@ -241,7 +233,7 @@ PetrovType[metric_CTensor] :=
 				WeylSelfDual3 === Zero,
 					Print["Type III"]
 				,
-				Simplify[aa WeylSelfDual2 - aa^2 / 3 G2Form - bb WeylSelfDual] ===
+				simplf[aa WeylSelfDual2 - aa^2 / 3 G2Form - bb WeylSelfDual] ===
 					 Zero,
 					Print["Type D"]
 				,
