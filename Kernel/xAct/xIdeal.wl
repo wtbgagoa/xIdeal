@@ -350,7 +350,7 @@ Recall that the value of Assumptions option is always logical statement.
 Therefore it should be expressed in terms of the logical syntax  
 *)
 Options[SymbolicPositiveQ] := {Assumptions -> True};
-SymbolicPositiveQ[x_, opts : OptionsPattern[]] :=
+SymbolicPositiveQ[x_, OptionsPattern[]] :=
 	Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
 		Which[
 			Simplify[x] === 0,
