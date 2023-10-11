@@ -188,13 +188,42 @@ PetrovType::nometric = "Metric `1` has not been registered as a metric";
 
 Begin["`Private`"]
 
-(******************************************************************************)
-
-(********************* 2. Basic structures ************************************)
-
-(******************************************************************************)
+(* ::Section:: *)
+(* Computation of the Weyl concomitants *)
 
 
+weylConcomitant["Weyl"][metric_CTensor, opts___] :=
+(weylConcomitant["Weyl"][metric, opts] = 
+	Module[{cart, cd},
+		cart = 	Part[metric, 2, 1, -1];
+		cd = CovDOfMetric[metric];
+		MetricCompute[metric, cart, "Weyl"[-1, -1, -1, -1], Parallelize -> True, Verbose -> True];
+		Weyl[cd]
+	]
+)
+
+
+weylConcomitant["WeylDual"][metric_CTensor, opts___] :=
+(weylConcomitant["WeylDual"][metric, opts] = 
+	Module[{simplf, cart, a1, b1, c1, d1, e1, f1, cd, weylcd, epsilonmetric, weyldual},
+		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[Tangent @ ManifoldOfChart@ cart, 6];
+		cd = CovDOfMetric[metric];
+		epsilonmetric = epsilon[metric];
+		weylcd = weylConcomitant["Weyl"][metric, opts];
+		weyldual = simplf[HeadOfTensor[1/2 epsilonmetric[-c1, -d1, -e1, -f1] weylcd[e1, f1, -a1, -b1], {-c1, -d1, -a1, -b1}]]
+	]
+)
+
+
+weylConcomitant["WeylSelfDual"][metric_CTensor, opts___] :=
+(weylConcomitant["WeylSelfDual"][metric, opts] = 
+	Module[{simplf},
+		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		simplf[1/2 (weylConcomitant["Weyl"][metric, opts] - I * weylConcomitant["WeylDual"][metric, opts])]
+	]
+)
 
 (* ::Section:: *)
 (* Computation of the Petrov types *)
@@ -205,9 +234,9 @@ TODO: there are different algorithms for doing this computation. Add Method opti
 to be able to choose between them. Add names for each method option.
 *)
 Options[PetrovType] = {Method -> "Default", PSimplify -> $CVSimplify}
-PetrovType[metric_CTensor, OptionsPattern[]] :=
+PetrovType[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch @
-		Module[{cart, cd, weylcd, epsilonmetric, WeylDual, WeylSelfDual, G2Form, WeylSelfDual2, WeylSelfDual3, aa, bb,
+		Module[{cart, cd, weylcd, epsilonmetric, weyldual, weylselfdual, G2Form, WeylSelfDual2, WeylSelfDual3, aa, bb,
 			 rho, a1, b1, c1, d1, e1, f1, i, j, simplf},
 			If[Not @ MetricQ @ metric,
 				Throw[Message[PetrovType::nometric, metric]]
@@ -215,17 +244,16 @@ PetrovType[metric_CTensor, OptionsPattern[]] :=
 			simplf = OptionValue[PSimplify];
 			cart = Part[metric, 2, 1, -1];
 			{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[Tangent @ ManifoldOfChart@ cart, 6];
-			MetricCompute[metric, cart, "Weyl"[-1, -1, -1, -1], Parallelize -> True, Verbose -> True];
-			cd = CovDOfMetric[metric];
-			weylcd = Weyl[cd];
 			epsilonmetric = epsilon[metric];
-			WeylDual = simplf[HeadOfTensor[1/2 epsilonmetric[-c1, -d1, -e1, -f1] weylcd[e1, f1, -a1, -b1], {-c1, -d1, -a1, -b1}]];
-			WeylSelfDual = simplf[1/2 (weylcd - I * WeylDual)];
+			cd = CovDOfMetric[metric];
+			weylcd = weylConcomitant["Weyl"][metric, opts];
+			weyldual = weylConcomitant["WeylDual"][metric, opts];
+			weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
 			G2Form = simplf[HeadOfTensor[1/2 (-I epsilonmetric[-a1, -b1, -c1, -d1] + metric[-a1, -c1] metric[-b1, -d1] - metric[-a1, -d1] metric[-b1, -c1]), 
 				{-a1, -b1, -c1, -d1}]];
-			WeylSelfDual2 = simplf[HeadOfTensor[1/2 WeylSelfDual[-a1, -b1, e1, f1] WeylSelfDual[-e1, -f1, -c1, -d1], {-a1, -b1, -c1, -d1}]];
+			WeylSelfDual2 = simplf[HeadOfTensor[1/2 weylselfdual[-a1, -b1, e1, f1] weylselfdual[-e1, -f1, -c1, -d1], {-a1, -b1, -c1, -d1}]];
 			aa = simplf[1/2 WeylSelfDual2[-a1, -b1, a1, b1]];
-			WeylSelfDual3 = simplf[HeadOfTensor[1/2 WeylSelfDual2[-a1, -b1, e1, f1] WeylSelfDual[-e1, -f1, -c1, -d1], {-a1, -b1, -c1, -d1}]];
+			WeylSelfDual3 = simplf[HeadOfTensor[1/2 WeylSelfDual2[-a1, -b1, e1, f1] weylselfdual[-e1, -f1, -c1, -d1], {-a1, -b1, -c1, -d1}]];
 			bb = simplf[WeylSelfDual3[-a1, -b1, a1, b1] / 2];
 			rho = simplf[-bb / aa];
 			Which[
@@ -235,7 +263,7 @@ PetrovType[metric_CTensor, OptionsPattern[]] :=
 				WeylSelfDual3 === Zero,
 					Print["Type III"]
 				,
-				simplf[aa WeylSelfDual2 - aa^2 / 3 G2Form - bb WeylSelfDual] ===
+				simplf[aa WeylSelfDual2 - aa^2 / 3 G2Form - bb weylselfdual] ===
 					 Zero,
 					Print["Type D"]
 				,
