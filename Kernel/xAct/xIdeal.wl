@@ -335,6 +335,52 @@ weylConcomitant["TensorXi"][metric_CTensor, opts___] :=
 
 
 (* ::Section:: *)
+(* Computation of the R-frame concomitants *)
+(*
+NOTE: I put H as an input in the functions that compute its derivative concomitants
+instead of calling RframeConcomitant["ConnectionTensor"] in case it is not computed from the R-frame.
+
+TODO: Do the same in IsometryGroupDimension for the same reason.
+*)
+
+RframeConcomitant["ConnectionTensor"][metric_CTensor, e0_CTensor, e1_CTensor, e2_CTensor, e3_CTensor, opts___] :=
+(RframeConcomitant["ConnectionTensor"][metric, e0, e1, e2, e3, opts] = 
+	Module[{simplf, cart, cd, a1, b1, c1},
+		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 3];
+		cd = CovDOfMetric[metric];
+		simplf[HeadOfTensor[-(1/2) (-(cd[a1][e0[b1]] e0[c1] - cd[a1][e0[c1]] e0[b1]) + (cd[a1][e1[b1]] e1[c1] - cd[a1][e1[c1]] e1[b1]) + (cd[a1][e2[b1]] e2[c1] - 
+           			cd[a1][e2[c1]] e2[b1]) + (cd[a1][e3[b1]] e3[c1] - cd[a1][e3[c1]] e3[b1])), {-a1, -b1, -c1}]]
+	]
+ )
+
+RframeConcomitant["C1"][metric_CTensor, H_CTensor, opts___] :=
+(RframeConcomitant["C1"][metric, H, opts] = 
+	Module[{simplf, cart, cd, a1, b1, c1, d1, i1},
+		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1, i1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 5];
+		cd = CovDOfMetric[metric];
+		simplf[HeadOfTensor[cd[-a1][H[-b1, -c1, -d1]] + H[-a1, -b1, i1] H[-i1, -c1, -d1] + H[-a1, -c1, i1] H[-b1, -i1, -d1] + 
+				H[-a1, -d1, i1] H[-b1, -c1, -i1], {-a1, -b1, -c1, -d1}]]
+  	]
+)
+
+RframeConcomitant["C11"][metric_CTensor, H_CTensor, opts___] :=
+(RframeConcomitant["C11"][metric, H, opts] = 
+	Module[{simplf, cart, epsilonmetric, ce1, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1},
+		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 10];
+  		epsilonmetric = epsilon[metric];
+    		ce1 = RframeConcomitant["C1"][metric, H, opts];
+		simplf[HeadOfTensor[epsilonmetric[i1, j1, a1, b1] C1[-i1, -c1, -d1, -e1] C1[-j1, -f1, -g1, -h1], {a1, b1, -c1, -d1, -e1, -f1, -g1, -h1}]]
+  	]
+)
+
+
+(* ::Section:: *)
 (* Computation of the Petrov types *)
 
 
