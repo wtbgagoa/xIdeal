@@ -173,6 +173,8 @@ PSimplify::usage = " ";
 
 IsometryGroupDimension::usage = " ";
 
+KerrSolutionQ::usage = " ";
+
 
 (* ::Section:: *)
 (* Messages *)
@@ -196,7 +198,7 @@ metricConcomitant["G2Form"][metric_CTensor, opts___] :=
 	Module[{simplf, cart, a1, b1, c1, d1, e1, f1, epsilonmetric},
 		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
 		cart = 	Part[metric, 2, 1, -1];
-		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[Tangent @ ManifoldOfChart@ cart, 6];
+		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
 		epsilonmetric = epsilon[metric];
 		simplf[
 			HeadOfTensor[
@@ -228,7 +230,7 @@ weylConcomitant["WeylDual"][metric_CTensor, opts___] :=
 	Module[{simplf, cart, a1, b1, c1, d1, e1, f1, cd, weylcd, epsilonmetric, weyldual},
 		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
 		cart = Part[metric, 2, 1, -1];
-		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[Tangent @ ManifoldOfChart@ cart, 6];
+		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
 		cd = CovDOfMetric[metric];
 		epsilonmetric = epsilon[metric];
 		weylcd = weylConcomitant["Weyl"][metric, opts];
@@ -249,10 +251,21 @@ weylConcomitant["WeylSelfDual2"][metric_CTensor, opts___] :=
 (weylConcomitant["WeylSelfDual2"][metric, opts] = 
 	Module[{simplf, weylselfdual, cart, a1, b1, c1, d1, e1, f1},
 		cart = Part[metric, 2, 1, -1];
-		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[Tangent @ ManifoldOfChart@ cart, 6];
+		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
 		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
 		weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
 		simplf[HeadOfTensor[1/2 weylselfdual[-a1, -b1, e1, f1] weylselfdual[-e1, -f1, -c1, -d1], {-a1, -b1, -c1, -d1}]]
+	]
+)
+
+weylConcomitant["TraceWeylSelfDual2"][metric_CTensor, opts___] :=
+(weylConcomitant["TraceWeylSelfDual2"][metric, opts] = 
+	Module[{weylselfdual2, simplf, cart, a1, b1},
+		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
+		weylselfdual2 = weylConcomitant["WeylSelfDual2"][metric, opts];
+		simplf[weylselfdual2[-a1, -b1, a1, b1] / 2]
 	]
 )
 
@@ -261,7 +274,7 @@ weylConcomitant["WeylSelfDual3"][metric_CTensor, opts___] :=
 	Module[{simplf, weylselfdual, weylselfdual2, cart, a1, b1, c1, d1, e1, f1},
 		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
 		cart = Part[metric, 2, 1, -1];
-		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[Tangent @ ManifoldOfChart@ cart, 6];
+		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
 		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
 		weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
 		weylselfdual2 = weylConcomitant["WeylSelfDual2"][metric, opts];
@@ -269,6 +282,56 @@ weylConcomitant["WeylSelfDual3"][metric_CTensor, opts___] :=
 	]
 )
 
+weylConcomitant["TraceWeylSelfDual3"][metric_CTensor, opts___] :=
+(weylConcomitant["TraceWeylSelfDual3"][metric, opts] = 
+	Module[{weylselfdual3, simplf, cart, a1, b1},
+		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
+		weylselfdual3 = weylConcomitant["WeylSelfDual3"][metric, opts];
+		simplf[weylselfdual3[-a1, -b1, a1, b1] / 2]
+	]
+)
+
+weylConcomitant["ScalarW"][metric_CTensor, opts___] :=
+(weylConcomitant["ScalarW"][metric, opts] = 
+	Module[{simplf, cart, weylselfdual, g2form, aa, bb, w, cd, a1, b1, c1, d1},
+		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		cart = Part[metric, 2, 1, -1];
+		{b1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
+		weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
+		g2form = metricConcomitant["G2Form"][metric, opts];
+		aa = 2 weylConcomitant["TraceWeylSelfDual2"][metric, opts];
+		bb = 2 weylConcomitant["TraceWeylSelfDual3"][metric, opts];
+		w = simplf[-bb / (2 aa)]
+	]
+)
+
+weylConcomitant["ScalarZ"][metric_CTensor, opts___] :=
+(weylConcomitant["ScalarZ"][metric, opts] = 
+	Module[{simplf, cart, weylselfdual, g2form, w, cd, a1, b1, c1, d1},
+		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		cart = Part[metric, 2, 1, -1];
+		{b1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];		
+		cd = CovDOfMetric[metric];
+		w = weylConcomitant["ScalarW"][metric, opts];
+		simplf[(metric[b1, d1]) cd[-b1][w] cd[-d1][w]]
+	]
+)
+
+weylConcomitant["TensorXi"][metric_CTensor, opts___] :=
+(weylConcomitant["TensorXi"][metric, opts] = 
+	Module[{simplf, cart, weylselfdual, g2form, w, cd, a1, b1, c1, d1},
+		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
+		weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
+		g2form = metricConcomitant["G2Form"][metric, opts];
+		w = weylConcomitant["ScalarW"][metric, opts];
+		cd = CovDOfMetric[metric];
+		simplf[(weylselfdual[-a1, b1, -c1, d1] - w g2form[-a1, b1, -c1, d1]) cd[-b1][w] cd[-d1][w]]
+	]
+)
 
 
 (* ::Section:: *)
@@ -283,23 +346,22 @@ Options[PetrovType] = {Method -> "Default", PSimplify -> $CVSimplify}
 PetrovType[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch @
 		Module[{cart, cd, weylcd, epsilonmetric, weyldual, weylselfdual, g2form, weylselfdual2, weylselfdual3, aa, bb,
-			 rho, a1, b1, c1, d1, e1, f1, simplf},
+			 rho, simplf},
 			If[Not @ MetricQ @ metric,
 				Throw[Message[PetrovType::nometric, metric]]
 			];
 			simplf = OptionValue[PSimplify];
 			cart = Part[metric, 2, 1, -1];
-			{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[Tangent @ ManifoldOfChart@ cart, 6];
 			epsilonmetric = epsilon[metric];
 			weylcd = weylConcomitant["Weyl"][metric, opts];
 			weyldual = weylConcomitant["WeylDual"][metric, opts];
 			weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
 			g2form = metricConcomitant["G2Form"][metric, opts];
 			weylselfdual2 = weylConcomitant["WeylSelfDual2"][metric, opts];
-			aa = simplf[1/2 weylselfdual2[-a1, -b1, a1, b1]];
+			aa = weylConcomitant["TraceWeylSelfDual2"][metric, opts];
 			weylselfdual3 = weylConcomitant["WeylSelfDual3"][metric, opts];
-			bb = simplf[weylselfdual3[-a1, -b1, a1, b1] / 2];
-			rho = simplf[-bb / aa];
+			bb = weylConcomitant["TraceWeylSelfDual3"][metric, opts];
+			rho = simplf[- bb / aa];
 			Which[
 				WeylSelfDual2 === Zero,
 					Print["Type N"]
@@ -536,6 +598,33 @@ TypeDClassify[metric_CTensor, w_CTensor, OptionsPattern[]] :=
 			]
 		]
 
+(* ::Section:: *)
+(* Identification of the Kerr metric *)
+
+KerrSolutionQ[metric_CTensor, opts : OptionsPattern[]] :=
+Catch @
+		Module[{cart, cd, weylcd, epsilonmetric, weyldual, weylselfdual, g2form, weylselfdual2, weylselfdual3, aa, bb,
+			 rho, a1, b1, c1, d1, e1, f1, simplf},
+			If[Not @ MetricQ @ metric,
+				Throw[Message[PetrovType::nometric, metric]]
+			];
+			simplf = OptionValue[PSimplify];
+			cart = Part[metric, 2, 1, -1];
+			{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
+			epsilonmetric = epsilon[metric];
+			weylcd = weylConcomitant["Weyl"][metric, opts];
+			weyldual = weylConcomitant["WeylDual"][metric, opts];
+			weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
+			g2form = metricConcomitant["G2Form"][metric, opts];
+			weylselfdual2 = weylConcomitant["WeylSelfDual2"][metric, opts];
+			weylselfdual3 = weylConcomitant["WeylSelfDual3"][metric, opts];
+			aa = 2 weylConcomitant["TraceWeylSelfDual2"][metric, opts];
+			bb = 2 weylConcomitant["TraceWeylSelfDual3"][metric, opts];
+			w = simplf[-bb / (2 aa)];
+			cd = CovDOfMetric[metric];
+			z = simplf[metric[a, b]cd[-a][w]cd[-b][w]];
+
+		]
 
 
 (* ::Section:: *)
