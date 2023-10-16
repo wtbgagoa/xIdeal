@@ -379,6 +379,111 @@ RframeConcomitant["C11"][metric_CTensor, H_CTensor, opts___] :=
   	]
 )
 
+RframeConcomitant["C2"][metric_CTensor, H_CTensor, opts___] :=
+(RframeConcomitant["C2"][metric, H, opts] = 
+	Module[{simplf, cart, cd, ce1, a1, b1, c1, d1, e1, i1},
+		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1, e1, i1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
+  		cd = CovDOfMetric[metric];
+    		ce1 = RframeConcomitant["C1"][metric, H, opts];
+		simplf[HeadOfTensor[cd[-a1][ce1[-b1, -c1, -d1, -e1]] + H[-a1, -b1, i1] ce1[-i1, -c1, -d1, -e1] +
+	   		H[-a1, -c1, i1] ce1[-b1, -i1, -d1, -e1] + H[-a1, -d1, i1] ce1[-b1, -c1, -i1, -e1] + 
+         		H[-a1, -e1, i1] ce1[-b1, -c1, -d1, -i1], {-a1, -b1, -c1, -d1, -e1}]]
+  	]
+)
+
+RframeConcomitant["C12"][metric_CTensor, H_CTensor, opts___] :=
+(RframeConcomitant["C12"][metric, H, opts] = 
+	Module[{simplf, cart, epsilonmetric, ce1, ce2, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1},
+		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 11];
+  		epsilonmetric = epsilon[metric];
+    		ce1 = RframeConcomitant["C1"][metric, H, opts];
+      		ce2 = RframeConcomitant["C2"][metric, H, opts];
+		simplf[HeadOfTensor[epsilonmetric[i1, j1, a1, b1] ce1[-i1, -c1, -d1, -e1] ce2[-j1, -f1, -g1, -h1, -k1], 
+	   		{a1, b1, -c1, -d1, -e1, -f1, -g1, -h1, -k1}]]
+  	]
+)
+
+RframeConcomitant["C122"][metric_CTensor, H_CTensor, opts___] :=
+(RframeConcomitant["C122"][metric, H, opts] = 
+	Module[{simplf, cart, epsilonmetric, ce1, ce2, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1},
+		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 15];
+  		epsilonmetric = epsilon[metric];
+    		ce1 = RframeConcomitant["C1"][metric, H, opts];
+      		ce2 = RframeConcomitant["C2"][metric, H, opts];
+		simplf[HeadOfTensor[epsilonmetric[i1, j1, k1, a1] ce1[-i1, -b1, -c1, -d1] ce2[-j1, -e1, -f1, -g1, -h1] 
+	   		ce2[-k1, -l1, -m1, -n1, -o1], {a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -l1, -m1, -n1, -o1}]]
+  	]
+)
+
+RframeConcomitant["C3"][metric_CTensor, H_CTensor, opts___] :=
+(RframeConcomitant["C3"][metric, H, opts] = 
+	Module[{simplf, cart, cd, ce2, a1, b1, c1, d1, e1, f1, i1},
+		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1, e1, f1, i1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 7];
+  		cd = CovDOfMetric[metric];
+    		ce2 = RframeConcomitant["C2"][metric, H, opts];
+		simplf[HeadOfTensor[cd[-a1][ce2[-b1, -c1, -d1, -e1, -f1]] + H[-a1, -b1, i1] ce2[-i1, -c1, -d1, -e1, -f1] + 
+              		H[-a1, -c1, i1] ce2[-b1, -i1, -d1, -e1, -f1] + H[-a1, -d1, i1] ce2[-b1, -c1, -i1, -e1, -f1] + 
+          		H[-a1, -e1, i1] ce2[-b1, -c1, -d1, -i1, -f1] + H[-a1, -f1, i1] ce2[-b1, -c1, -d1, -e1, -i1], 
+		  	{-a1, -b1, -c1, -d1, -e1, -f1}]]
+  	]
+)
+
+RframeConcomitant["C123"][metric_CTensor, H_CTensor, opts___] :=
+(RframeConcomitant["C123"][metric, H, opts] = 
+	Module[{simplf, cart, epsilonmetric, ce1, ce2, ce3, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1},
+		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 16];
+  		epsilonmetric = epsilon[metric];
+    		ce1 = RframeConcomitant["C1"][metric, H, opts];
+     		ce2 = RframeConcomitant["C2"][metric, H, opts];
+    		ce3 = RframeConcomitant["C3"][metric, H, opts];
+		simplf[HeadOfTensor[epsilonmetric[i1, j1, k1, a1] ce1[-i1, -b1, -c1, -d1] ce2[-j1, -e1, -f1, -g1, -h1] 
+	      		ce3[-k1, -l1, -m1, -n1, -o1, -p1], {a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -l1, -m1, -n1, -o1, -p1}]]
+  	]
+)
+
+RframeConcomitant["C1233"][metric_CTensor, H_CTensor, opts___] :=
+(RframeConcomitant["C1233"][metric, H, opts] = 
+	Module[{simplf, cart, epsilonmetric, ce1, ce2, ce3, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, 
+ 		q1, r1, s1, t1, u1},
+		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1, r1, s1, t1, u1} = 
+  			GetIndicesOfVBundle[VBundleOfBasis @ cart, 21];
+  		epsilonmetric = epsilon[metric];
+    		ce1 = RframeConcomitant["C1"][metric, H, opts];
+     		ce2 = RframeConcomitant["C2"][metric, H, opts];
+    		ce3 = RframeConcomitant["C3"][metric, H, opts];
+		simplf[HeadOfTensor[epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce2[-j1, -d1, -e1, -f1, -g1] 
+	      		ce3[-k1, -h1, -m1, -n1, -o1, -p1] ce3[-l1, -q1, -r1, -s1, -t1, -u1], 
+	      		{-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1, -q1, -r1, -s1, -t1, -u1}]]
+  	]
+)
+
+RframeConcomitant["C4"][metric_CTensor, H_CTensor, opts___] :=
+(RframeConcomitant["C4"][metric, H, opts] = 
+	Module[{simplf, cart, cd, ce3, a1, b1, c1, d1, e1, f1, g1, i1},
+		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1, e1, f1, g1, i1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 8];
+  		cd = CovDOfMetric[metric];
+    		ce3 = RframeConcomitant["C3"][metric, H, opts];
+		simplf[HeadOfTensor[cd[-a1][ce3[-b1, -c1, -d1, -e1, -f1, -g1]] + H[-a1, -b1, i1] ce3[-i1, -c1, -d1, -e1, -f1, -g1] + 
+          		H[-a1, -c1, i1] ce3[-b1, -i1, -d1, -e1, -f1, -g1] + H[-a1, -d1, i1] ce3[-b1, -c1, -i1, -e1, -f1, -g1] + 
+           		H[-a1, -e1, i1] ce3[-b1, -c1, -d1, -i1, -f1, -g1] + H[-a1, -f1, i1] ce3[-b1, -c1, -d1, -e1, -i1, -g1] + 
+          		H[-a1, -g1, i1] ce3[-b1, -c1, -d1, -e1, -f1, -i1], {-a1, -b1, -c1, -d1, -e1, -f1, -g1}]]
+  	]
+)
+
 
 (* ::Section:: *)
 (* Computation of the Petrov types *)
