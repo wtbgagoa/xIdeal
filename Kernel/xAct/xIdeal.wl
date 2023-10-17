@@ -897,29 +897,62 @@ TypeDClassify[metric_CTensor, w_CTensor, OptionsPattern[]] :=
 (* ::Section:: *)
 (* Identification of the Kerr metric *)
 
+(* Real and imaginary parts of symbolic complex quantities. *)
+
+SymbolicRe[expr_] := ComplexExpand[(expr + Dagger[expr]) / 2]
+
+symbolicIm[expr_] := ComplexExpand[(expr - Dagger[expr]) / (2 I)]
+
+symbolicComplexNorm2[expr_] := ComplexExpand[expr Dagger[expr]] 
+
+Options[KerrSolutionQ] = {PSimplify -> Simplify}
 KerrSolutionQ[metric_CTensor, opts : OptionsPattern[]] :=
 Catch @
 		Module[{cart, cd, weylcd, epsilonmetric, weyldual, weylselfdual, g2form, weylselfdual2, weylselfdual3, aa, bb,
-			 rho, a1, b1, c1, d1, e1, f1, simplf},
+			 rho, a1, b1, c1, d1, e1, f1, simplf, w, z, riccicd, z1, z2, modz},
 			If[Not @ MetricQ @ metric,
 				Throw[Message[PetrovType::nometric, metric]]
 			];
 			simplf = OptionValue[PSimplify];
 			cart = Part[metric, 2, 1, -1];
 			{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
-			epsilonmetric = epsilon[metric];
+			(* If we compute Weyl here then we speed up the computation of Ricci below *)
 			weylcd = weylConcomitant["Weyl"][metric, opts];
-			weyldual = weylConcomitant["WeylDual"][metric, opts];
-			weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
-			g2form = metricConcomitant["G2Form"][metric, opts];
-			weylselfdual2 = weylConcomitant["WeylSelfDual2"][metric, opts];
-			weylselfdual3 = weylConcomitant["WeylSelfDual3"][metric, opts];
-			aa = 2 weylConcomitant["TraceWeylSelfDual2"][metric, opts];
-			bb = 2 weylConcomitant["TraceWeylSelfDual3"][metric, opts];
-			w = simplf[-bb / (2 aa)];
 			cd = CovDOfMetric[metric];
-			z = simplf[metric[a, b]cd[-a][w]cd[-b][w]];
-
+			riccicd = simplf[Ricci[cd]];
+			If[
+				riccicd === Zero,
+				Print["Vacuum"];
+				If[PetrovType[metric, opts] === "Type D",
+					Print["Type D"];
+					If[simplf@ Antisymmetrize[weylConcomitant["TensorXi"][metric, opts][-a1, -b1] weylConcomitant["TensorXi"][metric, opts][-c1, -d1], {-b1, -c1}] === 0,
+						Print["Kerr NUT"];
+						If[symbolicIm[z^3 Dagger[w^8]] === 0,
+							Print["Complex Kerr"];
+							weyldual = weylConcomitant["WeylDual"][metric, opts];
+							weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
+							g2form = metricConcomitant["G2Form"][metric, opts];
+							weylselfdual2 = weylConcomitant["WeylSelfDual2"][metric, opts];
+							weylselfdual3 = weylConcomitant["WeylSelfDual3"][metric, opts];
+							aa = 2 weylConcomitant["TraceWeylSelfDual2"][metric, opts];
+							bb = 2 weylConcomitant["TraceWeylSelfDual3"][metric, opts];
+							w = simplf[-bb / (2 aa)];
+							z = weylConcomitant["ScalarZ"][metric, opts];
+							z1 = simplf@ symbolicRe[z^3 Dagger[w^8]];
+							z2 = simplf@ symbolicRe[w^3 Dagger[z]];
+							modz = simplf@ symbolicComplexNorm2[z];
+							If[SymbolicPositiveQ[-z1 / (18 z2 - modz)^3, opts],
+								Print["Kerr"];
+								True
+							],
+							False
+						],
+						False
+					],
+					False
+				],
+				False
+			]
 		]
 
 
