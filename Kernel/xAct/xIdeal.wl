@@ -682,33 +682,36 @@ PetrovType[metric_CTensor, opts : OptionsPattern[]] :=
 (* Computation of Deveber null directions for each Petrov type *)
 
 
-(* TODO: we should have private or public functions for the different concommitants *)
+(* TODO: Create separate functions for the Petrov matrix concomitants*)
 (*
 TODO: there are different algorithms for doing this computation. Add Method option
 to be able to choose between them. Add names for each method option.
 *)
 
-DebeverNullDirections[metric_CTensor, u_CTensor, w_CTensor] :=
-	Module[{cart, a, b, c, d, e, f, i, j, CD, WeylCD, RiemannCD, RicciCD,
-		 RicciScalarCD, epsilonmetric, WeylDual, WeylSelfDual, Q, gamma, Q2, 
-		aa, Q3, bb, rho, P, Pdag, scrP, scrP2, dseda, S, Ch2, v0, v1},
+Options[PetrovType] = {Method -> "Default", PSimplify -> $CVSimplify}
+DebeverNullDirections[metric_CTensor, u_CTensor, w_CTensor, opts : OptionsPattern[]] :=
+(* Catch@ is missing? *)
+	Module[{cart, a, b, c, d, e, f, i, j, cd, weylcd, riemanncd, riccicd,
+		ricciscalarcd, epsilonmetric, weyldual, weylselfdual, Q, gamma, Q2, 
+		aa, Q3, bb, rho, P, Pdag, scrP, scrP2, dseda, S, Ch2, v0, v1, simplf},
 		If[Not @ MetricQ @ metric,
 			Throw[Message[PetrovType::nometric, metric]]
 		];
+  		simplf = OptionValue[PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a, b, c, d, e, f, i, j} = GetIndicesOfVBundle[Tangent @ ManifoldOfChart
 			 @ cart, 8];
+    		(* I think that now the following line is not necessary *)
 		MetricCompute[metric, cart, All, Parallelize -> True, Verbose -> True
 			];
-		CD = CovDOfMetric[metric];
-		WeylCD = Weyl[CD];
-		RiemannCD = Riemann[CD];
-		RicciCD = Ricci[CD];
-		RicciScalarCD = RicciScalar[CD];
+		cd = CovDOfMetric[metric];
+		weylcd = weylConcomitant["Weyl"][metric, opts];
+		riemanncd = simplf[Riemann[CD]];
+		riccicd = simplf[Ricci[cd]];
+		ricciscalarcd = simplf[RicciScalar[CD]];
 		epsilonmetric = epsilon[metric];
-		WeylDual = Simplify[HeadOfTensor[1/2 epsilonmetric[-c, -d, -e, -f] 
-			WeylCD[e, f, -a, -b], {-c, -d, -a, -b}]];
-		WeylSelfDual = Simplify[1/2 (WeylCD - I * WeylDual)];
+		weyldual = weylConcomitant["WeylDual"][metric, opts];
+		weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
 		Q = HeadOfTensor[2 u[a] u[c] WeylSelfDual[-a, -b, -c, -d], {-b, -d}
 			] // FullSimplify;
 		gamma = HeadOfTensor[metric[-a, -b] + u[-a] u[-b], {-a, -b}] // FullSimplify
@@ -766,7 +769,7 @@ DebeverNullDirections[metric_CTensor, u_CTensor, w_CTensor] :=
 
 (* ::Section:: *)
 (*  Classification of type D metrics*)
-
+(* TODO: Add the new Weyl concomitants that appear here *)
 
 (* Test when a symbolic function is non-negative *)
 (* 
@@ -795,7 +798,7 @@ SymbolicPositiveQ[x_, OptionsPattern[]] :=
 	]
 
 
-Options[TypeDClassify] = {Assumptions -> True}
+Options[TypeDClassify] = {Assumptions -> True, Method -> "Default", PSimplify -> $CVSimplify}
 
 TypeDClassify[metric_CTensor, w_CTensor, OptionsPattern[]] :=
 	Catch @
