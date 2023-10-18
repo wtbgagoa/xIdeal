@@ -234,7 +234,9 @@ weylConcomitant["WeylDual"][metric_CTensor, opts___] :=
 		cd = CovDOfMetric[metric];
 		epsilonmetric = epsilon[metric];
 		weylcd = weylConcomitant["Weyl"][metric, opts];
-		weyldual = simplf[HeadOfTensor[1/2 epsilonmetric[-c1, -d1, -e1, -f1] weylcd[e1, f1, -a1, -b1], {-c1, -d1, -a1, -b1}]]
+		weyldual = 1/2 epsilonmetric[-c1, -d1, -e1, -f1] weylcd[e1, f1, -a1, -b1];
+		weyldual = ToCCanonical[weyldual]; 
+		simplf@ HeadOfTensor[weyldual, {-c1, -d1, -a1, -b1}]
 	]
 )
 
@@ -301,27 +303,28 @@ weylConcomitant["ScalarW"][metric_CTensor, opts___] :=
 		{b1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
 		weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
 		g2form = metricConcomitant["G2Form"][metric, opts];
-		aa = 2 weylConcomitant["TraceWeylSelfDual2"][metric, opts];
-		bb = 2 weylConcomitant["TraceWeylSelfDual3"][metric, opts];
-		w = simplf[-bb / (2 aa)]
+		aa = 4 weylConcomitant["TraceWeylSelfDual2"][metric, opts];
+		bb = 8 weylConcomitant["TraceWeylSelfDual3"][metric, opts];
+		w = CTensor[simplf[-bb / (2 aa)], {}]
 	]
 )
 
 weylConcomitant["ScalarZ"][metric_CTensor, opts___] :=
 (weylConcomitant["ScalarZ"][metric, opts] = 
-	Module[{simplf, cart, weylselfdual, g2form, w, cd, a1, b1, c1, d1},
+	Module[{simplf, cart, weylselfdual, g2form, w, cd, cdw, a1, b1, c1, d1},
 		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
 		cart = Part[metric, 2, 1, -1];
 		{b1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];		
 		cd = CovDOfMetric[metric];
 		w = weylConcomitant["ScalarW"][metric, opts];
-		simplf[(metric[b1, d1]) cd[-b1][w] cd[-d1][w]]
+		cdw = TensorDerivative[w, cd];
+		simplf[(metric[b1, d1]) cdw[-b1] cdw[-d1]]
 	]
 )
 
 weylConcomitant["TensorXi"][metric_CTensor, opts___] :=
 (weylConcomitant["TensorXi"][metric, opts] = 
-	Module[{simplf, cart, weylselfdual, g2form, w, cd, a1, b1, c1, d1},
+	Module[{simplf, cart, weylselfdual, g2form, w, cd, a1, b1, c1, d1, cdw},
 		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
@@ -329,7 +332,12 @@ weylConcomitant["TensorXi"][metric_CTensor, opts___] :=
 		g2form = metricConcomitant["G2Form"][metric, opts];
 		w = weylConcomitant["ScalarW"][metric, opts];
 		cd = CovDOfMetric[metric];
-		simplf[(weylselfdual[-a1, b1, -c1, d1] - w g2form[-a1, b1, -c1, d1]) cd[-b1][w] cd[-d1][w]]
+		cdw = TensorDerivative[w, cd];
+		simplf[HeadOfTensor[
+			(weylselfdual[-a1, -b1, -c1, -d1] - w[] g2form[-a1, -b1, -c1, -d1]) cdw[b1] cdw[d1], 
+			{-a1, -c1}
+			]
+		]
 	]
 )
 
@@ -913,7 +921,7 @@ Options[KerrSolutionQ] = {PSimplify -> Simplify}
 KerrSolutionQ[metric_CTensor, opts : OptionsPattern[]] :=
 Catch @
 		Module[{cart, cd, weylcd, epsilonmetric, weyldual, weylselfdual, g2form, weylselfdual2, weylselfdual3, aa, bb,
-			 rho, a1, b1, c1, d1, e1, f1, simplf, w, z, riccicd, z1, z2, modz},
+			 rho, a1, b1, c1, d1, e1, f1, simplf, w, z, xi, riccicd, z1, z2, modz},
 			If[Not @ MetricQ @ metric,
 				Throw[Message[PetrovType::nometric, metric]]
 			];
@@ -924,12 +932,14 @@ Catch @
 			weylcd = weylConcomitant["Weyl"][metric, opts];
 			cd = CovDOfMetric[metric];
 			riccicd = simplf[Ricci[cd]];
+			BreakPoint[];
 			If[
 				riccicd === Zero,
 				Print["Vacuum"];
 				If[PetrovType[metric, opts] === "Type D",
 					Print["Type D"];
-					If[simplf@ Antisymmetrize[weylConcomitant["TensorXi"][metric, opts][-a1, -b1] weylConcomitant["TensorXi"][metric, opts][-c1, -d1], {-b1, -c1}] === 0,
+					xi = weylConcomitant["TensorXi"][metric, opts];
+					If[simplf@ HeadOfTensor[Antisymmetrize[xi[-a1, -b1] xi[-c1, -d1], {-b1, -c1}], {-a1, -b1, -c1, -d1}] === Zero,
 						Print["Kerr NUT"];
 						If[symbolicIm[z^3 Dagger[w^8]] === 0,
 							Print["Complex Kerr"];
@@ -938,8 +948,8 @@ Catch @
 							g2form = metricConcomitant["G2Form"][metric, opts];
 							weylselfdual2 = weylConcomitant["WeylSelfDual2"][metric, opts];
 							weylselfdual3 = weylConcomitant["WeylSelfDual3"][metric, opts];
-							aa = 2 weylConcomitant["TraceWeylSelfDual2"][metric, opts];
-							bb = 2 weylConcomitant["TraceWeylSelfDual3"][metric, opts];
+							aa = 4 weylConcomitant["TraceWeylSelfDual2"][metric, opts];
+							bb = 8 weylConcomitant["TraceWeylSelfDual3"][metric, opts];
 							w = simplf[-bb / (2 aa)];
 							z = weylConcomitant["ScalarZ"][metric, opts];
 							z1 = simplf@ symbolicRe[z^3 Dagger[w^8]];
