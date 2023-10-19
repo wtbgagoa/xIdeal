@@ -193,10 +193,10 @@ Begin["`Private`"]
 (* ::Section:: *)
 (* Computation of the metric concomitants *)
 
-metricConcomitant["G2Form"][metric_CTensor, opts___] :=
+metricConcomitant["G2Form"][metric_CTensor, opts : OptionsPattern[]] :=
 (metricConcomitant["G2Form"][metric, opts] = 
 	Module[{simplf, cart, a1, b1, c1, d1, e1, f1, epsilonmetric},
-		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		simplf = Quiet@ OptionValue[weylConcomitant, opts, PSimplify];
 		cart = 	Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
 		epsilonmetric = epsilon[metric];
@@ -213,57 +213,60 @@ metricConcomitant["G2Form"][metric_CTensor, opts___] :=
 (* ::Section:: *)
 (* Computation of the Weyl concomitants *)
 
+Options[weylConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True}
 
-weylConcomitant["Weyl"][metric_CTensor, opts___] :=
+weylConcomitant["Weyl"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["Weyl"][metric, opts] = 
-	Module[{cart, cd},
+	Module[{cart, cd, paralel, vb},
 		cart = 	Part[metric, 2, 1, -1];
 		cd = CovDOfMetric[metric];
-		MetricCompute[metric, cart, "Weyl"[-1, -1, -1, -1], Parallelize -> True, Verbose -> True];
+		paralel = Quiet@ OptionValue[weylConcomitant, opts, Parallelize];
+		vb = OptionValue[weylConcomitant, opts, Verbose];
+		MetricCompute[metric, cart, "Weyl"[-1, -1, -1, -1], Parallelize -> paralel, Verbose -> vb];
 		Weyl[cd]
 	]
 )
 
 
-weylConcomitant["WeylDual"][metric_CTensor, opts___] :=
+weylConcomitant["WeylDual"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["WeylDual"][metric, opts] = 
 	Module[{simplf, cart, a1, b1, c1, d1, e1, f1, cd, weylcd, epsilonmetric, weyldual},
-		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		simplf = Quiet@ OptionValue[weylConcomitant, opts, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
 		cd = CovDOfMetric[metric];
 		epsilonmetric = epsilon[metric];
 		weylcd = weylConcomitant["Weyl"][metric, opts];
 		weyldual = 1/2 epsilonmetric[-c1, -d1, -e1, -f1] weylcd[e1, f1, -a1, -b1];
-		weyldual = ToCCanonical[weyldual]; 
+		weyldual = ToCCanonical[weyldual];
 		simplf@ HeadOfTensor[weyldual, {-c1, -d1, -a1, -b1}]
 	]
 )
 
 
-weylConcomitant["WeylSelfDual"][metric_CTensor, opts___] :=
+weylConcomitant["WeylSelfDual"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["WeylSelfDual"][metric, opts] = 
 	Module[{simplf},
-		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		simplf = Quiet@ OptionValue[weylConcomitant, opts, PSimplify];
 		simplf[1/2 (weylConcomitant["Weyl"][metric, opts] - I * weylConcomitant["WeylDual"][metric, opts])]
 	]
 )
 
-weylConcomitant["WeylSelfDual2"][metric_CTensor, opts___] :=
+weylConcomitant["WeylSelfDual2"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["WeylSelfDual2"][metric, opts] = 
 	Module[{simplf, weylselfdual, cart, a1, b1, c1, d1, e1, f1},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
-		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		simplf = Quiet@ OptionValue[weylConcomitant, opts, PSimplify];
 		weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
 		simplf[HeadOfTensor[1/2 weylselfdual[-a1, -b1, e1, f1] weylselfdual[-e1, -f1, -c1, -d1], {-a1, -b1, -c1, -d1}]]
 	]
 )
 
-weylConcomitant["TraceWeylSelfDual2"][metric_CTensor, opts___] :=
+weylConcomitant["TraceWeylSelfDual2"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["TraceWeylSelfDual2"][metric, opts] = 
 	Module[{weylselfdual2, simplf, cart, a1, b1},
-		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		simplf = Quiet@ OptionValue[weylConcomitant, opts, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
 		weylselfdual2 = weylConcomitant["WeylSelfDual2"][metric, opts];
@@ -271,23 +274,22 @@ weylConcomitant["TraceWeylSelfDual2"][metric_CTensor, opts___] :=
 	]
 )
 
-weylConcomitant["WeylSelfDual3"][metric_CTensor, opts___] :=
+weylConcomitant["WeylSelfDual3"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["WeylSelfDual3"][metric, opts] = 
 	Module[{simplf, weylselfdual, weylselfdual2, cart, a1, b1, c1, d1, e1, f1},
-		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		simplf = Quiet@ OptionValue[weylConcomitant, opts, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
-		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
 		weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
 		weylselfdual2 = weylConcomitant["WeylSelfDual2"][metric, opts];
 		simplf[HeadOfTensor[1/2 weylselfdual2[-a1, -b1, e1, f1] weylselfdual[-e1, -f1, -c1, -d1], {-a1, -b1, -c1, -d1}]]
 	]
 )
 
-weylConcomitant["TraceWeylSelfDual3"][metric_CTensor, opts___] :=
+weylConcomitant["TraceWeylSelfDual3"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["TraceWeylSelfDual3"][metric, opts] = 
 	Module[{weylselfdual3, simplf, cart, a1, b1},
-		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		simplf = Quiet@ OptionValue[weylConcomitant, opts, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
 		weylselfdual3 = weylConcomitant["WeylSelfDual3"][metric, opts];
@@ -295,10 +297,10 @@ weylConcomitant["TraceWeylSelfDual3"][metric_CTensor, opts___] :=
 	]
 )
 
-weylConcomitant["ScalarW"][metric_CTensor, opts___] :=
+weylConcomitant["ScalarW"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["ScalarW"][metric, opts] = 
 	Module[{simplf, cart, weylselfdual, g2form, aa, bb, w, cd, a1, b1, c1, d1},
-		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		simplf = Quiet@ OptionValue[weylConcomitant, opts, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{b1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
 		weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
@@ -309,10 +311,10 @@ weylConcomitant["ScalarW"][metric_CTensor, opts___] :=
 	]
 )
 
-weylConcomitant["ScalarZ"][metric_CTensor, opts___] :=
+weylConcomitant["ScalarZ"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["ScalarZ"][metric, opts] = 
 	Module[{simplf, cart, weylselfdual, g2form, w, cd, cdw, a1, b1, c1, d1},
-		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		simplf = Quiet@ OptionValue[weylConcomitant, opts, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{b1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];		
 		cd = CovDOfMetric[metric];
@@ -322,10 +324,10 @@ weylConcomitant["ScalarZ"][metric_CTensor, opts___] :=
 	]
 )
 
-weylConcomitant["TensorXi"][metric_CTensor, opts___] :=
+weylConcomitant["TensorXi"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["TensorXi"][metric, opts] = 
 	Module[{simplf, cart, weylselfdual, g2form, w, cd, a1, b1, c1, d1, cdw},
-		simplf = (PSimplify /. FilterRules[{opts}, PSimplify]);
+		simplf = Quiet@ OptionValue[weylConcomitant, opts, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
 		weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
@@ -647,7 +649,7 @@ RframeConcomitant["C1112"][metric_CTensor, H_CTensor, opts___] :=
 TODO: there are different algorithms for doing this computation. Add Method option
 to be able to choose between them. Add names for each method option.
 *)
-Options[PetrovType] = {Method -> "Default", PSimplify -> $CVSimplify}
+Options[PetrovType] = {Method -> "Default", PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True}
 PetrovType[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch @
 		Module[{cart, cd, weylcd, epsilonmetric, weyldual, weylselfdual, g2form, weylselfdual2, weylselfdual3, aa, bb,
@@ -668,10 +670,10 @@ PetrovType[metric_CTensor, opts : OptionsPattern[]] :=
 			bb = weylConcomitant["TraceWeylSelfDual3"][metric, opts];
 			rho = simplf[- bb / aa];
 			Which[
-				WeylSelfDual2 === Zero,
+				weylselfdual2 === Zero,
 					"Type N"
 				,
-				WeylSelfDual3 === Zero,
+				weylselfdual3 === Zero,
 					"Type III"
 				,
 				simplf[aa weylselfdual2 - aa^2 / 3 g2form - bb weylselfdual] === Zero,
@@ -696,7 +698,7 @@ TODO: there are different algorithms for doing this computation. Add Method opti
 to be able to choose between them. Add names for each method option.
 *)
 
-Options[PetrovType] = {Method -> "Default", PSimplify -> $CVSimplify}
+Options[DebeverNullDirections] = {Method -> "Default", PSimplify -> $CVSimplify}
 DebeverNullDirections[metric_CTensor, u_CTensor, w_CTensor, opts : OptionsPattern[]] :=
 (* Catch@ is missing? *)
 	Module[{cart, a, b, c, d, e, f, i, j, cd, weylcd, riemanncd, riccicd,
@@ -784,7 +786,7 @@ DebeverNullDirections[metric_CTensor, u_CTensor, w_CTensor, opts : OptionsPatter
 Recall that the value of Assumptions option is always logical statement. 
 Therefore it should be expressed in terms of the logical syntax  
 *)
-Options[SymbolicPositiveQ] := {Assumptions -> True, PSimplify -> Simplify};
+Options[SymbolicPositiveQ] := {Assumptions -> True, PSimplify -> Simplify, Verbose -> True};
 SymbolicPositiveQ[x_, OptionsPattern[]] :=
 	Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
 		Which[
@@ -917,7 +919,7 @@ symbolicIm[expr_] := ComplexExpand[(expr - Dagger[expr]) / (2 I)]
 
 symbolicComplexNorm2[expr_] := ComplexExpand[expr Dagger[expr]] 
 
-Options[KerrSolutionQ] = {PSimplify -> Simplify}
+Options[KerrSolutionQ] = {PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True}
 KerrSolutionQ[metric_CTensor, opts : OptionsPattern[]] :=
 Catch @
 		Module[{cart, cd, weylcd, epsilonmetric, weyldual, weylselfdual, g2form, weylselfdual2, weylselfdual3, aa, bb,
