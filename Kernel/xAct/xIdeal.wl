@@ -360,7 +360,7 @@ RframeConcomitant["ConnectionTensor"][metric_CTensor, e0_CTensor, e1_CTensor, e2
 		{a1, b1, c1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 3];
 		cd = CovDOfMetric[metric];
 		simplf[HeadOfTensor[-(1/2) (-(cd[a1][e0[b1]] e0[c1] - cd[a1][e0[c1]] e0[b1]) + (cd[a1][e1[b1]] e1[c1] - cd[a1][e1[c1]] e1[b1]) + (cd[a1][e2[b1]] e2[c1] - 
-           			cd[a1][e2[c1]] e2[b1]) + (cd[a1][e3[b1]] e3[c1] - cd[a1][e3[c1]] e3[b1])), {-a1, -b1, -c1}]]
+           			cd[a1][e2[c1]] e2[b1]) + (cd[a1][e3[b1]] e3[c1] - cd[a1][e3[c1]] e3[b1])), {a1, b1, c1}]]
 	]
  )
 
@@ -669,19 +669,19 @@ PetrovType[metric_CTensor, opts : OptionsPattern[]] :=
 			rho = simplf[- bb / aa];
 			Which[
 				WeylSelfDual2 === Zero,
-					Print["Type N"]
+					"Type N"
 				,
 				WeylSelfDual3 === Zero,
-					Print["Type III"]
+					"Type III"
 				,
 				simplf[aa weylselfdual2 - aa^2 / 3 g2form - bb weylselfdual] === Zero,
-					Print["Type D"]
+					"Type D"
 				,
 				6 bb^2 - aa^3 === 0,
-					Print["Type II"]
+					"Type II"
 				,
 				True,
-					Print["Type I"]
+					"Type I"
 			]
 		]
 
@@ -730,20 +730,20 @@ DebeverNullDirections[metric_CTensor, u_CTensor, w_CTensor, opts : OptionsPatter
 		bb = -Q3[-a, a] // FullSimplify;
 		Which[
 			Q === Zero,
-				Print["Type O"]
+				"Type O"
 			,
 			Q2 === Zero,
-				Print["Type N"];
+				"Type N";
 				HeadOfTensor[Dagger[Q[a, b]] (Q[-b, -a] u[c] + I Q[-b, d] epsilonmetric[
 					-a, -d, c, -e] u[e]) // Simplify, {c}]
 			,
 			Q3 === Zero,
-				Print["Type III"];
+				"Type III";
 				HeadOfTensor[Dagger[Q2[a, b]] (Q2[-b, -a] u[c] + I Q2[-b, d] epsilonmetric[
 					-a, -d, c, -e] u[e]) // Simplify, {c}]
 			,
 			Simplify[(aa^2 / 3) gamma - aa Q2 - bb Q] === Zero,
-				Print["Type D"];
+				"Type D";
 				rho = -bb / aa // FullSimplify;
 				P = 1 / (3 rho) Q // Simplify;
 				Pdag = Dagger[P] // Simplify;
@@ -762,14 +762,14 @@ DebeverNullDirections[metric_CTensor, u_CTensor, w_CTensor, opts : OptionsPatter
 				{v0 + v1, v0 - v1}
 			,
 			Simplify[6 bb^2 - aa^3] === 0,
-				Print["Type II"];
+				"Type II";
 				rho = bb / aa;
 				P = rho Q + 2 rho^2 gamma - Q2;
 				HeadOfTensor[Dagger[P[a, b]] (P[-b, -a] u[c] + I P[-b, d] epsilonmetric[
 					-a, -d, c, -e] u[e]) // Simplify, {c}]
 			,
 			True,
-				Print["Type I"]
+				"Type I"
 		]
 	]
 
@@ -784,7 +784,7 @@ DebeverNullDirections[metric_CTensor, u_CTensor, w_CTensor, opts : OptionsPatter
 Recall that the value of Assumptions option is always logical statement. 
 Therefore it should be expressed in terms of the logical syntax  
 *)
-Options[SymbolicPositiveQ] := {Assumptions -> True};
+Options[SymbolicPositiveQ] := {Assumptions -> True, PSimplify -> Simplify};
 SymbolicPositiveQ[x_, OptionsPattern[]] :=
 	Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
 		Which[
@@ -843,10 +843,10 @@ TypeDClassify[metric_CTensor, w_CTensor, OptionsPattern[]] :=
 			C5 = 2 Q[-i, -j] w[i] w[j] + Q[-k, k] // Simplify;
 			Which[
 				RicciCD =!= Zero,
-					Print["No vacuum"]
+					"No vacuum"
 				,
 				rho === Zero || C3 =!= 0,
-					Print["Vacuum no Type D"]
+					"Vacuum no Type D"
 				,
 				P === Zero,
 					Which[
@@ -902,7 +902,7 @@ TypeDClassify[metric_CTensor, w_CTensor, OptionsPattern[]] :=
 					]
 				,
 				True,
-					Print["C-metric"];
+					"C-metric";
 			]
 		]
 
@@ -911,7 +911,7 @@ TypeDClassify[metric_CTensor, w_CTensor, OptionsPattern[]] :=
 
 (* Real and imaginary parts of symbolic complex quantities. *)
 
-SymbolicRe[expr_] := ComplexExpand[(expr + Dagger[expr]) / 2]
+symbolicRe[expr_] := ComplexExpand[(expr + Dagger[expr]) / 2]
 
 symbolicIm[expr_] := ComplexExpand[(expr - Dagger[expr]) / (2 I)]
 
@@ -932,26 +932,27 @@ Catch @
 			weylcd = weylConcomitant["Weyl"][metric, opts];
 			cd = CovDOfMetric[metric];
 			riccicd = simplf[Ricci[cd]];
-			BreakPoint[];
 			If[
 				riccicd === Zero,
 				Print["Vacuum"];
 				If[PetrovType[metric, opts] === "Type D",
 					Print["Type D"];
 					xi = weylConcomitant["TensorXi"][metric, opts];
-					If[simplf@ HeadOfTensor[Antisymmetrize[xi[-a1, -b1] xi[-c1, -d1], {-b1, -c1}], {-a1, -b1, -c1, -d1}] === Zero,
+					xi = Antisymmetrize[xi[-a1, -b1] xi[-c1, -d1], {-b1, -c1}];
+					xi = HeadOfTensor[xi, {-a1, -b1, -c1, -d1}];
+					If[simplf[xi] === Zero,
 						Print["Kerr NUT"];
+						weyldual = weylConcomitant["WeylDual"][metric, opts];
+						weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
+						g2form = metricConcomitant["G2Form"][metric, opts];
+						weylselfdual2 = weylConcomitant["WeylSelfDual2"][metric, opts];
+						weylselfdual3 = weylConcomitant["WeylSelfDual3"][metric, opts];
+						aa = 4 weylConcomitant["TraceWeylSelfDual2"][metric, opts];
+						bb = 8 weylConcomitant["TraceWeylSelfDual3"][metric, opts];
+						w = simplf[- bb / (2 aa)];
+						z = weylConcomitant["ScalarZ"][metric, opts];
 						If[symbolicIm[z^3 Dagger[w^8]] === 0,
 							Print["Complex Kerr"];
-							weyldual = weylConcomitant["WeylDual"][metric, opts];
-							weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
-							g2form = metricConcomitant["G2Form"][metric, opts];
-							weylselfdual2 = weylConcomitant["WeylSelfDual2"][metric, opts];
-							weylselfdual3 = weylConcomitant["WeylSelfDual3"][metric, opts];
-							aa = 4 weylConcomitant["TraceWeylSelfDual2"][metric, opts];
-							bb = 8 weylConcomitant["TraceWeylSelfDual3"][metric, opts];
-							w = simplf[-bb / (2 aa)];
-							z = weylConcomitant["ScalarZ"][metric, opts];
 							z1 = simplf@ symbolicRe[z^3 Dagger[w^8]];
 							z2 = simplf@ symbolicRe[w^3 Dagger[z]];
 							modz = simplf@ symbolicComplexNorm2[z];
