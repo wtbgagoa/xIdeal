@@ -1035,6 +1035,7 @@ Catch @
 (* ::Section:: *)
 (*  Determination of the dimension of the isometry group*)
 
+Options[IsometryGroupDimension] = {Method -> "Default", PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True}
 IsometryGroupDimension[metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
  	Catch@ 
   		Module[{simplf, C1, C2, C3, C4, C11, C12, C122, C123, C1233, 
