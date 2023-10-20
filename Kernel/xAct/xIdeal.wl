@@ -196,7 +196,7 @@ Begin["`Private`"]
 metricConcomitant["G2Form"][metric_CTensor, opts : OptionsPattern[]] :=
 (metricConcomitant["G2Form"][metric, opts] = 
 	Module[{simplf, cart, a1, b1, c1, d1, e1, f1, epsilonmetric},
-		simplf = Quiet@ OptionValue[weylConcomitant, opts, PSimplify];
+		simplf = OptionValue[weylConcomitant, PSimplify];
 		cart = 	Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
 		epsilonmetric = epsilon[metric];
@@ -220,8 +220,8 @@ weylConcomitant["Weyl"][metric_CTensor, opts : OptionsPattern[]] :=
 	Module[{cart, cd, paralel, vb},
 		cart = 	Part[metric, 2, 1, -1];
 		cd = CovDOfMetric[metric];
-		paralel = Quiet@ OptionValue[weylConcomitant, opts, Parallelize];
-		vb = OptionValue[weylConcomitant, opts, Verbose];
+		paralel = OptionValue[weylConcomitant, Parallelize];
+		vb = OptionValue[weylConcomitant, Verbose];
 		MetricCompute[metric, cart, "Weyl"[-1, -1, -1, -1], Parallelize -> paralel, Verbose -> vb];
 		Weyl[cd]
 	]
@@ -231,7 +231,7 @@ weylConcomitant["Weyl"][metric_CTensor, opts : OptionsPattern[]] :=
 weylConcomitant["WeylDual"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["WeylDual"][metric, opts] = 
 	Module[{simplf, cart, a1, b1, c1, d1, e1, f1, cd, weylcd, epsilonmetric, weyldual},
-		simplf = Quiet@ OptionValue[weylConcomitant, opts, PSimplify];
+		simplf = OptionValue[weylConcomitant, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
 		cd = CovDOfMetric[metric];
@@ -247,7 +247,7 @@ weylConcomitant["WeylDual"][metric_CTensor, opts : OptionsPattern[]] :=
 weylConcomitant["WeylSelfDual"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["WeylSelfDual"][metric, opts] = 
 	Module[{simplf},
-		simplf = Quiet@ OptionValue[weylConcomitant, opts, PSimplify];
+		simplf = OptionValue[weylConcomitant, PSimplify];
 		simplf[1/2 (weylConcomitant["Weyl"][metric, opts] - I * weylConcomitant["WeylDual"][metric, opts])]
 	]
 )
@@ -257,7 +257,7 @@ weylConcomitant["WeylSelfDual2"][metric_CTensor, opts : OptionsPattern[]] :=
 	Module[{simplf, weylselfdual, cart, a1, b1, c1, d1, e1, f1},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
-		simplf = Quiet@ OptionValue[weylConcomitant, opts, PSimplify];
+		simplf = OptionValue[weylConcomitant, PSimplify];
 		weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
 		simplf[HeadOfTensor[1/2 weylselfdual[-a1, -b1, e1, f1] weylselfdual[-e1, -f1, -c1, -d1], {-a1, -b1, -c1, -d1}]]
 	]
@@ -266,7 +266,7 @@ weylConcomitant["WeylSelfDual2"][metric_CTensor, opts : OptionsPattern[]] :=
 weylConcomitant["TraceWeylSelfDual2"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["TraceWeylSelfDual2"][metric, opts] = 
 	Module[{weylselfdual2, simplf, cart, a1, b1},
-		simplf = Quiet@ OptionValue[weylConcomitant, opts, PSimplify];
+		simplf = OptionValue[weylConcomitant, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
 		weylselfdual2 = weylConcomitant["WeylSelfDual2"][metric, opts];
@@ -277,7 +277,7 @@ weylConcomitant["TraceWeylSelfDual2"][metric_CTensor, opts : OptionsPattern[]] :
 weylConcomitant["WeylSelfDual3"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["WeylSelfDual3"][metric, opts] = 
 	Module[{simplf, weylselfdual, weylselfdual2, cart, a1, b1, c1, d1, e1, f1},
-		simplf = Quiet@ OptionValue[weylConcomitant, opts, PSimplify];
+		simplf = OptionValue[weylConcomitant, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
 		weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
@@ -289,7 +289,7 @@ weylConcomitant["WeylSelfDual3"][metric_CTensor, opts : OptionsPattern[]] :=
 weylConcomitant["TraceWeylSelfDual3"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["TraceWeylSelfDual3"][metric, opts] = 
 	Module[{weylselfdual3, simplf, cart, a1, b1},
-		simplf = Quiet@ OptionValue[weylConcomitant, opts, PSimplify];
+		simplf = OptionValue[weylConcomitant, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
 		weylselfdual3 = weylConcomitant["WeylSelfDual3"][metric, opts];
@@ -300,7 +300,7 @@ weylConcomitant["TraceWeylSelfDual3"][metric_CTensor, opts : OptionsPattern[]] :
 weylConcomitant["ScalarW"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["ScalarW"][metric, opts] = 
 	Module[{simplf, cart, weylselfdual, g2form, aa, bb, w, cd, a1, b1, c1, d1},
-		simplf = Quiet@ OptionValue[weylConcomitant, opts, PSimplify];
+		simplf = OptionValue[weylConcomitant, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{b1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
 		weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
@@ -314,7 +314,7 @@ weylConcomitant["ScalarW"][metric_CTensor, opts : OptionsPattern[]] :=
 weylConcomitant["ScalarZ"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["ScalarZ"][metric, opts] = 
 	Module[{simplf, cart, weylselfdual, g2form, w, cd, cdw, a1, b1, c1, d1},
-		simplf = Quiet@ OptionValue[weylConcomitant, opts, PSimplify];
+		simplf = OptionValue[weylConcomitant, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{b1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];		
 		cd = CovDOfMetric[metric];
@@ -327,7 +327,7 @@ weylConcomitant["ScalarZ"][metric_CTensor, opts : OptionsPattern[]] :=
 weylConcomitant["TensorXi"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["TensorXi"][metric, opts] = 
 	Module[{simplf, cart, weylselfdual, g2form, w, cd, a1, b1, c1, d1, cdw},
-		simplf = Quiet@ OptionValue[weylConcomitant, opts, PSimplify];
+		simplf = OptionValue[weylConcomitant, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
 		weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
