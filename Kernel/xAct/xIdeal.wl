@@ -171,6 +171,8 @@ TypeDClassify::usage = " ";
 
 PSimplify::usage = " ";
 
+ConnectionTensor::usage = " ";
+
 IsometryGroupDimension::usage = " ";
 
 KerrSolutionQ::usage = " ";
@@ -355,21 +357,6 @@ instead of calling RframeConcomitant["ConnectionTensor"] in case it is not compu
 (* TODO: Add different options to compute H to RframeConcomitant["ConnectionTensor"] *)
 
 Options[RframeConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True}
-
-RframeConcomitant["ConnectionTensor"][metric_CTensor, e0_CTensor, e1_CTensor, e2_CTensor, e3_CTensor, opts : OptionsPattern[]] :=
-(RframeConcomitant["ConnectionTensor"][metric, e0, e1, e2, e3, opts] = 
-	Module[{simplf, cart, cd, a1, b1, c1},
-		simplf = OptionValue[RframeConcomitant, PSimplify];
-		cart = Part[metric, 2, 1, -1];
-		{a1, b1, c1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 3];
-		cd = CovDOfMetric[metric];
-		simplf[HeadOfTensor[
-  			-(1/2) (-(cd[a1][e0[b1]] e0[c1] - cd[a1][e0[c1]] e0[b1]) + (cd[a1][e1[b1]] e1[c1] - cd[a1][e1[c1]] e1[b1]) + 
-     			(cd[a1][e2[b1]] e2[c1] - cd[a1][e2[c1]] e2[b1]) + (cd[a1][e3[b1]] e3[c1] - cd[a1][e3[c1]] e3[b1])), {a1, b1, c1}
-	     		]
-	      	]
-	]
- )
 
 RframeConcomitant["C1"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
 (RframeConcomitant["C1"][metric, H, opts] = 
@@ -1031,6 +1018,28 @@ Catch @
 			]
 		]
 
+(* ::Section:: *)
+(*  Determination of the Connection Tensor*)
+
+(*TODO: Add the documentation of this function*)
+Options[ConnectionTensor] = {Method -> "Default", PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True}
+
+ConnectionTensor[metric_CTensor, e0_CTensor, e1_CTensor, e2_CTensor, e3_CTensor, opts : OptionsPattern[]] :=
+	Catch@ 
+		Module[{simplf, cart, cd, a1, b1, c1},
+			If[Not@MetricQ@metric, 
+    				Throw[Message[IsometryGroupDimension::nometric, metric]]];
+			simplf = OptionValue[PSimplify];
+			cart = Part[metric, 2, 1, -1];
+			{a1, b1, c1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 3];
+			cd = CovDOfMetric[metric];
+			simplf[
+   				HeadOfTensor[
+					-(1/2) (-(cd[a1][e0[b1]] e0[c1] - cd[a1][e0[c1]] e0[b1]) + (cd[a1][e1[b1]] e1[c1] - cd[a1][e1[c1]] e1[b1]) + 
+					(cd[a1][e2[b1]] e2[c1] - cd[a1][e2[c1]] e2[b1]) + (cd[a1][e3[b1]] e3[c1] - cd[a1][e3[c1]] e3[b1])), {a1, b1, c1}
+	     	      		]
+	        	]
+		]
 
 (* ::Section:: *)
 (*  Determination of the dimension of the isometry group*)
@@ -1116,7 +1125,7 @@ IsometryGroupDimension[metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
     					Print["\!\(\*SubscriptBox[\(G\), \(1  a\)]\)"],
 	 
     				True,
-    					Print["No symmetries"]		
+    					Print["No symmetries C1112"]		
     			]
    
    		]
