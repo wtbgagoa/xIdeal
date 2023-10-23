@@ -287,9 +287,21 @@ weylConcomitant["WeylMatrixQ"][metric_CTensor, opts : OptionsPattern[]] :=
 	]
 )
 
+weylConcomitant["TraceWeylMatrixQ"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["TraceWeylMatrixQ"][metric, opts] = 
+	Module[{cart, simplf, obs, mq, trmq, a1},
+		cart = Part[metric, 2, 1, -1];
+		{a1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 1];
+		simplf = OptionValue[weylConcomitant, PSimplify];
+		mq = weylConcomitant["WeylMatrixQ"][metric, opts];
+		trmq = mq[a1, -a1];
+		simplf[trmq]
+	]
+)
+
 weylConcomitant["WeylMatrixQ2"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["WeylMatrixQ2"][metric, opts] = 
-	Module[{cart, simplf, obs, mq, mq2, a1, b1, c1, d1},
+	Module[{cart, simplf, mq, mq2, a1, b1, c1, d1},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 3];
 		simplf = OptionValue[weylConcomitant, PSimplify];
@@ -299,19 +311,42 @@ weylConcomitant["WeylMatrixQ2"][metric_CTensor, opts : OptionsPattern[]] :=
 	]
 )
 
+weylConcomitant["TraceWeylMatrixQ2"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["TraceWeylMatrixQ2"][metric, opts] = 
+	Module[{cart, simplf, obs, mq, trmq, a1},
+		cart = Part[metric, 2, 1, -1];
+		{a1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 1];
+		simplf = OptionValue[weylConcomitant, PSimplify];
+		mq = weylConcomitant["WeylMatrixQ2"][metric, opts];
+		trmq = mq[a1, -a1];
+		simplf[trmq]
+	]
+)
+
 weylConcomitant["WeylMatrixQ3"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["WeylMatrixQ3"][metric, opts] = 
-	Module[{cart, simplf, obs, mq, mq2, mq3, a1, b1, c1, d1},
+	Module[{cart, simplf, mq, mq2, mq3, a1, b1, c1, d1},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
 		simplf = OptionValue[weylConcomitant, PSimplify];
 		mq = weylConcomitant["WeylMatrixQ"][metric, opts];
 		mq2 = weylConcomitant["WeylMatrixQ2"][metric, opts];
 		mq3 = HeadOfTensor[mq2[-a1, -b1] mq[b1, -c1], {-a1, -c1}];
-		simplf[mq2]
+		simplf[mq3]
 	]
 )
 
+weylConcomitant["TraceWeylMatrixQ3"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["TraceWeylMatrixQ3"][metric, opts] = 
+	Module[{cart, simplf, obs, mq, trmq, a1},
+		cart = Part[metric, 2, 1, -1];
+		{a1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 1];
+		simplf = OptionValue[weylConcomitant, PSimplify];
+		mq = weylConcomitant["WeylMatrixQ3"][metric, opts];
+		trmq = mq[a1, -a1];
+		simplf[trmq]
+	]
+)
 
 weylConcomitant["WeylSelfDual2"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["WeylSelfDual2"][metric, opts] = 
@@ -814,11 +849,7 @@ Catch@ Module[{cart, a, b, c, d, e, f, i, j, cd, weylcd, riemanncd, riccicd,
 		];
   		simplf = OptionValue[PSimplify];
 		cart = Part[metric, 2, 1, -1];
-		{a, b, c, d, e, f, i, j} = GetIndicesOfVBundle[Tangent @ ManifoldOfChart
-			 @ cart, 8];
-    		(* I think that now the following line is not necessary *)
-		MetricCompute[metric, cart, All, Parallelize -> True, Verbose -> True
-			];
+		{a, b, c, d, e, f, i, j} = GetIndicesOfVBundle[Tangent @ ManifoldOfChart@ cart, 8];
 		cd = CovDOfMetric[metric];
 		weylcd = weylConcomitant["Weyl"][metric, opts];
 		riemanncd = simplf[Riemann[cd]];
@@ -830,24 +861,22 @@ Catch@ Module[{cart, a, b, c, d, e, f, i, j, cd, weylcd, riemanncd, riccicd,
 		Q = weylConcomitant["WeylMatrixQ"][metric, opts, "Observer" -> u];
 		gamma = metricConcomitant["SpatialMetric"][metric, opts, "Observer" -> u];
 		Q2 = weylConcomitant["WeylMatrixQ2"][metric, opts, "Observer" -> u];
-		aa = Q2[-a, a] // FullSimplify;
+		aa = weylConcomitant["TraceWeylMatrixQ2"][metric, opts, "Observer" -> u];
 		Q3 = weylConcomitant["WeylMatrixQ3"][metric, opts, "Observer" -> u];
-		bb = -Q3[-a, a] // FullSimplify;
+		bb = -weylConcomitant["TraceWeylMatrixQ3"][metric, opts, "Observer" -> u];
 		Which[
 			Q === Zero,
-				"Type O"
+				Print["Type O"]
 			,
 			Q2 === Zero,
-				"Type N";
-				HeadOfTensor[Dagger[Q[a, b]] (Q[-b, -a] u[c] + I Q[-b, d] epsilonmetric[
-					-a, -d, c, -e] u[e]) // Simplify, {c}]
+				Print["Type N"];
+				HeadOfTensor[Dagger[Q[a, b]] (Q[-b, -a] u[c] + I Q[-b, d] epsilonmetric[-a, -d, c, -e] u[e]) // Simplify, {c}]
 			,
 			Q3 === Zero,
-				"Type III";
-				HeadOfTensor[Dagger[Q2[a, b]] (Q2[-b, -a] u[c] + I Q2[-b, d] epsilonmetric[
-					-a, -d, c, -e] u[e]) // Simplify, {c}]
+				Print["Type III"];
+				HeadOfTensor[Dagger[Q2[a, b]] (Q2[-b, -a] u[c] + I Q2[-b, d] epsilonmetric[-a, -d, c, -e] u[e]) // Simplify, {c}]
 			,
-			Simplify[(aa^2 / 3) gamma - aa Q2 - bb Q] === Zero,
+			simplf[(aa^2 / 3) gamma - aa Q2 - bb Q] === Zero,
 				Print["Type D"];
 				rho = -bb / aa // FullSimplify;
 				P = 1 / (3 rho) Q // Simplify;
@@ -855,21 +884,17 @@ Catch@ Module[{cart, a, b, c, d, e, f, i, j, cd, weylcd, riemanncd, riccicd,
 				scrP = HeadOfTensor[P[-a, -b] Pdag[b, -c], {-a, -c}] // Simplify;
 				scrP2 = HeadOfTensor[Pdag[-a, -b] P[b, -c], {-a, -c}] // Simplify;
 				dseda = scrP[-a, a] + 1/3 // Simplify;
-				S = Simplify[1/4 (1 + 2 / (3 Sqrt[dseda])) (P + Pdag) + 1 / (4 Sqrt[
-					dseda]) (scrP + scrP2) + 1/6 (1 + 1 / (3 Sqrt[dseda])) gamma];
+				S = Simplify[1/4 (1 + 2 / (3 Sqrt[dseda])) (P + Pdag) + 1 / (4 Sqrt[dseda]) (scrP + scrP2) + 1/6 (1 + 1 / (3 Sqrt[dseda])) gamma];
 				Ch2 = Simplify[(1 + Sqrt[dseda]) / 2];
-				v0 = HeadOfTensor[PowerExpand[Ch2 u[a] + I / (2 Sqrt[dseda]) scrP2[
-					c, b] epsilonmetric[-c, -b, a, -d] u[d]] // Simplify, {a}];
-				v1 = HeadOfTensor[PowerExpand[S[-c, a] w[c] / Sqrt[S[-d, -b] w[d]
-					 w[b]]] // Simplify, {a}];
+				v0 = HeadOfTensor[PowerExpand[Ch2 u[a] + I / (2 Sqrt[dseda]) scrP2[c, b] epsilonmetric[-c, -b, a, -d] u[d]] // Simplify, {a}];
+				v1 = HeadOfTensor[PowerExpand[S[-c, a] w[c] / Sqrt[S[-d, -b] w[d] w[b]]] // Simplify, {a}];
 				{v0 + v1, v0 - v1}
 			,
 			Simplify[6 bb^2 - aa^3] === 0,
 				"Type II";
 				rho = bb / aa;
 				P = rho Q + 2 rho^2 gamma - Q2;
-				HeadOfTensor[Dagger[P[a, b]] (P[-b, -a] u[c] + I P[-b, d] epsilonmetric[
-					-a, -d, c, -e] u[e]) // Simplify, {c}]
+				HeadOfTensor[Dagger[P[a, b]] (P[-b, -a] u[c] + I P[-b, d] epsilonmetric[-a, -d, c, -e] u[e]) // Simplify, {c}]
 			,
 			True,
 				"Type I"
