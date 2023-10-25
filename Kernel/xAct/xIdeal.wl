@@ -542,6 +542,91 @@ weylConcomitant["ConformalScalarZ"][metric_CTensor, opts : OptionsPattern[]] :=
 	]
 )
 
+weylConcomitant["NullDirectionTypeN"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["NullDirectionTypeN"][metric, opts] = 
+	Module[{cart, simplf, obs, mq, a1, b1, c1, d1, e1},
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1, e1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 5];
+		simplf = OptionValue[weylConcomitant, PSimplify];
+		obs = OptionValue[weylConcomitant, opts, "Observer"];
+		mq = weylConcomitant["WeylMatrixQ"][metric, opts];
+		mq = Dagger[mq[a1, b1]] (mq[-b1, -a1] obs[c1] + I mq[-b1, d1] epsilon[metric][-a1, -d1, c1, -e1] obs[e1]);
+		HeadOfTensor[mq, {c1}];
+		simplf[mq]
+	]
+)
+
+weylConcomitant["NullDirectionTypeIII"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["NullDirectionTypeIII"][metric, opts] = 
+	Module[{cart, simplf, obs, mq, a1, b1, c1, d1, e1},
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1, e1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 5];
+		simplf = OptionValue[weylConcomitant, PSimplify];
+		obs = OptionValue[weylConcomitant, opts, "Observer"];
+		mq = weylConcomitant["WeylMatrixQ2"][metric, opts];
+		mq = Dagger[mq[a1, b1]] (mq[-b1, -a1] obs[c1] + I mq[-b1, d1] epsilon[metric][-a1, -d1, c1, -e1] obs[e1]);
+		HeadOfTensor[mq, {c1}];
+		simplf[mq]
+	]
+)
+
+weylConcomitant["NullDirectionTypeD"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["NullDirectionTypeD"][metric, opts] = 
+	Module[{cart, simplf, obs, w, a1, uw, b1, c1, d1, e1, bb, aa, mq, rho, gamma, P, Pdag, scrP, scrP2, S, dseda, Ch2, v0, v1, newopts},
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1, e1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 5];
+		simplf = OptionValue[weylConcomitant, PSimplify];
+		uw = OptionValue[weylConcomitant, opts, "Observer"];
+		obs = Part[uw, 1];
+		w = Part[uw, 2];
+		(* In the following calls we need just an "Observer" *)
+		newopts = ReplaceAll[{opts}, uw -> obs];
+		bb = -weylConcomitant["TraceWeylMatrixQ3"][metric, Sequence@@ newopts];
+		aa = weylConcomitant["TraceWeylMatrixQ2"][metric, Sequence@@ newopts];
+		mq = weylConcomitant["WeylMatrixQ"][metric, Sequence@@ newopts];
+		gamma = metricConcomitant["SpatialMetric"][metric, Sequence@@ newopts];
+		rho = simplf[-bb / aa];
+		P = simplf[1 / (3 rho) mq];
+		Pdag = simplf[Dagger[P]];
+		scrP = P[-a1, -b1] Pdag[b1, -c1];
+		scrP = simplf[HeadOfTensor[scrP, {-a1, -c1}]];
+		scrP2 = Pdag[-a1, -b1] P[b1, -c1];
+		scrP2 = simplf[HeadOfTensor[scrP2, {-a1, -c1}]];
+		dseda = simplf[scrP[-a1, a1] + 1/3];
+		S = simplf[1/4 (1 + 2 / (3 Sqrt[dseda])) (P + Pdag) + 1 / (4 Sqrt[dseda]) (scrP + scrP2) + 1/6 (1 + 1 / (3 Sqrt[dseda])) gamma];
+		Ch2 = simplf[(1 + Sqrt[dseda]) / 2];
+		v0 = PowerExpand[Ch2 obs[a1] + I / (2 Sqrt[dseda]) scrP2[c1, b1] epsilon[metric][-c1, -b1, a1, -d1] obs[d1]];
+		v0 = Simplify[v0];
+		v0 = HeadOfTensor[v0, {a1}];
+		v1 = PowerExpand[S[-c1, a1] w[c1] / Sqrt[S[-d1, -b1] w[d1] w[b1]]];
+		v1 = Simplify[v1];
+		v1 = HeadOfTensor[v1, {a1}];
+		{v0 + v1, v0 - v1}
+	]
+)
+
+weylConcomitant["NullDirectionTypeII"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["NullDirectionTypeII"][metric, opts] = 
+	Module[{cart, simplf, obs, mq, mq2, a1, b1, c1, d1, e1, bb, aa, gamma, rho, P, dvb},
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1, e1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 5];
+		simplf = OptionValue[weylConcomitant, PSimplify];
+		obs = OptionValue[weylConcomitant, opts, "Observer"];
+		(* In the following calls the "Observer" option is supossed to be non-Null *)
+		mq = weylConcomitant["WeylMatrixQ"][metric, opts];
+		mq2 = weylConcomitant["WeylMatrixQ2"][metric, opts];
+		bb = -weylConcomitant["TraceWeylMatrixQ3"][metric, opts];
+		aa = weylConcomitant["TraceWeylMatrixQ2"][metric, opts];
+		gamma = metricConcomitant["SpatialMetric"][metric, opts];
+		rho = bb / aa;
+		P = rho mq + 2 rho^2 gamma - mq2;
+		dvb = Dagger[P[a1, b1]] (P[-b1, -a1] obs[c1] + I P[-b1, d1] epsilon[metric][-a1, -d1, c1, -e1] obs[e1]);
+		simplf[dvb];
+		HeadOfTensor[dvb, {c1}]
+	]
+)
+
+
 (* ::Section:: *)
 (* Computation of the R-frame concomitants *)
 
@@ -972,31 +1057,19 @@ Catch@ Module[{cart, a, b, c, d, e, f, i, j, cd, weylcd, riemanncd, riccicd,
 			,
 			Q2 === Zero,
 				Print["Type N"];
-				HeadOfTensor[Dagger[Q[a, b]] (Q[-b, -a] u[c] + I Q[-b, d] epsilonmetric[-a, -d, c, -e] u[e]) // Simplify, {c}]
+				weylConcomitant["NullDirectionTypeN"][metric, opts, "Observer" -> u]
 			,
 			Q3 === Zero,
 				Print["Type III"];
-				HeadOfTensor[Dagger[Q2[a, b]] (Q2[-b, -a] u[c] + I Q2[-b, d] epsilonmetric[-a, -d, c, -e] u[e]) // Simplify, {c}]
+				weylConcomitant["NullDirectionTypeIII"][metric, opts, "Observer" -> u]
 			,
 			simplf[(aa^2 / 3) gamma - aa Q2 - bb Q] === Zero,
 				Print["Type D"];
-				rho = -bb / aa // FullSimplify;
-				P = 1 / (3 rho) Q // Simplify;
-				Pdag = Dagger[P] // Simplify;
-				scrP = HeadOfTensor[P[-a, -b] Pdag[b, -c], {-a, -c}] // Simplify;
-				scrP2 = HeadOfTensor[Pdag[-a, -b] P[b, -c], {-a, -c}] // Simplify;
-				dseda = scrP[-a, a] + 1/3 // Simplify;
-				S = Simplify[1/4 (1 + 2 / (3 Sqrt[dseda])) (P + Pdag) + 1 / (4 Sqrt[dseda]) (scrP + scrP2) + 1/6 (1 + 1 / (3 Sqrt[dseda])) gamma];
-				Ch2 = Simplify[(1 + Sqrt[dseda]) / 2];
-				v0 = HeadOfTensor[PowerExpand[Ch2 u[a] + I / (2 Sqrt[dseda]) scrP2[c, b] epsilonmetric[-c, -b, a, -d] u[d]] // Simplify, {a}];
-				v1 = HeadOfTensor[PowerExpand[S[-c, a] w[c] / Sqrt[S[-d, -b] w[d] w[b]]] // Simplify, {a}];
-				{v0 + v1, v0 - v1}
+				weylConcomitant["NullDirectionTypeD"][metric, opts, "Observer" -> {u, w}]
 			,
-			Simplify[6 bb^2 - aa^3] === 0,
+			simplf[6 bb^2 - aa^3] === 0,
 				"Type II";
-				rho = bb / aa;
-				P = rho Q + 2 rho^2 gamma - Q2;
-				HeadOfTensor[Dagger[P[a, b]] (P[-b, -a] u[c] + I P[-b, d] epsilonmetric[-a, -d, c, -e] u[e]) // Simplify, {c}]
+				weylConcomitant["NullDirectionTypeII"][metric, opts, "Observer" -> u]
 			,
 			True,
 				"Type I"
