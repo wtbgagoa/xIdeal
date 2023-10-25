@@ -3,1189 +3,2252 @@
 (*** Wolfram Notebook File ***)
 (* http://www.wolfram.com/nb *)
 
-(* CreatedBy='Mathematica 13.3' *)
+(* Created By: SaveReadableNotebook *)
+(* https://resources.wolframcloud.com/FunctionRepository/resources/SaveReadableNotebook *)
 
-(*CacheID: 234*)
-(* Internal cache information:
-NotebookFileLineBreakTest
-NotebookFileLineBreakTest
-NotebookDataPosition[       158,          7]
-NotebookDataLength[     40815,       1183]
-NotebookOptionsPosition[     34203,       1041]
-NotebookOutlinePosition[     34978,       1067]
-CellTagsIndexPosition[     34898,       1062]
-WindowFrame->Normal*)
-
-(* Beginning of Notebook Content *)
-Notebook[{
-
-Cell[CellGroupData[{
-Cell["ConnectionTensor", "ObjectName",
- CellID->493712759,ExpressionUUID->"b6de754d-bd01-4975-9ff0-6c3d3cba74ec"],
-
-Cell[TextData[{
- Cell["   ", "ModInfo",ExpressionUUID->"bd073afc-db00-4c53-96fc-090d273bea1b"],
- " "
-}], "Usage",
- CellID->423578463,ExpressionUUID->"da521100-f881-4ff3-a852-49d72354c1af"],
-
-Cell["The following options can be given: ", "Notes",
- CellID->354734344,ExpressionUUID->"952168b1-f93f-4577-8334-98d1ae52bfe0"],
-
-Cell[BoxData[GridBox[{
-   {Cell["   ", "ModInfo",ExpressionUUID->
-     "213bf0fc-3003-4ab9-bb06-d962f8debb49"], 
-    ButtonBox["Method",
-     BaseStyle->"Link"], "\"\<Default\>\"", Cell["\<\
-Method is an option for various algorithm-intensive functions that specifies \
-what internal methods they should use.\
-\>", "TableText",ExpressionUUID->"e4388a7d-85fc-4986-8957-ff7187a70f6a"]},
-   {Cell["   ", "ModInfo",ExpressionUUID->
-     "020d7cc3-7650-4390-a72b-77dfbff27132"], 
-    ButtonBox["PSimplify",
-     BaseStyle->"Link",
-     ButtonData->"paclet:xIdeal/ref/PSimplify"], 
-    ButtonBox["Simplify",
-     BaseStyle->"Link"], Cell[
-    " ", "TableText",ExpressionUUID->"b7977dc7-15f1-4ef8-a0bd-ba34cb850987"]},
-   {Cell["   ", "ModInfo",ExpressionUUID->
-     "b039da00-9a83-4795-834d-991aff00e957"], 
-    ButtonBox["Parallelize",
-     BaseStyle->"Link"], 
-    ButtonBox["True",
-     BaseStyle->"Link"], Cell[TextData[{
-     Cell[BoxData[
-      RowBox[{"Parallelize", "[", 
-       StyleBox["expr", "TI"], "]"}]], "InlineFormula",ExpressionUUID->
-      "7d3d416d-9b0d-483f-82bb-67b26f49d9a3"],
-     " evaluates ",
-     Cell[BoxData[
-      StyleBox["expr", "TI"]], "InlineFormula",ExpressionUUID->
-      "b7a72935-a970-42ff-a180-eb3dc27c9860"],
-     " using automatic parallelization."
-    }], "TableText",ExpressionUUID->"45557df5-e046-419f-9a81-055cb463e21c"]},
-   {Cell["   ", "ModInfo",ExpressionUUID->
-     "ed343e55-3f9a-4b73-bb91-041bade846d3"], 
-    ButtonBox["Verbose",
-     BaseStyle->"Link"], 
-    ButtonBox["True",
-     BaseStyle->"Link"], Cell["\<\
-Verbose is a Boolean option for MakeRule, AutomaticRules and ToCanonical. \
-Verbose->True gives lots of log-info about the internals of the calculation. \
-Its default value is False.\
-\>", "TableText",ExpressionUUID->"31d06bee-8d09-4eb4-914d-603cdce20740"]}
-  }]], "3ColumnTableMod",
- CellID->27290970,ExpressionUUID->"077330b5-ccc0-4d91-9cf2-2877c14503bb"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[TextData[{
- "See Also",
- Cell[BoxData[
-  TemplateBox[{"SeeAlso", 
-    Cell[
-     BoxData[
-      FrameBox[
-       Cell[
-       "Insert links to any related reference (function) pages.", 
-        "MoreInfoText"], BaseStyle -> "IFrameBox"]], "MoreInfoTextOuter"]},
-   "MoreInfoOpenerButtonTemplate"]],ExpressionUUID->
-  "02d4ac3a-098f-486f-8cc5-8a69349ca5d6"]
-}], "SeeAlsoSection",
- CellID->488911490,ExpressionUUID->"b5b69247-10cf-4f34-b38f-7b49319cb9ae"],
-
-Cell[TextData[{
- Cell[BoxData[
-  TagBox[
-   FrameBox["\<\"XXXX\"\>"],
-   "FunctionPlaceholder"]], "InlineSeeAlsoFunction",
-  TaggingRules->{"PageType" -> "Function"},ExpressionUUID->
-  "71cf5630-5c9c-4b9c-8832-c72faee7c586"],
- Cell[BoxData[
-  RowBox[{
-  Cell[TextData[StyleBox[
-   " \[FilledVerySmallSquare] ", "InlineSeparator"]],ExpressionUUID->
-    "f6235722-6b40-45e7-947f-2d7c6bd5f03c"], 
-   DynamicModuleBox[{$CellContext`nbobj$$ = NotebookObject[
-    "2f02fc1c-7565-4687-9773-afb24171f118", 
-     "bde5e6b4-8418-415c-8490-ff5560bda10a"], $CellContext`cellobj$$ = 
-    CellObject[
-    "fc1a7568-699a-4df3-b967-f9437aeff9ad", 
-     "9b343e20-a07a-498c-b272-eb099fa02128"]}, 
-    TemplateBox[{
-      GraphicsBox[{{
-         Thickness[0.06], 
-         StrokeForm[
-          Hue[0.4167, 0.406, 0.502]], 
-         CircleBox[{0, 0}]}, {
-         Thickness[0.06], 
-         StrokeForm[
-          Hue[0.4167, 0.406, 0.502]], 
-         LineBox[{{0, 0.62}, {0, -0.62}}]}, {
-         Thickness[0.06], 
-         StrokeForm[
-          Hue[0.4167, 0.406, 0.502]], 
-         LineBox[{{-0.62, 0}, {0.62, 0}}]}}, 
-       ImagePadding -> {{1., 1.}, {2.4, 1.}}, ImageSize -> 16, 
-       PlotRange -> {{-1.06, 1.06}, {-1.06, 1.06}}, 
-       BaselinePosition -> (Center -> 
-        Center)], $CellContext`nbobj$$, $CellContext`cellobj$$},
-     "InlineListingAddButton"],
-    Initialization:>($CellContext`nbobj$$ = 
-      EvaluationNotebook[]; $CellContext`cellobj$$ = EvaluationCell[])]}]], 
-  "InlineListingAddButton",ExpressionUUID->
-  "fc1a7568-699a-4df3-b967-f9437aeff9ad"]
-}], "SeeAlso",
- CellID->124156201,ExpressionUUID->"fe9a89df-98e3-44e1-8457-0c24490bb7fe"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[TextData[{
- "Tech Notes",
- Cell[BoxData[
-  TemplateBox[{"TechNotes", 
-    Cell[
-     BoxData[
-      FrameBox[
-       Cell["Insert links to related tech notes.", "MoreInfoText"], BaseStyle -> 
-       "IFrameBox"]], "MoreInfoTextOuter"]},
-   "MoreInfoOpenerButtonTemplate"]],ExpressionUUID->
-  "65229240-4228-4978-810c-fad0037ac163"]
-}], "TechNotesSection",
- CellID->601765411,ExpressionUUID->"0eb209c5-76d2-4409-aa35-9e1b5ca237d2"],
-
-Cell["XXXX", "Tutorials",
- CellID->595761971,ExpressionUUID->"8aaac800-5463-4d71-9b5e-b9eddd8382c9"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Related Guides", "MoreAboutSection",
- CellID->1643838,ExpressionUUID->"367d3434-3cf6-4b02-b7ed-507c85167dde"],
-
-Cell["XXXX", "MoreAbout",
- CellID->461793609,ExpressionUUID->"fe4de772-1077-495f-a870-3285c0e26276"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[TextData[{
- "Related Links",
- Cell[BoxData[
-  TemplateBox[{"RelatedLinks", 
-    Cell[
-     BoxData[
-      FrameBox[
-       Cell[
-       "Insert links to any related page, including web pages.", 
-        "MoreInfoText"], BaseStyle -> "IFrameBox"]], "MoreInfoTextOuter"]},
-   "MoreInfoOpenerButtonTemplate"]],ExpressionUUID->
-  "741d7aff-fbe5-4a75-9c3f-e088fd603673"]
-}], "RelatedLinksSection",
- CellID->281794148,ExpressionUUID->"7aeec43d-fc42-46af-9c2b-a65ccce26509"],
-
-Cell["XXXX", "RelatedLinks",
- CellID->361533051,ExpressionUUID->"a51215b8-8396-4087-b303-4a99b1da694a"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[TextData[{
- "Examples Initialization",
- Cell[BoxData[
-  TemplateBox[{"ExamplesInitialization", 
-    Cell[
-     BoxData[
-      FrameBox[
-       Cell[
-       "Input that is to be evaluated before any examples are run, e.g. \
-Needs[\[Ellipsis]].", "MoreInfoText"], BaseStyle -> "IFrameBox"]], 
-     "MoreInfoTextOuter"]},
-   "MoreInfoOpenerButtonTemplate"]],ExpressionUUID->
-  "8f3975e0-26d5-42aa-9110-c39a3e482903"]
-}], "ExamplesInitializationSection",
- CellID->540519112,ExpressionUUID->"0343e88b-84d5-4d89-bc18-059eac8cf59f"],
-
-Cell[BoxData[
- RowBox[{"Needs", "[", "\"\<xAct`xIdeal`\>\"", "]"}]], "ExampleInitialization",
- CellID->19048104,ExpressionUUID->"207143ee-a50f-4530-b25a-bae81e101cf5"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- InterpretationBox[GridBox[{
+Notebook[
+ {
+  Cell[
+   CellGroupData[
     {
-     StyleBox[
-      RowBox[{"Basic", " ", "Examples"}], "PrimaryExamplesSection"], 
-     ButtonBox[
-      RowBox[{
-       RowBox[{"More", " ", "Examples"}], " ", "\[RightTriangle]"}],
-      BaseStyle->"ExtendedExamplesLink",
-      ButtonData:>"ExtendedExamples"]}
-   }],
-  $Line = 0; Null]], "PrimaryExamplesSection",
- CellID->346976232,ExpressionUUID->"7236ac87-7253-47e5-8425-eccc1190c29e"],
-
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"$DefInfoQ", "=", "False"}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"DefManifold", "[", 
-   RowBox[{"M", ",", "4", ",", 
-    RowBox[{"IndexRange", "[", 
-     RowBox[{"a", ",", "q"}], "]"}]}], "]"}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"DefChart", "[", 
-   RowBox[{"char", ",", "M", ",", 
-    RowBox[{"{", 
-     RowBox[{"0", ",", "1", ",", "2", ",", "3"}], "}"}], ",", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"\[ScriptU]", "[", "]"}], ",", 
-      RowBox[{"\[ScriptW]", "[", "]"}], ",", 
-      RowBox[{"x", "[", "]"}], ",", 
-      RowBox[{"y", "[", "]"}]}], "}"}]}], "]"}], ";"}], "\n", 
- RowBox[{
-  RowBox[{"DefScalarFunction", "[", 
-   RowBox[{"ff", ",", 
-    RowBox[{"PrintAs", "\[Rule]", "\"\<f\>\""}]}], "]"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"$Assumptions", "=", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{
-      RowBox[{"x", "[", "]"}], ">", "0"}], ",", 
-     RowBox[{"ff", ">", "0"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"metricMatrix", "=", 
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{
-        RowBox[{
-         RowBox[{"-", "2"}], 
-         RowBox[{"ff", "[", 
-          RowBox[{"\[ScriptU]", "[", "]"}], "]"}], " ", 
-         RowBox[{"x", "[", "]"}], 
-         RowBox[{"(", 
-          RowBox[{
-           SuperscriptBox[
-            RowBox[{"x", "[", "]"}], "2"], "+", 
-           SuperscriptBox[
-            RowBox[{"y", "[", "]"}], "2"]}], ")"}]}], "+", 
-        SuperscriptBox[
-         RowBox[{"\[ScriptW]", "[", "]"}], "2"]}], ",", 
-       RowBox[{"-", 
-        RowBox[{"x", "[", "]"}]}], ",", 
-       RowBox[{"\[ScriptW]", "[", "]"}], ",", "0"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"-", 
-        RowBox[{"x", "[", "]"}]}], ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"\[ScriptW]", "[", "]"}], ",", "0", ",", "1", ",", "0"}], 
-      "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"0", ",", "0", ",", "0", ",", "1"}], "}"}]}], "}"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"metric", "=", 
-   RowBox[{"CTensor", "[", 
-    RowBox[{"metricMatrix", ",", 
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"-", "char"}], ",", 
-       RowBox[{"-", "char"}]}], "}"}]}], "]"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"SetCMetric", "[", 
-   RowBox[{"metric", ",", "char", ",", 
-    RowBox[{"SignatureOfMetric", "\[Rule]", 
-     RowBox[{"{", 
-      RowBox[{"3", ",", "1", ",", "0"}], "}"}]}]}], "]"}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{"\t", 
-  RowBox[{
-   RowBox[{"CD", "=", 
-    RowBox[{"CovDOfMetric", "[", "metric", "]"}]}], 
-   ";"}]}], "\[IndentingNewLine]", 
- RowBox[{"\t", 
-  RowBox[{
-   RowBox[{"epsilonmetric", "=", 
-    RowBox[{"epsilon", "[", "metric", "]"}]}], ";"}]}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"\[ScriptCapitalK]", "=", 
-   RowBox[{
-    RowBox[{"CTensor", "[", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{
-         FractionBox[
-          RowBox[{"2", 
-           SqrtBox[
-            RowBox[{"ff", "[", 
-             RowBox[{"\[ScriptU]", "[", "]"}], "]"}]]}], 
-          SqrtBox[
-           RowBox[{"x", "[", "]"}]]], 
-         RowBox[{"x", "[", "]"}]}], ",", "0", ",", "0", ",", "0"}], "}"}], 
-      ",", 
-      RowBox[{"{", 
-       RowBox[{"-", "char"}], "}"}]}], "]"}], "//", "Simplify"}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"e2", "=", 
-   RowBox[{"CTensor", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"0", ",", "0", ",", "1", ",", "0"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"-", "char"}], "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"e3", "=", 
-   RowBox[{"CTensor", "[", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{"0", ",", "0", ",", "0", ",", "1"}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{"-", "char"}], "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{"\t", 
-  RowBox[{
-   RowBox[{"U", "=", 
-    RowBox[{
-     RowBox[{"HeadOfTensor", "[", 
-      RowBox[{
-       RowBox[{
-        FractionBox["1", "2"], 
-        RowBox[{"epsilonmetric", "[", 
-         RowBox[{
-          RowBox[{"-", "a"}], ",", 
-          RowBox[{"-", "b"}], ",", "i", ",", "j"}], "]"}], 
-        RowBox[{"(", 
-         RowBox[{
-          RowBox[{
-           RowBox[{"e2", "[", 
-            RowBox[{"-", "i"}], "]"}], 
-           RowBox[{"e3", "[", 
-            RowBox[{"-", "j"}], "]"}]}], "-", 
-          RowBox[{
-           RowBox[{"e2", "[", 
-            RowBox[{"-", "j"}], "]"}], 
-           RowBox[{"e3", "[", 
-            RowBox[{"-", "i"}], "]"}]}]}], ")"}]}], ",", 
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"-", "a"}], ",", 
-         RowBox[{"-", "b"}]}], "}"}]}], "]"}], "//", "FullSimplify"}]}], 
-   ";"}]}], "\[IndentingNewLine]", 
- RowBox[{"\t", 
-  RowBox[{
-   RowBox[{"w", "=", 
-    RowBox[{"CTensor", "[", 
-     RowBox[{
-      RowBox[{"{", 
-       RowBox[{"1", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
-      RowBox[{"{", "char", "}"}]}], "]"}]}], ";"}]}], "\[IndentingNewLine]", 
- RowBox[{"\t", 
-  RowBox[{
-   RowBox[{"L", "=", 
-    RowBox[{
-     RowBox[{"HeadOfTensor", "[", 
-      RowBox[{
-       RowBox[{"-", 
-        FractionBox[
-         RowBox[{
-          RowBox[{"(", 
-           RowBox[{
-            RowBox[{
-             RowBox[{"U", "[", 
-              RowBox[{"a", ",", "k"}], "]"}], 
-             RowBox[{"U", "[", 
-              RowBox[{
-               RowBox[{"-", "k"}], ",", 
-               RowBox[{"-", "j"}]}], "]"}]}], "+", 
-            RowBox[{"U", "[", 
-             RowBox[{"a", ",", 
-              RowBox[{"-", "j"}]}], "]"}]}], ")"}], 
-          RowBox[{"w", "[", "j", "]"}]}], 
-         RowBox[{"2", 
-          RowBox[{"w", "[", 
-           RowBox[{"-", "i"}], "]"}], 
-          RowBox[{"\[ScriptCapitalK]", "[", "i", "]"}]}]]}], ",", 
-       RowBox[{"{", "a", "}"}]}], "]"}], "//", "Simplify"}]}], ";"}]}], "\n", 
- RowBox[{
-  RowBox[{"e0", "=", 
-   FractionBox[
-    RowBox[{"L", "+", "\[ScriptCapitalK]"}], 
-    SqrtBox["2"]]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"e1", "=", 
-   FractionBox[
-    RowBox[{"L", "-", "\[ScriptCapitalK]"}], 
-    SqrtBox["2"]]}], ";"}]}], "Input",
- CellLabel->"In[17]:=",
- CellID->140152022,ExpressionUUID->"ff0a0ce0-0ebd-454f-8473-ec7235327c4d"],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"H", "=", 
-  RowBox[{"ConnectionTensor", "[", 
-   RowBox[{
-   "metric", ",", " ", "e0", ",", " ", "e1", ",", " ", "e2", ",", " ", "e3"}],
-    "]"}]}]], "Input",
- CellLabel->"In[35]:=",
- CellID->399764725,ExpressionUUID->"64f87ce6-29d6-45c0-87f5-d722f0b2d7b5"],
-
-Cell[BoxData[
- RowBox[{"CTensor", "[", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "0", ",", 
-         FractionBox["1", 
-          SuperscriptBox[
-           InterpretationBox[
-            StyleBox["x",
-             ShowAutoStyles->False,
-             AutoSpacing->False],
-            $CellContext`x[],
-            Editable->False], "2"]], ",", "0"}], "}"}], ",", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", 
-         RowBox[{"-", 
-          FractionBox["1", 
-           SuperscriptBox[
-            InterpretationBox[
-             StyleBox["x",
-              ShowAutoStyles->False,
-              AutoSpacing->False],
-             $CellContext`x[],
-             Editable->False], "2"]]}], ",", "0", ",", "0"}], "}"}], ",", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"0", ",", 
-         FractionBox[
-          RowBox[{
-           RowBox[{
-            RowBox[{
-             InterpretationBox[
-              StyleBox["f",
-               ShowAutoStyles->False,
-               AutoSpacing->False],
-              $CellContext`ff,
-              Editable->False], "[", 
-             InterpretationBox[
-              StyleBox["\[ScriptU]",
-               ShowAutoStyles->False,
-               AutoSpacing->False],
-              $CellContext`\[ScriptU][],
-              Editable->False], "]"}], " ", 
-            InterpretationBox[
-             StyleBox["\[ScriptW]",
-              ShowAutoStyles->False,
-              AutoSpacing->False],
-             $CellContext`\[ScriptW][],
-             Editable->False]}], "+", 
-           RowBox[{
-            InterpretationBox[
-             StyleBox["x",
-              ShowAutoStyles->False,
-              AutoSpacing->False],
-             $CellContext`x[],
-             Editable->False], " ", 
-            RowBox[{
-             SuperscriptBox[
-              InterpretationBox[
-               StyleBox["f",
-                ShowAutoStyles->False,
-                AutoSpacing->False],
-               $CellContext`ff,
-               Editable->False], "\[Prime]",
-              MultilineFunction->None], "[", 
-             InterpretationBox[
-              StyleBox["\[ScriptU]",
-               ShowAutoStyles->False,
-               AutoSpacing->False],
-              $CellContext`\[ScriptU][],
-              Editable->False], "]"}]}]}], 
-          RowBox[{"2", " ", 
-           RowBox[{
-            InterpretationBox[
-             StyleBox["f",
-              ShowAutoStyles->False,
-              AutoSpacing->False],
-             $CellContext`ff,
-             Editable->False], "[", 
-            InterpretationBox[
-             StyleBox["\[ScriptU]",
-              ShowAutoStyles->False,
-              AutoSpacing->False],
-             $CellContext`\[ScriptU][],
-             Editable->False], "]"}], " ", 
-           SuperscriptBox[
-            InterpretationBox[
-             StyleBox["x",
-              ShowAutoStyles->False,
-              AutoSpacing->False],
-             $CellContext`x[],
-             Editable->False], "3"]}]], ",", 
-         FractionBox["1", 
-          SuperscriptBox[
-           InterpretationBox[
-            StyleBox["x",
-             ShowAutoStyles->False,
-             AutoSpacing->False],
-            $CellContext`x[],
-            Editable->False], "2"]], ",", "0"}], "}"}], ",", 
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"-", 
-          FractionBox[
-           RowBox[{
-            RowBox[{
-             RowBox[{
-              InterpretationBox[
-               StyleBox["f",
-                ShowAutoStyles->False,
-                AutoSpacing->False],
-               $CellContext`ff,
-               Editable->False], "[", 
-              InterpretationBox[
-               StyleBox["\[ScriptU]",
-                ShowAutoStyles->False,
-                AutoSpacing->False],
-               $CellContext`\[ScriptU][],
-               Editable->False], "]"}], " ", 
-             InterpretationBox[
-              StyleBox["\[ScriptW]",
-               ShowAutoStyles->False,
-               AutoSpacing->False],
-              $CellContext`\[ScriptW][],
-              Editable->False]}], "+", 
-            RowBox[{
-             InterpretationBox[
-              StyleBox["x",
-               ShowAutoStyles->False,
-               AutoSpacing->False],
-              $CellContext`x[],
-              Editable->False], " ", 
-             RowBox[{
-              SuperscriptBox[
-               InterpretationBox[
-                StyleBox["f",
-                 ShowAutoStyles->False,
-                 AutoSpacing->False],
-                $CellContext`ff,
-                Editable->False], "\[Prime]",
-               MultilineFunction->None], "[", 
-              InterpretationBox[
-               StyleBox["\[ScriptU]",
-                ShowAutoStyles->False,
-                AutoSpacing->False],
-               $CellContext`\[ScriptU][],
-               Editable->False], "]"}]}]}], 
-           RowBox[{"2", " ", 
-            RowBox[{
-             InterpretationBox[
-              StyleBox["f",
-               ShowAutoStyles->False,
-               AutoSpacing->False],
-              $CellContext`ff,
-              Editable->False], "[", 
-             InterpretationBox[
-              StyleBox["\[ScriptU]",
-               ShowAutoStyles->False,
-               AutoSpacing->False],
-              $CellContext`\[ScriptU][],
-              Editable->False], "]"}], " ", 
-            SuperscriptBox[
-             InterpretationBox[
-              StyleBox["x",
-               ShowAutoStyles->False,
-               AutoSpacing->False],
-              $CellContext`x[],
-              Editable->False], "3"]}]]}], ",", "0", ",", 
-         FractionBox[
-          RowBox[{
-           RowBox[{
-            RowBox[{"-", 
-             RowBox[{
-              InterpretationBox[
-               StyleBox["f",
-                ShowAutoStyles->False,
-                AutoSpacing->False],
-               $CellContext`ff,
-               Editable->False], "[", 
-              InterpretationBox[
-               StyleBox["\[ScriptU]",
-                ShowAutoStyles->False,
-                AutoSpacing->False],
-               $CellContext`\[ScriptU][],
-               Editable->False], "]"}]}], " ", 
-            RowBox[{"(", 
-             RowBox[{
-              SuperscriptBox[
-               InterpretationBox[
-                StyleBox["x",
-                 ShowAutoStyles->False,
-                 AutoSpacing->False],
-                $CellContext`x[],
-                Editable->False], "3"], "+", 
-              RowBox[{"3", " ", 
-               InterpretationBox[
-                StyleBox["x",
-                 ShowAutoStyles->False,
-                 AutoSpacing->False],
-                $CellContext`x[],
-                Editable->False], " ", 
-               SuperscriptBox[
-                InterpretationBox[
-                 StyleBox["y",
-                  ShowAutoStyles->False,
-                  AutoSpacing->False],
-                 $CellContext`y[],
-                 Editable->False], "2"]}]}], ")"}]}], "+", 
-           SuperscriptBox[
-            InterpretationBox[
-             StyleBox["\[ScriptW]",
-              ShowAutoStyles->False,
-              AutoSpacing->False],
-             $CellContext`\[ScriptW][],
-             Editable->False], "2"]}], 
-          SuperscriptBox[
-           InterpretationBox[
-            StyleBox["x",
-             ShowAutoStyles->False,
-             AutoSpacing->False],
-            $CellContext`x[],
-            Editable->False], "3"]], ",", 
-         FractionBox[
-          RowBox[{"2", " ", 
-           RowBox[{
-            InterpretationBox[
-             StyleBox["f",
-              ShowAutoStyles->False,
-              AutoSpacing->False],
-             $CellContext`ff,
-             Editable->False], "[", 
-            InterpretationBox[
-             StyleBox["\[ScriptU]",
-              ShowAutoStyles->False,
-              AutoSpacing->False],
-             $CellContext`\[ScriptU][],
-             Editable->False], "]"}], " ", 
-           InterpretationBox[
-            StyleBox["y",
-             ShowAutoStyles->False,
-             AutoSpacing->False],
-            $CellContext`y[],
-            Editable->False]}], 
+     Cell["ConnectionTensor", "ObjectName"],
+     Cell[TextData[{Cell["   ", "ModInfo"], " "}], "Usage"],
+     Cell["The following options can be given: ", "Notes"],
+     Cell[
+      BoxData[
+       GridBox[
+        {
+         {
+          Cell["   ", "ModInfo"],
+          ButtonBox["Method", BaseStyle -> "Link"],
+          "\"Default\"",
+          Cell[
+           "Method is an option for various algorithm-intensive functions that specifies what internal methods they should use.",
+           "TableText"
+          ]
+         },
+         {
+          Cell["   ", "ModInfo"],
+          ButtonBox[
+           "PSimplify",
+           BaseStyle -> "Link",
+           ButtonData -> "paclet:xIdeal/ref/PSimplify"
+          ],
+          ButtonBox["Simplify", BaseStyle -> "Link"],
+          Cell[" ", "TableText"]
+         },
+         {
+          Cell["   ", "ModInfo"],
+          ButtonBox["Parallelize", BaseStyle -> "Link"],
+          ButtonBox["True", BaseStyle -> "Link"],
+          Cell[
+           TextData[
+            {
+             Cell[
+              BoxData[
+               RowBox[{"Parallelize", "[", StyleBox["expr", "TI"], "]"}]
+              ],
+              "InlineFormula"
+             ],
+             " evaluates ",
+             Cell[BoxData[StyleBox["expr", "TI"]], "InlineFormula"],
+             " using automatic parallelization."
+            }
+           ],
+           "TableText"
+          ]
+         },
+         {
+          Cell["   ", "ModInfo"],
+          ButtonBox["Verbose", BaseStyle -> "Link"],
+          ButtonBox["True", BaseStyle -> "Link"],
+          Cell[
+           "Verbose is a Boolean option for MakeRule, AutomaticRules and ToCanonical. Verbose->True gives lots of log-info about the internals of the calculation. Its default value is False.",
+           "TableText"
+          ]
+         }
+        }
+       ]
+      ],
+      "3ColumnTableMod"
+     ]
+    },
+    Open
+   ]
+  ],
+  Cell[
+   CellGroupData[
+    {
+     Cell[
+      TextData[
+       {
+        "See Also",
+        Cell[
+         BoxData[
+          TemplateBox[
+           {
+            "SeeAlso",
+            Cell[
+             BoxData[
+              FrameBox[
+               Cell[
+                "Insert links to any related reference (function) pages.",
+                "MoreInfoText"
+               ],
+               BaseStyle -> "IFrameBox"
+              ]
+             ],
+             "MoreInfoTextOuter"
+            ]
+           },
+           "MoreInfoOpenerButtonTemplate"
+          ]
+         ]
+        ]
+       }
+      ],
+      "SeeAlsoSection"
+     ],
+     Cell[
+      TextData[
+       {
+        Cell[
+         BoxData[
+          TagBox[FrameBox["\"XXXX\""], "FunctionPlaceholder"]
+         ],
+         "InlineSeeAlsoFunction",
+         TaggingRules -> {"PageType" -> "Function"}
+        ],
+        Cell[
+         BoxData[
+          RowBox[
+           {
+            Cell[
+             TextData[
+              StyleBox[" \[FilledVerySmallSquare] ", "InlineSeparator"]
+             ]
+            ],
+            DynamicModuleBox[
+             {
+              nbobj$$ = 
+               NotebookObject[
+                "2f02fc1c-7565-4687-9773-afb24171f118",
+                "bde5e6b4-8418-415c-8490-ff5560bda10a"
+               ],
+              cellobj$$ = 
+               CellObject[
+                "fc1a7568-699a-4df3-b967-f9437aeff9ad",
+                "9b343e20-a07a-498c-b272-eb099fa02128"
+               ]
+             },
+             TemplateBox[
+              {
+               GraphicsBox[
+                {
+                 {
+                  Thickness[0.06],
+                  StrokeForm[Hue[0.4167, 0.406, 0.502]],
+                  CircleBox[{0, 0}]
+                 },
+                 {
+                  Thickness[0.06],
+                  StrokeForm[Hue[0.4167, 0.406, 0.502]],
+                  LineBox[{{0, 0.62}, {0, -0.62}}]
+                 },
+                 {
+                  Thickness[0.06],
+                  StrokeForm[Hue[0.4167, 0.406, 0.502]],
+                  LineBox[{{-0.62, 0}, {0.62, 0}}]
+                 }
+                },
+                ImagePadding -> {{1.0, 1.0}, {2.4, 1.0}},
+                ImageSize -> 16,
+                PlotRange -> {{-1.06, 1.06}, {-1.06, 1.06}},
+                BaselinePosition -> Center -> Center
+               ],
+               nbobj$$,
+               cellobj$$
+              },
+              "InlineListingAddButton"
+             ],
+             Initialization :>
+              (nbobj$$ = EvaluationNotebook[];
+              cellobj$$ = EvaluationCell[])
+            ]
+           }
+          ]
+         ],
+         "InlineListingAddButton"
+        ]
+       }
+      ],
+      "SeeAlso"
+     ]
+    },
+    Open
+   ]
+  ],
+  Cell[
+   CellGroupData[
+    {
+     Cell[
+      TextData[
+       {
+        "Tech Notes",
+        Cell[
+         BoxData[
+          TemplateBox[
+           {
+            "TechNotes",
+            Cell[
+             BoxData[
+              FrameBox[
+               Cell["Insert links to related tech notes.", "MoreInfoText"],
+               BaseStyle -> "IFrameBox"
+              ]
+             ],
+             "MoreInfoTextOuter"
+            ]
+           },
+           "MoreInfoOpenerButtonTemplate"
+          ]
+         ]
+        ]
+       }
+      ],
+      "TechNotesSection"
+     ],
+     Cell["XXXX", "Tutorials"]
+    },
+    Open
+   ]
+  ],
+  Cell[
+   CellGroupData[
+    {
+     Cell["Related Guides", "MoreAboutSection"],
+     Cell["XXXX", "MoreAbout"]
+    },
+    Open
+   ]
+  ],
+  Cell[
+   CellGroupData[
+    {
+     Cell[
+      TextData[
+       {
+        "Related Links",
+        Cell[
+         BoxData[
+          TemplateBox[
+           {
+            "RelatedLinks",
+            Cell[
+             BoxData[
+              FrameBox[
+               Cell[
+                "Insert links to any related page, including web pages.",
+                "MoreInfoText"
+               ],
+               BaseStyle -> "IFrameBox"
+              ]
+             ],
+             "MoreInfoTextOuter"
+            ]
+           },
+           "MoreInfoOpenerButtonTemplate"
+          ]
+         ]
+        ]
+       }
+      ],
+      "RelatedLinksSection"
+     ],
+     Cell["XXXX", "RelatedLinks"]
+    },
+    Open
+   ]
+  ],
+  Cell[
+   CellGroupData[
+    {
+     Cell[
+      TextData[
+       {
+        "Examples Initialization",
+        Cell[
+         BoxData[
+          TemplateBox[
+           {
+            "ExamplesInitialization",
+            Cell[
+             BoxData[
+              FrameBox[
+               Cell[
+                "Input that is to be evaluated before any examples are run, e.g. Needs[\[Ellipsis]].",
+                "MoreInfoText"
+               ],
+               BaseStyle -> "IFrameBox"
+              ]
+             ],
+             "MoreInfoTextOuter"
+            ]
+           },
+           "MoreInfoOpenerButtonTemplate"
+          ]
+         ]
+        ]
+       }
+      ],
+      "ExamplesInitializationSection"
+     ],
+     Cell[
+      BoxData[RowBox[{"Needs", "[", "\"xAct`xIdeal`\"", "]"}]],
+      "ExampleInitialization"
+     ]
+    },
+    Open
+   ]
+  ],
+  Cell[
+   CellGroupData[
+    {
+     Cell[
+      BoxData[
+       InterpretationBox[
+        GridBox[
+         {
+          {
+           StyleBox[
+            RowBox[{"Basic", " ", "Examples"}],
+            "PrimaryExamplesSection"
+           ],
+           ButtonBox[
+            RowBox[
+             {
+              RowBox[{"More", " ", "Examples"}],
+              " ",
+              "\[RightTriangle]"
+             }
+            ],
+            BaseStyle -> "ExtendedExamplesLink",
+            ButtonData :> "ExtendedExamples"
+           ]
+          }
+         }
+        ],
+        $Line = 0;
+       ]
+      ],
+      "PrimaryExamplesSection"
+     ],
+     Cell[
+      BoxData[
+       {
+        RowBox[{RowBox[{"$DefInfoQ", "=", "False"}], ";"}],
+        "\[IndentingNewLine]",
+        RowBox[
+         {
+          RowBox[
+           {
+            "DefManifold",
+            "[",
+            RowBox[
+             {
+              "M",
+              ",",
+              "4",
+              ",",
+              RowBox[{"IndexRange", "[", RowBox[{"a", ",", "q"}], "]"}]
+             }
+            ],
+            "]"
+           }
+          ],
+          ";"
+         }
+        ],
+        "\[IndentingNewLine]",
+        RowBox[
+         {
+          RowBox[
+           {
+            "DefChart",
+            "[",
+            RowBox[
+             {
+              "char",
+              ",",
+              "M",
+              ",",
+              RowBox[
+               {"{", RowBox[{"0", ",", "1", ",", "2", ",", "3"}], "}"}
+              ],
+              ",",
+              RowBox[
+               {
+                "{",
+                RowBox[
+                 {
+                  RowBox[{"\[ScriptU]", "[", "]"}],
+                  ",",
+                  RowBox[{"\[ScriptW]", "[", "]"}],
+                  ",",
+                  RowBox[{"x", "[", "]"}],
+                  ",",
+                  RowBox[{"y", "[", "]"}]
+                 }
+                ],
+                "}"
+               }
+              ]
+             }
+            ],
+            "]"
+           }
+          ],
+          ";"
+         }
+        ],
+        "\n",
+        RowBox[
+         {
+          RowBox[
+           {
+            "DefScalarFunction",
+            "[",
+            RowBox[
+             {"ff", ",", RowBox[{"PrintAs", "\[Rule]", "\"f\""}]}
+            ],
+            "]"
+           }
+          ],
+          ";"
+         }
+        ],
+        "\[IndentingNewLine]",
+        RowBox[
+         {
+          RowBox[
+           {
+            "$Assumptions",
+            "=",
+            RowBox[
+             {
+              "{",
+              RowBox[
+               {
+                RowBox[{RowBox[{"x", "[", "]"}], ">", "0"}],
+                ",",
+                RowBox[{"ff", ">", "0"}]
+               }
+              ],
+              "}"
+             }
+            ]
+           }
+          ],
+          ";"
+         }
+        ],
+        "\[IndentingNewLine]",
+        RowBox[
+         {
+          RowBox[
+           {
+            "metricMatrix",
+            "=",
+            RowBox[
+             {
+              "{",
+              RowBox[
+               {
+                RowBox[
+                 {
+                  "{",
+                  RowBox[
+                   {
+                    RowBox[
+                     {
+                      RowBox[
+                       {
+                        RowBox[{"-", "2"}],
+                        RowBox[{"ff", "[", RowBox[{"\[ScriptU]", "[", "]"}], "]"}],
+                        " ",
+                        RowBox[{"x", "[", "]"}],
+                        RowBox[
+                         {
+                          "(",
+                          RowBox[
+                           {
+                            SuperscriptBox[RowBox[{"x", "[", "]"}], "2"],
+                            "+",
+                            SuperscriptBox[RowBox[{"y", "[", "]"}], "2"]
+                           }
+                          ],
+                          ")"
+                         }
+                        ]
+                       }
+                      ],
+                      "+",
+                      SuperscriptBox[RowBox[{"\[ScriptW]", "[", "]"}], "2"]
+                     }
+                    ],
+                    ",",
+                    RowBox[{"-", RowBox[{"x", "[", "]"}]}],
+                    ",",
+                    RowBox[{"\[ScriptW]", "[", "]"}],
+                    ",",
+                    "0"
+                   }
+                  ],
+                  "}"
+                 }
+                ],
+                ",",
+                RowBox[
+                 {
+                  "{",
+                  RowBox[
+                   {
+                    RowBox[{"-", RowBox[{"x", "[", "]"}]}],
+                    ",",
+                    "0",
+                    ",",
+                    "0",
+                    ",",
+                    "0"
+                   }
+                  ],
+                  "}"
+                 }
+                ],
+                ",",
+                RowBox[
+                 {
+                  "{",
+                  RowBox[
+                   {
+                    RowBox[{"\[ScriptW]", "[", "]"}],
+                    ",",
+                    "0",
+                    ",",
+                    "1",
+                    ",",
+                    "0"
+                   }
+                  ],
+                  "}"
+                 }
+                ],
+                ",",
+                RowBox[
+                 {"{", RowBox[{"0", ",", "0", ",", "0", ",", "1"}], "}"}
+                ]
+               }
+              ],
+              "}"
+             }
+            ]
+           }
+          ],
+          ";"
+         }
+        ],
+        "\[IndentingNewLine]",
+        RowBox[
+         {
+          RowBox[
+           {
+            "metric",
+            "=",
+            RowBox[
+             {
+              "CTensor",
+              "[",
+              RowBox[
+               {
+                "metricMatrix",
+                ",",
+                RowBox[
+                 {
+                  "{",
+                  RowBox[{RowBox[{"-", "char"}], ",", RowBox[{"-", "char"}]}],
+                  "}"
+                 }
+                ]
+               }
+              ],
+              "]"
+             }
+            ]
+           }
+          ],
+          ";"
+         }
+        ],
+        "\[IndentingNewLine]",
+        RowBox[
+         {
+          RowBox[
+           {
+            "SetCMetric",
+            "[",
+            RowBox[
+             {
+              "metric",
+              ",",
+              "char",
+              ",",
+              RowBox[
+               {
+                "SignatureOfMetric",
+                "\[Rule]",
+                RowBox[{"{", RowBox[{"3", ",", "1", ",", "0"}], "}"}]
+               }
+              ]
+             }
+            ],
+            "]"
+           }
+          ],
+          ";"
+         }
+        ],
+        "\[IndentingNewLine]",
+        RowBox[
+         {
+          "\t",
+          RowBox[
+           {
+            RowBox[
+             {"CD", "=", RowBox[{"CovDOfMetric", "[", "metric", "]"}]}
+            ],
+            ";"
+           }
+          ]
+         }
+        ],
+        "\[IndentingNewLine]",
+        RowBox[
+         {
+          "\t",
+          RowBox[
+           {
+            RowBox[
+             {
+              "epsilonmetric",
+              "=",
+              RowBox[{"epsilon", "[", "metric", "]"}]
+             }
+            ],
+            ";"
+           }
+          ]
+         }
+        ],
+        "\[IndentingNewLine]",
+        RowBox[
+         {
+          RowBox[
+           {
+            "\[ScriptCapitalK]",
+            "=",
+            RowBox[
+             {
+              RowBox[
+               {
+                "CTensor",
+                "[",
+                RowBox[
+                 {
+                  RowBox[
+                   {
+                    "{",
+                    RowBox[
+                     {
+                      RowBox[
+                       {
+                        FractionBox[
+                         RowBox[
+                          {
+                           "2",
+                           SqrtBox[
+                            RowBox[{"ff", "[", RowBox[{"\[ScriptU]", "[", "]"}], "]"}]
+                           ]
+                          }
+                         ],
+                         SqrtBox[RowBox[{"x", "[", "]"}]]
+                        ],
+                        RowBox[{"x", "[", "]"}]
+                       }
+                      ],
+                      ",",
+                      "0",
+                      ",",
+                      "0",
+                      ",",
+                      "0"
+                     }
+                    ],
+                    "}"
+                   }
+                  ],
+                  ",",
+                  RowBox[{"{", RowBox[{"-", "char"}], "}"}]
+                 }
+                ],
+                "]"
+               }
+              ],
+              "//",
+              "Simplify"
+             }
+            ]
+           }
+          ],
+          ";"
+         }
+        ],
+        "\[IndentingNewLine]",
+        RowBox[
+         {
+          RowBox[
+           {
+            "e2",
+            "=",
+            RowBox[
+             {
+              "CTensor",
+              "[",
+              RowBox[
+               {
+                RowBox[
+                 {"{", RowBox[{"0", ",", "0", ",", "1", ",", "0"}], "}"}
+                ],
+                ",",
+                RowBox[{"{", RowBox[{"-", "char"}], "}"}]
+               }
+              ],
+              "]"
+             }
+            ]
+           }
+          ],
+          ";"
+         }
+        ],
+        "\[IndentingNewLine]",
+        RowBox[
+         {
+          RowBox[
+           {
+            "e3",
+            "=",
+            RowBox[
+             {
+              "CTensor",
+              "[",
+              RowBox[
+               {
+                RowBox[
+                 {"{", RowBox[{"0", ",", "0", ",", "0", ",", "1"}], "}"}
+                ],
+                ",",
+                RowBox[{"{", RowBox[{"-", "char"}], "}"}]
+               }
+              ],
+              "]"
+             }
+            ]
+           }
+          ],
+          ";"
+         }
+        ],
+        "\[IndentingNewLine]",
+        RowBox[
+         {
+          "\t",
+          RowBox[
+           {
+            RowBox[
+             {
+              "U",
+              "=",
+              RowBox[
+               {
+                RowBox[
+                 {
+                  "HeadOfTensor",
+                  "[",
+                  RowBox[
+                   {
+                    RowBox[
+                     {
+                      FractionBox["1", "2"],
+                      RowBox[
+                       {
+                        "epsilonmetric",
+                        "[",
+                        RowBox[
+                         {
+                          RowBox[{"-", "a"}],
+                          ",",
+                          RowBox[{"-", "b"}],
+                          ",",
+                          "i",
+                          ",",
+                          "j"
+                         }
+                        ],
+                        "]"
+                       }
+                      ],
+                      RowBox[
+                       {
+                        "(",
+                        RowBox[
+                         {
+                          RowBox[
+                           {
+                            RowBox[{"e2", "[", RowBox[{"-", "i"}], "]"}],
+                            RowBox[{"e3", "[", RowBox[{"-", "j"}], "]"}]
+                           }
+                          ],
+                          "-",
+                          RowBox[
+                           {
+                            RowBox[{"e2", "[", RowBox[{"-", "j"}], "]"}],
+                            RowBox[{"e3", "[", RowBox[{"-", "i"}], "]"}]
+                           }
+                          ]
+                         }
+                        ],
+                        ")"
+                       }
+                      ]
+                     }
+                    ],
+                    ",",
+                    RowBox[
+                     {
+                      "{",
+                      RowBox[{RowBox[{"-", "a"}], ",", RowBox[{"-", "b"}]}],
+                      "}"
+                     }
+                    ]
+                   }
+                  ],
+                  "]"
+                 }
+                ],
+                "//",
+                "FullSimplify"
+               }
+              ]
+             }
+            ],
+            ";"
+           }
+          ]
+         }
+        ],
+        "\[IndentingNewLine]",
+        RowBox[
+         {
+          "\t",
+          RowBox[
+           {
+            RowBox[
+             {
+              "w",
+              "=",
+              RowBox[
+               {
+                "CTensor",
+                "[",
+                RowBox[
+                 {
+                  RowBox[
+                   {"{", RowBox[{"1", ",", "0", ",", "0", ",", "0"}], "}"}
+                  ],
+                  ",",
+                  RowBox[{"{", "char", "}"}]
+                 }
+                ],
+                "]"
+               }
+              ]
+             }
+            ],
+            ";"
+           }
+          ]
+         }
+        ],
+        "\[IndentingNewLine]",
+        RowBox[
+         {
+          "\t",
+          RowBox[
+           {
+            RowBox[
+             {
+              "L",
+              "=",
+              RowBox[
+               {
+                RowBox[
+                 {
+                  "HeadOfTensor",
+                  "[",
+                  RowBox[
+                   {
+                    RowBox[
+                     {
+                      "-",
+                      FractionBox[
+                       RowBox[
+                        {
+                         RowBox[
+                          {
+                           "(",
+                           RowBox[
+                            {
+                             RowBox[
+                              {
+                               RowBox[{"U", "[", RowBox[{"a", ",", "k"}], "]"}],
+                               RowBox[
+                                {
+                                 "U",
+                                 "[",
+                                 RowBox[{RowBox[{"-", "k"}], ",", RowBox[{"-", "j"}]}],
+                                 "]"
+                                }
+                               ]
+                              }
+                             ],
+                             "+",
+                             RowBox[
+                              {"U", "[", RowBox[{"a", ",", RowBox[{"-", "j"}]}], "]"}
+                             ]
+                            }
+                           ],
+                           ")"
+                          }
+                         ],
+                         RowBox[{"w", "[", "j", "]"}]
+                        }
+                       ],
+                       RowBox[
+                        {
+                         "2",
+                         RowBox[{"w", "[", RowBox[{"-", "i"}], "]"}],
+                         RowBox[{"\[ScriptCapitalK]", "[", "i", "]"}]
+                        }
+                       ]
+                      ]
+                     }
+                    ],
+                    ",",
+                    RowBox[{"{", "a", "}"}]
+                   }
+                  ],
+                  "]"
+                 }
+                ],
+                "//",
+                "Simplify"
+               }
+              ]
+             }
+            ],
+            ";"
+           }
+          ]
+         }
+        ],
+        "\n",
+        RowBox[
+         {
+          RowBox[
+           {
+            "e0",
+            "=",
+            FractionBox[
+             RowBox[{"L", "+", "\[ScriptCapitalK]"}],
+             SqrtBox["2"]
+            ]
+           }
+          ],
+          ";"
+         }
+        ],
+        "\[IndentingNewLine]",
+        RowBox[
+         {
+          RowBox[
+           {
+            "e1",
+            "=",
+            FractionBox[
+             RowBox[{"L", "-", "\[ScriptCapitalK]"}],
+             SqrtBox["2"]
+            ]
+           }
+          ],
+          ";"
+         }
+        ]
+       }
+      ],
+      "Input"
+     ],
+     Cell[
+      CellGroupData[
+       {
+        Cell[
+         BoxData[
+          RowBox[
+           {
+            "H",
+            "=",
+            RowBox[
+             {
+              "ConnectionTensor",
+              "[",
+              RowBox[
+               {
+                "metric",
+                ",",
+                " ",
+                "e0",
+                ",",
+                " ",
+                "e1",
+                ",",
+                " ",
+                "e2",
+                ",",
+                " ",
+                "e3"
+               }
+              ],
+              "]"
+             }
+            ]
+           }
+          ]
+         ],
+         "Input"
+        ],
+        Cell[
+         BoxData[
+          RowBox[
+           {
+            "CTensor",
+            "[",
+            RowBox[
+             {
+              RowBox[
+               {
+                "{",
+                RowBox[
+                 {
+                  RowBox[
+                   {
+                    "{",
+                    RowBox[
+                     {
+                      RowBox[
+                       {"{", RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}
+                      ],
+                      ",",
+                      RowBox[
+                       {
+                        "{",
+                        RowBox[
+                         {
+                          "0",
+                          ",",
+                          "0",
+                          ",",
+                          FractionBox[
+                           "1",
+                           SuperscriptBox[
+                            InterpretationBox[
+                             StyleBox[
+                              "x",
+                              ShowAutoStyles -> False,
+                              AutoSpacing -> False
+                             ],
+                             x[],
+                             Editable -> False
+                            ],
+                            "2"
+                           ]
+                          ],
+                          ",",
+                          "0"
+                         }
+                        ],
+                        "}"
+                       }
+                      ],
+                      ",",
+                      RowBox[
+                       {
+                        "{",
+                        RowBox[
+                         {
+                          "0",
+                          ",",
+                          RowBox[
+                           {
+                            "-",
+                            FractionBox[
+                             "1",
+                             SuperscriptBox[
+                              InterpretationBox[
+                               StyleBox[
+                                "x",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               x[],
+                               Editable -> False
+                              ],
+                              "2"
+                             ]
+                            ]
+                           }
+                          ],
+                          ",",
+                          "0",
+                          ",",
+                          "0"
+                         }
+                        ],
+                        "}"
+                       }
+                      ],
+                      ",",
+                      RowBox[
+                       {"{", RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}
+                      ]
+                     }
+                    ],
+                    "}"
+                   }
+                  ],
+                  ",",
+                  RowBox[
+                   {
+                    "{",
+                    RowBox[
+                     {
+                      RowBox[
+                       {
+                        "{",
+                        RowBox[
+                         {
+                          "0",
+                          ",",
+                          FractionBox[
+                           RowBox[
+                            {
+                             RowBox[
+                              {
+                               RowBox[
+                                {
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "f",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  ff,
+                                  Editable -> False
+                                 ],
+                                 "[",
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "\[ScriptU]",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  \[ScriptU][],
+                                  Editable -> False
+                                 ],
+                                 "]"
+                                }
+                               ],
+                               " ",
+                               InterpretationBox[
+                                StyleBox[
+                                 "\[ScriptW]",
+                                 ShowAutoStyles -> False,
+                                 AutoSpacing -> False
+                                ],
+                                \[ScriptW][],
+                                Editable -> False
+                               ]
+                              }
+                             ],
+                             "+",
+                             RowBox[
+                              {
+                               InterpretationBox[
+                                StyleBox[
+                                 "x",
+                                 ShowAutoStyles -> False,
+                                 AutoSpacing -> False
+                                ],
+                                x[],
+                                Editable -> False
+                               ],
+                               " ",
+                               RowBox[
+                                {
+                                 SuperscriptBox[
+                                  InterpretationBox[
+                                   StyleBox[
+                                    "f",
+                                    ShowAutoStyles -> False,
+                                    AutoSpacing -> False
+                                   ],
+                                   ff,
+                                   Editable -> False
+                                  ],
+                                  "\[Prime]",
+                                  MultilineFunction -> None
+                                 ],
+                                 "[",
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "\[ScriptU]",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  \[ScriptU][],
+                                  Editable -> False
+                                 ],
+                                 "]"
+                                }
+                               ]
+                              }
+                             ]
+                            }
+                           ],
+                           RowBox[
+                            {
+                             "2",
+                             " ",
+                             RowBox[
+                              {
+                               InterpretationBox[
+                                StyleBox[
+                                 "f",
+                                 ShowAutoStyles -> False,
+                                 AutoSpacing -> False
+                                ],
+                                ff,
+                                Editable -> False
+                               ],
+                               "[",
+                               InterpretationBox[
+                                StyleBox[
+                                 "\[ScriptU]",
+                                 ShowAutoStyles -> False,
+                                 AutoSpacing -> False
+                                ],
+                                \[ScriptU][],
+                                Editable -> False
+                               ],
+                               "]"
+                              }
+                             ],
+                             " ",
+                             SuperscriptBox[
+                              InterpretationBox[
+                               StyleBox[
+                                "x",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               x[],
+                               Editable -> False
+                              ],
+                              "3"
+                             ]
+                            }
+                           ]
+                          ],
+                          ",",
+                          FractionBox[
+                           "1",
+                           SuperscriptBox[
+                            InterpretationBox[
+                             StyleBox[
+                              "x",
+                              ShowAutoStyles -> False,
+                              AutoSpacing -> False
+                             ],
+                             x[],
+                             Editable -> False
+                            ],
+                            "2"
+                           ]
+                          ],
+                          ",",
+                          "0"
+                         }
+                        ],
+                        "}"
+                       }
+                      ],
+                      ",",
+                      RowBox[
+                       {
+                        "{",
+                        RowBox[
+                         {
+                          RowBox[
+                           {
+                            "-",
+                            FractionBox[
+                             RowBox[
+                              {
+                               RowBox[
+                                {
+                                 RowBox[
+                                  {
+                                   InterpretationBox[
+                                    StyleBox[
+                                     "f",
+                                     ShowAutoStyles -> False,
+                                     AutoSpacing -> False
+                                    ],
+                                    ff,
+                                    Editable -> False
+                                   ],
+                                   "[",
+                                   InterpretationBox[
+                                    StyleBox[
+                                     "\[ScriptU]",
+                                     ShowAutoStyles -> False,
+                                     AutoSpacing -> False
+                                    ],
+                                    \[ScriptU][],
+                                    Editable -> False
+                                   ],
+                                   "]"
+                                  }
+                                 ],
+                                 " ",
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "\[ScriptW]",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  \[ScriptW][],
+                                  Editable -> False
+                                 ]
+                                }
+                               ],
+                               "+",
+                               RowBox[
+                                {
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "x",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  x[],
+                                  Editable -> False
+                                 ],
+                                 " ",
+                                 RowBox[
+                                  {
+                                   SuperscriptBox[
+                                    InterpretationBox[
+                                     StyleBox[
+                                      "f",
+                                      ShowAutoStyles -> False,
+                                      AutoSpacing -> False
+                                     ],
+                                     ff,
+                                     Editable -> False
+                                    ],
+                                    "\[Prime]",
+                                    MultilineFunction -> None
+                                   ],
+                                   "[",
+                                   InterpretationBox[
+                                    StyleBox[
+                                     "\[ScriptU]",
+                                     ShowAutoStyles -> False,
+                                     AutoSpacing -> False
+                                    ],
+                                    \[ScriptU][],
+                                    Editable -> False
+                                   ],
+                                   "]"
+                                  }
+                                 ]
+                                }
+                               ]
+                              }
+                             ],
+                             RowBox[
+                              {
+                               "2",
+                               " ",
+                               RowBox[
+                                {
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "f",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  ff,
+                                  Editable -> False
+                                 ],
+                                 "[",
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "\[ScriptU]",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  \[ScriptU][],
+                                  Editable -> False
+                                 ],
+                                 "]"
+                                }
+                               ],
+                               " ",
+                               SuperscriptBox[
+                                InterpretationBox[
+                                 StyleBox[
+                                  "x",
+                                  ShowAutoStyles -> False,
+                                  AutoSpacing -> False
+                                 ],
+                                 x[],
+                                 Editable -> False
+                                ],
+                                "3"
+                               ]
+                              }
+                             ]
+                            ]
+                           }
+                          ],
+                          ",",
+                          "0",
+                          ",",
+                          FractionBox[
+                           RowBox[
+                            {
+                             RowBox[
+                              {
+                               RowBox[
+                                {
+                                 "-",
+                                 RowBox[
+                                  {
+                                   InterpretationBox[
+                                    StyleBox[
+                                     "f",
+                                     ShowAutoStyles -> False,
+                                     AutoSpacing -> False
+                                    ],
+                                    ff,
+                                    Editable -> False
+                                   ],
+                                   "[",
+                                   InterpretationBox[
+                                    StyleBox[
+                                     "\[ScriptU]",
+                                     ShowAutoStyles -> False,
+                                     AutoSpacing -> False
+                                    ],
+                                    \[ScriptU][],
+                                    Editable -> False
+                                   ],
+                                   "]"
+                                  }
+                                 ]
+                                }
+                               ],
+                               " ",
+                               RowBox[
+                                {
+                                 "(",
+                                 RowBox[
+                                  {
+                                   SuperscriptBox[
+                                    InterpretationBox[
+                                     StyleBox[
+                                      "x",
+                                      ShowAutoStyles -> False,
+                                      AutoSpacing -> False
+                                     ],
+                                     x[],
+                                     Editable -> False
+                                    ],
+                                    "3"
+                                   ],
+                                   "+",
+                                   RowBox[
+                                    {
+                                     "3",
+                                     " ",
+                                     InterpretationBox[
+                                      StyleBox[
+                                       "x",
+                                       ShowAutoStyles -> False,
+                                       AutoSpacing -> False
+                                      ],
+                                      x[],
+                                      Editable -> False
+                                     ],
+                                     " ",
+                                     SuperscriptBox[
+                                      InterpretationBox[
+                                       StyleBox[
+                                        "y",
+                                        ShowAutoStyles -> False,
+                                        AutoSpacing -> False
+                                       ],
+                                       y[],
+                                       Editable -> False
+                                      ],
+                                      "2"
+                                     ]
+                                    }
+                                   ]
+                                  }
+                                 ],
+                                 ")"
+                                }
+                               ]
+                              }
+                             ],
+                             "+",
+                             SuperscriptBox[
+                              InterpretationBox[
+                               StyleBox[
+                                "\[ScriptW]",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               \[ScriptW][],
+                               Editable -> False
+                              ],
+                              "2"
+                             ]
+                            }
+                           ],
+                           SuperscriptBox[
+                            InterpretationBox[
+                             StyleBox[
+                              "x",
+                              ShowAutoStyles -> False,
+                              AutoSpacing -> False
+                             ],
+                             x[],
+                             Editable -> False
+                            ],
+                            "3"
+                           ]
+                          ],
+                          ",",
+                          FractionBox[
+                           RowBox[
+                            {
+                             "2",
+                             " ",
+                             RowBox[
+                              {
+                               InterpretationBox[
+                                StyleBox[
+                                 "f",
+                                 ShowAutoStyles -> False,
+                                 AutoSpacing -> False
+                                ],
+                                ff,
+                                Editable -> False
+                               ],
+                               "[",
+                               InterpretationBox[
+                                StyleBox[
+                                 "\[ScriptU]",
+                                 ShowAutoStyles -> False,
+                                 AutoSpacing -> False
+                                ],
+                                \[ScriptU][],
+                                Editable -> False
+                               ],
+                               "]"
+                              }
+                             ],
+                             " ",
+                             InterpretationBox[
+                              StyleBox[
+                               "y",
+                               ShowAutoStyles -> False,
+                               AutoSpacing -> False
+                              ],
+                              y[],
+                              Editable -> False
+                             ]
+                            }
+                           ],
+                           InterpretationBox[
+                            StyleBox[
+                             "x",
+                             ShowAutoStyles -> False,
+                             AutoSpacing -> False
+                            ],
+                            x[],
+                            Editable -> False
+                           ]
+                          ]
+                         }
+                        ],
+                        "}"
+                       }
+                      ],
+                      ",",
+                      RowBox[
+                       {
+                        "{",
+                        RowBox[
+                         {
+                          RowBox[
+                           {
+                            "-",
+                            FractionBox[
+                             "1",
+                             SuperscriptBox[
+                              InterpretationBox[
+                               StyleBox[
+                                "x",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               x[],
+                               Editable -> False
+                              ],
+                              "2"
+                             ]
+                            ]
+                           }
+                          ],
+                          ",",
+                          RowBox[
+                           {
+                            RowBox[
+                             {
+                              InterpretationBox[
+                               StyleBox[
+                                "f",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               ff,
+                               Editable -> False
+                              ],
+                              "[",
+                              InterpretationBox[
+                               StyleBox[
+                                "\[ScriptU]",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               \[ScriptU][],
+                               Editable -> False
+                              ],
+                              "]"
+                             }
+                            ],
+                            "+",
+                            FractionBox[
+                             RowBox[
+                              {
+                               "3",
+                               " ",
+                               RowBox[
+                                {
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "f",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  ff,
+                                  Editable -> False
+                                 ],
+                                 "[",
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "\[ScriptU]",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  \[ScriptU][],
+                                  Editable -> False
+                                 ],
+                                 "]"
+                                }
+                               ],
+                               " ",
+                               SuperscriptBox[
+                                InterpretationBox[
+                                 StyleBox[
+                                  "y",
+                                  ShowAutoStyles -> False,
+                                  AutoSpacing -> False
+                                 ],
+                                 y[],
+                                 Editable -> False
+                                ],
+                                "2"
+                               ]
+                              }
+                             ],
+                             SuperscriptBox[
+                              InterpretationBox[
+                               StyleBox[
+                                "x",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               x[],
+                               Editable -> False
+                              ],
+                              "2"
+                             ]
+                            ],
+                            "-",
+                            FractionBox[
+                             SuperscriptBox[
+                              InterpretationBox[
+                               StyleBox[
+                                "\[ScriptW]",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               \[ScriptW][],
+                               Editable -> False
+                              ],
+                              "2"
+                             ],
+                             SuperscriptBox[
+                              InterpretationBox[
+                               StyleBox[
+                                "x",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               x[],
+                               Editable -> False
+                              ],
+                              "3"
+                             ]
+                            ]
+                           }
+                          ],
+                          ",",
+                          "0",
+                          ",",
+                          "0"
+                         }
+                        ],
+                        "}"
+                       }
+                      ],
+                      ",",
+                      RowBox[
+                       {
+                        "{",
+                        RowBox[
+                         {
+                          "0",
+                          ",",
+                          RowBox[
+                           {
+                            "-",
+                            FractionBox[
+                             RowBox[
+                              {
+                               "2",
+                               " ",
+                               RowBox[
+                                {
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "f",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  ff,
+                                  Editable -> False
+                                 ],
+                                 "[",
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "\[ScriptU]",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  \[ScriptU][],
+                                  Editable -> False
+                                 ],
+                                 "]"
+                                }
+                               ],
+                               " ",
+                               InterpretationBox[
+                                StyleBox[
+                                 "y",
+                                 ShowAutoStyles -> False,
+                                 AutoSpacing -> False
+                                ],
+                                y[],
+                                Editable -> False
+                               ]
+                              }
+                             ],
+                             InterpretationBox[
+                              StyleBox[
+                               "x",
+                               ShowAutoStyles -> False,
+                               AutoSpacing -> False
+                              ],
+                              x[],
+                              Editable -> False
+                             ]
+                            ]
+                           }
+                          ],
+                          ",",
+                          "0",
+                          ",",
+                          "0"
+                         }
+                        ],
+                        "}"
+                       }
+                      ]
+                     }
+                    ],
+                    "}"
+                   }
+                  ],
+                  ",",
+                  RowBox[
+                   {
+                    "{",
+                    RowBox[
+                     {
+                      RowBox[
+                       {
+                        "{",
+                        RowBox[
+                         {
+                          "0",
+                          ",",
+                          FractionBox[
+                           "1",
+                           RowBox[
+                            {
+                             "2",
+                             " ",
+                             SuperscriptBox[
+                              InterpretationBox[
+                               StyleBox[
+                                "x",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               x[],
+                               Editable -> False
+                              ],
+                              "2"
+                             ]
+                            }
+                           ]
+                          ],
+                          ",",
+                          "0",
+                          ",",
+                          "0"
+                         }
+                        ],
+                        "}"
+                       }
+                      ],
+                      ",",
+                      RowBox[
+                       {
+                        "{",
+                        RowBox[
+                         {
+                          RowBox[
+                           {
+                            "-",
+                            FractionBox[
+                             "1",
+                             RowBox[
+                              {
+                               "2",
+                               " ",
+                               SuperscriptBox[
+                                InterpretationBox[
+                                 StyleBox[
+                                  "x",
+                                  ShowAutoStyles -> False,
+                                  AutoSpacing -> False
+                                 ],
+                                 x[],
+                                 Editable -> False
+                                ],
+                                "2"
+                               ]
+                              }
+                             ]
+                            ]
+                           }
+                          ],
+                          ",",
+                          "0",
+                          ",",
+                          "0",
+                          ",",
+                          "0"
+                         }
+                        ],
+                        "}"
+                       }
+                      ],
+                      ",",
+                      RowBox[
+                       {"{", RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}
+                      ],
+                      ",",
+                      RowBox[
+                       {"{", RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}
+                      ]
+                     }
+                    ],
+                    "}"
+                   }
+                  ],
+                  ",",
+                  RowBox[
+                   {
+                    "{",
+                    RowBox[
+                     {
+                      RowBox[
+                       {"{", RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}
+                      ],
+                      ",",
+                      RowBox[
+                       {"{", RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}
+                      ],
+                      ",",
+                      RowBox[
+                       {"{", RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}
+                      ],
+                      ",",
+                      RowBox[
+                       {"{", RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}
+                      ]
+                     }
+                    ],
+                    "}"
+                   }
+                  ]
+                 }
+                ],
+                "}"
+               }
+              ],
+              ",",
+              RowBox[
+               {"{", RowBox[{"char", ",", "char", ",", "char"}], "}"}
+              ],
+              ",",
+              "0"
+             }
+            ],
+            "]"
+           }
+          ]
+         ],
+         "Output"
+        ]
+       },
+       Open
+      ]
+     ]
+    },
+    Open
+   ]
+  ],
+  Cell[
+   CellGroupData[
+    {
+     Cell[
+      TextData[
+       {
+        "More Examples",
+        Cell[
+         BoxData[
+          TemplateBox[
+           {
+            "MoreExamples",
+            Cell[
+             BoxData[
+              FrameBox[
+               Cell[
+                "Extended examples in standardized sections.",
+                "MoreInfoText"
+               ],
+               BaseStyle -> "IFrameBox"
+              ]
+             ],
+             "MoreInfoTextOuter"
+            ]
+           },
+           "MoreInfoOpenerButtonTemplate"
+          ]
+         ]
+        ]
+       }
+      ],
+      "ExtendedExamplesSection",
+      CellTags -> "ExtendedExamples"
+     ],
+     Cell[
+      BoxData[
+       InterpretationBox[
+        Cell["Scope", "ExampleSection"],
+        $Line = 0;
+       ]
+      ],
+      "ExampleSection"
+     ],
+     Cell[
+      BoxData[
+       InterpretationBox[
+        Cell["Generalizations & Extensions", "ExampleSection"],
+        $Line = 0;
+       ]
+      ],
+      "ExampleSection"
+     ],
+     Cell[
+      CellGroupData[
+       {
+        Cell[
+         BoxData[
           InterpretationBox[
-           StyleBox["x",
-            ShowAutoStyles->False,
-            AutoSpacing->False],
-           $CellContext`x[],
-           Editable->False]]}], "}"}], ",", 
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"-", 
-          FractionBox["1", 
-           SuperscriptBox[
-            InterpretationBox[
-             StyleBox["x",
-              ShowAutoStyles->False,
-              AutoSpacing->False],
-             $CellContext`x[],
-             Editable->False], "2"]]}], ",", 
-         RowBox[{
-          RowBox[{
-           InterpretationBox[
-            StyleBox["f",
-             ShowAutoStyles->False,
-             AutoSpacing->False],
-            $CellContext`ff,
-            Editable->False], "[", 
-           InterpretationBox[
-            StyleBox["\[ScriptU]",
-             ShowAutoStyles->False,
-             AutoSpacing->False],
-            $CellContext`\[ScriptU][],
-            Editable->False], "]"}], "+", 
-          FractionBox[
-           RowBox[{"3", " ", 
-            RowBox[{
-             InterpretationBox[
-              StyleBox["f",
-               ShowAutoStyles->False,
-               AutoSpacing->False],
-              $CellContext`ff,
-              Editable->False], "[", 
-             InterpretationBox[
-              StyleBox["\[ScriptU]",
-               ShowAutoStyles->False,
-               AutoSpacing->False],
-              $CellContext`\[ScriptU][],
-              Editable->False], "]"}], " ", 
-            SuperscriptBox[
-             InterpretationBox[
-              StyleBox["y",
-               ShowAutoStyles->False,
-               AutoSpacing->False],
-              $CellContext`y[],
-              Editable->False], "2"]}], 
-           SuperscriptBox[
-            InterpretationBox[
-             StyleBox["x",
-              ShowAutoStyles->False,
-              AutoSpacing->False],
-             $CellContext`x[],
-             Editable->False], "2"]], "-", 
-          FractionBox[
-           SuperscriptBox[
-            InterpretationBox[
-             StyleBox["\[ScriptW]",
-              ShowAutoStyles->False,
-              AutoSpacing->False],
-             $CellContext`\[ScriptW][],
-             Editable->False], "2"], 
-           SuperscriptBox[
-            InterpretationBox[
-             StyleBox["x",
-              ShowAutoStyles->False,
-              AutoSpacing->False],
-             $CellContext`x[],
-             Editable->False], "3"]]}], ",", "0", ",", "0"}], "}"}], ",", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", 
-         RowBox[{"-", 
-          FractionBox[
-           RowBox[{"2", " ", 
-            RowBox[{
-             InterpretationBox[
-              StyleBox["f",
-               ShowAutoStyles->False,
-               AutoSpacing->False],
-              $CellContext`ff,
-              Editable->False], "[", 
-             InterpretationBox[
-              StyleBox["\[ScriptU]",
-               ShowAutoStyles->False,
-               AutoSpacing->False],
-              $CellContext`\[ScriptU][],
-              Editable->False], "]"}], " ", 
-            InterpretationBox[
-             StyleBox["y",
-              ShowAutoStyles->False,
-              AutoSpacing->False],
-             $CellContext`y[],
-             Editable->False]}], 
-           InterpretationBox[
-            StyleBox["x",
-             ShowAutoStyles->False,
-             AutoSpacing->False],
-            $CellContext`x[],
-            Editable->False]]}], ",", "0", ",", "0"}], "}"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"0", ",", 
-         FractionBox["1", 
-          RowBox[{"2", " ", 
-           SuperscriptBox[
-            InterpretationBox[
-             StyleBox["x",
-              ShowAutoStyles->False,
-              AutoSpacing->False],
-             $CellContext`x[],
-             Editable->False], "2"]}]], ",", "0", ",", "0"}], "}"}], ",", 
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"-", 
-          FractionBox["1", 
-           RowBox[{"2", " ", 
-            SuperscriptBox[
-             InterpretationBox[
-              StyleBox["x",
-               ShowAutoStyles->False,
-               AutoSpacing->False],
-              $CellContext`x[],
-              Editable->False], "2"]}]]}], ",", "0", ",", "0", ",", "0"}], 
-        "}"}], ",", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}]}], "}"}], ",", 
-     RowBox[{"{", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
-       RowBox[{"{", 
-        RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}]}], "}"}]}], "}"}], 
-   ",", 
-   RowBox[{"{", 
-    RowBox[{"char", ",", "char", ",", "char"}], "}"}], ",", "0"}], 
-  "]"}]], "Output",
- CellChangeTimes->{3.907055634643722*^9},
- CellLabel->"Out[35]=",
- CellID->125824473,ExpressionUUID->"0798de4f-727b-4a48-b6df-98c0fb78552f"]
-}, Open  ]]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[TextData[{
- "More Examples",
- Cell[BoxData[
-  TemplateBox[{"MoreExamples", 
-    Cell[
-     BoxData[
-      FrameBox[
-       Cell["Extended examples in standardized sections.", "MoreInfoText"], 
-       BaseStyle -> "IFrameBox"]], "MoreInfoTextOuter"]},
-   "MoreInfoOpenerButtonTemplate"]],ExpressionUUID->
-  "cea986c4-e433-40b1-acc8-e31cf53e96ef"]
-}], "ExtendedExamplesSection",
- CellTags->"ExtendedExamples",
- CellID->30196552,ExpressionUUID->"03b417a6-0efc-4d07-9b90-26ff822865a8"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "Scope", "ExampleSection",ExpressionUUID->
-   "4e885325-7004-4619-82fd-971b9828e690"],
-  $Line = 0; Null]], "ExampleSection",
- CellID->99653001,ExpressionUUID->"336e5311-0268-475d-972e-742d4121c26d"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "Generalizations & Extensions", "ExampleSection",ExpressionUUID->
-   "bd11a04b-ccc5-443e-b102-7b1038a2f931"],
-  $Line = 0; Null]], "ExampleSection",
- CellID->480880614,ExpressionUUID->"65ca9691-3d5b-40a7-a031-f5024a90b65e"],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "Options", "ExampleSection",ExpressionUUID->
-   "88e20c06-7f31-4082-b8b6-5587a21920bb"],
-  $Line = 0; Null]], "ExampleSection",
- CellID->3691380,ExpressionUUID->"49b91dec-da61-4320-8b0b-92682ef55ec2"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "Method", "ExampleSubsection",ExpressionUUID->
-   "84c1c8ad-d6c3-404c-bc8f-bb1ebc2be405"],
-  $Line = 0; Null]], "ExampleSubsection",
- CellID->97069441,ExpressionUUID->"a1d36b06-c60d-440b-be00-8ccd2699605b"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "PSimplify", "ExampleSubsection",ExpressionUUID->
-   "00d5f6cd-30ae-4262-902c-b78ca0dd75aa"],
-  $Line = 0; Null]], "ExampleSubsection",
- CellID->332337614,ExpressionUUID->"e3cfdc0f-46c4-465d-baff-7fa0c46f5efe"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "Parallelize", "ExampleSubsection",ExpressionUUID->
-   "cac29ba7-3871-4f8b-ac92-f8fda0851a88"],
-  $Line = 0; Null]], "ExampleSubsection",
- CellID->293348677,ExpressionUUID->"53daaa29-0301-4eef-93ec-b9df7bad0743"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "Verbose", "ExampleSubsection",ExpressionUUID->
-   "a46541ea-310d-445c-ba5d-231216b48e82"],
-  $Line = 0; Null]], "ExampleSubsection",
- CellID->80309467,ExpressionUUID->"28019039-e5f6-4031-a54a-6b87a17a6483"]
-}, Open  ]],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "Applications", "ExampleSection",ExpressionUUID->
-   "5b32dc08-c345-4e47-8388-9ea925bd182b"],
-  $Line = 0; Null]], "ExampleSection",
- CellID->372178100,ExpressionUUID->"c90cdf0b-e7a1-47a3-82b7-acd595983227"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "Properties & Relations", "ExampleSection",ExpressionUUID->
-   "d227eaa3-ffd2-4610-828c-998096c5ba9c"],
-  $Line = 0; Null]], "ExampleSection",
- CellID->41147927,ExpressionUUID->"07acd4e8-fbfd-4a04-b68b-89e33cd41a32"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "Possible Issues", "ExampleSection",ExpressionUUID->
-   "402ba32b-5d53-46b6-97b1-4bbf2532e121"],
-  $Line = 0; Null]], "ExampleSection",
- CellID->3156910,ExpressionUUID->"b19b5aa8-9627-4e9b-9370-97bd35373896"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "Interactive Examples", "ExampleSection",ExpressionUUID->
-   "be92045f-7662-4cb9-99f8-6612332908ab"],
-  $Line = 0; Null]], "ExampleSection",
- CellID->36151799,ExpressionUUID->"039aed0c-f932-4cec-99c0-c3aa2a08a898"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "Neat Examples", "ExampleSection",ExpressionUUID->
-   "0105b3d8-1242-4fbe-8cef-6aa68ec00760"],
-  $Line = 0; Null]], "ExampleSection",
- CellID->27349199,ExpressionUUID->"0e07ab53-18b2-458e-98ee-3a510c916ec6"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Metadata", "MetadataSection",
- CellID->62273000,ExpressionUUID->"cc1698f4-e6a7-4913-b586-897e31d34afa"],
-
-Cell[TextData[{
- "New in: ",
- Cell["XX", "HistoryData",
-  CellTags->"New",ExpressionUUID->"5ccde18f-21e4-40ca-9c1f-a205570b7eb4"],
- " | Modified in: ",
- Cell[" ", "HistoryData",
-  CellTags->"Modified",ExpressionUUID->"24aceb73-a704-4ae5-a393-d686b14ef942"],
- " | Obsolete in: ",
- Cell[" ", "HistoryData",
-  CellTags->"Obsolete",ExpressionUUID->"6b0f59f2-fac2-45a3-b14a-a02808025b82"]
-}], "History",
- CellID->243104397,ExpressionUUID->"04a1be77-c0fc-482c-a105-51e35b7186d4"],
-
-Cell[CellGroupData[{
-
-Cell[TextData[{
- "Categorization",
- Cell[BoxData[
-  TemplateBox[{"Metadata", 
-    Cell[
-     BoxData[
-      FrameBox[
-       Cell[
-       "Metadata such as page URI, context, and type of documentation page.", 
-        "MoreInfoText"], BaseStyle -> "IFrameBox"]], "MoreInfoTextOuter"]},
-   "MoreInfoOpenerButtonTemplate"]],ExpressionUUID->
-  "24c114ae-b05e-40d0-bdec-9fbd395cebec"]
-}], "CategorizationSection",
- CellID->57038907,ExpressionUUID->"c0c86210-3c8a-491b-bca2-8ac9fd3da9f3"],
-
-Cell["Symbol", "Categorization",
- CellLabel->"Entity Type",
- CellID->16874048,ExpressionUUID->"a9968125-271e-416c-8bcd-b4f9cf743c6f"],
-
-Cell["xIdeal", "Categorization",
- CellLabel->"Paclet Name",
- CellID->228474119,ExpressionUUID->"9b8929d9-75d2-435a-a3a0-f5dfedef2363"],
-
-Cell["xAct`xIdeal`", "Categorization",
- CellLabel->"Context",
- CellID->163636100,ExpressionUUID->"4be85dbf-12ae-424e-8174-472a8c458a70"],
-
-Cell["xIdeal/ref/ConnectionTensor", "Categorization",
- CellLabel->"URI",
- CellID->4720550,ExpressionUUID->"b6cce4bd-bada-499f-bc9c-e44857e1ce06"]
-}, Closed]],
-
-Cell[CellGroupData[{
-
-Cell["Keywords", "KeywordsSection",
- CellID->233345585,ExpressionUUID->"92cbaa0e-8dd4-4b29-b285-33e15b446daf"],
-
-Cell["XXXX", "Keywords",
- CellID->366178970,ExpressionUUID->"d504810c-4e08-4cfb-b3b3-c79b92a16d8d"]
-}, Closed]],
-
-Cell[CellGroupData[{
-
-Cell["Syntax Templates", "TemplatesSection",
- CellID->34998034,ExpressionUUID->"82908618-8fc8-4e1c-94b6-ba89eff87bf3"],
-
-Cell[BoxData[""], "Template",
- CellLabel->"Additional Function Template",
- CellID->84688149,ExpressionUUID->"c9caf399-bed3-4359-b405-ae5ad536bf98"],
-
-Cell[BoxData[""], "Template",
- CellLabel->"Arguments Pattern",
- CellID->178919448,ExpressionUUID->"46ecc655-38ae-40d1-a4c6-203ea8e95321"],
-
-Cell[BoxData[""], "Template",
- CellLabel->"Local Variables",
- CellID->245446586,ExpressionUUID->"54af0a09-7530-462f-8f15-5a6be34713fc"],
-
-Cell[BoxData[""], "Template",
- CellLabel->"Color Equal Signs",
- CellID->43984326,ExpressionUUID->"5ee87e5d-0a41-457d-b2c6-d9b3c93db085"]
-}, Closed]]
-}, Open  ]]
-},
-WindowSize->{700, 770},
-WindowMargins->{{202.5, Automatic}, {Automatic, 75}},
-TaggingRules-><|"Paclet" -> "xIdeal"|>,
-CellContext->"Global`",
-FrontEndVersion->"13.3 for Microsoft Windows (64-bit) (July 24, 2023)",
-StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "FunctionPageStylesExt.nb", 
-  CharacterEncoding -> "UTF-8"],
-ExpressionUUID->"2f02fc1c-7565-4687-9773-afb24171f118"
+           Cell["Options", "ExampleSection"],
+           $Line = 0;
+          ]
+         ],
+         "ExampleSection"
+        ],
+        Cell[
+         BoxData[
+          InterpretationBox[
+           Cell["Method", "ExampleSubsection"],
+           $Line = 0;
+          ]
+         ],
+         "ExampleSubsection"
+        ],
+        Cell[
+         BoxData[
+          InterpretationBox[
+           Cell["PSimplify", "ExampleSubsection"],
+           $Line = 0;
+          ]
+         ],
+         "ExampleSubsection"
+        ],
+        Cell[
+         BoxData[
+          InterpretationBox[
+           Cell["Parallelize", "ExampleSubsection"],
+           $Line = 0;
+          ]
+         ],
+         "ExampleSubsection"
+        ],
+        Cell[
+         BoxData[
+          InterpretationBox[
+           Cell["Verbose", "ExampleSubsection"],
+           $Line = 0;
+          ]
+         ],
+         "ExampleSubsection"
+        ]
+       },
+       Open
+      ]
+     ],
+     Cell[
+      BoxData[
+       InterpretationBox[
+        Cell["Applications", "ExampleSection"],
+        $Line = 0;
+       ]
+      ],
+      "ExampleSection"
+     ],
+     Cell[
+      BoxData[
+       InterpretationBox[
+        Cell["Properties & Relations", "ExampleSection"],
+        $Line = 0;
+       ]
+      ],
+      "ExampleSection"
+     ],
+     Cell[
+      BoxData[
+       InterpretationBox[
+        Cell["Possible Issues", "ExampleSection"],
+        $Line = 0;
+       ]
+      ],
+      "ExampleSection"
+     ],
+     Cell[
+      BoxData[
+       InterpretationBox[
+        Cell["Interactive Examples", "ExampleSection"],
+        $Line = 0;
+       ]
+      ],
+      "ExampleSection"
+     ],
+     Cell[
+      BoxData[
+       InterpretationBox[
+        Cell["Neat Examples", "ExampleSection"],
+        $Line = 0;
+       ]
+      ],
+      "ExampleSection"
+     ]
+    },
+    Open
+   ]
+  ],
+  Cell[
+   CellGroupData[
+    {
+     Cell["Metadata", "MetadataSection"],
+     Cell[
+      TextData[
+       {
+        "New in: ",
+        Cell["XX", "HistoryData", CellTags -> "New"],
+        " | Modified in: ",
+        Cell[" ", "HistoryData", CellTags -> "Modified"],
+        " | Obsolete in: ",
+        Cell[" ", "HistoryData", CellTags -> "Obsolete"]
+       }
+      ],
+      "History"
+     ],
+     Cell[
+      CellGroupData[
+       {
+        Cell[
+         TextData[
+          {
+           "Categorization",
+           Cell[
+            BoxData[
+             TemplateBox[
+              {
+               "Metadata",
+               Cell[
+                BoxData[
+                 FrameBox[
+                  Cell[
+                   "Metadata such as page URI, context, and type of documentation page.",
+                   "MoreInfoText"
+                  ],
+                  BaseStyle -> "IFrameBox"
+                 ]
+                ],
+                "MoreInfoTextOuter"
+               ]
+              },
+              "MoreInfoOpenerButtonTemplate"
+             ]
+            ]
+           ]
+          }
+         ],
+         "CategorizationSection"
+        ],
+        Cell["Symbol", "Categorization"],
+        Cell["xIdeal", "Categorization"],
+        Cell["xAct`xIdeal`", "Categorization"],
+        Cell["xIdeal/ref/ConnectionTensor", "Categorization"]
+       },
+       Closed
+      ]
+     ],
+     Cell[
+      CellGroupData[
+       {
+        Cell["Keywords", "KeywordsSection"],
+        Cell["XXXX", "Keywords"]
+       },
+       Closed
+      ]
+     ],
+     Cell[
+      CellGroupData[
+       {
+        Cell["Syntax Templates", "TemplatesSection"],
+        Cell[BoxData[""], "Template"],
+        Cell[BoxData[""], "Template"],
+        Cell[BoxData[""], "Template"],
+        Cell[BoxData[""], "Template"]
+       },
+       Closed
+      ]
+     ]
+    },
+    Open
+   ]
+  ]
+ },
+ TaggingRules -> <|"Paclet" -> "xIdeal"|>,
+ CellContext -> "Global`"
+ StyleDefinitions ->
+  FrontEnd`FileName[
+   {"Wolfram"},
+   "FunctionPageStylesExt.nb",
+   CharacterEncoding -> "UTF-8"
+  ]
 ]
-(* End of Notebook Content *)
-
-(* Internal cache information *)
-(*CellTagsOutline
-CellTagsIndex->{
- "ExtendedExamples"->{
-  Cell[27957, 854, 486, 13, 57, "ExtendedExamplesSection",ExpressionUUID->"03b417a6-0efc-4d07-9b90-26ff822865a8",
-   CellTags->"ExtendedExamples",
-   CellID->30196552]}
- }
-*)
-(*CellTagsIndex
-CellTagsIndex->{
- {"ExtendedExamples", 34705, 1055}
- }
-*)
-(*NotebookFileOutline
-Notebook[{
-Cell[CellGroupData[{
-Cell[580, 22, 113, 1, 74, "ObjectName",ExpressionUUID->"b6de754d-bd01-4975-9ff0-6c3d3cba74ec",
- CellID->493712759],
-Cell[696, 25, 188, 4, 59, "Usage",ExpressionUUID->"da521100-f881-4ff3-a852-49d72354c1af",
- CellID->423578463],
-Cell[887, 31, 128, 1, 27, "Notes",ExpressionUUID->"952168b1-f93f-4577-8334-98d1ae52bfe0",
- CellID->354734344],
-Cell[1018, 34, 1917, 43, 194, "3ColumnTableMod",ExpressionUUID->"077330b5-ccc0-4d91-9cf2-2877c14503bb",
- CellID->27290970]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2972, 82, 458, 13, 39, "SeeAlsoSection",ExpressionUUID->"b5b69247-10cf-4f34-b38f-7b49319cb9ae",
- CellID->488911490],
-Cell[3433, 97, 1653, 42, 24, "SeeAlso",ExpressionUUID->"fe9a89df-98e3-44e1-8457-0c24490bb7fe",
- CellID->124156201]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[5123, 144, 435, 12, 40, "TechNotesSection",ExpressionUUID->"0eb209c5-76d2-4409-aa35-9e1b5ca237d2",
- CellID->601765411],
-Cell[5561, 158, 100, 1, 19, "Tutorials",ExpressionUUID->"8aaac800-5463-4d71-9b5e-b9eddd8382c9",
- CellID->595761971]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[5698, 164, 115, 1, 39, "MoreAboutSection",ExpressionUUID->"367d3434-3cf6-4b02-b7ed-507c85167dde",
- CellID->1643838],
-Cell[5816, 167, 100, 1, 19, "MoreAbout",ExpressionUUID->"fe4de772-1077-495f-a870-3285c0e26276",
- CellID->461793609]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[5953, 173, 472, 13, 39, "RelatedLinksSection",ExpressionUUID->"7aeec43d-fc42-46af-9c2b-a65ccce26509",
- CellID->281794148],
-Cell[6428, 188, 103, 1, 19, "RelatedLinks",ExpressionUUID->"a51215b8-8396-4087-b303-4a99b1da694a",
- CellID->361533051]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[6568, 194, 530, 14, 69, "ExamplesInitializationSection",ExpressionUUID->"0343e88b-84d5-4d89-bc18-059eac8cf59f",
- CellID->540519112],
-Cell[7101, 210, 167, 2, 45, "ExampleInitialization",ExpressionUUID->"207143ee-a50f-4530-b25a-bae81e101cf5",
- CellID->19048104]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[7305, 217, 442, 12, 71, "PrimaryExamplesSection",ExpressionUUID->"7236ac87-7253-47e5-8425-eccc1190c29e",
- CellID->346976232],
-Cell[7750, 231, 6342, 201, 505, "Input",ExpressionUUID->"ff0a0ce0-0ebd-454f-8473-ec7235327c4d",
- CellID->140152022],
-Cell[CellGroupData[{
-Cell[14117, 436, 282, 7, 25, "Input",ExpressionUUID->"64f87ce6-29d6-45c0-87f5-d722f0b2d7b5",
- CellID->399764725],
-Cell[14402, 445, 13506, 403, 186, "Output",ExpressionUUID->"0798de4f-727b-4a48-b6df-98c0fb78552f",
- CellID->125824473]
-}, Open  ]]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[27957, 854, 486, 13, 57, "ExtendedExamplesSection",ExpressionUUID->"03b417a6-0efc-4d07-9b90-26ff822865a8",
- CellTags->"ExtendedExamples",
- CellID->30196552],
-Cell[28446, 869, 240, 5, 35, "ExampleSection",ExpressionUUID->"336e5311-0268-475d-972e-742d4121c26d",
- CellID->99653001],
-Cell[28689, 876, 264, 5, 23, "ExampleSection",ExpressionUUID->"65ca9691-3d5b-40a7-a031-f5024a90b65e",
- CellID->480880614],
-Cell[CellGroupData[{
-Cell[28978, 885, 241, 5, 23, "ExampleSection",ExpressionUUID->"49b91dec-da61-4320-8b0b-92682ef55ec2",
- CellID->3691380],
-Cell[29222, 892, 247, 5, 26, "ExampleSubsection",ExpressionUUID->"a1d36b06-c60d-440b-be00-8ccd2699605b",
- CellID->97069441],
-Cell[29472, 899, 251, 5, 22, "ExampleSubsection",ExpressionUUID->"e3cfdc0f-46c4-465d-baff-7fa0c46f5efe",
- CellID->332337614],
-Cell[29726, 906, 253, 5, 22, "ExampleSubsection",ExpressionUUID->"53daaa29-0301-4eef-93ec-b9df7bad0743",
- CellID->293348677],
-Cell[29982, 913, 248, 5, 22, "ExampleSubsection",ExpressionUUID->"28019039-e5f6-4031-a54a-6b87a17a6483",
- CellID->80309467]
-}, Open  ]],
-Cell[30245, 921, 248, 5, 35, "ExampleSection",ExpressionUUID->"c90cdf0b-e7a1-47a3-82b7-acd595983227",
- CellID->372178100],
-Cell[30496, 928, 257, 5, 23, "ExampleSection",ExpressionUUID->"07acd4e8-fbfd-4a04-b68b-89e33cd41a32",
- CellID->41147927],
-Cell[30756, 935, 249, 5, 23, "ExampleSection",ExpressionUUID->"b19b5aa8-9627-4e9b-9370-97bd35373896",
- CellID->3156910],
-Cell[31008, 942, 255, 5, 23, "ExampleSection",ExpressionUUID->"039aed0c-f932-4cec-99c0-c3aa2a08a898",
- CellID->36151799],
-Cell[31266, 949, 248, 5, 23, "ExampleSection",ExpressionUUID->"0e07ab53-18b2-458e-98ee-3a510c916ec6",
- CellID->27349199]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[31551, 959, 109, 1, 72, "MetadataSection",ExpressionUUID->"cc1698f4-e6a7-4913-b586-897e31d34afa",
- CellID->62273000],
-Cell[31663, 962, 473, 11, 26, "History",ExpressionUUID->"04a1be77-c0fc-482c-a105-51e35b7186d4",
- CellID->243104397],
-Cell[CellGroupData[{
-Cell[32161, 977, 483, 13, 21, "CategorizationSection",ExpressionUUID->"c0c86210-3c8a-491b-bca2-8ac9fd3da9f3",
- CellID->57038907],
-Cell[32647, 992, 133, 2, 35, "Categorization",ExpressionUUID->"a9968125-271e-416c-8bcd-b4f9cf743c6f",
- CellID->16874048],
-Cell[32783, 996, 134, 2, 35, "Categorization",ExpressionUUID->"9b8929d9-75d2-435a-a3a0-f5dfedef2363",
- CellID->228474119],
-Cell[32920, 1000, 136, 2, 35, "Categorization",ExpressionUUID->"4be85dbf-12ae-424e-8174-472a8c458a70",
- CellID->163636100],
-Cell[33059, 1004, 145, 2, 35, "Categorization",ExpressionUUID->"b6cce4bd-bada-499f-bc9c-e44857e1ce06",
- CellID->4720550]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[33241, 1011, 110, 1, 21, "KeywordsSection",ExpressionUUID->"92cbaa0e-8dd4-4b29-b285-33e15b446daf",
- CellID->233345585],
-Cell[33354, 1014, 99, 1, 70, "Keywords",ExpressionUUID->"d504810c-4e08-4cfb-b3b3-c79b92a16d8d",
- CellID->366178970]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[33490, 1020, 118, 1, 21, "TemplatesSection",ExpressionUUID->"82908618-8fc8-4e1c-94b6-ba89eff87bf3",
- CellID->34998034],
-Cell[33611, 1023, 147, 2, 70, "Template",ExpressionUUID->"c9caf399-bed3-4359-b405-ae5ad536bf98",
- CellID->84688149],
-Cell[33761, 1027, 137, 2, 70, "Template",ExpressionUUID->"46ecc655-38ae-40d1-a4c6-203ea8e95321",
- CellID->178919448],
-Cell[33901, 1031, 135, 2, 70, "Template",ExpressionUUID->"54af0a09-7530-462f-8f15-5a6be34713fc",
- CellID->245446586],
-Cell[34039, 1035, 136, 2, 70, "Template",ExpressionUUID->"5ee87e5d-0a41-457d-b2c6-d9b3c93db085",
- CellID->43984326]
-}, Closed]]
-}, Open  ]]
-}
-]
-*)
-
