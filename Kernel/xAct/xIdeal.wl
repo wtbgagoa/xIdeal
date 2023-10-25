@@ -542,6 +542,8 @@ weylConcomitant["ConformalScalarZ"][metric_CTensor, opts : OptionsPattern[]] :=
 	]
 )
 
+(* Debever directions as Weyl concomitants *)
+
 weylConcomitant["NullDirectionTypeN"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["NullDirectionTypeN"][metric, opts] = 
 	Module[{cart, simplf, obs, mq, a1, b1, c1, d1, e1},
@@ -1028,23 +1030,11 @@ to be able to choose between them. Add names for each method option.
 Options[DebeverNullDirections] = {Method -> "Default", PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True}
 DebeverNullDirections[metric_CTensor, u_CTensor, w_CTensor, opts : OptionsPattern[]] :=
 (* Catch@ is missing? *)
-Catch@ Module[{cart, a, b, c, d, e, f, i, j, cd, weylcd, riemanncd, riccicd,
-		ricciscalarcd, epsilonmetric, weyldual, weylselfdual, Q, gamma, Q2, 
-		aa, Q3, bb, rho, P, Pdag, scrP, scrP2, dseda, S, Ch2, v0, v1, simplf},
+Catch@ Module[{Q, gamma, Q2, aa, Q3, bb, simplf},
 		If[Not @ MetricQ @ metric,
 			Throw[Message[PetrovType::nometric, metric]]
 		];
   		simplf = OptionValue[PSimplify];
-		cart = Part[metric, 2, 1, -1];
-		{a, b, c, d, e, f, i, j} = GetIndicesOfVBundle[Tangent @ ManifoldOfChart@ cart, 8];
-		cd = CovDOfMetric[metric];
-		weylcd = weylConcomitant["Weyl"][metric, opts];
-		riemanncd = simplf[Riemann[cd]];
-		riccicd = simplf[Ricci[cd]];
-		ricciscalarcd = simplf[RicciScalar[cd]];
-		epsilonmetric = epsilon[metric];
-		weyldual = weylConcomitant["WeylDual"][metric, opts];
-		weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
 		Q = weylConcomitant["WeylMatrixQ"][metric, opts, "Observer" -> u];
 		gamma = metricConcomitant["SpatialMetric"][metric, opts, "Observer" -> u];
 		Q2 = weylConcomitant["WeylMatrixQ2"][metric, opts, "Observer" -> u];
