@@ -232,6 +232,30 @@ metricConcomitant["SpatialMetric"][metric_CTensor, opts : OptionsPattern[]] :=
 	]
 )
 
+metricConcomitant["RicciScalar"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["RicciScalar"][metric, opts] = 
+	Module[{cd},
+		cd = CovDOfMetric[metric];
+		weylConcomitant["Weyl"][metric, opts];
+		Ricci[cd]
+	]
+)
+
+metricConcomitant["SchoutenTensor"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["SchoutenTensor"][metric, opts] = 
+	Module[{simplf, cart, cd, ricciscalarcd, ricci, a1, b1, schouten},
+		simplf = OptionValue[metricConcomitant, PSimplify];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
+		cd = CovDOfMetric[metric];
+		ricciscalarcd = metricConcomitant["RicciScalar"][metric, opts];
+		ricci = Ricci[cd];
+		schouten = 1/2 (ricci[-a1, -b1] - 1/6 ricciscalarcd metric[-a1, -b1]);
+		schouten = HeadOfTensor[schouten, {-a1, -b1}];
+		simplf[schouten]
+	]
+)
+
 (* ::Section:: *)
 (* Computation of the Weyl concomitants *)
 
@@ -239,12 +263,12 @@ Options[weylConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Verbo
 
 weylConcomitant["Weyl"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["Weyl"][metric, opts] = 
-	Module[{cart, cd, paralel, vb},
+	Module[{cart, cd, parallel, vb},
 		cart = 	Part[metric, 2, 1, -1];
 		cd = CovDOfMetric[metric];
-		paralel = OptionValue[weylConcomitant, Parallelize];
+		parallel = OptionValue[weylConcomitant, Parallelize];
 		vb = OptionValue[weylConcomitant, Verbose];
-		MetricCompute[metric, cart, "Weyl"[-1, -1, -1, -1], Parallelize -> paralel, Verbose -> vb];
+		MetricCompute[metric, cart, "Weyl"[-1, -1, -1, -1], Parallelize -> parallel, Verbose -> vb];
 		Weyl[cd]
 	]
 )
@@ -375,7 +399,7 @@ weylConcomitant["WeylMatrixQ3"][metric_CTensor, opts : OptionsPattern[]] :=
 
 weylConcomitant["TraceWeylMatrixQ3"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["TraceWeylMatrixQ3"][metric, opts] = 
-	Module[{cart, simplf, obs, mq, trmq, a1},
+	Module[{cart, simplf, mq, trmq, a1},
 		cart = Part[metric, 2, 1, -1];
 		{a1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 1];
 		simplf = OptionValue[weylConcomitant, PSimplify];
@@ -459,7 +483,7 @@ weylConcomitant["ScalarZ"][metric_CTensor, opts : OptionsPattern[]] :=
 
 weylConcomitant["TensorXi"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["TensorXi"][metric, opts] = 
-	Module[{simplf, cart, weylselfdual, g2form, w, cd, a1, b1, c1, d1, cdw},
+	Module[{simplf, cart, weylselfdual, g2form, w, cd, a1, b1, c1, d1, cdw, tensorxi},
 		simplf = OptionValue[weylConcomitant, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
@@ -468,14 +492,55 @@ weylConcomitant["TensorXi"][metric_CTensor, opts : OptionsPattern[]] :=
 		w = weylConcomitant["ScalarW"][metric, opts];
 		cd = CovDOfMetric[metric];
 		cdw = TensorDerivative[w, cd];
-		simplf[HeadOfTensor[
-			(weylselfdual[-a1, -b1, -c1, -d1] - w[] g2form[-a1, -b1, -c1, -d1]) cdw[b1] cdw[d1], 
-			{-a1, -c1}
-			]
-		]
+		tensorxi = (weylselfdual[-a1, -b1, -c1, -d1] - w[] g2form[-a1, -b1, -c1, -d1]) cdw[b1] cdw[d1];
+		tensorxi = HeadOfTensor[tensorxi, {-a1, -c1}];
+		simplf[tensorxi]
 	]
 )
 
+weylConcomitant["ConformalTensorXi"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["ConformalTensorXi"][metric, opts] = 
+	Module[{simplf, cart, weylselfdual, g2form, w, cd, a1, b1, c1, d1, cdw, schouten, cdschouten, weylcd, weylcdweylcd, lambda, tensorxi},
+		simplf = OptionValue[weylConcomitant, PSimplify];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
+		weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
+		g2form = metricConcomitant["G2Form"][metric, opts];
+		w = weylConcomitant["ScalarW"][metric, opts];
+		cd = CovDOfMetric[metric];
+		cdw = TensorDerivative[w, cd];
+		schouten = metricConcomitant["SchoutenTensor"][metric, opts];
+		cdschouten = TensorDerivative[schouten, cd];
+		weylcd = Weyl[cd];
+		weylcdweylcd = weylcd[-a1, -b1, -c1, -d1]weylcd[a1, b1, c1, d1];
+		lambda = (2 / weylcdweylcd) weylcd[-a1, b1, c1, d1]Antisymmetrize[cdschouten[-c1, -d1, -b1], {-d1, -b1}];
+		lambda = simplf[HeadOfTensor[lambda, {-a1}]];
+		lambda = simplf[cdw + 2 w lambda];
+		tensorxi = (weylselfdual[-a1, -b1, -c1, -d1] - w[] g2form[-a1, -b1, -c1, -d1]) lambda[b1] lambda[d1];
+		tensorxi = HeadOfTensor[tensorxi, {-a1, -c1}];
+		simplf[tensorxi]
+	]
+)
+
+weylConcomitant["ConformalScalarZ"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["ConformalScalarZ"][metric, opts] = 
+	Module[{simplf, cart, weylselfdual, g2form, w, cd, cdw, a1, b1, c1, d1, schouten, cdschouten, weylcd, weylcdweylcd, lambda},
+		simplf = OptionValue[weylConcomitant, PSimplify];
+		cart = Part[metric, 2, 1, -1];
+		{b1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];		
+		cd = CovDOfMetric[metric];
+		w = weylConcomitant["ScalarW"][metric, opts];
+		cdw = TensorDerivative[w, cd];
+		schouten = metricConcomitant["SchoutenTensor"][metric, opts];
+		cdschouten = TensorDerivative[schouten, cd];
+		weylcd = Weyl[cd];
+		weylcdweylcd = weylcd[-a1, -b1, -c1, -d1]weylcd[a1, b1, c1, d1];
+		lambda = (2 / weylcdweylcd) weylcd[-a1, b1, c1, d1]Antisymmetrize[cdschouten[-c1, -d1, -b1], {-d1, -b1}];
+		lambda = simplf[HeadOfTensor[lambda, {-a1}]];
+		lambda = simplf[cdw + 2 w lambda];
+		simplf[(metric[b1, d1]) lambda[-b1] lambda[-d1]]
+	]
+)
 
 (* ::Section:: *)
 (* Computation of the R-frame concomitants *)
