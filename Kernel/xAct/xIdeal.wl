@@ -249,6 +249,43 @@ weylConcomitant["Weyl"][metric_CTensor, opts : OptionsPattern[]] :=
 	]
 )
 
+weylConcomitant["Weyl2"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["Weyl2"][metric, opts] = 
+	Module[{simplf, cart, a1, b1, c1, d1, i1, j1, weylcd},
+		simplf = OptionValue[weylConcomitant, PSimplify];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1, i1, j1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
+		weylcd = weylConcomitant["Weyl"][metric, opts];
+		simplf[
+  			HeadOfTensor[1/2 weylcd[-a1, -b1, i1, j1] weylcd[-i1, -j1, -c1, -d1], {-a1, -b1, -c1, -d1}]
+     		]
+	]
+)
+
+weylConcomitant["Weyl3"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["Weyl3"][metric, opts] = 
+	Module[{simplf, cart, a1, b1, c1, d1, i1, j1, weylcd, weyl2cd},
+		simplf = OptionValue[weylConcomitant, PSimplify];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1, i1, j1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
+		weylcd = weylConcomitant["Weyl"][metric, opts];
+  		weyl2cd = weylConcomitant["Weyl2"][metric, opts];
+		simplf[
+  			HeadOfTensor[1/2 weyl2cd[-a1, -b1, i1, j1] weylcd[-i1, -j1, -c1, -d1], {-a1, -b1, -c1, -d1}]
+     		]
+	]
+)
+
+weylConcomitant["TraceWeyl3"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["TraceWeyl3"][metric, opts] = 
+	Module[{simplf, cart, a1, b1, weyl3cd},
+		simplf = OptionValue[weylConcomitant, PSimplify];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
+  		weyl3cd = weylConcomitant["Weyl3"][metric, opts];
+		simplf[1/2 weyl3cd[-a1, -b1, a1, b1]]
+	]
+)
 
 weylConcomitant["WeylDual"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["WeylDual"][metric, opts] = 
@@ -936,39 +973,41 @@ SymbolicPositiveQ[x_, OptionsPattern[]] :=
 
 Options[TypeDClassify] = {Assumptions -> True, Method -> "Default", PSimplify -> $CVSimplify}
 
-TypeDClassify[metric_CTensor, w_CTensor, OptionsPattern[]] :=
+TypeDClassify[metric_CTensor, w_CTensor, opts : OptionsPattern[]] :=
 	Catch @
 		Module[{cart, CD, W, RiemannCD, RicciCD, RicciScalarCD, epsilonmetric,
 			 W2, W3, TrW3, rho, drho, dlogrho, alpha, S, P, Q, C3, a, b, c, d, e,
-			 f, i, j, k, l, C5, assumptionsC5},
+			 f, i, j, k, l, C5, assumptions,simplf},
 			If[Not @ MetricQ @ metric,
 				Throw[Message[PetrovType::nometric, metric]]
 			];
-			assumptionsC5 = OptionValue[Assumptions];
+			assumptions = OptionValue[Assumptions];
+   			simplf = OptionValue[PSimplify];
 			cart = Part[metric, 2, 1, -1];
 			{a, b, c, d, e, f, i, j, k, l} = GetIndicesOfVBundle[Tangent @ ManifoldOfChart
 				 @ cart, 10];
 			MetricCompute[metric, cart, All, Parallelize -> True, Verbose -> True
 				];
 			CD = CovDOfMetric[metric];
-			W = Weyl[CD];
-			RiemannCD = Riemann[CD];
-			RicciCD = Ricci[CD];
-			RicciScalarCD = RicciScalar[CD];
+			W = weylConcomitant["Weyl"][metric, opts];
 			epsilonmetric = epsilon[metric];
-			W2 = HeadOfTensor[1/2 W[-a, -b, i, j] W[-i, -j, -c, -d], {-a, -b, -c, -d}] // Simplify;
-			W3 = HeadOfTensor[1/2 W2[-a, -b, i, j] W[-i, -j, -c, -d], {-a, -b, -c, -d}] // Simplify;
-			TrW3 = 1/2 W3[-i, -j, i, j] // Simplify;
-			rho = -(1/12 TrW3) ^ (1/3) // FullSimplify;
-			drho = CTensor[Grad[rho, ScalarsOfChart @ cart], {-cart}] // Simplify;
-			dlogrho = CTensor[Grad[Log[rho], ScalarsOfChart @ cart], {-cart}] // Simplify;
-			alpha = 1/9 metric[-i, -j] dlogrho[i] dlogrho[j] - 2 rho // FullSimplify;
-			S = HeadOfTensor[1 / (3 rho) (W[-a, -b, -c, -d] - 
-			rho (metric[-a, -c] metric[-b, -d] - metric[-a, -d] metric[-b, -c])), {-a, -b, -c, -d}] // Simplify;
-			P = HeadOfTensor[epsilonmetric[-a, -b, -i, -j] W[-k, i, -l, j] drho[k] drho[l], {-a, -b}] // Simplify;
-			Q = HeadOfTensor[S[-i, -a, -j, -b] drho[i] drho[j], {-a, -b}] // Simplify;
-			C3 = 1/2 S[-a, -b, -i, -j] S[i, j, -c, -d] + S[-a, -b, -c, -d] // Simplify;
-			C5 = 2 Q[-i, -j] w[i] w[j] + Q[-k, k] // Simplify;
+			W2 = weylConcomitant["Weyl2"][metric, opts];
+			W3 = weylConcomitant["Weyl3"][metric, opts];
+			TrW3 = weylConcomitant["TraceWeyl3"][metric, opts];
+			rho = simplf[-(1/12 TrW3) ^ (1/3)];
+			drho = simplf[CTensor[Grad[rho, ScalarsOfChart @ cart], {-cart}]];
+			dlogrho = simplf[CTensor[Grad[Log[rho], ScalarsOfChart @ cart], {-cart}] ];
+			alpha = simplf[1/9 metric[-i, -j] dlogrho[i] dlogrho[j] - 2 rho];
+			S = simplf[
+   				HeadOfTensor[
+       					1 / (3 rho) (W[-a, -b, -c, -d] - rho (metric[-a, -c] metric[-b, -d] - 
+					metric[-a, -d] metric[-b, -c])), {-a, -b, -c, -d}
+     				]
+	 		];
+			P = simplf[HeadOfTensor[epsilonmetric[-a, -b, -i, -j] W[-k, i, -l, j] drho[k] drho[l], {-a, -b}]];
+			Q = simplf[HeadOfTensor[S[-i, -a, -j, -b] drho[i] drho[j], {-a, -b}]];
+			C3 = simplf[1/2 S[-a, -b, -i, -j] S[i, j, -c, -d] + S[-a, -b, -c, -d]];
+			C5 = simplf[2 Q[-i, -j] w[i] w[j] + Q[-k, k]];
 			Which[
 				RicciCD =!= Zero,
 					"No vacuum"
@@ -978,55 +1017,55 @@ TypeDClassify[metric_CTensor, w_CTensor, OptionsPattern[]] :=
 				,
 				P === Zero,
 					Which[
-						SymbolicPositiveQ[C5, Assumptions -> assumptionsC5] === "Undefined",
+						SymbolicPositiveQ[C5, Assumptions -> assumptions] === "Undefined",
 							
 							"Undefined sign in C5"
 						,
-						SymbolicPositiveQ[C5, Assumptions -> assumptionsC5],
+						SymbolicPositiveQ[C5, Assumptions -> assumptions],
 							Which[
-								SymbolicPositiveQ[alpha, Assumptions -> assumptionsC5] === "Undefined",
+								SymbolicPositiveQ[alpha, Assumptions -> assumptions] === "Undefined",
 									
 									"Undefined sign in \[Alpha]"
 								,
-								SymbolicPositiveQ[alpha, Assumptions -> assumptionsC5],
+								SymbolicPositiveQ[alpha, Assumptions -> assumptions],
 									"\!\(\*SubscriptBox[\(A\), \(1\)]\)-metric"
 								,
 								alpha === Zero,
 									"\!\(\*SubscriptBox[\(A\), \(3\)]\)-metric"
 								,
-								Not @ SymbolicPositiveQ[alpha, Assumptions -> assumptionsC5],
+								Not @ SymbolicPositiveQ[alpha, Assumptions -> assumptions],
 									
 									"\!\(\*SubscriptBox[\(A\), \(2\)]\)-metric"
 								,
 								True,
 									(*Should be "Undefined" *)SymbolicPositiveQ[alpha, Assumptions
-										 -> assumptionsC5]
+										 -> assumptions]
 							]
 						,
-						Not @ SymbolicPositiveQ[C5, Assumptions -> assumptionsC5],
+						Not @ SymbolicPositiveQ[C5, Assumptions -> assumptions],
 							Which[
-								SymbolicPositiveQ[alpha, Assumptions -> assumptionsC5] === "Undefined",
+								SymbolicPositiveQ[alpha, Assumptions -> assumptions] === "Undefined",
 									
 									"Undefined sign in \[Alpha]"
 								,
-								SymbolicPositiveQ[alpha, Assumptions -> assumptionsC5],
+								SymbolicPositiveQ[alpha, Assumptions -> assumptions],
 									"\!\(\*SubscriptBox[\(B\), \(1\)]\)-metric"
 								,
 								alpha === Zero,
 									"\!\(\*SubscriptBox[\(B\), \(3\)]\)-metric"
 								,
-								Not @ SymbolicPositiveQ[alpha, Assumptions -> assumptionsC5],
+								Not @ SymbolicPositiveQ[alpha, Assumptions -> assumptions],
 									
 									"\!\(\*SubscriptBox[\(B\), \(2\)]\)-metric"
 								,
 								True,
 									(*Should be "Undefined" *)
-									SymbolicPositiveQ[alpha, Assumptions -> assumptionsC5]
+									SymbolicPositiveQ[alpha, Assumptions -> assumptions]
 							]
 						,
 						True,
 							(*Should be "Undefined" *)
-							SymbolicPositiveQ[alpha, Assumptions -> assumptionsC5]
+							SymbolicPositiveQ[alpha, Assumptions -> assumptions]
 					]
 				,
 				True,
