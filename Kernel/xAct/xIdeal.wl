@@ -997,7 +997,6 @@ PetrovType[metric_CTensor, opts : OptionsPattern[]] :=
 			aa = weylConcomitant["TraceWeylSelfDual2"][metric, opts];
 			weylselfdual3 = weylConcomitant["WeylSelfDual3"][metric, opts];
 			bb = weylConcomitant["TraceWeylSelfDual3"][metric, opts];
-			rho = simplf[- bb / aa];
 			Which[
 				weylselfdual2 === Zero,
 					"Type N"
