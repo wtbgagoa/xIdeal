@@ -907,7 +907,7 @@ RframeConcomitant["C1122"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :
      		ce2 = RframeConcomitant["C2"][metric, H, opts];
 		simplf[HeadOfTensor[
   			epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce1[-j1, -d1, -e1, -f1] 
-	   		ce2[-k1, -g1, -h1, -m1, -n1,] ce2[-l1, -o1, -p1, -q1, -r1], 
+	   		ce2[-k1, -g1, -h1, -m1, -n1] ce2[-l1, -o1, -p1, -q1, -r1], 
 	  		{-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1, -q1, -r1}
      			]
      		]
@@ -928,7 +928,7 @@ RframeConcomitant["C1123"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :
        		ce3 = RframeConcomitant["C3"][metric, H, opts];
 		simplf[HeadOfTensor[
   			epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce1[-j1, -d1, -e1, -f1] 
-	   		ce2[-k1, -g1, -h1, -m1, -n1,] ce3[-l1, -o1, -p1, -q1, -r1, -s1], 
+	   		ce2[-k1, -g1, -h1, -m1, -n1] ce3[-l1, -o1, -p1, -q1, -r1, -s1], 
 	  		{-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1, -q1, -r1, -s1}
      			]
      		]
