@@ -571,7 +571,7 @@ weylConcomitant["NullDirectionTypeIII"][metric_CTensor, opts : OptionsPattern[]]
 		simplf[mq]
 	]
 )
-
+(* TODO: when doing simplifications we are not able to handle outputs with Piecewise *)
 weylConcomitant["NullDirectionTypeD"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["NullDirectionTypeD"][metric, opts] = 
 	Module[{cart, simplf, obs, w, a1, uw, b1, c1, d1, e1, bb, aa, mq, rho, gamma, P, Pdag, scrP, scrP2, S, dseda, Ch2, v0, v1, newopts},
@@ -600,8 +600,9 @@ weylConcomitant["NullDirectionTypeD"][metric_CTensor, opts : OptionsPattern[]] :
 		v0 = PowerExpand[Ch2 obs[a1] + I / (2 Sqrt[dseda]) scrP2[c1, b1] epsilon[metric][-c1, -b1, a1, -d1] obs[d1]];
 		v0 = Simplify[v0];
 		v0 = HeadOfTensor[v0, {a1}];
-		v1 = PowerExpand[S[-c1, a1] w[c1] / Sqrt[S[-d1, -b1] w[d1] w[b1]]];
-		v1 = Simplify[v1];
+		v1 = S[-c1, a1] w[c1] / Sqrt[S[-d1, -b1] w[d1] w[b1]];
+		v1 = PowerExpand[v1];
+		v1 = simplf[v1];
 		v1 = HeadOfTensor[v1, {a1}];
 		{v0 + v1, v0 - v1}
 	]
@@ -1028,7 +1029,6 @@ to be able to choose between them. Add names for each method option.
 
 Options[DebeverNullDirections] = {Method -> "Default", PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True}
 DebeverNullDirections[metric_CTensor, u_CTensor, w_CTensor, opts : OptionsPattern[]] :=
-(* Catch@ is missing? *)
 Catch@ Module[{Q, gamma, Q2, aa, Q3, bb, simplf},
 		If[Not @ MetricQ @ metric,
 			Throw[Message[PetrovType::nometric, metric]]
@@ -1102,32 +1102,32 @@ Options[TypeDClassify] = {Assumptions -> True, Method -> "Default", PSimplify ->
 
 TypeDClassify[metric_CTensor, w_CTensor, opts : OptionsPattern[]] :=
 	Catch @
-		Module[{cart, CD, W, RiemannCD, RicciCD, RicciScalarCD, epsilonmetric,
+		Module[{cart, cd, W, RiemannCD, RicciCD, RicciScalarCD, epsilonmetric, logrho,
 			 W2, W3, TrW3, rho, drho, dlogrho, alpha, S, P, Q, C3, a, b, c, d, e,
-			 f, i, j, k, l, C5, assumptions,simplf},
+			 f, i, j, k, l, C5, assumptions, simplf},
 			If[Not @ MetricQ @ metric,
 				Throw[Message[PetrovType::nometric, metric]]
 			];
 			assumptions = OptionValue[Assumptions];
    			simplf = OptionValue[PSimplify];
 			cart = Part[metric, 2, 1, -1];
-			{a, b, c, d, e, f, i, j, k, l} = GetIndicesOfVBundle[Tangent @ ManifoldOfChart
-				 @ cart, 10];
-			MetricCompute[metric, cart, All, Parallelize -> True, Verbose -> True
-				];
-			CD = CovDOfMetric[metric];
+			{a, b, c, d, e, f, i, j, k, l} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 10];
 			W = weylConcomitant["Weyl"][metric, opts];
+			cd = CovDOfMetric[metric];
+			RicciCD = Ricci[cd];
 			epsilonmetric = epsilon[metric];
 			W2 = weylConcomitant["Weyl2"][metric, opts];
 			W3 = weylConcomitant["Weyl3"][metric, opts];
 			TrW3 = weylConcomitant["TraceWeyl3"][metric, opts];
 			rho = simplf[-(1/12 TrW3) ^ (1/3)];
-			drho = simplf[CTensor[Grad[rho, ScalarsOfChart @ cart], {-cart}]];
-			dlogrho = simplf[CTensor[Grad[Log[rho], ScalarsOfChart @ cart], {-cart}] ];
-			alpha = simplf[1/9 metric[-i, -j] dlogrho[i] dlogrho[j] - 2 rho];
+			logrho = CTensor[Log[rho], {}];
+			rho = CTensor[rho, {}];
+			drho = simplf[TensorDerivative[rho, cd]];
+			dlogrho = simplf[TensorDerivative[logrho, cd]];
+			alpha = simplf[1/9 metric[-i, -j] dlogrho[i] dlogrho[j] - 2 rho[]];
 			S = simplf[
    				HeadOfTensor[
-       					1 / (3 rho) (W[-a, -b, -c, -d] - rho (metric[-a, -c] metric[-b, -d] - 
+       					1 / (3 rho[]) (W[-a, -b, -c, -d] - rho[] (metric[-a, -c] metric[-b, -d] - 
 					metric[-a, -d] metric[-b, -c])), {-a, -b, -c, -d}
      				]
 	 		];
@@ -1139,13 +1139,12 @@ TypeDClassify[metric_CTensor, w_CTensor, opts : OptionsPattern[]] :=
 				RicciCD =!= Zero,
 					"No vacuum"
 				,
-				rho === Zero || C3 =!= 0,
+				rho[] === Zero || C3 =!= 0,
 					"Vacuum no Type D"
 				,
 				P === Zero,
 					Which[
 						SymbolicPositiveQ[C5, Assumptions -> assumptions] === "Undefined",
-							
 							"Undefined sign in C5"
 						,
 						SymbolicPositiveQ[C5, Assumptions -> assumptions],
