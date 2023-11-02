@@ -1413,6 +1413,47 @@ IsometryGroupDimension[metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
    
    		]
 
+(* ::Section:: *)
+(* Data *)
+
+allmetrics = {
+	"Schwarzschild",
+	"Kerr",
+	"KasnerI",
+	"KasnerII",
+	"KasnerIII",
+	"TaubI",
+	"TaubII",
+	"WindmillI",
+	"PetrovSolution",
+	"PPWave",
+	"ReissnerNordstrom"
+}
+
+
+allclasses = {
+	"DMetrics",
+	"VacuumTypeD",
+	"Warped22",
+	"SphericalSymmetry",
+	"PerfectFluid",
+	"PetrovTypeI",
+	"PetrovTypeII",
+	"PetrovTypeIII",
+	"PetrovTypeN",
+	"PetrovTypeD",
+	"G1",
+	"G2",
+	"G3",
+	"G4",
+	"G5",
+	"G5",
+	"G6",
+	"G7",
+	"G8",
+	"G9",
+	"G10"
+}
 
 
 (****************************************************************)
