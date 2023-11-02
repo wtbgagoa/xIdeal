@@ -1141,8 +1141,7 @@ Options[TypeDClassify] = {Assumptions -> True, Method -> "Default", PSimplify ->
 
 TypeDClassify[metric_CTensor, w_CTensor, opts : OptionsPattern[]] :=
 	Catch @
-		Module[{cart, cd, W, RiemannCD, RicciCD, RicciScalarCD, epsilonmetric, logrho,
-			 W2, W3, TrW3, rho, drho, dlogrho, alpha, S, P, Q, C3, a, b, c, d, e,
+		Module[{cart, cd, W, RicciCD, epsilonmetric, logrho, TrW3, rho, drho, dlogrho, alpha, S, P, Q, C3, a, b, c, d, e,
 			 f, i, j, k, l, C5, assumptions, simplf},
 			If[Not @ MetricQ @ metric,
 				Throw[Message[PetrovType::nometric, metric]]
@@ -1155,8 +1154,6 @@ TypeDClassify[metric_CTensor, w_CTensor, opts : OptionsPattern[]] :=
 			cd = CovDOfMetric[metric];
 			RicciCD = Ricci[cd];
 			epsilonmetric = epsilon[metric];
-			W2 = weylConcomitant["Weyl2"][metric, opts];
-			W3 = weylConcomitant["Weyl3"][metric, opts];
 			TrW3 = weylConcomitant["TraceWeyl3"][metric, opts];
 			rho = simplf[-(1/12 TrW3) ^ (1/3)];
 			logrho = CTensor[Log[rho], {}];
@@ -1164,16 +1161,19 @@ TypeDClassify[metric_CTensor, w_CTensor, opts : OptionsPattern[]] :=
 			drho = simplf[TensorDerivative[rho, cd]];
 			dlogrho = simplf[TensorDerivative[logrho, cd]];
 			alpha = simplf[1/9 metric[-i, -j] dlogrho[i] dlogrho[j] - 2 rho[]];
-			S = simplf[
-   				HeadOfTensor[
+			S = HeadOfTensor[
        					1 / (3 rho[]) (W[-a, -b, -c, -d] - rho[] (metric[-a, -c] metric[-b, -d] - 
 					metric[-a, -d] metric[-b, -c])), {-a, -b, -c, -d}
-     				]
-	 		];
-			P = simplf[HeadOfTensor[epsilonmetric[-a, -b, -i, -j] W[-k, i, -l, j] drho[k] drho[l], {-a, -b}]];
-			Q = simplf[HeadOfTensor[S[-i, -a, -j, -b] drho[i] drho[j], {-a, -b}]];
-			C3 = simplf[1/2 S[-a, -b, -i, -j] S[i, j, -c, -d] + S[-a, -b, -c, -d]];
-			C5 = simplf[2 Q[-i, -j] w[i] w[j] + Q[-k, k]];
+     				];
+			S = simplf[S];
+			P = HeadOfTensor[epsilonmetric[-a, -b, -i, -j] W[-k, i, -l, j] drho[k] drho[l], {-a, -b}];
+			P = simplf[P];
+			Q = HeadOfTensor[S[-i, -a, -j, -b] drho[i] drho[j], {-a, -b}];
+			Q = simplf[Q];
+			C3 = 1/2 S[-a, -b, -i, -j] S[i, j, -c, -d] + S[-a, -b, -c, -d];
+			C3 = simplf[C3];
+			C5 = 2 Q[-i, -j] w[i] w[j] + Q[-k, k];
+			C5 = simplf[C5];
 			Which[
 				RicciCD =!= Zero,
 					"No vacuum"
@@ -1203,8 +1203,7 @@ TypeDClassify[metric_CTensor, w_CTensor, opts : OptionsPattern[]] :=
 									"\!\(\*SubscriptBox[\(A\), \(2\)]\)-metric"
 								,
 								True,
-									(*Should be "Undefined" *)SymbolicPositiveQ[alpha, Assumptions
-										 -> assumptions]
+									(*Should be "Undefined" *)SymbolicPositiveQ[alpha, Assumptions-> assumptions]
 							]
 						,
 						Not @ SymbolicPositiveQ[C5, Assumptions -> assumptions],
