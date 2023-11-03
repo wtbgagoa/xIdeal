@@ -1427,7 +1427,12 @@ allmetrics = {
 	"WindmillI",
 	"PetrovSolution",
 	"PPWave",
-	"ReissnerNordstrom"
+	"ReissnerNordstrom",
+ 	"LemaitreTolmanBondi",
+  	"GeneralSphericalSymmetry",
+   	"Stephani",
+    	"StephaniSpherical",
+     	"Friedmann"
 }
 
 
