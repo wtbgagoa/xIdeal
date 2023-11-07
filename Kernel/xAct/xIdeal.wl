@@ -1465,10 +1465,16 @@ allmetricproperties = {
 	"IsIDEAL",
 	"CoordinateAssumptions",
 	"ParameterAssumptions",
-	"StandardCoordinateNames",
-	"StandardParameterNames",
-	"StandardFunctionNames",
+	"CoordinateNames",
+	"ParameterNames",
+	"FunctionNames",
 	"Metric"
+}
+
+allcoordinatesystems = {
+	"SchwarzschildCoordinates",
+	"BoyerLindquistCoordinates",
+	"SphericalCoordinates"
 }
 
 exactSolsData["Solutions"] = allmetrics
@@ -1477,6 +1483,7 @@ exactSolsData["Classes"] = allclasses
 
 exactSolsData["MetricProperties"] = allmetricproperties
 
+exactSolsData["CoordinateSystems"] = allcoordinatesystems
 
 
 (* ::Section:: *)
@@ -1507,19 +1514,60 @@ exactSolsData["Vacuum"] = {
 (* ::Section:: *)
 (* Exact solutions database *)
 
-(* Schwarzschild *)
+(* Schwarzschild in Schwarzschild coordinates *)
+
+exactSolsData["Schwarzschild", "ParameterNames"] = {"m"}
+
+exactSolsData["Schwarzschild", "ParameterAssumptions"] = #[[1]] > 0 &
 
 exactSolsData["Schwarzschild", "IsIDEAL"] = True
 
-exactSolsData["Schwarzschild", "StandardCoordinateNames"] = {"t", "r", "\[Theta]", "\[Phi]"}
+exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "CoordinateNames"}] = {"t", "r", "\[Theta]", "\[Phi]"}
 
-exactSolsData["Schwarzschild", "StandardParameterNames"] = {"m"}
+exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "CoordinateAssumptions"}] = #[[2]] > 0 && Pi > #[[3]] > 0 &
 
-exactSolsData["Schwarzschild", "CoordinateAssumptions"] = #[[2]] > 0 && Pi > #[[3]] > 0 &
+exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ParameterNames"}] = exactSolsData["Schwarzschild", "ParameterNames"]
 
-exactSolsData["Schwarzschild", "ParameterAssumptions"] = #[[1]] > 0 & 
+exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ParameterAssumptions"}] = exactSolsData["Schwarzschild", "ParameterAssumptions"]
 
-exactSolsData["Schwarzschild", "Metric"] = DiagonalMatrix[{-(1 - (2 #2[[1]])/#1[[2]]), (1 - (2 #2[[1]])/#1[[2]])^-1, #1[[2]]^2, #1[[2]]^2 Sin[#1[[3]]]^2}] &
+(* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
+
+exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "Metric"}] = DiagonalMatrix[{-(1 - (2 #2[[1]]) / #1[[2]]), (1 - (2 #2[[1]]) / #1[[2]])^-1, #1[[2]]^2, #1[[2]]^2 Sin[#1[[3]]]^2}] &
+
+
+(* GeneralSpherical in spherical coordinates *)
+
+exactSolsData["GeneralSphericalSymmetry", "ParameterNames"] = {}
+
+exactSolsData["GeneralSphericalSymmetry", "ParameterAssumptions"] = Null
+
+exactSolsData["GeneralSphericalSymmetry", "IsIDEAL"] = True
+
+exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "CoordinateNames"}] = {"t", "r", "\[Theta]", "\[Phi]"}
+
+exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "CoordinateAssumptions"}] = #[[2]] > 0 && Pi > #[[3]] > 0 &
+
+exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "ParameterNames"}] = exactSolsData["GeneralSpherical", "ParameterNames"]
+
+exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "ParameterAssumptions"}] = exactSolsData["GeneralSpherical", "ParameterAssumptions"]
+
+exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "FunctionNames"}] = {"\[Lambda]", "\[Mu]", "\[Nu]"}
+
+
+(* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
+
+exactSolsData["GeneralSpherical", {"SphericalCoordinates", "Metric"}] =
+	DiagonalMatrix[
+		{
+			-E^(2 #3[[3]][#1[[1]], #1[[2]]]), 
+			E^(2 #3[[1]][#1[[1]], #1[[2]]]), 
+			E^(2 #3[[2]][#1[[1]], #1[[2]]]), 
+			E^(2 #3[[2]][#1[[1]], #1[[2]]]) Sin[#1[[3]]]^2
+		}
+	] &
+
+
+
 
 (****************************************************************)
 
