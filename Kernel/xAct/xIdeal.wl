@@ -1456,10 +1456,70 @@ allclasses = {
 	"PetrovTypeN",
 	"PetrovTypeD",
 	"SphericalSymmetry",
+	"Vacuum",
 	"VacuumTypeD",
 	"Warped22"
 }
 
+allmetricproperties = {
+	"IsIDEAL",
+	"CoordinateAssumptions",
+	"ParameterAssumptions",
+	"StandardCoordinateNames",
+	"StandardParameterNames",
+	"StandardFunctionNames",
+	"Metric"
+}
+
+exactSolsData["Solutions"] = allmetrics
+
+exactSolsData["Classes"] = allclasses
+
+exactSolsData["MetricProperties"] = allmetricproperties
+
+
+
+(* ::Section:: *)
+(* Classification of exact solutions *)
+
+
+
+exactSolsData["SphericalSymmetry"] = {
+	"GeneralSphericalSymmetry",
+	"Schwarzschild",
+	"StephaniSpherical"
+}
+
+exactSolsData["AxialSymmetry"] = {
+	"Kerr"
+}
+
+exactSolsData["PetrovTypeD"] = {
+	"Kerr",
+	"Schwarzschild"
+}
+
+exactSolsData["Vacuum"] = {
+	"Kerr",
+	"Schwarzschild"
+}
+
+(* ::Section:: *)
+(* Exact solutions database *)
+
+(* Schwarzschild *)
+
+exactSolsData["Schwarzschild", "IsIDEAL"] = True
+
+exactSolsData["Schwarzschild", "StandardCoordinateNames"] = {"t", "r", "\[Theta]", "\[Phi]"}
+
+exactSolsData["Schwarzschild", "StandardParameterNames"] = {"m"}
+
+exactSolsData["Schwarzschild", "CoordinateAssumptions"] = #[[2]] > 0 && Pi > #[[3]] > 0 &
+
+exactSolsData["Schwarzschild", "ParameterAssumptions"] = #[[1]] > 0 & 
+
+exactSolsData["Schwarzschild", "Metric"] = DiagonalMatrix[{-(1 - (2 #2[[1]])/#1[[2]]), (1 - (2 #2[[1]])/#1[[2]])^-1, #1[[2]]^2, #1[[2]]^2 Sin[#1[[3]]]^2}] &
 
 (****************************************************************)
 
