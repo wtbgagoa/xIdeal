@@ -179,6 +179,8 @@ KerrSolutionQ::usage = " ";
 
 ClearxIdealCache::usage = " ";
 
+SaveExactSolution::usage = " ";
+
 (* ::Section:: *)
 (* Messages *)
 
@@ -1556,7 +1558,7 @@ exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "FunctionName
 
 (* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
 
-exactSolsData["GeneralSpherical", {"SphericalCoordinates", "Metric"}] =
+exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "Metric"}] =
 	DiagonalMatrix[
 		{
 			-E^(2 #3[[3]][#1[[1]], #1[[2]]]), 
@@ -1567,7 +1569,43 @@ exactSolsData["GeneralSpherical", {"SphericalCoordinates", "Metric"}] =
 	] &
 
 
+Options[SaveExactSolution] = {
+	"ParameterNames" -> {}, 
+	"ParameterAssumptions" -> Null , 
+	"IsIdeal" -> True, 
+	"CoordinateSystem" -> "MinkowskiCoordinates",
+	"CoordinateNames" -> {},
+	"CoordinateAssumptions" -> Null,
+	"ScalarFunctions" -> {},
+	"Classes" -> {""}
 
+}
+
+SaveExactSolution[metric_Function, metricname_String, opts : OptionsPattern[]] :=
+	Module[{params, paramassmp, isideal, coords, sclrs, coordsassmp},
+
+		{params, paramassmp, isideal, sclrs, coords, coordsassmp} = OptionValue[{"ParameterNames", "ParameterAssumptions", "IsIdeal", "CoordinateNames", "CoordinateSystem", "CoordinateAssumptions"}];
+
+		externalExactSolsData[metricname, "ParameterNames"] = params;
+
+		externalExactSolsData[metricname, "ParameterAssumptions"] = paramassmp;
+
+		externalExactSolsData[metricname, "IsIDEAL"] = isideal;
+
+		externalExactSolsData[metricname, {coords, "CoordinateNames"}] = sclrs;
+
+		(* The syntax is exactSolsData[args__][coords_List, parameters_List, functions_List] *)
+		externalExactSolsData[metricname, {coords, "CoordinateAssumptions"}] = coordsassmp;
+
+		externalExactSolsData[metricname, {coords, "ParameterNames"}] = externalExactSolsData[metricname, "ParameterNames"];
+
+		externalExactSolsData[metricname, {coords, "ParameterAssumptions"}] = externalExactSolsData[metricname, "ParameterAssumptions"];
+
+		externalExactSolsData[metricname, {coords, "Metric"}] = metric;
+
+		Save["stdout", externalExactSolsData]
+
+	]
 
 (****************************************************************)
 
