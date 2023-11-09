@@ -1544,8 +1544,12 @@ exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ParameterAssumption
 
 (* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
 
-exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "MetricName"}] = DiagonalMatrix[{-(1 - (2 #2[[1]]) / #1[[2]]), (1 - (2 #2[[1]]) / #1[[2]])^-1, #1[[2]]^2, #1[[2]]^2 Sin[#1[[3]]]^2}] &
-
+exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "Metric"}] = 
+	Function[{coords, params, funcs},
+		With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]], m = params[[1]]},
+			DiagonalMatrix[{-(1 - (2 m) / r), (1 - (2 m) / r)^-1, r^2, r^2 Sin[theta]^2}] 
+		]
+	]
 
 (* GeneralSpherical in spherical coordinates *)
 
@@ -1568,16 +1572,19 @@ exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "FunctionName
 
 (* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
 
-exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "MetricName"}] =
-	DiagonalMatrix[
-		{
-			-E^(2 #3[[3]][#1[[1]], #1[[2]]]), 
-			E^(2 #3[[1]][#1[[1]], #1[[2]]]), 
-			E^(2 #3[[2]][#1[[1]], #1[[2]]]), 
-			E^(2 #3[[2]][#1[[1]], #1[[2]]]) Sin[#1[[3]]]^2
-		}
-	] &
-
+exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "Metric"}] =
+	Function[{coords, params, funcs},
+		With[{nu = funcs[[3]], lambda = funcs[[1]], mu = funcs[[2]], t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]]},
+			DiagonalMatrix[
+				{
+					-E^(2 nu[t, r]), 
+					E^(2 lambda[t, r]), 
+					E^(2 mu[t, r]), 
+					E^(2 mu[t, r]) Sin[theta]^2
+				}
+			]
+		] 
+	]
 
 Options[SaveExactSolution] = {
 	"ParameterNames" -> {}, 
