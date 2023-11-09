@@ -1419,12 +1419,15 @@ IsometryGroupDimension[metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
 (* Data *)
 
 allmetrics = {
-	"Friedmann",
+	"BertottiRobinson",
+ 	"Friedmann",
 	"GeneralSphericalSymmetry",
+ 	"KantowskiSachs",
 	"KasnerI",
 	"KasnerII",
 	"KasnerIII",
 	"Kerr",
+ 	"KerrNut,"
 	"LemaitreTolmanBondi",
 	"TaubI",
 	"TaubII",
@@ -1433,12 +1436,16 @@ allmetrics = {
 	"ReissnerNordstrom",
 	"Schwarzschild",
    	"Stephani",
-    "StephaniSpherical",
+    	"SzekeresSzafronI",
+    	"SzekeresSzafronII",
+    	"StephaniSpherical",
+     	"Wills",
 	"WindmillI"
 }
 
 allclasses = {
 	"AxialSymmetry",
+ 	"ConformallyFlat",
 	"DMetrics",
 	"G1",
 	"G2",
@@ -1458,6 +1465,7 @@ allclasses = {
 	"PetrovTypeN",
 	"PetrovTypeD",
 	"SphericalSymmetry",
+ 	"ThermodynamicPerfectFluid",
 	"Vacuum",
 	"VacuumTypeD",
 	"Warped22"
