@@ -1428,7 +1428,7 @@ allmetrics = {
 	"KasnerII",
 	"KasnerIII",
 	"Kerr",
- 	"KerrNut,"
+ 	"KerrNut",
 	"LemaitreTolmanBondi",
 	"TaubI",
 	"TaubII",
@@ -1437,10 +1437,10 @@ allmetrics = {
 	"ReissnerNordstrom",
 	"Schwarzschild",
    	"Stephani",
-    	"SzekeresSzafronI",
-    	"SzekeresSzafronII",
-    	"StephaniSpherical",
-     	"Wills",
+    "SzekeresSzafronI",
+    "SzekeresSzafronII",
+    "StephaniSpherical",
+    "Wills",
 	"WindmillI"
 }
 
@@ -1475,11 +1475,12 @@ allclasses = {
 allmetricproperties = {
 	"IsIDEAL",
 	"CoordinateAssumptions",
+	"CoordinateSystemName",
 	"ParameterAssumptions",
 	"CoordinateNames",
 	"ParameterNames",
 	"FunctionNames",
-	"Metric"
+	"MetricName"
 }
 
 allcoordinatesystems = {
@@ -1543,7 +1544,7 @@ exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ParameterAssumption
 
 (* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
 
-exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "Metric"}] = DiagonalMatrix[{-(1 - (2 #2[[1]]) / #1[[2]]), (1 - (2 #2[[1]]) / #1[[2]])^-1, #1[[2]]^2, #1[[2]]^2 Sin[#1[[3]]]^2}] &
+exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "MetricName"}] = DiagonalMatrix[{-(1 - (2 #2[[1]]) / #1[[2]]), (1 - (2 #2[[1]]) / #1[[2]])^-1, #1[[2]]^2, #1[[2]]^2 Sin[#1[[3]]]^2}] &
 
 
 (* GeneralSpherical in spherical coordinates *)
@@ -1567,7 +1568,7 @@ exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "FunctionName
 
 (* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
 
-exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "Metric"}] =
+exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "MetricName"}] =
 	DiagonalMatrix[
 		{
 			-E^(2 #3[[3]][#1[[1]], #1[[2]]]), 
@@ -1610,7 +1611,7 @@ SaveExactSolution[metric_Function, metricname_String, opts : OptionsPattern[]] :
 
 		externalExactSolsData[metricname, {coords, "ParameterAssumptions"}] = externalExactSolsData[metricname, "ParameterAssumptions"];
 
-		externalExactSolsData[metricname, {coords, "Metric"}] = metric;
+		externalExactSolsData[metricname, {coords, "MetricName"}] = metric;
 
 		Save["stdout", externalExactSolsData]
 
