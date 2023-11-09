@@ -1422,6 +1422,7 @@ allmetrics = {
 	"BertottiRobinson",
  	"Friedmann",
 	"GeneralSphericalSymmetry",
+ 	"GeneralSzekeresSzafron",
  	"KantowskiSachs",
 	"KasnerI",
 	"KasnerII",
