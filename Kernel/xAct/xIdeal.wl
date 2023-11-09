@@ -1583,7 +1583,7 @@ Options[SaveExactSolution] = {
 	"ParameterNames" -> {}, 
 	"ParameterAssumptions" -> Null , 
 	"IsIdeal" -> True, 
-	"CoordinateSystem" -> "MinkowskiCoordinates",
+	"CoordinateSystemName" -> "MinkowskiCoordinates",
 	"CoordinateNames" -> {},
 	"CoordinateAssumptions" -> Null,
 	"ScalarFunctions" -> {},
@@ -1594,7 +1594,7 @@ Options[SaveExactSolution] = {
 SaveExactSolution[metric_Function, metricname_String, opts : OptionsPattern[]] :=
 	Module[{params, paramassmp, isideal, coords, sclrs, coordsassmp},
 
-		{params, paramassmp, isideal, sclrs, coords, coordsassmp} = OptionValue[{"ParameterNames", "ParameterAssumptions", "IsIdeal", "CoordinateNames", "CoordinateSystem", "CoordinateAssumptions"}];
+		{params, paramassmp, isideal, sclrs, coords, coordsassmp} = OptionValue[{"ParameterNames", "ParameterAssumptions", "IsIdeal", "CoordinateNames", "CoordinateSystemName", "CoordinateAssumptions"}];
 
 		externalExactSolsData[metricname, "ParameterNames"] = params;
 
