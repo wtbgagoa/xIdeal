@@ -1602,28 +1602,28 @@ Options[SaveExactSolution] = {
 }
 
 SaveExactSolution[metric_Function, exactsolname_String, opts : OptionsPattern[]] :=
-	Module[{params, paramassmp, isideal, coords, sclrs, coordsassmp},
+	Module[{params, paramassmp, isideal, coords, sclrs, coordsassmp, cls},
 
-		{params, paramassmp, isideal, sclrs, coords, coordsassmp} = OptionValue[{"ParameterNames", "ParameterAssumptions", "IsIdeal", "CoordinateNames", "CoordinateSystemName", "CoordinateAssumptions"}];
+		{params, paramassmp, isideal, sclrs, coords, coordsassmp, cls} = OptionValue[{"ParameterNames", "ParameterAssumptions", "IsIdeal", "CoordinateNames", "CoordinateSystemName", "CoordinateAssumptions", "Classes"}];
 
-		externalExactSolsData[exactsolname, "ParameterNames"] = params;
+		exactSolsData[exactsolname, "ParameterNames"] = params;
 
-		externalExactSolsData[exactsolname, "ParameterAssumptions"] = paramassmp;
+		exactSolsData[exactsolname, "ParameterAssumptions"] = paramassmp;
 
-		externalExactSolsData[exactsolname, "IsIDEAL"] = isideal;
+		exactSolsData[exactsolname, "IsIDEAL"] = isideal;
 
-		externalExactSolsData[exactsolname, {coords, "CoordinateNames"}] = sclrs;
+		exactSolsData[exactsolname, "Classes"] = cls;
+
+		exactSolsData[exactsolname, {coords, "CoordinateNames"}] = sclrs;
 
 		(* The syntax is exactSolsData[args__][coords_List, parameters_List, functions_List] *)
-		externalExactSolsData[exactsolname, {coords, "CoordinateAssumptions"}] = coordsassmp;
+		exactSolsData[exactsolname, {coords, "CoordinateAssumptions"}] = coordsassmp;
 
-		externalExactSolsData[exactsolname, {coords, "ParameterNames"}] = externalExactSolsData[metricname, "ParameterNames"];
+		exactSolsData[exactsolname, {coords, "ParameterNames"}] = exactSolsData[metricname, "ParameterNames"];
 
-		externalExactSolsData[exactsolname, {coords, "ParameterAssumptions"}] = externalExactSolsData[metricname, "ParameterAssumptions"];
+		exactSolsData[exactsolname, {coords, "ParameterAssumptions"}] = exactSolsData[metricname, "ParameterAssumptions"];
 
-		externalExactSolsData[exactsolname, {coords, "Metric"}] = metric;
-
-		Save["stdout", externalExactSolsData]
+		exactSolsData[exactsolname, {coords, "Metric"}] = metric;
 
 	]
 
@@ -1632,6 +1632,7 @@ SaveExactSolution[metric_Function, exactsolname_String, opts : OptionsPattern[]]
 (****************** 5. End private and package ******************)
 
 (****************************************************************)
+
 
 End[];
 

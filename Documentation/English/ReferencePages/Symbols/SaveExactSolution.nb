@@ -3,1302 +3,2328 @@
 (*** Wolfram Notebook File ***)
 (* http://www.wolfram.com/nb *)
 
-(* CreatedBy='Mathematica 13.3' *)
+(* Created By: SaveReadableNotebook *)
+(* https://resources.wolframcloud.com/FunctionRepository/resources/SaveReadableNotebook *)
 
-(*CacheID: 234*)
-(* Internal cache information:
-NotebookFileLineBreakTest
-NotebookFileLineBreakTest
-NotebookDataPosition[       158,          7]
-NotebookDataLength[     47376,       1296]
-NotebookOptionsPosition[     38127,       1100]
-NotebookOutlinePosition[     38906,       1126]
-CellTagsIndexPosition[     38826,       1121]
-WindowFrame->Normal*)
-
-(* Beginning of Notebook Content *)
-Notebook[{
-
-Cell[CellGroupData[{
-Cell["SaveExactSolution", "ObjectName",
- CellID->1456896570,ExpressionUUID->"d37f90f1-9cec-41d3-a4e5-e7e74cb7486e"],
-
-Cell[TextData[{
- Cell["   ", "ModInfo",ExpressionUUID->"d81ec898-bc33-44da-9d6a-7749be51d522"],
- " "
-}], "Usage",
- CellID->860563098,ExpressionUUID->"5dc94e8e-8d96-437b-bcc2-3a5d9fb4f4a9"],
-
-Cell["The following options can be given: ", "Notes",
- CellID->613550280,ExpressionUUID->"8c090d5f-5d7d-4225-a85e-bebacc2c6d6b"],
-
-Cell[BoxData[GridBox[{
-   {Cell["   ", "ModInfo",ExpressionUUID->
-     "deffa7f2-76f4-446c-bd48-39de3dfd7980"], "\"\<ParameterNames\>\"", 
-    RowBox[{"{", "}"}], Cell[
-    "XXXX", "TableText",ExpressionUUID->
-     "c517a73a-8b43-4ed7-85a7-2bc2bea56559"]},
-   {Cell["   ", "ModInfo",ExpressionUUID->
-     "bb035620-06e8-4047-b3d3-00ed2b1881c9"], "\"\<ParameterAssumptions\>\"", 
-    
-    ButtonBox["Null",
-     BaseStyle->"Link"], Cell[
-    "XXXX", "TableText",ExpressionUUID->
-     "ef7fc800-1001-49ae-ba24-bdf5c6f18e1e"]},
-   {Cell["   ", "ModInfo",ExpressionUUID->
-     "7dbdcd56-99bf-4090-9739-206d311b8dee"], "\"\<IsIdeal\>\"", 
-    ButtonBox["True",
-     BaseStyle->"Link"], Cell[
-    "XXXX", "TableText",ExpressionUUID->
-     "053b5dfb-6ecb-42d7-ac5b-ee4f51ca0414"]},
-   {Cell["   ", "ModInfo",ExpressionUUID->
-     "fd5bb836-27c9-46e1-931e-fdddcf7bf74c"], "\"\<CoordinateSystem\>\"", 
-    "\"\<MinkowskiCoordinates\>\"", Cell[
-    "XXXX", "TableText",ExpressionUUID->
-     "9320202a-0740-4000-be1d-5806cdbb3b7e"]},
-   {Cell["   ", "ModInfo",ExpressionUUID->
-     "27317856-679f-4622-9dfb-b7dba74d52e4"], "\"\<CoordinateNames\>\"", 
-    RowBox[{"{", "}"}], Cell[
-    "XXXX", "TableText",ExpressionUUID->
-     "19ddeeae-b6e3-49c1-a3ee-3409d8fca420"]},
-   {Cell["   ", "ModInfo",ExpressionUUID->
-     "d3073e7b-cb00-4cf4-8567-bc686c9ae17a"], "\"\<CoordinateAssumptions\>\"", 
-    ButtonBox["Null",
-     BaseStyle->"Link"], Cell[
-    "XXXX", "TableText",ExpressionUUID->
-     "b7700a58-593d-4106-a673-b39be9aa6ece"]},
-   {Cell["   ", "ModInfo",ExpressionUUID->
-     "8cbfcc4a-600c-4bc1-a75d-a2030030ca25"], "\"\<ScalarFunctions\>\"", 
-    RowBox[{"{", "}"}], Cell[
-    "XXXX", "TableText",ExpressionUUID->
-     "e5e7dee3-0d67-47dc-aaee-e7c6d148b0f5"]},
-   {Cell["   ", "ModInfo",ExpressionUUID->
-     "661a5839-5f5b-4c0d-b09a-55ee73e03999"], "\"\<Classes\>\"", 
-    RowBox[{"{", "}"}], Cell[
-    "XXXX", "TableText",ExpressionUUID->
-     "652a2858-8274-4a11-b5fd-f912aebdf75e"]}
-  }]], "3ColumnTableMod",
- CellID->480773630,ExpressionUUID->"a7e6dc56-68fa-4485-b851-6f93bc3f0113"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[TextData[{
- "See Also",
- Cell[BoxData[
-  TemplateBox[{"SeeAlso", 
-    Cell[
-     BoxData[
-      FrameBox[
-       Cell[
-       "Insert links to any related reference (function) pages.", 
-        "MoreInfoText"], BaseStyle -> "IFrameBox"]], "MoreInfoTextOuter"]},
-   "MoreInfoOpenerButtonTemplate"]],ExpressionUUID->
-  "8f0d15df-5b5d-48ef-af0d-a8d41d539f18"]
-}], "SeeAlsoSection",
- CellID->2137687583,ExpressionUUID->"79cc5d2a-dfd8-4d24-8c7a-229f548a6ca4"],
-
-Cell[TextData[{
- Cell[BoxData[
-  TagBox[
-   FrameBox["\<\"XXXX\"\>"],
-   "FunctionPlaceholder"]], "InlineSeeAlsoFunction",
-  TaggingRules->{"PageType" -> "Function"},ExpressionUUID->
-  "28530cee-b3c6-4f17-a757-8d6a145f475c"],
- Cell[BoxData[
-  RowBox[{
-  Cell[TextData[StyleBox[
-   " \[FilledVerySmallSquare] ", "InlineSeparator"]],ExpressionUUID->
-    "a58070f6-0ee1-47eb-b6e2-7701d94b0986"], 
-   DynamicModuleBox[{$CellContext`nbobj$$ = NotebookObject[
-    "396d7ba7-e62f-4f66-8e75-d1637f87bc52", 
-     "8dca8c6d-6db9-4368-8e5a-8a796e7b787f"], $CellContext`cellobj$$ = 
-    CellObject[
-    "d74f7fd5-0a33-4f8e-890f-a45643222570", 
-     "836e6667-611f-46ab-97f0-824f48ce0650"]}, 
-    TemplateBox[{
-      GraphicsBox[{{
-         Thickness[0.06], 
-         StrokeForm[
-          Hue[0.4167, 0.406, 0.502]], 
-         CircleBox[{0, 0}]}, {
-         Thickness[0.06], 
-         StrokeForm[
-          Hue[0.4167, 0.406, 0.502]], 
-         LineBox[{{0, 0.62}, {0, -0.62}}]}, {
-         Thickness[0.06], 
-         StrokeForm[
-          Hue[0.4167, 0.406, 0.502]], 
-         LineBox[{{-0.62, 0}, {0.62, 0}}]}}, 
-       ImagePadding -> {{1., 1.}, {2.4, 1.}}, ImageSize -> 16, 
-       PlotRange -> {{-1.06, 1.06}, {-1.06, 1.06}}, 
-       BaselinePosition -> (Center -> 
-        Center)], $CellContext`nbobj$$, $CellContext`cellobj$$},
-     "InlineListingAddButton"],
-    Initialization:>($CellContext`nbobj$$ = 
-      EvaluationNotebook[]; $CellContext`cellobj$$ = EvaluationCell[])]}]], 
-  "InlineListingAddButton",ExpressionUUID->
-  "d74f7fd5-0a33-4f8e-890f-a45643222570"]
-}], "SeeAlso",
- CellID->1418022634,ExpressionUUID->"3e42c66d-3ee1-4423-a1fb-7d76f6a5a1e0"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[TextData[{
- "Tech Notes",
- Cell[BoxData[
-  TemplateBox[{"TechNotes", 
-    Cell[
-     BoxData[
-      FrameBox[
-       Cell["Insert links to related tech notes.", "MoreInfoText"], BaseStyle -> 
-       "IFrameBox"]], "MoreInfoTextOuter"]},
-   "MoreInfoOpenerButtonTemplate"]],ExpressionUUID->
-  "d96b0bbd-76e2-45c2-bc58-d20679005f9c"]
-}], "TechNotesSection",
- CellID->1153259893,ExpressionUUID->"d6cbb9b3-6c47-44b8-91d1-82e25f513f98"],
-
-Cell["XXXX", "Tutorials",
- CellID->1433480558,ExpressionUUID->"fac64312-6cc1-47fd-b93b-c25ceb86c869"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Related Guides", "MoreAboutSection",
- CellID->1629435598,ExpressionUUID->"726e324f-6c7a-4687-8b38-99eb0d97a670"],
-
-Cell["XXXX", "MoreAbout",
- CellID->1268697948,ExpressionUUID->"bc15abbc-8046-4b0e-8940-3b5f678772ff"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[TextData[{
- "Related Links",
- Cell[BoxData[
-  TemplateBox[{"RelatedLinks", 
-    Cell[
-     BoxData[
-      FrameBox[
-       Cell[
-       "Insert links to any related page, including web pages.", 
-        "MoreInfoText"], BaseStyle -> "IFrameBox"]], "MoreInfoTextOuter"]},
-   "MoreInfoOpenerButtonTemplate"]],ExpressionUUID->
-  "13a34b3c-1378-415b-9f2d-1324cc108ca7"]
-}], "RelatedLinksSection",
- CellID->12445449,ExpressionUUID->"fd855793-0b6f-4d25-b68b-128db21c6a99"],
-
-Cell["XXXX", "RelatedLinks",
- CellID->166348002,ExpressionUUID->"d07d2fe3-156a-4fe4-844a-8932134dd350"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[TextData[{
- "Examples Initialization",
- Cell[BoxData[
-  TemplateBox[{"ExamplesInitialization", 
-    Cell[
-     BoxData[
-      FrameBox[
-       Cell[
-       "Input that is to be evaluated before any examples are run, e.g. \
-Needs[\[Ellipsis]].", "MoreInfoText"], BaseStyle -> "IFrameBox"]], 
-     "MoreInfoTextOuter"]},
-   "MoreInfoOpenerButtonTemplate"]],ExpressionUUID->
-  "e33e6000-b93a-4e12-aaac-7284e9e8beed"]
-}], "ExamplesInitializationSection",
- CellID->22475182,ExpressionUUID->"ea15a0cc-31ec-4190-92e8-787e7f93b7f6"],
-
-Cell[BoxData[
- RowBox[{"Needs", "[", "\"\<xAct`xIdeal`\>\"", "]"}]], "ExampleInitialization",\
-
- CellID->158792612,ExpressionUUID->"2598512e-f2f0-447c-b05f-b4203c236524"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- InterpretationBox[GridBox[{
+Notebook[
+ {
+  Cell[
+   CellGroupData[
     {
-     StyleBox[
-      RowBox[{"Basic", " ", "Examples"}], "PrimaryExamplesSection"], 
-     ButtonBox[
-      RowBox[{
-       RowBox[{"More", " ", "Examples"}], " ", "\[RightTriangle]"}],
-      BaseStyle->"ExtendedExamplesLink",
-      ButtonData:>"ExtendedExamples"]}
-   }],
-  $Line = 0; Null]], "PrimaryExamplesSection",
- CellID->722731118,ExpressionUUID->"d27426c1-ca3c-4cea-b251-3925765f4b83"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"$DefInfoQ", "=", "False"}], ";"}]], "Input",
- CellLabel->"In[1]:=",
- CellID->1475706900,ExpressionUUID->"0fe0a223-c1e4-406b-a2d1-0f58d6c52e1b"],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{"Function", "[", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"cords", ",", "params", ",", "scfuncs"}], "}"}], ",", 
-   RowBox[{
-    RowBox[{"r", "\[Element]", "Reals"}], "&&", 
-    RowBox[{"mm", "\[Element]", "Reals"}], "&&", 
-    RowBox[{"\[Theta]", "\[Element]", "Reals"}], "&&", 
-    RowBox[{"mm", ">", "0"}], "&&", 
-    RowBox[{
-     RowBox[{"1", "-", 
-      RowBox[{"2", 
-       RowBox[{"mm", "/", "r"}]}]}], ">", "0"}], "&&", 
-    RowBox[{"r", ">", "0"}]}]}], "]"}]], "Input",
- CellChangeTimes->{{3.908447533464758*^9, 3.908447607681044*^9}, {
-  3.9084476801466084`*^9, 3.908447691769623*^9}, {3.9084477918582783`*^9, 
-  3.908447798753407*^9}, {3.90844903814734*^9, 3.908449053752768*^9}, {
-  3.9084491172581987`*^9, 3.908449127249136*^9}},
- CellLabel->"In[3]:=",
- CellID->378788024,ExpressionUUID->"d9d70a20-a559-4d74-8439-1d03246b7c41"],
-
-Cell[BoxData[
- RowBox[{"Function", "[", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"t", ",", "r", ",", "\[Theta]", ",", "\[Phi]", ",", "mm"}], "}"}],
-    ",", 
-   RowBox[{
-    RowBox[{"r", "\[Element]", 
-     TemplateBox[{},
-      "Reals"]}], "&&", 
-    RowBox[{"mm", "\[Element]", 
-     TemplateBox[{},
-      "Reals"]}], "&&", 
-    RowBox[{"\[Theta]", "\[Element]", 
-     TemplateBox[{},
-      "Reals"]}], "&&", 
-    RowBox[{"mm", ">", "0"}], "&&", 
-    RowBox[{
-     RowBox[{"1", "-", 
-      FractionBox[
-       RowBox[{"2", " ", "mm"}], "r"]}], ">", "0"}], "&&", 
-    RowBox[{"r", ">", "0"}]}]}], "]"}]], "Output",
- CellChangeTimes->{
-  3.908447610499354*^9, {3.908447684455984*^9, 3.908447692544639*^9}},
- CellLabel->"Out[3]=",
- CellID->238906111,ExpressionUUID->"3f3ba8e2-13a0-46c6-bb6d-d88e125874bc"]
-}, Open  ]],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"MetricAssumptions", "=", 
-   RowBox[{
-    RowBox[{
-     RowBox[{"r", "[", "]"}], "\[Element]", "Reals"}], "&&", 
-    RowBox[{"mm", "\[Element]", "Reals"}], "&&", 
-    RowBox[{
-     RowBox[{"\[Theta]", "[", "]"}], "\[Element]", "Reals"}], "&&", 
-    RowBox[{"mm", ">", "0"}], "&&", 
-    RowBox[{
-     RowBox[{"1", "-", 
-      RowBox[{"2", 
-       RowBox[{"mm", "/", 
-        RowBox[{"r", "[", "]"}]}]}]}], ">", "0"}], "&&", 
-    RowBox[{
-     RowBox[{"r", "[", "]"}], ">", "0"}]}]}], ";"}]], "Input",
- CellChangeTimes->{{3.908446102798704*^9, 3.9084461415285807`*^9}},
- CellLabel->"In[36]:=",
- CellID->112301888,ExpressionUUID->"52a06a7b-c3f2-4eff-9b27-996070b8e96e"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"metricMatrix", "=", 
-   RowBox[{"DiagonalMatrix", "[", 
-    RowBox[{"{", 
-     RowBox[{
-      RowBox[{"-", 
-       RowBox[{"(", 
-        RowBox[{"1", "-", 
-         FractionBox[
-          RowBox[{"2", "mm"}], 
-          RowBox[{"r", "[", "]"}]]}], ")"}]}], ",", 
-      SuperscriptBox[
-       RowBox[{"(", 
-        RowBox[{"1", "-", 
-         FractionBox[
-          RowBox[{"2", "mm"}], 
-          RowBox[{"r", "[", "]"}]]}], ")"}], 
-       RowBox[{"-", "1"}]], ",", 
-      SuperscriptBox[
-       RowBox[{"r", "[", "]"}], "2"], ",", 
-      RowBox[{
-       SuperscriptBox[
-        RowBox[{"r", "[", "]"}], "2"], 
-       SuperscriptBox[
-        RowBox[{"Sin", "[", 
-         RowBox[{"\[Theta]", "[", "]"}], "]"}], "2"]}]}], "}"}], "]"}]}], 
-  ";"}]], "Input",
- CellChangeTimes->{{3.90844236537816*^9, 3.908442368996962*^9}},
- CellLabel->"In[37]:=",
- CellID->1241609735,ExpressionUUID->"c492869f-0679-4d2c-8eb6-efc71bfe09f0"],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"SaveExactSolution", "[", 
-   RowBox[{
-    RowBox[{"(", 
-     RowBox[{
-      RowBox[{"DiagonalMatrix", "[", 
-       RowBox[{"{", 
-        RowBox[{
-         RowBox[{"-", 
-          RowBox[{"(", 
-           RowBox[{"1", "-", 
-            FractionBox[
-             RowBox[{"2", 
-              RowBox[{"#2", "[", 
-               RowBox[{"[", "1", "]"}], "]"}]}], 
-             RowBox[{"#1", "[", 
-              RowBox[{"[", "2", "]"}], "]"}]]}], ")"}]}], ",", 
-         SuperscriptBox[
-          RowBox[{"(", 
-           RowBox[{"1", "-", 
-            FractionBox[
-             RowBox[{"2", 
-              RowBox[{"#2", "[", 
-               RowBox[{"[", "1", "]"}], "]"}]}], 
-             RowBox[{"#1", "[", 
-              RowBox[{"[", "2", "]"}], "]"}]]}], ")"}], 
-          RowBox[{"-", "1"}]], ",", 
-         SuperscriptBox[
-          RowBox[{"#1", "[", 
-           RowBox[{"[", "2", "]"}], "]"}], "2"], ",", 
-         RowBox[{
-          SuperscriptBox[
-           RowBox[{"#1", "[", 
-            RowBox[{"[", "2", "]"}], "]"}], "2"], 
-          SuperscriptBox[
-           RowBox[{"Sin", "[", 
-            RowBox[{"#1", "[", 
-             RowBox[{"[", "3", "]"}], "]"}], "]"}], "2"]}]}], "}"}], "]"}], 
-      "&"}], ")"}], ",", "\[IndentingNewLine]", 
-    "\"\<SchwarzschildSolution\>\"", ",", "\[IndentingNewLine]", 
-    RowBox[{"\"\<ParameterNames\>\"", "->", 
-     RowBox[{"{", "\"\<m\>\"", "}"}]}], ",", "\[IndentingNewLine]", 
-    RowBox[{"\"\<ParameterAssumptions\>\"", " ", "->", " ", 
-     RowBox[{"(", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"#", "[", 
-         RowBox[{"[", "1", "]"}], "]"}], ">", "0"}], "&"}], ")"}]}], ",", 
-    "\[IndentingNewLine]", 
-    RowBox[{"\"\<IsIdeal\>\"", " ", "->", "True"}], ",", 
-    "\[IndentingNewLine]", 
-    RowBox[{
-    "\"\<CoordinateSystem\>\"", " ", "->", " ", 
-     "\"\<SchwarzschildCoordinates\>\""}], ",", "\[IndentingNewLine]", 
-    RowBox[{"\"\<CoordinateNames\>\"", "->", 
-     RowBox[{"{", 
-      RowBox[{
-      "\"\<t\>\"", ",", "\"\<r\>\"", ",", "\"\<\[Theta]\>\"", ",", 
-       "\"\<\[Phi]\>\""}], "}"}]}], ",", "\[IndentingNewLine]", 
-    RowBox[{"\"\<CoordinateAssumptions\>\"", " ", "->", 
-     RowBox[{"(", " ", 
-      RowBox[{
-       RowBox[{
-        RowBox[{
-         RowBox[{"#1", "[", 
-          RowBox[{"[", "2", "]"}], "]"}], "\[Element]", "Reals"}], "&&", 
-        RowBox[{
-         RowBox[{"#2", "[", 
-          RowBox[{"[", "1", "]"}], "]"}], "\[Element]", "Reals"}], "&&", 
-        RowBox[{
-         RowBox[{"#1", "[", 
-          RowBox[{"[", "3", "]"}], "]"}], "\[Element]", "Reals"}], "&&", 
-        RowBox[{
-         RowBox[{"#2", "[", 
-          RowBox[{"[", "1", "]"}], "]"}], ">", "0"}], "&&", 
-        RowBox[{
-         RowBox[{"1", "-", 
-          RowBox[{"2", 
-           RowBox[{
-            RowBox[{"#2", "[", 
-             RowBox[{"[", "1", "]"}], "]"}], "/", 
-            RowBox[{"#1", "[", 
-             RowBox[{"[", "2", "]"}], "]"}]}]}]}], ">", "0"}], "&&", 
-        RowBox[{
-         RowBox[{"#1", "[", 
-          RowBox[{"[", "2", "]"}], "]"}], ">", "0"}]}], "&"}], ")"}]}]}], 
-   "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]"}]], "Input",
- CellChangeTimes->{{3.908442601798121*^9, 3.90844289303483*^9}, {
-  3.9084429249960737`*^9, 3.9084429874200487`*^9}, {3.9084431736358433`*^9, 
-  3.9084432709564953`*^9}, {3.908443309013012*^9, 3.90844341055637*^9}, {
-  3.908443674879586*^9, 3.908443687747444*^9}, {3.9084455494806232`*^9, 
-  3.908445568079336*^9}},
- CellLabel->"In[2]:=",
- CellID->89664016,ExpressionUUID->"15c9b326-5db7-4dc6-bbda-7c1b7edee454"],
-
-Cell[BoxData[
- InterpretationBox[GridBox[{
-    {GridBox[{
-       {GridBox[{
-          {
-           RowBox[{
-            RowBox[{"xAct`xIdeal`Private`externalExactSolsData", "[", 
-             
-             RowBox[{"\<\"SchwarzschildSolution\"\>", 
-              ",", "\<\"IsIDEAL\"\>"}], "]"}], "=", "True"}]},
-          {" "},
-          {
-           RowBox[{
-            RowBox[{"xAct`xIdeal`Private`externalExactSolsData", "[", 
-             
-             RowBox[{"\<\"SchwarzschildSolution\"\>", 
-              ",", "\<\"ParameterAssumptions\"\>"}], "]"}], "=", 
-            RowBox[{
-             RowBox[{
-              RowBox[{
-              "#1", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
-              ">", "0"}], "&"}]}]},
-          {" "},
-          {
-           RowBox[{
-            RowBox[{"xAct`xIdeal`Private`externalExactSolsData", "[", 
-             
-             RowBox[{"\<\"SchwarzschildSolution\"\>", 
-              ",", "\<\"ParameterNames\"\>"}], "]"}], "=", 
-            RowBox[{"{", "\<\"m\"\>", "}"}]}]},
-          {" "},
-          {
-           RowBox[{
-            RowBox[{"xAct`xIdeal`Private`externalExactSolsData", "[", 
-             RowBox[{"\<\"SchwarzschildSolution\"\>", ",", 
-              RowBox[{"{", 
-               
-               RowBox[{"\<\"SchwarzschildCoordinates\"\>", 
-                ",", "\<\"CoordinateAssumptions\"\>"}], "}"}]}], "]"}], "=", 
-            RowBox[{
-             RowBox[{
-              RowBox[{
-               RowBox[{
-               "#1", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], 
-               "\[Element]", 
-               TemplateBox[{},
-                "Reals"]}], "&&", 
-              RowBox[{
-               RowBox[{
-               "#2", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
-               "\[Element]", 
-               TemplateBox[{},
-                "Reals"]}], "&&", 
-              RowBox[{
-               RowBox[{
-               "#1", "\[LeftDoubleBracket]", "3", "\[RightDoubleBracket]"}], 
-               "\[Element]", 
-               TemplateBox[{},
-                "Reals"]}], "&&", 
-              RowBox[{
-               RowBox[{
-               "#2", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
-               ">", "0"}], "&&", 
-              RowBox[{
-               RowBox[{"1", "-", 
-                FractionBox[
-                 RowBox[{"2", " ", 
-                  RowBox[{
-                  "#2", "\[LeftDoubleBracket]", "1", 
-                   "\[RightDoubleBracket]"}]}], 
-                 RowBox[{
-                 "#1", "\[LeftDoubleBracket]", "2", 
-                  "\[RightDoubleBracket]"}]]}], ">", "0"}], "&&", 
-              RowBox[{
-               RowBox[{
-               "#1", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}], 
-               ">", "0"}]}], "&"}]}]},
-          {" "},
-          {
-           RowBox[{
-            RowBox[{"xAct`xIdeal`Private`externalExactSolsData", "[", 
-             RowBox[{"\<\"SchwarzschildSolution\"\>", ",", 
-              RowBox[{"{", 
-               
-               RowBox[{"\<\"SchwarzschildCoordinates\"\>", 
-                ",", "\<\"CoordinateNames\"\>"}], "}"}]}], "]"}], "=", 
-            RowBox[{"{", 
-             
-             RowBox[{"\<\"t\"\>", ",", "\<\"r\"\>", ",", "\<\"\[Theta]\"\>", 
-              ",", "\<\"\[Phi]\"\>"}], "}"}]}]},
-          {" "},
-          {
-           RowBox[{
-            RowBox[{"xAct`xIdeal`Private`externalExactSolsData", "[", 
-             RowBox[{"\<\"SchwarzschildSolution\"\>", ",", 
-              RowBox[{"{", 
-               
-               RowBox[{"\<\"SchwarzschildCoordinates\"\>", 
-                ",", "\<\"Metric\"\>"}], "}"}]}], "]"}], "=", 
-            RowBox[{
-             RowBox[{"DiagonalMatrix", "[", 
-              RowBox[{"{", 
-               RowBox[{
-                RowBox[{"-", 
-                 RowBox[{"(", 
-                  RowBox[{"1", "-", 
-                   FractionBox[
-                    RowBox[{"2", " ", 
-                    RowBox[{
-                    "#2", "\[LeftDoubleBracket]", "1", 
-                    "\[RightDoubleBracket]"}]}], 
-                    RowBox[{
-                    "#1", "\[LeftDoubleBracket]", "2", 
-                    "\[RightDoubleBracket]"}]]}], ")"}]}], ",", 
-                FractionBox["1", 
-                 RowBox[{"1", "-", 
-                  FractionBox[
-                   RowBox[{"2", " ", 
-                    RowBox[{
-                    "#2", "\[LeftDoubleBracket]", "1", 
-                    "\[RightDoubleBracket]"}]}], 
-                   RowBox[{
-                   "#1", "\[LeftDoubleBracket]", "2", 
-                    "\[RightDoubleBracket]"}]]}]], ",", 
-                SuperscriptBox[
-                 RowBox[{
-                 "#1", "\[LeftDoubleBracket]", "2", "\[RightDoubleBracket]"}],
-                  "2"], ",", 
-                RowBox[{
-                 SuperscriptBox[
-                  RowBox[{
-                  "#1", "\[LeftDoubleBracket]", "2", 
-                   "\[RightDoubleBracket]"}], "2"], " ", 
-                 SuperscriptBox[
-                  RowBox[{
-                   InterpretationBox[
-                    StyleBox["Sin",
-                    ShowAutoStyles->False,
-                    AutoSpacing->False],
-                    Sin,
-                    Editable->False], "[", 
-                   RowBox[{
-                   "#1", "\[LeftDoubleBracket]", "3", 
-                    "\[RightDoubleBracket]"}], "]"}], "2"]}]}], "}"}], "]"}], 
-             "&"}]}]},
-          {" "},
-          {
-           RowBox[{
-            RowBox[{"xAct`xIdeal`Private`externalExactSolsData", "[", 
-             RowBox[{"\<\"SchwarzschildSolution\"\>", ",", 
-              RowBox[{"{", 
-               
-               RowBox[{"\<\"SchwarzschildCoordinates\"\>", 
-                ",", "\<\"ParameterAssumptions\"\>"}], "}"}]}], "]"}], "=", 
-            RowBox[{
-             RowBox[{
-              RowBox[{
-              "#1", "\[LeftDoubleBracket]", "1", "\[RightDoubleBracket]"}], 
-              ">", "0"}], "&"}]}]},
-          {" "},
-          {
-           RowBox[{
-            RowBox[{"xAct`xIdeal`Private`externalExactSolsData", "[", 
-             RowBox[{"\<\"SchwarzschildSolution\"\>", ",", 
-              RowBox[{"{", 
-               
-               RowBox[{"\<\"SchwarzschildCoordinates\"\>", 
-                ",", "\<\"ParameterNames\"\>"}], "}"}]}], "]"}], "=", 
-            RowBox[{"{", "\<\"m\"\>", "}"}]}]}
+     Cell["SaveExactSolution", "ObjectName"],
+     Cell[TextData[{Cell["   ", "ModInfo"], " "}], "Usage"],
+     Cell["The following options can be given: ", "Notes"],
+     Cell[
+      BoxData[
+       GridBox[
+        {
+         {
+          Cell["   ", "ModInfo"],
+          "\"ParameterNames\"",
+          RowBox[{"{", "}"}],
+          Cell["XXXX", "TableText"]
          },
-         BaselinePosition->{Baseline, {1, 1}},
-         GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
-         GridBoxItemSize->{"Columns" -> {{
-              Scaled[0.999]}}, "Rows" -> {{1.}}}]}
-      },
-      BaselinePosition->{Baseline, {1, 1}},
-      GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}}]}
-   },
-   BaselinePosition->{Baseline, {1, 1}},
-   GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}}],
-  FullDefinition[
-  xAct`xIdeal`Private`externalExactSolsData, ExcludedContexts -> Automatic, 
-   IncludedContexts -> All],
-  Editable->False]], "Print",
- CellChangeTimes->{3.908443688917612*^9, 3.9084438338780107`*^9, 
-  3.9084441328481283`*^9, 3.908445573243271*^9, 3.908449171858054*^9, 
-  3.9084494394212303`*^9, 3.90844951364541*^9},
- CellLabel->"During evaluation of In[2]:=",
- CellID->1232181767,ExpressionUUID->"30f44680-cb61-4252-a9fb-1c72120f1919"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"xAct`xIdeal`Private`externalExactSolsData", "[", 
-   RowBox[{"\"\<SchwarzschildSolution\>\"", ",", 
-    RowBox[{"{", 
-     RowBox[{"\"\<SchwarzschildCoordinates\>\"", ",", "\"\<Metric\>\""}], 
-     "}"}]}], "]"}], "[", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"t", ",", "r", ",", "\[Theta]", ",", "\[Phi]"}], "}"}], ",", 
-   RowBox[{"{", "m", "}"}]}], "]"}]], "Input",
- CellChangeTimes->{{3.9084456091819572`*^9, 3.908445634054048*^9}, {
-  3.908445696727828*^9, 3.908445697109706*^9}, {3.9084457486162567`*^9, 
-  3.908445750846211*^9}},
- CellLabel->"In[3]:=",
- CellID->33652,ExpressionUUID->"592a9715-febd-41fb-ae5a-66565e2dcce5"],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{
-      RowBox[{"-", "1"}], "+", 
-      FractionBox[
-       RowBox[{"2", " ", "m"}], "r"]}], ",", "0", ",", "0", ",", "0"}], "}"}],
-    ",", 
-   RowBox[{"{", 
-    RowBox[{"0", ",", 
-     FractionBox["1", 
-      RowBox[{"1", "-", 
-       FractionBox[
-        RowBox[{"2", " ", "m"}], "r"]}]], ",", "0", ",", "0"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"0", ",", "0", ",", 
-     SuperscriptBox["r", "2"], ",", "0"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"0", ",", "0", ",", "0", ",", 
-     RowBox[{
-      SuperscriptBox["r", "2"], " ", 
-      SuperscriptBox[
-       RowBox[{
-        InterpretationBox[
-         StyleBox["Sin",
-          ShowAutoStyles->False,
-          AutoSpacing->False],
-         Sin,
-         Editable->False], "[", "\[Theta]", "]"}], "2"]}]}], "}"}]}], 
-  "}"}]], "Output",
- CellChangeTimes->{3.90844564116252*^9, 3.908445698199959*^9, 
-  3.908445751752891*^9, 3.9084491866868477`*^9, 3.908449445734943*^9, 
-  3.908449517556406*^9},
- CellLabel->"Out[3]=",
- CellID->1943637016,ExpressionUUID->"9bea192e-d99a-44be-b571-3b25418d0d21"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"xAct`xIdeal`Private`externalExactSolsData", "[", 
-   RowBox[{"\"\<SchwarzschildSolution\>\"", ",", 
-    RowBox[{"{", 
-     RowBox[{
-     "\"\<SchwarzschildCoordinates\>\"", ",", 
-      "\"\<CoordinateAssumptions\>\""}], "}"}]}], "]"}], "[", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"t", ",", "r", ",", "\[Theta]", ",", "\[Phi]"}], "}"}], ",", 
-   RowBox[{"{", "m", "}"}]}], "]"}]], "Input",
- CellChangeTimes->{{3.9084458041104937`*^9, 3.9084458124056787`*^9}},
- CellLabel->"In[4]:=",
- CellID->521703100,ExpressionUUID->"84f1abd0-9098-442c-b6aa-4090aa7d9d33"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"r", "\[Element]", 
-   TemplateBox[{},
-    "Reals"]}], "&&", 
-  RowBox[{"m", "\[Element]", 
-   TemplateBox[{},
-    "Reals"]}], "&&", 
-  RowBox[{"\[Theta]", "\[Element]", 
-   TemplateBox[{},
-    "Reals"]}], "&&", 
-  RowBox[{"m", ">", "0"}], "&&", 
-  RowBox[{
-   RowBox[{"1", "-", 
-    FractionBox[
-     RowBox[{"2", " ", "m"}], "r"]}], ">", "0"}], "&&", 
-  RowBox[{"r", ">", "0"}]}]], "Output",
- CellChangeTimes->{3.9084458133635683`*^9, 3.908449219821766*^9, 
-  3.908449446518611*^9, 3.908449518376627*^9},
- CellLabel->"Out[4]=",
- CellID->535430441,ExpressionUUID->"da0ed5e8-c1e2-4cc8-8c91-c316938f56b7"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"xAct`xIdeal`Private`externalExactSolsData", "[", 
-   RowBox[{
-   "\"\<SchwarzschildSolution\>\"", ",", "\"\<ParameterAssumptions\>\""}], 
-   "]"}], "[", 
-  RowBox[{"{", "m", "}"}], "]"}]], "Input",
- CellChangeTimes->{{3.9084458041104937`*^9, 3.9084458124056787`*^9}, {
-  3.908445907943808*^9, 3.908445967246889*^9}},
- CellLabel->"In[5]:=",
- CellID->630819295,ExpressionUUID->"f5e2de7e-89a3-4efa-b198-47d0d2236c7b"],
-
-Cell[BoxData[
- RowBox[{"m", ">", "0"}]], "Output",
- CellChangeTimes->{3.908445934542448*^9, 3.908445968185869*^9, 
-  3.908449222300791*^9, 3.908449447162115*^9, 3.908449519329549*^9},
- CellLabel->"Out[5]=",
- CellID->1408202183,ExpressionUUID->"52be61ce-4bf3-436c-ba4d-fcb1c8fe2140"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"xAct`xIdeal`Private`exactSolsData", "[", 
-   RowBox[{"\"\<GeneralSphericalSymmetry\>\"", ",", 
-    RowBox[{"{", 
-     RowBox[{"\"\<SphericalCoordinates\>\"", ",", "\"\<Metric\>\""}], "}"}]}],
-    "]"}], "[", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"t", ",", "r", ",", "\[Theta]", ",", "\[Phi]"}], "}"}], ",", 
-   RowBox[{"{", "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"\[CapitalMu]", ",", "\[CapitalLambda]", ",", "\[CapitalNu]"}], 
-    "}"}]}], "]"}]], "Input",
- CellChangeTimes->{{3.9084456091819572`*^9, 3.908445634054048*^9}, {
-  3.908445696727828*^9, 3.908445697109706*^9}, {3.9084457486162567`*^9, 
-  3.908445750846211*^9}, {3.9084492419304733`*^9, 3.908449273203521*^9}, {
-  3.9084493193820133`*^9, 3.908449405163726*^9}},
- CellLabel->"In[6]:=",
- CellID->466724076,ExpressionUUID->"cfd94f01-9727-4b32-9784-71c38b81e097"],
-
-Cell[BoxData[
- RowBox[{"{", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{
-     RowBox[{"-", 
-      SuperscriptBox["\[ExponentialE]", 
-       RowBox[{"2", " ", 
-        RowBox[{"\[CapitalNu]", "[", 
-         RowBox[{"t", ",", "r"}], "]"}]}]]}], ",", "0", ",", "0", ",", "0"}], 
-    "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"0", ",", 
-     SuperscriptBox["\[ExponentialE]", 
-      RowBox[{"2", " ", 
-       RowBox[{"\[CapitalMu]", "[", 
-        RowBox[{"t", ",", "r"}], "]"}]}]], ",", "0", ",", "0"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"0", ",", "0", ",", 
-     SuperscriptBox["\[ExponentialE]", 
-      RowBox[{"2", " ", 
-       RowBox[{"\[CapitalLambda]", "[", 
-        RowBox[{"t", ",", "r"}], "]"}]}]], ",", "0"}], "}"}], ",", 
-   RowBox[{"{", 
-    RowBox[{"0", ",", "0", ",", "0", ",", 
-     RowBox[{
-      SuperscriptBox["\[ExponentialE]", 
-       RowBox[{"2", " ", 
-        RowBox[{"\[CapitalLambda]", "[", 
-         RowBox[{"t", ",", "r"}], "]"}]}]], " ", 
-      SuperscriptBox[
-       RowBox[{
-        InterpretationBox[
-         StyleBox["Sin",
-          ShowAutoStyles->False,
-          AutoSpacing->False],
-         Sin,
-         Editable->False], "[", "\[Theta]", "]"}], "2"]}]}], "}"}]}], 
-  "}"}]], "Output",
- CellChangeTimes->{
-  3.90844564116252*^9, 3.908445698199959*^9, 3.908445751752891*^9, 
-   3.9084491866868477`*^9, 3.908449276637167*^9, {3.908449330890737*^9, 
-   3.908449379465611*^9}, 3.908449448039886*^9, 3.908449522012457*^9},
- CellLabel->"Out[6]=",
- CellID->1150403887,ExpressionUUID->"51064be2-02ed-43ca-a6c6-eb1ec8d02be2"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"xAct`xIdeal`Private`exactSolsData", "[", 
-   RowBox[{"\"\<GeneralSphericalSymmetry\>\"", ",", 
-    RowBox[{"{", 
-     RowBox[{
-     "\"\<SphericalCoordinates\>\"", ",", "\"\<CoordinateAssumptions\>\""}], 
-     "}"}]}], "]"}], "[", 
-  RowBox[{
-   RowBox[{"{", 
-    RowBox[{"t", ",", "r", ",", "\[Theta]", ",", "\[Phi]"}], "}"}], ",", 
-   RowBox[{"{", "m", "}"}]}], "]"}]], "Input",
- CellChangeTimes->{{3.9084458041104937`*^9, 3.9084458124056787`*^9}, {
-  3.908449527507971*^9, 3.908449569795802*^9}},
- CellLabel->"In[8]:=",
- CellID->925886600,ExpressionUUID->"92b3a8ce-dc4c-4a6d-b238-1598f04e9baf"],
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"r", ">", "0"}], "&&", 
-  RowBox[{"\[Pi]", ">", "\[Theta]", ">", "0"}]}]], "Output",
- CellChangeTimes->{
-  3.9084458133635683`*^9, 3.908449219821766*^9, {3.908449547669248*^9, 
-   3.9084495707183313`*^9}},
- CellLabel->"Out[8]=",
- CellID->527963035,ExpressionUUID->"24d0f456-6ca5-418e-906c-29a27d100f9c"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- RowBox[{
-  RowBox[{"xAct`xIdeal`Private`exactSolsData", "[", 
-   RowBox[{
-   "\"\<GeneralSphericalSymmetry\>\"", ",", "\"\<ParameterAssumptions\>\""}], 
-   "]"}], "[", 
-  RowBox[{"{", "}"}], "]"}]], "Input",
- CellChangeTimes->{{3.9084458041104937`*^9, 3.9084458124056787`*^9}, {
-  3.908445907943808*^9, 3.908445967246889*^9}, {3.908449575531123*^9, 
-  3.908449596643777*^9}},
- CellLabel->"In[10]:=",
- CellID->550098520,ExpressionUUID->"77c61b0f-4313-4ab5-979a-fa723a386f3e"],
-
-Cell[BoxData[
- RowBox[{"Null", "[", 
-  RowBox[{"{", "}"}], "]"}]], "Output",
- CellChangeTimes->{
-  3.908445934542448*^9, 3.908445968185869*^9, 3.908449222300791*^9, {
-   3.908449594191313*^9, 3.908449597109001*^9}},
- CellLabel->"Out[10]=",
- CellID->803995970,ExpressionUUID->"e8aeb541-18e1-4138-ab5b-1eca6d0fc390"]
-}, Open  ]]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell[TextData[{
- "More Examples",
- Cell[BoxData[
-  TemplateBox[{"MoreExamples", 
-    Cell[
-     BoxData[
-      FrameBox[
-       Cell["Extended examples in standardized sections.", "MoreInfoText"], 
-       BaseStyle -> "IFrameBox"]], "MoreInfoTextOuter"]},
-   "MoreInfoOpenerButtonTemplate"]],ExpressionUUID->
-  "58110d8a-d271-4c30-8996-35cd5e7e8172"]
-}], "ExtendedExamplesSection",
- CellTags->"ExtendedExamples",
- CellID->2022216592,ExpressionUUID->"24be2e7e-5171-42e5-8c12-3b735f965f38"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "Scope", "ExampleSection",ExpressionUUID->
-   "f40c498b-3a71-4ccb-88d4-65ee677a2fee"],
-  $Line = 0; Null]], "ExampleSection",
- CellID->1397687819,ExpressionUUID->"e5298cb7-9781-4c12-826f-da0c32d0e120"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "Generalizations & Extensions", "ExampleSection",ExpressionUUID->
-   "ac28d233-a744-4672-9ee8-ede01c1b5bda"],
-  $Line = 0; Null]], "ExampleSection",
- CellID->411441446,ExpressionUUID->"d223fdec-2861-4185-a18a-d402e8fba301"],
-
-Cell[CellGroupData[{
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "Options", "ExampleSection",ExpressionUUID->
-   "c43f57b4-a7da-4a6b-ba3c-593ce51e16f2"],
-  $Line = 0; Null]], "ExampleSection",
- CellID->1544741985,ExpressionUUID->"c59037c3-1843-430c-abfa-87e66db9fbf6"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "\"ParameterNames\"", "ExampleSubsection",ExpressionUUID->
-   "6f373352-7d17-4c69-90f7-8bb5cc459e84"],
-  $Line = 0; Null]], "ExampleSubsection",
- CellID->933278942,ExpressionUUID->"f4a5de61-0b29-4b46-8bf2-44323f324857"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "\"ParameterAssumptions\"", "ExampleSubsection",ExpressionUUID->
-   "44eebe51-88a8-408f-b4e6-074ce1420905"],
-  $Line = 0; Null]], "ExampleSubsection",
- CellID->26198628,ExpressionUUID->"21c4f75b-6f21-4d9f-81a0-a249e5f2fe2b"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "\"IsIdeal\"", "ExampleSubsection",ExpressionUUID->
-   "e1e8696c-076a-476b-9c8f-c44d69b073dd"],
-  $Line = 0; Null]], "ExampleSubsection",
- CellID->1567217168,ExpressionUUID->"d3e9a5e7-329e-4fd9-88d3-d8531e9f6fe7"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "\"CoordinateSystem\"", "ExampleSubsection",ExpressionUUID->
-   "8eeec076-dbcf-46ba-90ce-d04528fe0f38"],
-  $Line = 0; Null]], "ExampleSubsection",
- CellID->1092071554,ExpressionUUID->"66f3949b-bb57-41b9-b04c-49eaa11b9408"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "\"CoordinateNames\"", "ExampleSubsection",ExpressionUUID->
-   "19a0a709-66a1-4fdd-aebe-a27ab77c6533"],
-  $Line = 0; Null]], "ExampleSubsection",
- CellID->748929746,ExpressionUUID->"204fe7e4-4d98-4867-bfb2-3243cdd480d6"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "\"CoordinateAssumptions\"", "ExampleSubsection",ExpressionUUID->
-   "28ed74d0-bd8b-453f-aa21-833deb2b2f57"],
-  $Line = 0; Null]], "ExampleSubsection",
- CellID->1441950112,ExpressionUUID->"bcb8606b-f909-47dc-b65d-fa734c87e6ea"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "\"ScalarFunctions\"", "ExampleSubsection",ExpressionUUID->
-   "b4fca88a-23a2-4ec5-b2dc-a42c85de2ba0"],
-  $Line = 0; Null]], "ExampleSubsection",
- CellID->342275726,ExpressionUUID->"12792678-c6db-4a4e-8e99-c65c74f3f66a"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "\"Classes\"", "ExampleSubsection",ExpressionUUID->
-   "74488bd1-138f-4bb5-bf48-4c95c0ec1b99"],
-  $Line = 0; Null]], "ExampleSubsection",
- CellID->1160371193,ExpressionUUID->"6046ef5e-ae9f-4d50-98bd-c8e31350021f"]
-}, Open  ]],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "Applications", "ExampleSection",ExpressionUUID->
-   "6ea6e921-67db-4918-8eba-863a0afc5e32"],
-  $Line = 0; Null]], "ExampleSection",
- CellID->1775104354,ExpressionUUID->"de861329-6a58-43b2-b124-e1df30d74c1c"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "Properties & Relations", "ExampleSection",ExpressionUUID->
-   "e10f103c-6d17-4c29-8c06-d6b9d1ca64fd"],
-  $Line = 0; Null]], "ExampleSection",
- CellID->1404164583,ExpressionUUID->"cc9e02f0-a440-44b9-a5a0-c97137425605"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "Possible Issues", "ExampleSection",ExpressionUUID->
-   "222b2874-c179-4ea8-91fa-fdb9cc640a8b"],
-  $Line = 0; Null]], "ExampleSection",
- CellID->153822257,ExpressionUUID->"b418f138-33bb-4703-9f01-778042e8e99a"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "Interactive Examples", "ExampleSection",ExpressionUUID->
-   "eef40cfd-5890-4885-87b3-82794a913093"],
-  $Line = 0; Null]], "ExampleSection",
- CellID->1913386483,ExpressionUUID->"f3e8a782-9c4c-460b-b229-0e2d7ff3a75e"],
-
-Cell[BoxData[
- InterpretationBox[Cell[
-  "Neat Examples", "ExampleSection",ExpressionUUID->
-   "6efebca7-0008-466b-9133-e54193e256f8"],
-  $Line = 0; Null]], "ExampleSection",
- CellID->1058815157,ExpressionUUID->"59bf2295-a801-4543-aa6e-98d8e3c16d12"]
-}, Open  ]],
-
-Cell[CellGroupData[{
-
-Cell["Metadata", "MetadataSection",
- CellID->2124845776,ExpressionUUID->"41db151f-fdb8-438e-9193-eb462b4d211e"],
-
-Cell[TextData[{
- "New in: ",
- Cell["XX", "HistoryData",
-  CellTags->"New",ExpressionUUID->"312c8117-7fd3-4748-af57-95c24a97a7e4"],
- " | Modified in: ",
- Cell[" ", "HistoryData",
-  CellTags->"Modified",ExpressionUUID->"0b8e8dbf-4dc5-4129-b73f-0c59102fbedb"],
- " | Obsolete in: ",
- Cell[" ", "HistoryData",
-  CellTags->"Obsolete",ExpressionUUID->
-  "52f746d1-069c-4292-ba47-2b24fb7805ad"]
-}], "History",
- CellID->1018892605,ExpressionUUID->"50658aa3-690e-47f7-a6c3-cbdf42825519"],
-
-Cell[CellGroupData[{
-
-Cell[TextData[{
- "Categorization",
- Cell[BoxData[
-  TemplateBox[{"Metadata", 
-    Cell[
-     BoxData[
-      FrameBox[
-       Cell[
-       "Metadata such as page URI, context, and type of documentation page.", 
-        "MoreInfoText"], BaseStyle -> "IFrameBox"]], "MoreInfoTextOuter"]},
-   "MoreInfoOpenerButtonTemplate"]],ExpressionUUID->
-  "ac2bdbb9-71d6-4644-8e78-63c63c09be57"]
-}], "CategorizationSection",
- CellID->1480081238,ExpressionUUID->"0accdc6e-460d-4d75-822b-b06aa7b26b5a"],
-
-Cell["Symbol", "Categorization",
- CellLabel->"Entity Type",
- CellID->784069550,ExpressionUUID->"d65ea846-4ff0-430c-8e19-114c0e1873cc"],
-
-Cell["xIdeal", "Categorization",
- CellLabel->"Paclet Name",
- CellID->1848086194,ExpressionUUID->"5b5b38af-04b4-4edf-af9b-584b406eaede"],
-
-Cell["xAct`xIdeal`", "Categorization",
- CellLabel->"Context",
- CellID->2039500772,ExpressionUUID->"9baa5123-2d40-4878-87a1-8104f28f3e95"],
-
-Cell["xIdeal/ref/SaveExactSolution", "Categorization",
- CellLabel->"URI",
- CellID->2105963279,ExpressionUUID->"4b47edb5-bbc9-4ae2-bac5-bc1787ef9aff"]
-}, Closed]],
-
-Cell[CellGroupData[{
-
-Cell["Keywords", "KeywordsSection",
- CellID->1107359689,ExpressionUUID->"80748c86-7f34-49e7-9b25-ace80f7ced7e"],
-
-Cell["XXXX", "Keywords",
- CellID->1270267791,ExpressionUUID->"1c819bb7-05a4-4315-b6e4-3722196cc397"]
-}, Closed]],
-
-Cell[CellGroupData[{
-
-Cell["Syntax Templates", "TemplatesSection",
- CellID->1634836583,ExpressionUUID->"cde7536f-4f6b-4512-b21d-355e25a764e7"],
-
-Cell[BoxData[""], "Template",
- CellLabel->"Additional Function Template",
- CellID->377898676,ExpressionUUID->"82016a83-5545-40d4-abb7-713c906ee509"],
-
-Cell[BoxData[""], "Template",
- CellLabel->"Arguments Pattern",
- CellID->276044037,ExpressionUUID->"c24868c0-3cc2-4be3-8f01-45c27c5765c2"],
-
-Cell[BoxData[""], "Template",
- CellLabel->"Local Variables",
- CellID->920833493,ExpressionUUID->"2781772f-b441-418f-aff2-12e11831a780"],
-
-Cell[BoxData[""], "Template",
- CellLabel->"Color Equal Signs",
- CellID->2007334274,ExpressionUUID->"718abc12-3006-4c00-96d4-8685c9320be9"]
-}, Closed]]
-}, Open  ]]
-},
-WindowSize->{1057.5, 770.25},
-WindowMargins->{{690.75, Automatic}, {Automatic, 89.25}},
-TaggingRules-><|"Paclet" -> "xIdeal"|>,
-CellContext->"Global`",
-FrontEndVersion->"13.3 for Linux x86 (64-bit) (July 24, 2023)",
-StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "FunctionPageStylesExt.nb", 
-  CharacterEncoding -> "UTF-8"],
-ExpressionUUID->"396d7ba7-e62f-4f66-8e75-d1637f87bc52"
+         {
+          Cell["   ", "ModInfo"],
+          "\"ParameterAssumptions\"",
+          ButtonBox["Null", BaseStyle -> "Link"],
+          Cell["XXXX", "TableText"]
+         },
+         {
+          Cell["   ", "ModInfo"],
+          "\"IsIdeal\"",
+          ButtonBox["True", BaseStyle -> "Link"],
+          Cell["XXXX", "TableText"]
+         },
+         {
+          Cell["   ", "ModInfo"],
+          "\"CoordinateSystem\"",
+          "\"MinkowskiCoordinates\"",
+          Cell["XXXX", "TableText"]
+         },
+         {
+          Cell["   ", "ModInfo"],
+          "\"CoordinateNames\"",
+          RowBox[{"{", "}"}],
+          Cell["XXXX", "TableText"]
+         },
+         {
+          Cell["   ", "ModInfo"],
+          "\"CoordinateAssumptions\"",
+          ButtonBox["Null", BaseStyle -> "Link"],
+          Cell["XXXX", "TableText"]
+         },
+         {
+          Cell["   ", "ModInfo"],
+          "\"ScalarFunctions\"",
+          RowBox[{"{", "}"}],
+          Cell["XXXX", "TableText"]
+         },
+         {
+          Cell["   ", "ModInfo"],
+          "\"Classes\"",
+          RowBox[{"{", "}"}],
+          Cell["XXXX", "TableText"]
+         }
+        }
+       ]
+      ],
+      "3ColumnTableMod"
+     ]
+    },
+    Open
+   ]
+  ],
+  Cell[
+   CellGroupData[
+    {
+     Cell[
+      TextData[
+       {
+        "See Also",
+        Cell[
+         BoxData[
+          TemplateBox[
+           {
+            "SeeAlso",
+            Cell[
+             BoxData[
+              FrameBox[
+               Cell[
+                "Insert links to any related reference (function) pages.",
+                "MoreInfoText"
+               ],
+               BaseStyle -> "IFrameBox"
+              ]
+             ],
+             "MoreInfoTextOuter"
+            ]
+           },
+           "MoreInfoOpenerButtonTemplate"
+          ]
+         ]
+        ]
+       }
+      ],
+      "SeeAlsoSection"
+     ],
+     Cell[
+      TextData[
+       {
+        Cell[
+         BoxData[
+          TagBox[FrameBox["\"XXXX\""], "FunctionPlaceholder"]
+         ],
+         "InlineSeeAlsoFunction",
+         TaggingRules -> {"PageType" -> "Function"}
+        ],
+        Cell[
+         BoxData[
+          RowBox[
+           {
+            Cell[
+             TextData[
+              StyleBox[" \[FilledVerySmallSquare] ", "InlineSeparator"]
+             ]
+            ],
+            DynamicModuleBox[
+             {
+              nbobj$$ = 
+               NotebookObject[
+                "396d7ba7-e62f-4f66-8e75-d1637f87bc52",
+                "a9833a11-0cad-4d75-ac29-e52ce413d0df"
+               ],
+              cellobj$$ = 
+               CellObject[
+                "d74f7fd5-0a33-4f8e-890f-a45643222570",
+                "9a0cea6b-ab58-4ad8-9c50-27afee6da062"
+               ]
+             },
+             TemplateBox[
+              {
+               GraphicsBox[
+                {
+                 {
+                  Thickness[0.06],
+                  StrokeForm[Hue[0.4167, 0.406, 0.502]],
+                  CircleBox[{0, 0}]
+                 },
+                 {
+                  Thickness[0.06],
+                  StrokeForm[Hue[0.4167, 0.406, 0.502]],
+                  LineBox[{{0, 0.62}, {0, -0.62}}]
+                 },
+                 {
+                  Thickness[0.06],
+                  StrokeForm[Hue[0.4167, 0.406, 0.502]],
+                  LineBox[{{-0.62, 0}, {0.62, 0}}]
+                 }
+                },
+                ImagePadding -> {{1.0, 1.0}, {2.4, 1.0}},
+                ImageSize -> 16,
+                PlotRange -> {{-1.06, 1.06}, {-1.06, 1.06}},
+                BaselinePosition -> Center -> Center
+               ],
+               nbobj$$,
+               cellobj$$
+              },
+              "InlineListingAddButton"
+             ],
+             Initialization :>
+              (nbobj$$ = EvaluationNotebook[];
+              cellobj$$ = EvaluationCell[])
+            ]
+           }
+          ]
+         ],
+         "InlineListingAddButton"
+        ]
+       }
+      ],
+      "SeeAlso"
+     ]
+    },
+    Open
+   ]
+  ],
+  Cell[
+   CellGroupData[
+    {
+     Cell[
+      TextData[
+       {
+        "Tech Notes",
+        Cell[
+         BoxData[
+          TemplateBox[
+           {
+            "TechNotes",
+            Cell[
+             BoxData[
+              FrameBox[
+               Cell["Insert links to related tech notes.", "MoreInfoText"],
+               BaseStyle -> "IFrameBox"
+              ]
+             ],
+             "MoreInfoTextOuter"
+            ]
+           },
+           "MoreInfoOpenerButtonTemplate"
+          ]
+         ]
+        ]
+       }
+      ],
+      "TechNotesSection"
+     ],
+     Cell["XXXX", "Tutorials"]
+    },
+    Open
+   ]
+  ],
+  Cell[
+   CellGroupData[
+    {
+     Cell["Related Guides", "MoreAboutSection"],
+     Cell["XXXX", "MoreAbout"]
+    },
+    Open
+   ]
+  ],
+  Cell[
+   CellGroupData[
+    {
+     Cell[
+      TextData[
+       {
+        "Related Links",
+        Cell[
+         BoxData[
+          TemplateBox[
+           {
+            "RelatedLinks",
+            Cell[
+             BoxData[
+              FrameBox[
+               Cell[
+                "Insert links to any related page, including web pages.",
+                "MoreInfoText"
+               ],
+               BaseStyle -> "IFrameBox"
+              ]
+             ],
+             "MoreInfoTextOuter"
+            ]
+           },
+           "MoreInfoOpenerButtonTemplate"
+          ]
+         ]
+        ]
+       }
+      ],
+      "RelatedLinksSection"
+     ],
+     Cell["XXXX", "RelatedLinks"]
+    },
+    Open
+   ]
+  ],
+  Cell[
+   CellGroupData[
+    {
+     Cell[
+      TextData[
+       {
+        "Examples Initialization",
+        Cell[
+         BoxData[
+          TemplateBox[
+           {
+            "ExamplesInitialization",
+            Cell[
+             BoxData[
+              FrameBox[
+               Cell[
+                "Input that is to be evaluated before any examples are run, e.g. Needs[\[Ellipsis]].",
+                "MoreInfoText"
+               ],
+               BaseStyle -> "IFrameBox"
+              ]
+             ],
+             "MoreInfoTextOuter"
+            ]
+           },
+           "MoreInfoOpenerButtonTemplate"
+          ]
+         ]
+        ]
+       }
+      ],
+      "ExamplesInitializationSection"
+     ],
+     Cell[
+      BoxData[RowBox[{"Needs", "[", "\"xAct`xIdeal`\"", "]"}]],
+      "ExampleInitialization"
+     ]
+    },
+    Open
+   ]
+  ],
+  Cell[
+   CellGroupData[
+    {
+     Cell[
+      BoxData[
+       InterpretationBox[
+        GridBox[
+         {
+          {
+           StyleBox[
+            RowBox[{"Basic", " ", "Examples"}],
+            "PrimaryExamplesSection"
+           ],
+           ButtonBox[
+            RowBox[
+             {
+              RowBox[{"More", " ", "Examples"}],
+              " ",
+              "\[RightTriangle]"
+             }
+            ],
+            BaseStyle -> "ExtendedExamplesLink",
+            ButtonData :> "ExtendedExamples"
+           ]
+          }
+         }
+        ],
+        $Line = 0;
+       ]
+      ],
+      "PrimaryExamplesSection"
+     ],
+     Cell[
+      BoxData[RowBox[{RowBox[{"$DefInfoQ", "=", "False"}], ";"}]],
+      "Input"
+     ],
+     Cell[
+      BoxData[
+       RowBox[
+        {
+         RowBox[
+          {
+           "parameterAssumptions",
+           " ",
+           "=",
+           " ",
+           RowBox[
+            {
+             "Function",
+             "[",
+             RowBox[
+              {
+               RowBox[
+                {
+                 "{",
+                 RowBox[{"coords", ",", "params", ",", "scfuncs"}],
+                 "}"
+                }
+               ],
+               ",",
+               "\[IndentingNewLine]",
+               RowBox[
+                {
+                 "With",
+                 "[",
+                 RowBox[
+                  {
+                   RowBox[
+                    {
+                     "{",
+                     RowBox[
+                      {
+                       "m",
+                       "=",
+                       RowBox[{"params", "[", RowBox[{"[", "1", "]"}], "]"}]
+                      }
+                     ],
+                     "}"
+                    }
+                   ],
+                   ",",
+                   "\[IndentingNewLine]",
+                   RowBox[{"m", ">", "0"}]
+                  }
+                 ],
+                 "\[IndentingNewLine]",
+                 "]"
+                }
+               ]
+              }
+             ],
+             "\[IndentingNewLine]",
+             "]"
+            }
+           ]
+          }
+         ],
+         ";"
+        }
+       ]
+      ],
+      "Input"
+     ],
+     Cell[
+      CellGroupData[
+       {
+        Cell[
+         BoxData[
+          RowBox[
+           {
+            "parameterAssumptions",
+            "[",
+            RowBox[
+             {
+              RowBox[{"{", "}"}],
+              ",",
+              RowBox[{"{", "mM", "}"}],
+              ",",
+              RowBox[{"{", "}"}]
+             }
+            ],
+            "]"
+           }
+          ]
+         ],
+         "Input"
+        ],
+        Cell[BoxData[RowBox[{"mM", ">", "0"}]], "Output"]
+       },
+       Open
+      ]
+     ],
+     Cell[
+      BoxData[
+       RowBox[
+        {
+         RowBox[
+          {
+           "coordinateAssumptions",
+           "=",
+           "\[IndentingNewLine]",
+           RowBox[
+            {
+             "Function",
+             "[",
+             RowBox[
+              {
+               RowBox[
+                {
+                 "{",
+                 RowBox[{"coords", ",", "params", ",", "scfuncs"}],
+                 "}"
+                }
+               ],
+               ",",
+               "\[IndentingNewLine]",
+               RowBox[
+                {
+                 "With",
+                 "[",
+                 "\[IndentingNewLine]",
+                 RowBox[
+                  {
+                   RowBox[
+                    {
+                     "{",
+                     RowBox[
+                      {
+                       RowBox[
+                        {
+                         "t",
+                         "=",
+                         RowBox[{"coords", "[", RowBox[{"[", "1", "]"}], "]"}]
+                        }
+                       ],
+                       ",",
+                       RowBox[
+                        {
+                         "x",
+                         "=",
+                         RowBox[{"coords", "[", RowBox[{"[", "2", "]"}], "]"}]
+                        }
+                       ],
+                       ",",
+                       RowBox[
+                        {
+                         "y",
+                         "=",
+                         RowBox[{"coords", "[", RowBox[{"[", "3", "]"}], "]"}]
+                        }
+                       ],
+                       ",",
+                       RowBox[
+                        {
+                         "z",
+                         "=",
+                         RowBox[{"coords", "[", RowBox[{"[", "4", "]"}], "]"}]
+                        }
+                       ],
+                       ",",
+                       RowBox[
+                        {
+                         "m",
+                         "=",
+                         RowBox[{"params", "[", RowBox[{"[", "1", "]"}], "]"}]
+                        }
+                       ],
+                       ",",
+                       " ",
+                       RowBox[
+                        {
+                         "R",
+                         " ",
+                         "=",
+                         RowBox[{"scfuncs", "[", RowBox[{"[", "1", "]"}], "]"}]
+                        }
+                       ]
+                      }
+                     ],
+                     "}"
+                    }
+                   ],
+                   ",",
+                   "\[IndentingNewLine]",
+                   RowBox[
+                    {
+                     RowBox[
+                      {
+                       "R",
+                       "=",
+                       RowBox[
+                        {
+                         "Function",
+                         "[",
+                         RowBox[
+                          {
+                           RowBox[{"{", RowBox[{"x", ",", "y", ",", "z"}], "}"}],
+                           ",",
+                           RowBox[
+                            {
+                             "Sqrt",
+                             "[",
+                             RowBox[
+                              {
+                               RowBox[{"x", "^", "2"}],
+                               "+",
+                               RowBox[{"y", "^", "2"}],
+                               "+",
+                               RowBox[{"z", "^", "2"}]
+                              }
+                             ],
+                             "]"
+                            }
+                           ]
+                          }
+                         ],
+                         "]"
+                        }
+                       ]
+                      }
+                     ],
+                     ";",
+                     "\[IndentingNewLine]",
+                     RowBox[
+                      {
+                       RowBox[{"m", ">=", "0"}],
+                       "&&",
+                       RowBox[
+                        {
+                         RowBox[{"R", "[", RowBox[{"x", ",", "y", ",", "z"}], "]"}],
+                         ">",
+                         RowBox[{"2", "m"}]
+                        }
+                       ]
+                      }
+                     ]
+                    }
+                   ]
+                  }
+                 ],
+                 "\[IndentingNewLine]",
+                 "]"
+                }
+               ]
+              }
+             ],
+             "\[IndentingNewLine]",
+             "]"
+            }
+           ]
+          }
+         ],
+         ";"
+        }
+       ]
+      ],
+      "Input"
+     ],
+     Cell[
+      CellGroupData[
+       {
+        Cell[
+         BoxData[
+          RowBox[
+           {
+            "coordinateAssumptions",
+            "[",
+            RowBox[
+             {
+              RowBox[
+               {"{", RowBox[{"t", ",", "x", ",", "y", ",", "z"}], "}"}
+              ],
+              ",",
+              RowBox[{"{", "Mass", "}"}],
+              ",",
+              RowBox[{"{", "F", "}"}]
+             }
+            ],
+            "]"
+           }
+          ]
+         ],
+         "Input"
+        ],
+        Cell[
+         BoxData[
+          RowBox[
+           {
+            RowBox[{"Mass", "\[GreaterEqual]", "0"}],
+            "&&",
+            RowBox[
+             {
+              SqrtBox[
+               RowBox[
+                {
+                 SuperscriptBox["x", "2"],
+                 "+",
+                 SuperscriptBox["y", "2"],
+                 "+",
+                 SuperscriptBox["z", "2"]
+                }
+               ]
+              ],
+              ">",
+              RowBox[{"2", " ", "Mass"}]
+             }
+            ]
+           }
+          ]
+         ],
+         "Output"
+        ]
+       },
+       Open
+      ]
+     ],
+     Cell[
+      BoxData[
+       RowBox[
+        {
+         RowBox[
+          {
+           "metricTensor",
+           "=",
+           RowBox[
+            {
+             "Function",
+             "[",
+             RowBox[
+              {
+               RowBox[
+                {
+                 "{",
+                 RowBox[{"coords", ",", "params", ",", "scfuncs"}],
+                 "}"
+                }
+               ],
+               ",",
+               "\[IndentingNewLine]",
+               RowBox[
+                {
+                 "With",
+                 "[",
+                 "\[IndentingNewLine]",
+                 RowBox[
+                  {
+                   RowBox[
+                    {
+                     "{",
+                     RowBox[
+                      {
+                       RowBox[
+                        {
+                         "t",
+                         "=",
+                         RowBox[{"coords", "[", RowBox[{"[", "1", "]"}], "]"}]
+                        }
+                       ],
+                       ",",
+                       RowBox[
+                        {
+                         "x",
+                         "=",
+                         RowBox[{"coords", "[", RowBox[{"[", "2", "]"}], "]"}]
+                        }
+                       ],
+                       ",",
+                       RowBox[
+                        {
+                         "y",
+                         "=",
+                         RowBox[{"coords", "[", RowBox[{"[", "3", "]"}], "]"}]
+                        }
+                       ],
+                       ",",
+                       RowBox[
+                        {
+                         "z",
+                         "=",
+                         RowBox[{"coords", "[", RowBox[{"[", "4", "]"}], "]"}]
+                        }
+                       ],
+                       ",",
+                       RowBox[
+                        {
+                         "m",
+                         "=",
+                         RowBox[{"params", "[", RowBox[{"[", "1", "]"}], "]"}]
+                        }
+                       ],
+                       ",",
+                       " ",
+                       RowBox[
+                        {
+                         "R",
+                         " ",
+                         "=",
+                         RowBox[{"scfuncs", "[", RowBox[{"[", "1", "]"}], "]"}]
+                        }
+                       ]
+                      }
+                     ],
+                     "}"
+                    }
+                   ],
+                   ",",
+                   "\[IndentingNewLine]",
+                   RowBox[
+                    {
+                     RowBox[
+                      {
+                       "R",
+                       "=",
+                       RowBox[
+                        {
+                         "Function",
+                         "[",
+                         RowBox[
+                          {
+                           RowBox[{"{", RowBox[{"x", ",", "y", ",", "z"}], "}"}],
+                           ",",
+                           RowBox[
+                            {
+                             "Sqrt",
+                             "[",
+                             RowBox[
+                              {
+                               RowBox[{"x", "^", "2"}],
+                               "+",
+                               RowBox[{"y", "^", "2"}],
+                               "+",
+                               RowBox[{"z", "^", "2"}]
+                              }
+                             ],
+                             "]"
+                            }
+                           ]
+                          }
+                         ],
+                         "]"
+                        }
+                       ]
+                      }
+                     ],
+                     ";",
+                     "\[IndentingNewLine]",
+                     RowBox[
+                      {
+                       "DiagonalMatrix",
+                       "[",
+                       "\[IndentingNewLine]",
+                       RowBox[
+                        {
+                         "{",
+                         RowBox[
+                          {
+                           FractionBox[
+                            RowBox[
+                             {
+                              "-",
+                              SuperscriptBox[
+                               RowBox[
+                                {
+                                 "(",
+                                 RowBox[
+                                  {
+                                   "1",
+                                   "-",
+                                   FractionBox[
+                                    "m",
+                                    RowBox[
+                                     {
+                                      "2",
+                                      RowBox[{"R", "[", RowBox[{"x", ",", "y", ",", "z"}], "]"}]
+                                     }
+                                    ]
+                                   ]
+                                  }
+                                 ],
+                                 ")"
+                                }
+                               ],
+                               "2"
+                              ]
+                             }
+                            ],
+                            SuperscriptBox[
+                             RowBox[
+                              {
+                               "(",
+                               RowBox[
+                                {
+                                 "1",
+                                 "+",
+                                 FractionBox[
+                                  "m",
+                                  RowBox[
+                                   {
+                                    "2",
+                                    RowBox[{"R", "[", RowBox[{"x", ",", "y", ",", "z"}], "]"}]
+                                   }
+                                  ]
+                                 ]
+                                }
+                               ],
+                               ")"
+                              }
+                             ],
+                             "2"
+                            ]
+                           ],
+                           ",",
+                           SuperscriptBox[
+                            RowBox[
+                             {
+                              "(",
+                              RowBox[
+                               {
+                                "1",
+                                "+",
+                                FractionBox[
+                                 "m",
+                                 RowBox[
+                                  {
+                                   "2",
+                                   RowBox[{"R", "[", RowBox[{"x", ",", "y", ",", "z"}], "]"}]
+                                  }
+                                 ]
+                                ]
+                               }
+                              ],
+                              ")"
+                             }
+                            ],
+                            "4"
+                           ],
+                           ",",
+                           SuperscriptBox[
+                            RowBox[
+                             {
+                              "(",
+                              RowBox[
+                               {
+                                "1",
+                                "+",
+                                FractionBox[
+                                 "m",
+                                 RowBox[
+                                  {
+                                   "2",
+                                   RowBox[{"R", "[", RowBox[{"x", ",", "y", ",", "z"}], "]"}]
+                                  }
+                                 ]
+                                ]
+                               }
+                              ],
+                              ")"
+                             }
+                            ],
+                            "4"
+                           ],
+                           ",",
+                           SuperscriptBox[
+                            RowBox[
+                             {
+                              "(",
+                              RowBox[
+                               {
+                                "1",
+                                "+",
+                                FractionBox[
+                                 "m",
+                                 RowBox[
+                                  {
+                                   "2",
+                                   RowBox[{"R", "[", RowBox[{"x", ",", "y", ",", "z"}], "]"}]
+                                  }
+                                 ]
+                                ]
+                               }
+                              ],
+                              ")"
+                             }
+                            ],
+                            "4"
+                           ]
+                          }
+                         ],
+                         "}"
+                        }
+                       ],
+                       "\[IndentingNewLine]",
+                       "]"
+                      }
+                     ]
+                    }
+                   ]
+                  }
+                 ],
+                 "\[IndentingNewLine]",
+                 "]"
+                }
+               ]
+              }
+             ],
+             "\[IndentingNewLine]",
+             "]"
+            }
+           ]
+          }
+         ],
+         ";"
+        }
+       ]
+      ],
+      "Input"
+     ],
+     Cell[BoxData[RowBox[{"F", "=."}]], "Input"],
+     Cell[
+      CellGroupData[
+       {
+        Cell[
+         BoxData[
+          RowBox[
+           {
+            "metricTensor",
+            "[",
+            RowBox[
+             {
+              RowBox[
+               {"{", RowBox[{"t", ",", "x", ",", "y", ",", "z"}], "}"}
+              ],
+              ",",
+              RowBox[{"{", "Mass", "}"}],
+              ",",
+              RowBox[{"{", "F", "}"}]
+             }
+            ],
+            "]"
+           }
+          ]
+         ],
+         "Input"
+        ],
+        Cell[
+         BoxData[
+          RowBox[
+           {
+            "{",
+            RowBox[
+             {
+              RowBox[
+               {
+                "{",
+                RowBox[
+                 {
+                  RowBox[
+                   {
+                    "-",
+                    FractionBox[
+                     SuperscriptBox[
+                      RowBox[
+                       {
+                        "(",
+                        RowBox[
+                         {
+                          "1",
+                          "-",
+                          FractionBox[
+                           "Mass",
+                           RowBox[
+                            {
+                             "2",
+                             " ",
+                             SqrtBox[
+                              RowBox[
+                               {
+                                SuperscriptBox["x", "2"],
+                                "+",
+                                SuperscriptBox["y", "2"],
+                                "+",
+                                SuperscriptBox["z", "2"]
+                               }
+                              ]
+                             ]
+                            }
+                           ]
+                          ]
+                         }
+                        ],
+                        ")"
+                       }
+                      ],
+                      "2"
+                     ],
+                     SuperscriptBox[
+                      RowBox[
+                       {
+                        "(",
+                        RowBox[
+                         {
+                          "1",
+                          "+",
+                          FractionBox[
+                           "Mass",
+                           RowBox[
+                            {
+                             "2",
+                             " ",
+                             SqrtBox[
+                              RowBox[
+                               {
+                                SuperscriptBox["x", "2"],
+                                "+",
+                                SuperscriptBox["y", "2"],
+                                "+",
+                                SuperscriptBox["z", "2"]
+                               }
+                              ]
+                             ]
+                            }
+                           ]
+                          ]
+                         }
+                        ],
+                        ")"
+                       }
+                      ],
+                      "2"
+                     ]
+                    ]
+                   }
+                  ],
+                  ",",
+                  "0",
+                  ",",
+                  "0",
+                  ",",
+                  "0"
+                 }
+                ],
+                "}"
+               }
+              ],
+              ",",
+              RowBox[
+               {
+                "{",
+                RowBox[
+                 {
+                  "0",
+                  ",",
+                  SuperscriptBox[
+                   RowBox[
+                    {
+                     "(",
+                     RowBox[
+                      {
+                       "1",
+                       "+",
+                       FractionBox[
+                        "Mass",
+                        RowBox[
+                         {
+                          "2",
+                          " ",
+                          SqrtBox[
+                           RowBox[
+                            {
+                             SuperscriptBox["x", "2"],
+                             "+",
+                             SuperscriptBox["y", "2"],
+                             "+",
+                             SuperscriptBox["z", "2"]
+                            }
+                           ]
+                          ]
+                         }
+                        ]
+                       ]
+                      }
+                     ],
+                     ")"
+                    }
+                   ],
+                   "4"
+                  ],
+                  ",",
+                  "0",
+                  ",",
+                  "0"
+                 }
+                ],
+                "}"
+               }
+              ],
+              ",",
+              RowBox[
+               {
+                "{",
+                RowBox[
+                 {
+                  "0",
+                  ",",
+                  "0",
+                  ",",
+                  SuperscriptBox[
+                   RowBox[
+                    {
+                     "(",
+                     RowBox[
+                      {
+                       "1",
+                       "+",
+                       FractionBox[
+                        "Mass",
+                        RowBox[
+                         {
+                          "2",
+                          " ",
+                          SqrtBox[
+                           RowBox[
+                            {
+                             SuperscriptBox["x", "2"],
+                             "+",
+                             SuperscriptBox["y", "2"],
+                             "+",
+                             SuperscriptBox["z", "2"]
+                            }
+                           ]
+                          ]
+                         }
+                        ]
+                       ]
+                      }
+                     ],
+                     ")"
+                    }
+                   ],
+                   "4"
+                  ],
+                  ",",
+                  "0"
+                 }
+                ],
+                "}"
+               }
+              ],
+              ",",
+              RowBox[
+               {
+                "{",
+                RowBox[
+                 {
+                  "0",
+                  ",",
+                  "0",
+                  ",",
+                  "0",
+                  ",",
+                  SuperscriptBox[
+                   RowBox[
+                    {
+                     "(",
+                     RowBox[
+                      {
+                       "1",
+                       "+",
+                       FractionBox[
+                        "Mass",
+                        RowBox[
+                         {
+                          "2",
+                          " ",
+                          SqrtBox[
+                           RowBox[
+                            {
+                             SuperscriptBox["x", "2"],
+                             "+",
+                             SuperscriptBox["y", "2"],
+                             "+",
+                             SuperscriptBox["z", "2"]
+                            }
+                           ]
+                          ]
+                         }
+                        ]
+                       ]
+                      }
+                     ],
+                     ")"
+                    }
+                   ],
+                   "4"
+                  ]
+                 }
+                ],
+                "}"
+               }
+              ]
+             }
+            ],
+            "}"
+           }
+          ]
+         ],
+         "Output"
+        ]
+       },
+       Open
+      ]
+     ],
+     Cell[
+      BoxData[
+       RowBox[
+        {
+         RowBox[
+          {
+           "SaveExactSolution",
+           "[",
+           RowBox[
+            {
+             "metricTensor",
+             ",",
+             "\[IndentingNewLine]",
+             "\"Schwarzschild\"",
+             ",",
+             "\[IndentingNewLine]",
+             RowBox[
+              {"\"ParameterNames\"", "->", RowBox[{"{", "\"m\"", "}"}]}
+             ],
+             ",",
+             "\[IndentingNewLine]",
+             RowBox[
+              {
+               "\"ParameterAssumptions\"",
+               " ",
+               "->",
+               " ",
+               "parameterAssumptions"
+              }
+             ],
+             ",",
+             "\[IndentingNewLine]",
+             RowBox[{"\"IsIdeal\"", " ", "->", "True"}],
+             ",",
+             "\[IndentingNewLine]",
+             RowBox[
+              {
+               "\"CoordinateSystemName\"",
+               " ",
+               "->",
+               " ",
+               "\"IsotropicCoordinates\""
+              }
+             ],
+             ",",
+             "\[IndentingNewLine]",
+             RowBox[
+              {
+               "\"CoordinateNames\"",
+               "->",
+               RowBox[
+                {
+                 "{",
+                 RowBox[{"\"t\"", ",", "\"x\"", ",", "\"y\"", ",", "\"z\""}],
+                 "}"
+                }
+               ]
+              }
+             ],
+             ",",
+             "\[IndentingNewLine]",
+             RowBox[
+              {
+               "\"CoordinateAssumptions\"",
+               " ",
+               "->",
+               "coordinateAssumptions"
+              }
+             ],
+             ",",
+             "\[IndentingNewLine]",
+             RowBox[
+              {
+               "\"Classes\"",
+               "->",
+               RowBox[
+                {
+                 "{",
+                 RowBox[{"\"PetrovTypeD\"", ",", "\"SphericalSymmetry\""}],
+                 "}"
+                }
+               ]
+              }
+             ]
+            }
+           ],
+           "\[IndentingNewLine]",
+           "]"
+          }
+         ],
+         "\[IndentingNewLine]"
+        }
+       ]
+      ],
+      "Input"
+     ],
+     Cell[
+      BoxData[
+       RowBox[
+        {
+         RowBox[{"Begin", "[", "\"xAct`xIdeal`Private`\"", "]"}],
+         ";"
+        }
+       ]
+      ],
+      "Input"
+     ],
+     Cell[
+      CellGroupData[
+       {
+        Cell[
+         BoxData[
+          RowBox[
+           {
+            RowBox[
+             {
+              "exactSolsData",
+              "[",
+              RowBox[
+               {
+                "\"Schwarzschild\"",
+                ",",
+                RowBox[
+                 {
+                  "{",
+                  RowBox[{"\"SchwarzschildCoordinates\"", ",", "\"Metric\""}],
+                  "}"
+                 }
+                ]
+               }
+              ],
+              "]"
+             }
+            ],
+            "[",
+            RowBox[
+             {
+              RowBox[
+               {
+                "{",
+                RowBox[{"t", ",", "r", ",", "\[Theta]", ",", "\[Phi]"}],
+                "}"
+               }
+              ],
+              ",",
+              RowBox[{"{", "m", "}"}],
+              ",",
+              RowBox[{"{", "}"}]
+             }
+            ],
+            "]"
+           }
+          ]
+         ],
+         "Input"
+        ],
+        Cell[
+         BoxData[
+          RowBox[
+           {
+            "{",
+            RowBox[
+             {
+              RowBox[
+               {
+                "{",
+                RowBox[
+                 {
+                  RowBox[
+                   {
+                    RowBox[{"-", "1"}],
+                    "+",
+                    FractionBox[RowBox[{"2", " ", "m"}], "r"]
+                   }
+                  ],
+                  ",",
+                  "0",
+                  ",",
+                  "0",
+                  ",",
+                  "0"
+                 }
+                ],
+                "}"
+               }
+              ],
+              ",",
+              RowBox[
+               {
+                "{",
+                RowBox[
+                 {
+                  "0",
+                  ",",
+                  FractionBox[
+                   "1",
+                   RowBox[
+                    {"1", "-", FractionBox[RowBox[{"2", " ", "m"}], "r"]}
+                   ]
+                  ],
+                  ",",
+                  "0",
+                  ",",
+                  "0"
+                 }
+                ],
+                "}"
+               }
+              ],
+              ",",
+              RowBox[
+               {
+                "{",
+                RowBox[
+                 {"0", ",", "0", ",", SuperscriptBox["r", "2"], ",", "0"}
+                ],
+                "}"
+               }
+              ],
+              ",",
+              RowBox[
+               {
+                "{",
+                RowBox[
+                 {
+                  "0",
+                  ",",
+                  "0",
+                  ",",
+                  "0",
+                  ",",
+                  RowBox[
+                   {
+                    SuperscriptBox["r", "2"],
+                    " ",
+                    SuperscriptBox[
+                     RowBox[
+                      {
+                       InterpretationBox[
+                        StyleBox[
+                         "Sin",
+                         ShowAutoStyles -> False,
+                         AutoSpacing -> False
+                        ],
+                        Sin,
+                        Editable -> False
+                       ],
+                       "[",
+                       "\[Theta]",
+                       "]"
+                      }
+                     ],
+                     "2"
+                    ]
+                   }
+                  ]
+                 }
+                ],
+                "}"
+               }
+              ]
+             }
+            ],
+            "}"
+           }
+          ]
+         ],
+         "Output"
+        ]
+       },
+       Open
+      ]
+     ],
+     Cell[
+      CellGroupData[
+       {
+        Cell[
+         BoxData[
+          RowBox[
+           {
+            RowBox[
+             {
+              "exactSolsData",
+              "[",
+              RowBox[
+               {
+                "\"Schwarzschild\"",
+                ",",
+                RowBox[
+                 {
+                  "{",
+                  RowBox[{"\"IsotropicCoordinates\"", ",", "\"Metric\""}],
+                  "}"
+                 }
+                ]
+               }
+              ],
+              "]"
+             }
+            ],
+            "[",
+            RowBox[
+             {
+              RowBox[
+               {"{", RowBox[{"t", ",", "x", ",", "y", ",", "z"}], "}"}
+              ],
+              ",",
+              RowBox[{"{", "M", "}"}],
+              ",",
+              RowBox[{"{", "R", "}"}]
+             }
+            ],
+            "]"
+           }
+          ]
+         ],
+         "Input"
+        ],
+        Cell[
+         BoxData[
+          RowBox[
+           {
+            "{",
+            RowBox[
+             {
+              RowBox[
+               {
+                "{",
+                RowBox[
+                 {
+                  RowBox[
+                   {
+                    "-",
+                    FractionBox[
+                     SuperscriptBox[
+                      RowBox[
+                       {
+                        "(",
+                        RowBox[
+                         {
+                          "1",
+                          "-",
+                          FractionBox[
+                           "M",
+                           RowBox[
+                            {
+                             "2",
+                             " ",
+                             SqrtBox[
+                              RowBox[
+                               {
+                                SuperscriptBox["x", "2"],
+                                "+",
+                                SuperscriptBox["y", "2"],
+                                "+",
+                                SuperscriptBox["z", "2"]
+                               }
+                              ]
+                             ]
+                            }
+                           ]
+                          ]
+                         }
+                        ],
+                        ")"
+                       }
+                      ],
+                      "2"
+                     ],
+                     SuperscriptBox[
+                      RowBox[
+                       {
+                        "(",
+                        RowBox[
+                         {
+                          "1",
+                          "+",
+                          FractionBox[
+                           "M",
+                           RowBox[
+                            {
+                             "2",
+                             " ",
+                             SqrtBox[
+                              RowBox[
+                               {
+                                SuperscriptBox["x", "2"],
+                                "+",
+                                SuperscriptBox["y", "2"],
+                                "+",
+                                SuperscriptBox["z", "2"]
+                               }
+                              ]
+                             ]
+                            }
+                           ]
+                          ]
+                         }
+                        ],
+                        ")"
+                       }
+                      ],
+                      "2"
+                     ]
+                    ]
+                   }
+                  ],
+                  ",",
+                  "0",
+                  ",",
+                  "0",
+                  ",",
+                  "0"
+                 }
+                ],
+                "}"
+               }
+              ],
+              ",",
+              RowBox[
+               {
+                "{",
+                RowBox[
+                 {
+                  "0",
+                  ",",
+                  SuperscriptBox[
+                   RowBox[
+                    {
+                     "(",
+                     RowBox[
+                      {
+                       "1",
+                       "+",
+                       FractionBox[
+                        "M",
+                        RowBox[
+                         {
+                          "2",
+                          " ",
+                          SqrtBox[
+                           RowBox[
+                            {
+                             SuperscriptBox["x", "2"],
+                             "+",
+                             SuperscriptBox["y", "2"],
+                             "+",
+                             SuperscriptBox["z", "2"]
+                            }
+                           ]
+                          ]
+                         }
+                        ]
+                       ]
+                      }
+                     ],
+                     ")"
+                    }
+                   ],
+                   "4"
+                  ],
+                  ",",
+                  "0",
+                  ",",
+                  "0"
+                 }
+                ],
+                "}"
+               }
+              ],
+              ",",
+              RowBox[
+               {
+                "{",
+                RowBox[
+                 {
+                  "0",
+                  ",",
+                  "0",
+                  ",",
+                  SuperscriptBox[
+                   RowBox[
+                    {
+                     "(",
+                     RowBox[
+                      {
+                       "1",
+                       "+",
+                       FractionBox[
+                        "M",
+                        RowBox[
+                         {
+                          "2",
+                          " ",
+                          SqrtBox[
+                           RowBox[
+                            {
+                             SuperscriptBox["x", "2"],
+                             "+",
+                             SuperscriptBox["y", "2"],
+                             "+",
+                             SuperscriptBox["z", "2"]
+                            }
+                           ]
+                          ]
+                         }
+                        ]
+                       ]
+                      }
+                     ],
+                     ")"
+                    }
+                   ],
+                   "4"
+                  ],
+                  ",",
+                  "0"
+                 }
+                ],
+                "}"
+               }
+              ],
+              ",",
+              RowBox[
+               {
+                "{",
+                RowBox[
+                 {
+                  "0",
+                  ",",
+                  "0",
+                  ",",
+                  "0",
+                  ",",
+                  SuperscriptBox[
+                   RowBox[
+                    {
+                     "(",
+                     RowBox[
+                      {
+                       "1",
+                       "+",
+                       FractionBox[
+                        "M",
+                        RowBox[
+                         {
+                          "2",
+                          " ",
+                          SqrtBox[
+                           RowBox[
+                            {
+                             SuperscriptBox["x", "2"],
+                             "+",
+                             SuperscriptBox["y", "2"],
+                             "+",
+                             SuperscriptBox["z", "2"]
+                            }
+                           ]
+                          ]
+                         }
+                        ]
+                       ]
+                      }
+                     ],
+                     ")"
+                    }
+                   ],
+                   "4"
+                  ]
+                 }
+                ],
+                "}"
+               }
+              ]
+             }
+            ],
+            "}"
+           }
+          ]
+         ],
+         "Output"
+        ]
+       },
+       Open
+      ]
+     ],
+     Cell[
+      CellGroupData[
+       {
+        Cell[
+         BoxData[
+          RowBox[
+           {
+            RowBox[
+             {
+              "exactSolsData",
+              "[",
+              RowBox[
+               {
+                "\"Schwarzschild\"",
+                ",",
+                RowBox[
+                 {
+                  "{",
+                  RowBox[
+                   {
+                    "\"SchwarzschildCoordinates\"",
+                    ",",
+                    "\"CoordinateAssumptions\""
+                   }
+                  ],
+                  "}"
+                 }
+                ]
+               }
+              ],
+              "]"
+             }
+            ],
+            "[",
+            RowBox[
+             {
+              RowBox[
+               {
+                "{",
+                RowBox[{"t", ",", "r", ",", "\[Theta]", ",", "\[Phi]"}],
+                "}"
+               }
+              ],
+              ",",
+              RowBox[{"{", "m", "}"}],
+              ",",
+              RowBox[{"{", "}"}]
+             }
+            ],
+            "]"
+           }
+          ]
+         ],
+         "Input"
+        ],
+        Cell[
+         BoxData[
+          RowBox[
+           {
+            RowBox[{"r", ">", "0"}],
+            "&&",
+            RowBox[{"\[Pi]", ">", "\[Theta]", ">", "0"}]
+           }
+          ]
+         ],
+         "Output"
+        ]
+       },
+       Open
+      ]
+     ],
+     Cell[
+      CellGroupData[
+       {
+        Cell[
+         BoxData[
+          RowBox[
+           {
+            RowBox[
+             {
+              "exactSolsData",
+              "[",
+              RowBox[
+               {
+                "\"Schwarzschild\"",
+                ",",
+                RowBox[
+                 {
+                  "{",
+                  RowBox[
+                   {
+                    "\"IsotropicCoordinates\"",
+                    ",",
+                    "\"CoordinateAssumptions\""
+                   }
+                  ],
+                  "}"
+                 }
+                ]
+               }
+              ],
+              "]"
+             }
+            ],
+            "[",
+            RowBox[
+             {
+              RowBox[
+               {"{", RowBox[{"t", ",", "x", ",", "y", ",", "z"}], "}"}
+              ],
+              ",",
+              RowBox[{"{", "m", "}"}],
+              ",",
+              RowBox[{"{", "R", "}"}]
+             }
+            ],
+            "]"
+           }
+          ]
+         ],
+         "Input"
+        ],
+        Cell[
+         BoxData[
+          RowBox[
+           {
+            RowBox[{"m", "\[GreaterEqual]", "0"}],
+            "&&",
+            RowBox[
+             {
+              SqrtBox[
+               RowBox[
+                {
+                 SuperscriptBox["x", "2"],
+                 "+",
+                 SuperscriptBox["y", "2"],
+                 "+",
+                 SuperscriptBox["z", "2"]
+                }
+               ]
+              ],
+              ">",
+              RowBox[{"2", " ", "m"}]
+             }
+            ]
+           }
+          ]
+         ],
+         "Output"
+        ]
+       },
+       Open
+      ]
+     ],
+     Cell[
+      CellGroupData[
+       {
+        Cell[
+         BoxData[
+          RowBox[
+           {
+            RowBox[
+             {
+              "exactSolsData",
+              "[",
+              RowBox[
+               {"\"Schwarzschild\"", ",", "\"ParameterAssumptions\""}
+              ],
+              "]"
+             }
+            ],
+            "[",
+            RowBox[
+             {
+              RowBox[{"{", "}"}],
+              ",",
+              RowBox[{"{", "m", "}"}],
+              ",",
+              RowBox[{"{", "}"}]
+             }
+            ],
+            "]"
+           }
+          ]
+         ],
+         "Input"
+        ],
+        Cell[BoxData[RowBox[{"m", ">", "0"}]], "Output"]
+       },
+       Open
+      ]
+     ]
+    },
+    Open
+   ]
+  ],
+  Cell[
+   CellGroupData[
+    {
+     Cell[
+      TextData[
+       {
+        "More Examples",
+        Cell[
+         BoxData[
+          TemplateBox[
+           {
+            "MoreExamples",
+            Cell[
+             BoxData[
+              FrameBox[
+               Cell[
+                "Extended examples in standardized sections.",
+                "MoreInfoText"
+               ],
+               BaseStyle -> "IFrameBox"
+              ]
+             ],
+             "MoreInfoTextOuter"
+            ]
+           },
+           "MoreInfoOpenerButtonTemplate"
+          ]
+         ]
+        ]
+       }
+      ],
+      "ExtendedExamplesSection",
+      CellTags -> "ExtendedExamples"
+     ],
+     Cell[
+      BoxData[
+       InterpretationBox[
+        Cell["Scope", "ExampleSection"],
+        $Line = 0;
+       ]
+      ],
+      "ExampleSection"
+     ],
+     Cell[
+      BoxData[
+       InterpretationBox[
+        Cell["Generalizations & Extensions", "ExampleSection"],
+        $Line = 0;
+       ]
+      ],
+      "ExampleSection"
+     ],
+     Cell[
+      CellGroupData[
+       {
+        Cell[
+         BoxData[
+          InterpretationBox[
+           Cell["Options", "ExampleSection"],
+           $Line = 0;
+          ]
+         ],
+         "ExampleSection"
+        ],
+        Cell[
+         BoxData[
+          InterpretationBox[
+           Cell["\"ParameterNames\"", "ExampleSubsection"],
+           $Line = 0;
+          ]
+         ],
+         "ExampleSubsection"
+        ],
+        Cell[
+         BoxData[
+          InterpretationBox[
+           Cell["\"ParameterAssumptions\"", "ExampleSubsection"],
+           $Line = 0;
+          ]
+         ],
+         "ExampleSubsection"
+        ],
+        Cell[
+         BoxData[
+          InterpretationBox[
+           Cell["\"IsIdeal\"", "ExampleSubsection"],
+           $Line = 0;
+          ]
+         ],
+         "ExampleSubsection"
+        ],
+        Cell[
+         BoxData[
+          InterpretationBox[
+           Cell["\"CoordinateSystem\"", "ExampleSubsection"],
+           $Line = 0;
+          ]
+         ],
+         "ExampleSubsection"
+        ],
+        Cell[
+         BoxData[
+          InterpretationBox[
+           Cell["\"CoordinateNames\"", "ExampleSubsection"],
+           $Line = 0;
+          ]
+         ],
+         "ExampleSubsection"
+        ],
+        Cell[
+         BoxData[
+          InterpretationBox[
+           Cell["\"CoordinateAssumptions\"", "ExampleSubsection"],
+           $Line = 0;
+          ]
+         ],
+         "ExampleSubsection"
+        ],
+        Cell[
+         BoxData[
+          InterpretationBox[
+           Cell["\"ScalarFunctions\"", "ExampleSubsection"],
+           $Line = 0;
+          ]
+         ],
+         "ExampleSubsection"
+        ],
+        Cell[
+         BoxData[
+          InterpretationBox[
+           Cell["\"Classes\"", "ExampleSubsection"],
+           $Line = 0;
+          ]
+         ],
+         "ExampleSubsection"
+        ]
+       },
+       Open
+      ]
+     ],
+     Cell[
+      BoxData[
+       InterpretationBox[
+        Cell["Applications", "ExampleSection"],
+        $Line = 0;
+       ]
+      ],
+      "ExampleSection"
+     ],
+     Cell[
+      BoxData[
+       InterpretationBox[
+        Cell["Properties & Relations", "ExampleSection"],
+        $Line = 0;
+       ]
+      ],
+      "ExampleSection"
+     ],
+     Cell[
+      BoxData[
+       InterpretationBox[
+        Cell["Possible Issues", "ExampleSection"],
+        $Line = 0;
+       ]
+      ],
+      "ExampleSection"
+     ],
+     Cell[
+      BoxData[
+       InterpretationBox[
+        Cell["Interactive Examples", "ExampleSection"],
+        $Line = 0;
+       ]
+      ],
+      "ExampleSection"
+     ],
+     Cell[
+      BoxData[
+       InterpretationBox[
+        Cell["Neat Examples", "ExampleSection"],
+        $Line = 0;
+       ]
+      ],
+      "ExampleSection"
+     ]
+    },
+    Open
+   ]
+  ],
+  Cell[
+   CellGroupData[
+    {
+     Cell["Metadata", "MetadataSection"],
+     Cell[
+      TextData[
+       {
+        "New in: ",
+        Cell["XX", "HistoryData", CellTags -> "New"],
+        " | Modified in: ",
+        Cell[" ", "HistoryData", CellTags -> "Modified"],
+        " | Obsolete in: ",
+        Cell[" ", "HistoryData", CellTags -> "Obsolete"]
+       }
+      ],
+      "History"
+     ],
+     Cell[
+      CellGroupData[
+       {
+        Cell[
+         TextData[
+          {
+           "Categorization",
+           Cell[
+            BoxData[
+             TemplateBox[
+              {
+               "Metadata",
+               Cell[
+                BoxData[
+                 FrameBox[
+                  Cell[
+                   "Metadata such as page URI, context, and type of documentation page.",
+                   "MoreInfoText"
+                  ],
+                  BaseStyle -> "IFrameBox"
+                 ]
+                ],
+                "MoreInfoTextOuter"
+               ]
+              },
+              "MoreInfoOpenerButtonTemplate"
+             ]
+            ]
+           ]
+          }
+         ],
+         "CategorizationSection"
+        ],
+        Cell["Symbol", "Categorization"],
+        Cell["xIdeal", "Categorization"],
+        Cell["xAct`xIdeal`", "Categorization"],
+        Cell["xIdeal/ref/SaveExactSolution", "Categorization"]
+       },
+       Closed
+      ]
+     ],
+     Cell[
+      CellGroupData[
+       {
+        Cell["Keywords", "KeywordsSection"],
+        Cell["XXXX", "Keywords"]
+       },
+       Closed
+      ]
+     ],
+     Cell[
+      CellGroupData[
+       {
+        Cell["Syntax Templates", "TemplatesSection"],
+        Cell[BoxData[""], "Template"],
+        Cell[BoxData[""], "Template"],
+        Cell[BoxData[""], "Template"],
+        Cell[BoxData[""], "Template"]
+       },
+       Closed
+      ]
+     ]
+    },
+    Open
+   ]
+  ]
+ },
+ TaggingRules -> <|"Paclet" -> "xIdeal"|>,
+ CellContext -> "Global`",
+ FrontEndVersion -> "13.3 for Linux x86 (64-bit) (July 24, 2023)",
+ StyleDefinitions ->
+  FrontEnd`FileName[
+   {"Wolfram"},
+   "FunctionPageStylesExt.nb",
+   CharacterEncoding -> "UTF-8"
+  ],
+ ExpressionUUID -> "396d7ba7-e62f-4f66-8e75-d1637f87bc52"
 ]
-(* End of Notebook Content *)
-
-(* Internal cache information *)
-(*CellTagsOutline
-CellTagsIndex->{
- "ExtendedExamples"->{
-  Cell[30744, 884, 488, 13, 57, "ExtendedExamplesSection",ExpressionUUID->"24be2e7e-5171-42e5-8c12-3b735f965f38",
-   CellTags->"ExtendedExamples",
-   CellID->2022216592]}
- }
-*)
-(*CellTagsIndex
-CellTagsIndex->{
- {"ExtendedExamples", 38631, 1114}
- }
-*)
-(*NotebookFileOutline
-Notebook[{
-Cell[CellGroupData[{
-Cell[580, 22, 115, 1, 74, "ObjectName",ExpressionUUID->"d37f90f1-9cec-41d3-a4e5-e7e74cb7486e",
- CellID->1456896570],
-Cell[698, 25, 188, 4, 59, "Usage",ExpressionUUID->"5dc94e8e-8d96-437b-bcc2-3a5d9fb4f4a9",
- CellID->860563098],
-Cell[889, 31, 128, 1, 27, "Notes",ExpressionUUID->"8c090d5f-5d7d-4225-a85e-bebacc2c6d6b",
- CellID->613550280],
-Cell[1020, 34, 2083, 46, 171, "3ColumnTableMod",ExpressionUUID->"a7e6dc56-68fa-4485-b851-6f93bc3f0113",
- CellID->480773630]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[3140, 85, 459, 13, 40, "SeeAlsoSection",ExpressionUUID->"79cc5d2a-dfd8-4d24-8c7a-229f548a6ca4",
- CellID->2137687583],
-Cell[3602, 100, 1654, 42, 25, "SeeAlso",ExpressionUUID->"3e42c66d-3ee1-4423-a1fb-7d76f6a5a1e0",
- CellID->1418022634]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[5293, 147, 436, 12, 41, "TechNotesSection",ExpressionUUID->"d6cbb9b3-6c47-44b8-91d1-82e25f513f98",
- CellID->1153259893],
-Cell[5732, 161, 101, 1, 20, "Tutorials",ExpressionUUID->"fac64312-6cc1-47fd-b93b-c25ceb86c869",
- CellID->1433480558]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[5870, 167, 118, 1, 40, "MoreAboutSection",ExpressionUUID->"726e324f-6c7a-4687-8b38-99eb0d97a670",
- CellID->1629435598],
-Cell[5991, 170, 101, 1, 20, "MoreAbout",ExpressionUUID->"bc15abbc-8046-4b0e-8940-3b5f678772ff",
- CellID->1268697948]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[6129, 176, 471, 13, 40, "RelatedLinksSection",ExpressionUUID->"fd855793-0b6f-4d25-b68b-128db21c6a99",
- CellID->12445449],
-Cell[6603, 191, 103, 1, 20, "RelatedLinks",ExpressionUUID->"d07d2fe3-156a-4fe4-844a-8932134dd350",
- CellID->166348002]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[6743, 197, 529, 14, 69, "ExamplesInitializationSection",ExpressionUUID->"ea15a0cc-31ec-4190-92e8-787e7f93b7f6",
- CellID->22475182],
-Cell[7275, 213, 170, 3, 46, "ExampleInitialization",ExpressionUUID->"2598512e-f2f0-447c-b05f-b4203c236524",
- CellID->158792612]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[7482, 221, 442, 12, 72, "PrimaryExamplesSection",ExpressionUUID->"d27426c1-ca3c-4cea-b251-3925765f4b83",
- CellID->722731118],
-Cell[7927, 235, 178, 4, 26, "Input",ExpressionUUID->"0fe0a223-c1e4-406b-a2d1-0f58d6c52e1b",
- CellID->1475706900],
-Cell[CellGroupData[{
-Cell[8130, 243, 864, 20, 49, "Input",ExpressionUUID->"d9d70a20-a559-4d74-8439-1d03246b7c41",
- CellID->378788024],
-Cell[8997, 265, 804, 25, 43, "Output",ExpressionUUID->"3f3ba8e2-13a0-46c6-bb6d-d88e125874bc",
- CellID->238906111]
-}, Open  ]],
-Cell[9816, 293, 701, 19, 45, "Input",ExpressionUUID->"52a06a7b-c3f2-4eff-9b27-996070b8e96e",
- CellID->112301888],
-Cell[10520, 314, 956, 30, 70, "Input",ExpressionUUID->"c492869f-0679-4d2c-8eb6-efc71bfe09f0",
- CellID->1241609735],
-Cell[CellGroupData[{
-Cell[11501, 348, 3593, 94, 341, "Input",ExpressionUUID->"15c9b326-5db7-4dc6-bbda-7c1b7edee454",
- CellID->89664016],
-Cell[15097, 444, 7397, 188, 379, "Print",ExpressionUUID->"30f44680-cb61-4252-a9fb-1c72120f1919",
- CellID->1232181767]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[22531, 637, 665, 15, 45, "Input",ExpressionUUID->"592a9715-febd-41fb-ae5a-66565e2dcce5",
- CellID->33652],
-Cell[23199, 654, 1143, 36, 57, "Output",ExpressionUUID->"9bea192e-d99a-44be-b571-3b25418d0d21",
- CellID->1943637016]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[24379, 695, 593, 14, 64, "Input",ExpressionUUID->"84f1abd0-9098-442c-b6aa-4090aa7d9d33",
- CellID->521703100],
-Cell[24975, 711, 638, 20, 43, "Output",ExpressionUUID->"da0ed5e8-c1e2-4cc8-8c91-c316938f56b7",
- CellID->535430441]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[25650, 736, 449, 10, 45, "Input",ExpressionUUID->"f5e2de7e-89a3-4efa-b198-47d0d2236c7b",
- CellID->630819295],
-Cell[26102, 748, 282, 5, 25, "Output",ExpressionUUID->"52be61ce-4bf3-436c-ba4d-fcb1c8fe2140",
- CellID->1408202183]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[26421, 758, 863, 19, 45, "Input",ExpressionUUID->"cfd94f01-9727-4b32-9784-71c38b81e097",
- CellID->466724076],
-Cell[27287, 779, 1556, 44, 60, "Output",ExpressionUUID->"51064be2-02ed-43ca-a6c6-eb1ec8d02be2",
- CellID->1150403887]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[28880, 828, 632, 15, 64, "Input",ExpressionUUID->"92b3a8ce-dc4c-4a6d-b238-1598f04e9baf",
- CellID->925886600],
-Cell[29515, 845, 337, 8, 25, "Output",ExpressionUUID->"24d0f456-6ca5-418e-906c-29a27d100f9c",
- CellID->527963035]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[29889, 858, 489, 11, 45, "Input",ExpressionUUID->"77c61b0f-4313-4ab5-979a-fa723a386f3e",
- CellID->550098520],
-Cell[30381, 871, 314, 7, 25, "Output",ExpressionUUID->"e8aeb541-18e1-4138-ab5b-1eca6d0fc390",
- CellID->803995970]
-}, Open  ]]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[30744, 884, 488, 13, 57, "ExtendedExamplesSection",ExpressionUUID->"24be2e7e-5171-42e5-8c12-3b735f965f38",
- CellTags->"ExtendedExamples",
- CellID->2022216592],
-Cell[31235, 899, 242, 5, 35, "ExampleSection",ExpressionUUID->"e5298cb7-9781-4c12-826f-da0c32d0e120",
- CellID->1397687819],
-Cell[31480, 906, 264, 5, 23, "ExampleSection",ExpressionUUID->"d223fdec-2861-4185-a18a-d402e8fba301",
- CellID->411441446],
-Cell[CellGroupData[{
-Cell[31769, 915, 244, 5, 23, "ExampleSection",ExpressionUUID->"c59037c3-1843-430c-abfa-87e66db9fbf6",
- CellID->1544741985],
-Cell[32016, 922, 260, 5, 26, "ExampleSubsection",ExpressionUUID->"f4a5de61-0b29-4b46-8bf2-44323f324857",
- CellID->933278942],
-Cell[32279, 929, 265, 5, 22, "ExampleSubsection",ExpressionUUID->"21c4f75b-6f21-4d9f-81a0-a249e5f2fe2b",
- CellID->26198628],
-Cell[32547, 936, 254, 5, 22, "ExampleSubsection",ExpressionUUID->"d3e9a5e7-329e-4fd9-88d3-d8531e9f6fe7",
- CellID->1567217168],
-Cell[32804, 943, 263, 5, 22, "ExampleSubsection",ExpressionUUID->"66f3949b-bb57-41b9-b04c-49eaa11b9408",
- CellID->1092071554],
-Cell[33070, 950, 261, 5, 22, "ExampleSubsection",ExpressionUUID->"204fe7e4-4d98-4867-bfb2-3243cdd480d6",
- CellID->748929746],
-Cell[33334, 957, 268, 5, 22, "ExampleSubsection",ExpressionUUID->"bcb8606b-f909-47dc-b65d-fa734c87e6ea",
- CellID->1441950112],
-Cell[33605, 964, 261, 5, 22, "ExampleSubsection",ExpressionUUID->"12792678-c6db-4a4e-8e99-c65c74f3f66a",
- CellID->342275726],
-Cell[33869, 971, 254, 5, 22, "ExampleSubsection",ExpressionUUID->"6046ef5e-ae9f-4d50-98bd-c8e31350021f",
- CellID->1160371193]
-}, Open  ]],
-Cell[34138, 979, 249, 5, 35, "ExampleSection",ExpressionUUID->"de861329-6a58-43b2-b124-e1df30d74c1c",
- CellID->1775104354],
-Cell[34390, 986, 259, 5, 23, "ExampleSection",ExpressionUUID->"cc9e02f0-a440-44b9-a5a0-c97137425605",
- CellID->1404164583],
-Cell[34652, 993, 251, 5, 23, "ExampleSection",ExpressionUUID->"b418f138-33bb-4703-9f01-778042e8e99a",
- CellID->153822257],
-Cell[34906, 1000, 257, 5, 23, "ExampleSection",ExpressionUUID->"f3e8a782-9c4c-460b-b229-0e2d7ff3a75e",
- CellID->1913386483],
-Cell[35166, 1007, 250, 5, 23, "ExampleSection",ExpressionUUID->"59bf2295-a801-4543-aa6e-98d8e3c16d12",
- CellID->1058815157]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[35453, 1017, 111, 1, 72, "MetadataSection",ExpressionUUID->"41db151f-fdb8-438e-9193-eb462b4d211e",
- CellID->2124845776],
-Cell[35567, 1020, 477, 12, 27, "History",ExpressionUUID->"50658aa3-690e-47f7-a6c3-cbdf42825519",
- CellID->1018892605],
-Cell[CellGroupData[{
-Cell[36069, 1036, 485, 13, 21, "CategorizationSection",ExpressionUUID->"0accdc6e-460d-4d75-822b-b06aa7b26b5a",
- CellID->1480081238],
-Cell[36557, 1051, 134, 2, 34, "Categorization",ExpressionUUID->"d65ea846-4ff0-430c-8e19-114c0e1873cc",
- CellID->784069550],
-Cell[36694, 1055, 135, 2, 34, "Categorization",ExpressionUUID->"5b5b38af-04b4-4edf-af9b-584b406eaede",
- CellID->1848086194],
-Cell[36832, 1059, 137, 2, 34, "Categorization",ExpressionUUID->"9baa5123-2d40-4878-87a1-8104f28f3e95",
- CellID->2039500772],
-Cell[36972, 1063, 149, 2, 34, "Categorization",ExpressionUUID->"4b47edb5-bbc9-4ae2-bac5-bc1787ef9aff",
- CellID->2105963279]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[37158, 1070, 111, 1, 21, "KeywordsSection",ExpressionUUID->"80748c86-7f34-49e7-9b25-ace80f7ced7e",
- CellID->1107359689],
-Cell[37272, 1073, 100, 1, 70, "Keywords",ExpressionUUID->"1c819bb7-05a4-4315-b6e4-3722196cc397",
- CellID->1270267791]
-}, Closed]],
-Cell[CellGroupData[{
-Cell[37409, 1079, 120, 1, 21, "TemplatesSection",ExpressionUUID->"cde7536f-4f6b-4512-b21d-355e25a764e7",
- CellID->1634836583],
-Cell[37532, 1082, 148, 2, 70, "Template",ExpressionUUID->"82016a83-5545-40d4-abb7-713c906ee509",
- CellID->377898676],
-Cell[37683, 1086, 137, 2, 70, "Template",ExpressionUUID->"c24868c0-3cc2-4be3-8f01-45c27c5765c2",
- CellID->276044037],
-Cell[37823, 1090, 135, 2, 70, "Template",ExpressionUUID->"2781772f-b441-418f-aff2-12e11831a780",
- CellID->920833493],
-Cell[37961, 1094, 138, 2, 70, "Template",ExpressionUUID->"718abc12-3006-4c00-96d4-8685c9320be9",
- CellID->2007334274]
-}, Closed]]
-}, Open  ]]
-}
-]
-*)
-
