@@ -1448,6 +1448,7 @@ allclasses = {
 	"AxialSymmetry",
  	"ConformallyFlat",
 	"DMetrics",
+ 	"Dust",
 	"G1",
 	"G2",
 	"G3",
@@ -1459,6 +1460,7 @@ allclasses = {
 	"G8",
 	"G9",
 	"G10",
+ 	"Geodesic",
 	"PerfectFluid",
 	"PetrovTypeI",
 	"PetrovTypeII",
@@ -1484,8 +1486,10 @@ allmetricproperties = {
 }
 
 allcoordinatesystems = {
-	"SchwarzschildCoordinates",
 	"BoyerLindquistCoordinates",
+ 	"IsotropicCoordinates",
+  	"ReducedCircumferencePolarCoordinates",
+ 	"SchwarzschildCoordinates",
 	"SphericalCoordinates"
 }
 
