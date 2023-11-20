@@ -586,6 +586,27 @@ weylConcomitant["NullDirectionTypeN"][metric_CTensor, opts : OptionsPattern[]] :
 	]
 )
 
+weylConcomitant["WNullDirectionTypeN"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["WNullDirectionTypeN"][metric, opts] = 
+	Module[{cart, simplf, obs, X, weylselfdual, canonicalbivector, mh, mh2, dir, a1, b1, i1, j1, k1, l1},
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, i1, j1, k1, l1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
+		simplf = OptionValue[weylConcomitant, PSimplify];
+		uX = OptionValue[weylConcomitant, opts, "Observer"];
+  		obs = Part[uX, 1];
+    		X = Part[uX, 2];
+		weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
+  		canonicalbivector = simplf[HeadOfTensor[
+    			weylselfdual[-a1, -b1, -i1, -j1] X[i1, j1] / Sqrt[weylselfdual[-i1, -j1, -k1, -l1] X[i1, j1] X[k1, l1]], 
+       			{-a1, -b1}]
+	  	];
+	 	mh = ComplexExpand[(canonicalbivector + Dagger[canonicalbivector])/Sqrt[2]];
+   		mh2 = simplf[HeadOfTensor[mh[-a1, -i1] mh[i1, -b1], {-a1, -b1}]];
+     		dir = HeadOfTensor[mh2[-a1, -i1] obs[i1] / Sqrt[mh2[,i1, -j1] obs[i1] obs[j1]], {-a1}]
+       		simplf[dir]
+	]
+)
+
 weylConcomitant["NullDirectionTypeIII"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["NullDirectionTypeIII"][metric, opts] = 
 	Module[{cart, simplf, obs, mq, a1, b1, c1, d1, e1},
@@ -599,6 +620,28 @@ weylConcomitant["NullDirectionTypeIII"][metric_CTensor, opts : OptionsPattern[]]
 		simplf[mq]
 	]
 )
+
+weylConcomitant["WNullDirectionTypeIII"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["WNullDirectionTypeIII"][metric, opts] = 
+	Module[{cart, simplf, obs, X, weylselfdual, canonicalbivector, mh, mh2, dir, a1, b1, i1, j1, k1, l1},
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, i1, j1, k1, l1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
+		simplf = OptionValue[weylConcomitant, PSimplify];
+		uX = OptionValue[weylConcomitant, opts, "Observer"];
+  		obs = Part[uX, 1];
+    		X = Part[uX, 2];
+		weylselfdual2 = weylConcomitant["WeylSelfDual2"][metric, opts];
+  		canonicalbivector = simplf[HeadOfTensor[
+    			weylselfdual2[-a1, -b1, -i1, -j1] X[i1, j1] / Sqrt[weylselfdual2[-i1, -j1, -k1, -l1] X[i1, j1] X[k1, l1]], 
+       			{-a1, -b1}]
+	  	];
+	 	mh = ComplexExpand[(canonicalbivector + Dagger[canonicalbivector])/Sqrt[2]];
+   		mh2 = simplf[HeadOfTensor[mh[-a1, -i1] mh[i1, -b1], {-a1, -b1}]];
+     		dir = HeadOfTensor[mh2[-a1, -i1] obs[i1] / Sqrt[mh2[,i1, -j1] obs[i1] obs[j1]], {-a1}]
+       		simplf[dir]
+	]
+)
+
 (* TODO: when doing simplifications we are not able to handle outputs with Piecewise *)
 weylConcomitant["NullDirectionTypeD"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["NullDirectionTypeD"][metric, opts] = 
@@ -636,6 +679,33 @@ weylConcomitant["NullDirectionTypeD"][metric_CTensor, opts : OptionsPattern[]] :
 	]
 )
 
+weylConcomitant["WNullDirectionTypeD"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["WNullDirectionTypeD"][metric, opts] = 
+	Module[{cart, simplf, obs, X, bb, aa, rho, scrg, weylselfdual, scrp, canonicalbivector, mu, lp, lm, a1, b1, i1, j1, k1, l1},
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, i1, j1, k1, l1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
+		simplf = OptionValue[weylConcomitant, PSimplify];
+		uX = OptionValue[weylConcomitant, opts, "Observer"];
+  		obs = Part[uX, 1];
+    		X = Part[uX, 2];
+      		bb = -weylConcomitant["TraceWeylSelfDual3"][metric, opts];
+		aa = weylConcomitant["TraceWeylSelfDual2"][metric, opts];
+		rho = bb / aa;
+  		scrg = metricConcomitant["G2Form"][metric, opts];
+    		weylselfdual = weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];;
+		scrp = simplf[weylselfdual - rho scrg];
+  		canonicalbivector = simplf[HeadOfTensor[
+    			scrp[-a1, -b1, -i1, -j1] X[i1, j1] / Sqrt[scrp[-i1, -j1, -k1, -l1] X[i1, j1] X[k1, l1]], 
+       			{-a1, -b1}]
+	  	];
+	 	mu = ComplexExpand[(canonicalbivector + Dagger[canonicalbivector])/Sqrt[2]];
+     		lp = HeadOfTensor[(mu[-b1, i1] mu[-i1, a1] + mu[-b1, a1]) obs[b1], {a1}];
+       		lp = HeadOfTensor[(mu[-b1, i1] mu[-i1, a1] - mu[-b1, a1]) obs[b1], {a1}];
+	 	{simplf[lp], simplf[lm]}
+	]
+)
+
+
 weylConcomitant["NullDirectionTypeII"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["NullDirectionTypeII"][metric, opts] = 
 	Module[{cart, simplf, obs, mq, mq2, a1, b1, c1, d1, e1, bb, aa, gamma, rho, P, dvb},
@@ -654,6 +724,32 @@ weylConcomitant["NullDirectionTypeII"][metric_CTensor, opts : OptionsPattern[]] 
 		dvb = Dagger[P[a1, b1]] (P[-b1, -a1] obs[c1] + I P[-b1, d1] epsilon[metric][-a1, -d1, c1, -e1] obs[e1]);
 		simplf[dvb];
 		HeadOfTensor[dvb, {c1}]
+	]
+)
+
+weylConcomitant["WNullDirectionTypeII"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["WNullDirectionTypeII"][metric, opts] = 
+	Module[{cart, simplf, obs, X, bb, aa, rho, scrg, weylselfdual, scrq, canonicalbivector, mh, mh2, dir, a1, b1, i1, j1, k1, l1},
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, i1, j1, k1, l1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
+		simplf = OptionValue[weylConcomitant, PSimplify];
+		uX = OptionValue[weylConcomitant, opts, "Observer"];
+  		obs = Part[uX, 1];
+    		X = Part[uX, 2];
+      		bb = -weylConcomitant["TraceWeylSelfDual3"][metric, opts];
+		aa = weylConcomitant["TraceWeylSelfDual2"][metric, opts];
+		rho = bb / aa;
+  		scrg = metricConcomitant["G2Form"][metric, opts];
+    		weylselfdual = weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];;
+		scrq = simplf[(weylselfdual - rho scrg) (weylselfdual + 2 rho scrg) / (3 rho)];
+  		canonicalbivector = simplf[HeadOfTensor[
+    			scrq[-a1, -b1, -i1, -j1] X[i1, j1] / Sqrt[scrq[-i1, -j1, -k1, -l1] X[i1, j1] X[k1, l1]], 
+       			{-a1, -b1}]
+	  	];
+	 	mh = ComplexExpand[(canonicalbivector + Dagger[canonicalbivector])/Sqrt[2]];
+   		mh2 = simplf[HeadOfTensor[mh[-a1, -i1] mh[i1, -b1], {-a1, -b1}]];
+     		dir = HeadOfTensor[mh2[-a1, -i1] obs[i1] / Sqrt[mh2[,i1, -j1] obs[i1] obs[j1]], {-a1}]
+       		simplf[dir]
 	]
 )
 
@@ -1017,10 +1113,11 @@ ClearxIdealCache["RframeConcomitants"] :=
 
 
 (*
-TODO: there are different algorithms for doing this computation. Add Method option
-to be able to choose between them. Add names for each method option.
+TODO: there are two algorithms for doing this computation. Merge them in the same function.
 *)
 Options[PetrovType] = {Method -> "Default", PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True}
+
+(* Method 1: "WeylSelfdual" *)
 PetrovType[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch @
 		Module[{cart, cd, weylcd, epsilonmetric, weyldual, weylselfdual, g2form, weylselfdual2, weylselfdual3, aa, bb,
@@ -1040,6 +1137,9 @@ PetrovType[metric_CTensor, opts : OptionsPattern[]] :=
 			weylselfdual3 = weylConcomitant["WeylSelfDual3"][metric, opts];
 			bb = weylConcomitant["TraceWeylSelfDual3"][metric, opts];
 			Which[
+   				weylcd === Zero,
+       					"Type O"
+	    			,
 				weylselfdual2 === Zero,
 					"Type N"
 				,
@@ -1057,52 +1157,113 @@ PetrovType[metric_CTensor, opts : OptionsPattern[]] :=
 			]
 		]
 
+(* Method 2: "PetrovMatrix" *)
+PetrovType[metric_CTensor, u_CTensor, opts : OptionsPattern[]] :=
+	Catch @
+		Module[{Q, gamma, Q2, aa, Q3, bb, simplf},
+			If[Not @ MetricQ @ metric,
+				Throw[Message[PetrovType::nometric, metric]]
+			];
+			simplf = OptionValue[PSimplify];
+			Q = weylConcomitant["WeylMatrixQ"][metric, opts, "Observer" -> u];
+			gamma = metricConcomitant["SpatialMetric"][metric, opts, "Observer" -> u];
+			Q2 = weylConcomitant["WeylMatrixQ2"][metric, opts, "Observer" -> u];
+			aa = weylConcomitant["TraceWeylMatrixQ2"][metric, opts, "Observer" -> u];
+			Q3 = weylConcomitant["WeylMatrixQ3"][metric, opts, "Observer" -> u];
+			bb = -weylConcomitant["TraceWeylMatrixQ3"][metric, opts, "Observer" -> u];
+			Which[
+				Q === Zero,
+       					"Type O"
+	    			,
+				Q2 === Zero,
+					"Type N"
+				,
+				Q3 === Zero,
+					"Type III"
+				,
+				simplf[(aa^2 / 3) gamma - aa Q2 - bb Q] === Zero,
+					"Type D"
+				,
+				simplf[6 bb^2 - aa^3] === 0,
+					"Type II"
+				,
+				True,
+					"Type I"
+			]
+		]
+
 
 (* ::Section:: *)
-(* Computation of Deveber null directions for each Petrov type *)
+(* Computation of multiple Deveber null directions for each Petrov type *)
 
 
-(* TODO: Create separate functions for the Petrov matrix concomitants*)
 (*
-TODO: there are different algorithms for doing this computation. Add Method option
-to be able to choose between them. Add names for each method option.
+TODO: there are two algorithms for doing this computation. Merge them in the same function.
 *)
 
 Options[DebeverNullDirections] = {Method -> "Default", PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True}
-DebeverNullDirections[metric_CTensor, u_CTensor, w_CTensor, opts : OptionsPattern[]] :=
-Catch@ Module[{Q, gamma, Q2, aa, Q3, bb, simplf},
+
+(* Method 1: "WeylSelfdual" *)
+DebeverNullDirections[metric_CTensor, u_CTensor, X_CTensor, opts : OptionsPattern[]] :=
+Catch@ Module[{ptype},
 		If[Not @ MetricQ @ metric,
 			Throw[Message[PetrovType::nometric, metric]]
 		];
-  		simplf = OptionValue[PSimplify];
-		Q = weylConcomitant["WeylMatrixQ"][metric, opts, "Observer" -> u];
-		gamma = metricConcomitant["SpatialMetric"][metric, opts, "Observer" -> u];
-		Q2 = weylConcomitant["WeylMatrixQ2"][metric, opts, "Observer" -> u];
-		aa = weylConcomitant["TraceWeylMatrixQ2"][metric, opts, "Observer" -> u];
-		Q3 = weylConcomitant["WeylMatrixQ3"][metric, opts, "Observer" -> u];
-		bb = -weylConcomitant["TraceWeylMatrixQ3"][metric, opts, "Observer" -> u];
+  		ptype = PetrovType[metric, opts, Method -> "WeylSelfdual"];
 		Which[
-			Q === Zero,
+			ptype == "Type O",
 				Print["Type O"]
 			,
-			Q2 === Zero,
+			ptype == "Type N",
+				Print["Type N"];
+				weylConcomitant["WNullDirectionTypeN"][metric, opts, "Observer" -> {u, X}]
+			,
+			ptype == "Type III",
+				Print["Type III"];
+				weylConcomitant["WNullDirectionTypeIII"][metric, opts, "Observer" -> {u, X}]
+			,
+			ptype == "Type D",
+				Print["Type D"];
+				weylConcomitant["WNullDirectionTypeD"][metric, opts, "Observer" -> {u, X}]
+			,
+			ptype == "Type II",
+				Print["Type II"];
+				weylConcomitant["WNullDirectionTypeII"][metric, opts, "Observer" -> {u, X}]
+			,
+			True,
+				Print["Type I"]
+		]
+	]
+
+(* Method 2: "PetrovMatrix" *)
+DebeverNullDirections[metric_CTensor, u_CTensor, w_CTensor, opts : OptionsPattern[]] :=
+Catch@ Module[{ptype},
+		If[Not @ MetricQ @ metric,
+			Throw[Message[PetrovType::nometric, metric]]
+		];
+  		ptype = PetrovType[metric, u, opts, Method -> "PetrovMatrix"];
+		Which[
+			ptype == "Type O",
+				Print["Type O"]
+			,
+			ptype == "Type N",
 				Print["Type N"];
 				weylConcomitant["NullDirectionTypeN"][metric, opts, "Observer" -> u]
 			,
-			Q3 === Zero,
+			ptype == "Type III",
 				Print["Type III"];
 				weylConcomitant["NullDirectionTypeIII"][metric, opts, "Observer" -> u]
 			,
-			simplf[(aa^2 / 3) gamma - aa Q2 - bb Q] === Zero,
+			ptype == "Type D",
 				Print["Type D"];
 				weylConcomitant["NullDirectionTypeD"][metric, opts, "Observer" -> {u, w}]
 			,
-			simplf[6 bb^2 - aa^3] === 0,
-				"Type II";
+			ptype == "Type II",
+				Print["Type II"];
 				weylConcomitant["NullDirectionTypeII"][metric, opts, "Observer" -> u]
 			,
 			True,
-				"Type I"
+				Print["Type I"]
 		]
 	]
 
