@@ -1280,9 +1280,9 @@ petrovType2[metric_CTensor, opts : OptionsPattern[]] :=
 			Q = weylConcomitant["WeylMatrixQ"][metric, opts];
 			gamma = metricConcomitant["SpatialMetric"][metric, opts];
 			Q2 = weylConcomitant["WeylMatrixQ2"][metric, opts];
-			aa = weylConcomitant["TraceWeylMatrixQ2"][metric];
+			aa = weylConcomitant["TraceWeylMatrixQ2"][metric, opts];
 			Q3 = weylConcomitant["WeylMatrixQ3"][metric, opts];
-			bb = -weylConcomitant["TraceWeylMatrixQ3"][metric opts];
+			bb = -weylConcomitant["TraceWeylMatrixQ3"][metric, opts];
 			Which[
 				Q === Zero,
        					"Type O"
