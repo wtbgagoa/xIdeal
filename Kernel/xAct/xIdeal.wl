@@ -197,8 +197,8 @@ Begin["`Private`"]
 
 (* ::Section:: *)
 (* Computation of the metric concomitants *)
-
-Options[metricConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True, "Observer" -> Null}
+(* TODO: we should avoid defining default options for private functions *)
+Options[metricConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True, "Observer" -> Null, "Method" -> Default}
 
 metricConcomitant["G2Form"][metric_CTensor, opts : OptionsPattern[]] :=
 (metricConcomitant["G2Form"][metric, opts] = 
@@ -221,7 +221,7 @@ metricConcomitant["SpatialMetric"][metric_CTensor, opts : OptionsPattern[]] :=
 (metricConcomitant["SpatialMetric"][metric, opts] = 
 	Module[{simplf, cart, obs, a1, b1},
 		simplf = OptionValue[metricConcomitant, PSimplify];
-		obs = OptionValue[metricConcomitant, opts, "Observer"];
+		obs = OptionValue[metricConcomitant, {opts}, "Observer"];
 		cart = 	Part[metric, 2, 1, -1];
 		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
 		If[ SignatureOfMetric[metric] === {3, 1, 0},
@@ -268,7 +268,8 @@ ClearxIdealCache["MetricConcomitants"] :=
 (* ::Section:: *)
 (* Computation of the Weyl concomitants *)
 
-Options[weylConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True, "Observer" -> Null}
+(* TODO: we should avoid defining default options for private functions *)
+Options[weylConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True, "Observer" -> Null, Method -> "Default"}
 
 weylConcomitant["Weyl"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["Weyl"][metric, opts] = 
@@ -350,7 +351,7 @@ weylConcomitant["WeylMatrixQ"][metric_CTensor, opts : OptionsPattern[]] :=
 		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
 		simplf = OptionValue[weylConcomitant, PSimplify];
 		(* In this particular case we need to input the opts arg. Why? *)
-		obs = OptionValue[weylConcomitant, opts, "Observer"];
+		obs = OptionValue[weylConcomitant, {opts}, "Observer"];
 		mq = HeadOfTensor[2 obs[a1] obs[c1] weylConcomitant["WeylSelfDual"][metric, opts][-a1, -b1, -c1, -d1], {-b1, -d1}];
 		simplf[mq]
 	]
@@ -755,7 +756,7 @@ weylConcomitant["WNullDirectionTypeIII"][metric_CTensor, opts : OptionsPattern[]
   		canonicalbivector = weylConcomitant["PTIIICanonicalBivector1"][metric, opts];
 	 	mh = ComplexExpand[(canonicalbivector + Dagger[canonicalbivector])/Sqrt[2]];
    		mh2 = simplf[HeadOfTensor[mh[-a1, -i1] mh[i1, -b1], {-a1, -b1}]];
-     		dir = HeadOfTensor[mh2[-a1, -i1] obs[i1] / Sqrt[-mh2[,i1, -j1] obs[i1] obs[j1]], {-a1}]
+     		dir = HeadOfTensor[mh2[-a1, -i1] obs[i1] / Sqrt[-mh2[i1, -j1] obs[i1] obs[j1]], {-a1}]
        		simplf[dir]
 	]
 )
@@ -844,9 +845,8 @@ weylConcomitant["WNullDirectionTypeII"][metric_CTensor, opts : OptionsPattern[]]
   		canonicalbivector = weylConcomitant["PTIICanonicalBivector1"][metric, opts]];
 	 	mh = ComplexExpand[(canonicalbivector + Dagger[canonicalbivector])/Sqrt[2]];
    		mh2 = simplf[HeadOfTensor[mh[-a1, -i1] mh[i1, -b1], {-a1, -b1}]];
-     		dir = HeadOfTensor[mh2[-a1, -i1] obs[i1] / Sqrt[-mh2[,i1, -j1] obs[i1] obs[j1]], {-a1}]
+     		dir = HeadOfTensor[mh2[-a1, -i1] obs[i1] / Sqrt[-mh2[i1, -j1] obs[i1] obs[j1]], {-a1}];
        		simplf[dir]
-	]
 )
 
 (* This deletes the computed Weyl concomitants for all metrics  *)
@@ -1211,17 +1211,32 @@ ClearxIdealCache["RframeConcomitants"] :=
 (*
 TODO: there are two algorithms for doing this computation. Merge them in the same function.
 *)
-Options[PetrovType] = {Method -> "Default", PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True}
+Options[PetrovType] = {Method -> "Default", PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True, "Observer" -> Null}
+
+PetrovType[metric_CTensor, opts : OptionsPattern[]] :=
+    Module[{method},
+        method = OptionValue[Method];
+        Switch[method,
+            "Default" || "WeylSelfDual",
+                petrovType1[metric, opts]
+            ,
+            "PetrovMatrix",
+                petrovType2[metric, opts]
+            ,
+            _,
+                petrovType1[metric, opts]
+        ]
+    ]
 
 (* Method 1: "WeylSelfdual" *)
-PetrovType[metric_CTensor, opts : OptionsPattern[]] :=
+petrovType1[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch @
 		Module[{cart, cd, weylcd, epsilonmetric, weyldual, weylselfdual, g2form, weylselfdual2, weylselfdual3, aa, bb,
 			 rho, simplf},
 			If[Not @ MetricQ @ metric,
 				Throw[Message[PetrovType::nometric, metric]]
 			];
-			simplf = OptionValue[PSimplify];
+			simplf = OptionValue[PetrovType, opts, PSimplify];
 			cart = Part[metric, 2, 1, -1];
 			epsilonmetric = epsilon[metric];
 			weylcd = weylConcomitant["Weyl"][metric, opts];
@@ -1254,19 +1269,20 @@ PetrovType[metric_CTensor, opts : OptionsPattern[]] :=
 		]
 
 (* Method 2: "PetrovMatrix" *)
-PetrovType[metric_CTensor, u_CTensor, opts : OptionsPattern[]] :=
+petrovType2[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch @
-		Module[{Q, gamma, Q2, aa, Q3, bb, simplf},
+		Module[{Q, gamma, Q2, aa, Q3, bb, simplf, u},
 			If[Not @ MetricQ @ metric,
 				Throw[Message[PetrovType::nometric, metric]]
 			];
-			simplf = OptionValue[PSimplify];
-			Q = weylConcomitant["WeylMatrixQ"][metric, opts, "Observer" -> u];
-			gamma = metricConcomitant["SpatialMetric"][metric, opts, "Observer" -> u];
-			Q2 = weylConcomitant["WeylMatrixQ2"][metric, opts, "Observer" -> u];
-			aa = weylConcomitant["TraceWeylMatrixQ2"][metric, opts, "Observer" -> u];
-			Q3 = weylConcomitant["WeylMatrixQ3"][metric, opts, "Observer" -> u];
-			bb = -weylConcomitant["TraceWeylMatrixQ3"][metric, opts, "Observer" -> u];
+			(*TODO: make sure that an observer is included among the options*)
+			simplf = OptionValue[PetrovType, {opts}, PSimplify];
+			Q = weylConcomitant["WeylMatrixQ"][metric, opts];
+			gamma = metricConcomitant["SpatialMetric"][metric, opts];
+			Q2 = weylConcomitant["WeylMatrixQ2"][metric, opts];
+			aa = weylConcomitant["TraceWeylMatrixQ2"][metric];
+			Q3 = weylConcomitant["WeylMatrixQ3"][metric, opts];
+			bb = -weylConcomitant["TraceWeylMatrixQ3"][metric opts];
 			Which[
 				Q === Zero,
        					"Type O"
