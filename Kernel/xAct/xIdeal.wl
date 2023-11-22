@@ -1271,16 +1271,21 @@ petrovType2[metric_CTensor, opts : OptionsPattern[]] :=
 			];
 			(*TODO: make sure that an observer is included among the options*)
 			simplf = OptionValue[PetrovType, {opts}, PSimplify];
-			Q = weylConcomitant["WeylMatrixQ"][metric, opts];
-			gamma = metricConcomitant["SpatialMetric"][metric, opts];
-			Q2 = weylConcomitant["WeylMatrixQ2"][metric, opts];
-			aa = weylConcomitant["TraceWeylMatrixQ2"][metric, opts];
-			Q3 = weylConcomitant["WeylMatrixQ3"][metric, opts];
-			bb = -weylConcomitant["TraceWeylMatrixQ3"][metric, opts];
+			uw = OptionValue[weylConcomitant, {opts}, "Observer"];
+			obs = Part[uw, 1];
+			w = Part[uw, 2];
+			(* In the following calls we need just an "Observer" *)
+			newopts = ReplaceAll[{opts}, uw -> obs];
+			Q = weylConcomitant["WeylMatrixQ"][metric, Sequence@@ newopts];
+			gamma = metricConcomitant["SpatialMetric"][metric, Sequence@@ newopts];
+			Q2 = weylConcomitant["WeylMatrixQ2"][metric, Sequence@@ newopts];
+			aa = weylConcomitant["TraceWeylMatrixQ2"][metric, Sequence@@ newopts];
+			Q3 = weylConcomitant["WeylMatrixQ3"][metric, Sequence@@ newopts];
+			bb = -weylConcomitant["TraceWeylMatrixQ3"][metric, Sequence@@ newopts];
 			Which[
 				Q === Zero,
        					"Type O"
-	    			,
+	    		,
 				Q2 === Zero,
 					"Type N"
 				,
