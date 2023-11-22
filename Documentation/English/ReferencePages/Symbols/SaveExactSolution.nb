@@ -12,7 +12,15 @@ Notebook[
    CellGroupData[
     {
      Cell["SaveExactSolution", "ObjectName"],
-     Cell[TextData[{Cell["   ", "ModInfo"], " "}], "Usage"],
+     Cell[
+      TextData[
+       {
+        Cell["   ", "ModInfo"],
+        " SaveExactSolution[metric, opts] saves metric under the given opts"
+       }
+      ],
+      "Usage"
+     ],
      Cell["The following options can be given: ", "Notes"],
      Cell[
       BoxData[
@@ -22,49 +30,67 @@ Notebook[
           Cell["   ", "ModInfo"],
           "\"ParameterNames\"",
           RowBox[{"{", "}"}],
-          Cell["XXXX", "TableText"]
+          Cell[
+           "list of strings representing the paramater names",
+           "TableText"
+          ]
          },
          {
           Cell["   ", "ModInfo"],
           "\"ParameterAssumptions\"",
           ButtonBox["Null", BaseStyle -> "Link"],
-          Cell["XXXX", "TableText"]
+          Cell["list of assumptions on the parameters", "TableText"]
          },
          {
           Cell["   ", "ModInfo"],
           "\"IsIdeal\"",
           ButtonBox["True", BaseStyle -> "Link"],
-          Cell["XXXX", "TableText"]
+          Cell[
+           "wether the metric has an IDEAL characterization",
+           "TableText"
+          ]
          },
          {
           Cell["   ", "ModInfo"],
           "\"CoordinateSystem\"",
           "\"MinkowskiCoordinates\"",
-          Cell["XXXX", "TableText"]
+          Cell[
+           "string with the name of the coordinate system ",
+           "TableText"
+          ]
          },
          {
           Cell["   ", "ModInfo"],
           "\"CoordinateNames\"",
           RowBox[{"{", "}"}],
-          Cell["XXXX", "TableText"]
+          Cell[
+           "list of strings representing the coordinate names",
+           "TableText"
+          ]
          },
          {
           Cell["   ", "ModInfo"],
           "\"CoordinateAssumptions\"",
           ButtonBox["Null", BaseStyle -> "Link"],
-          Cell["XXXX", "TableText"]
+          Cell["list of assumptions on the coordinates", "TableText"]
          },
          {
           Cell["   ", "ModInfo"],
           "\"ScalarFunctions\"",
           RowBox[{"{", "}"}],
-          Cell["XXXX", "TableText"]
+          Cell[
+           "list of strings representing the scalar function names",
+           "TableText"
+          ]
          },
          {
           Cell["   ", "ModInfo"],
           "\"Classes\"",
           RowBox[{"{", "}"}],
-          Cell["XXXX", "TableText"]
+          Cell[
+           "list of strings representing the classes names",
+           "TableText"
+          ]
          }
         }
        ]
@@ -132,12 +158,12 @@ Notebook[
               nbobj$$ = 
                NotebookObject[
                 "396d7ba7-e62f-4f66-8e75-d1637f87bc52",
-                "a9833a11-0cad-4d75-ac29-e52ce413d0df"
+                "ee2b0f98-e712-4693-976f-e7babf777732"
                ],
               cellobj$$ = 
                CellObject[
-                "d74f7fd5-0a33-4f8e-890f-a45643222570",
-                "9a0cea6b-ab58-4ad8-9c50-27afee6da062"
+                "86985940-30e8-409b-bc6e-408304fd8908",
+                "adb87e1e-be43-4c67-9403-392f7997def2"
                ]
              },
              TemplateBox[
@@ -412,35 +438,6 @@ Notebook[
        ]
       ],
       "Input"
-     ],
-     Cell[
-      CellGroupData[
-       {
-        Cell[
-         BoxData[
-          RowBox[
-           {
-            "parameterAssumptions",
-            "[",
-            RowBox[
-             {
-              RowBox[{"{", "}"}],
-              ",",
-              RowBox[{"{", "mM", "}"}],
-              ",",
-              RowBox[{"{", "}"}]
-             }
-            ],
-            "]"
-           }
-          ]
-         ],
-         "Input"
-        ],
-        Cell[BoxData[RowBox[{"mM", ">", "0"}]], "Output"]
-       },
-       Open
-      ]
      ],
      Cell[
       BoxData[
@@ -967,7 +964,6 @@ Notebook[
       ],
       "Input"
      ],
-     Cell[BoxData[RowBox[{"F", "=."}]], "Input"],
      Cell[
       CellGroupData[
        {
