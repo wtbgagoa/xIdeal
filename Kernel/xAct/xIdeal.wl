@@ -758,19 +758,16 @@ weylConcomitant["WNullDirectionTypeIII"][metric_CTensor, opts : OptionsPattern[]
 (* TODO: when doing simplifications we are not able to handle outputs with Piecewise *)
 weylConcomitant["NullDirectionTypeD"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["NullDirectionTypeD"][metric, opts] = 
-	Module[{cart, simplf, obs, w, a1, uw, b1, c1, d1, e1, bb, aa, mq, rho, gamma, P, Pdag, scrP, scrP2, S, dseda, Ch2, v0, v1, newopts},
+	Module[{cart, simplf, obs, w, a1, b1, c1, d1, e1, bb, aa, mq, rho, gamma, P, Pdag, scrP, scrP2, S, dseda, Ch2, v0, v1},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 5];
 		simplf = OptionValue[weylConcomitant, PSimplify];
-		uw = OptionValue[weylConcomitant, {opts}, "Observer"];
-		obs = Part[uw, 1];
-		w = Part[uw, 2];
-		(* In the following calls we need just an "Observer" *)
-		newopts = ReplaceAll[{opts}, uw -> obs];
-		bb = -weylConcomitant["TraceWeylMatrixQ3"][metric, Sequence@@ newopts];
-		aa = weylConcomitant["TraceWeylMatrixQ2"][metric, Sequence@@ newopts];
-		mq = weylConcomitant["WeylMatrixQ"][metric, Sequence@@ newopts];
-		gamma = metricConcomitant["SpatialMetric"][metric, Sequence@@ newopts];
+		obs = OptionValue[weylConcomitant, {opts}, "Observer"];
+		w = OptionValue[weylConcomitant, {opts}, "Vector"];
+		bb = -weylConcomitant["TraceWeylMatrixQ3"][metric, opts];
+		aa = weylConcomitant["TraceWeylMatrixQ2"][metric, opts];
+		mq = weylConcomitant["WeylMatrixQ"][metric, opts];
+		gamma = metricConcomitant["SpatialMetric"][metric, opts];
 		rho = simplf[-bb / aa];
 		P = simplf[1 / (3 rho) mq];
 		Pdag = simplf[Dagger[P]];
@@ -1205,7 +1202,7 @@ ClearxIdealCache["RframeConcomitants"] :=
 (*
 TODO: there are two algorithms for doing this computation. Merge them in the same function.
 *)
-Options[PetrovType] = {Method -> "Default", PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True, "Observer" -> Null, "Bivector" -> Null}
+Options[PetrovType] = {Method -> "Default", PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True, "Observer" -> Null, "Vector" -> Null, "Bivector" -> Null}
 
 PetrovType[metric_CTensor, opts : OptionsPattern[]] :=
     Module[{method},
@@ -1271,17 +1268,12 @@ petrovType2[metric_CTensor, opts : OptionsPattern[]] :=
 			];
 			(*TODO: make sure that an observer is included among the options*)
 			simplf = OptionValue[PetrovType, {opts}, PSimplify];
-			uw = OptionValue[weylConcomitant, {opts}, "Observer"];
-			obs = Part[uw, 1];
-			w = Part[uw, 2];
-			(* In the following calls we need just an "Observer" *)
-			newopts = ReplaceAll[{opts}, uw -> obs];
-			Q = weylConcomitant["WeylMatrixQ"][metric, Sequence@@ newopts];
-			gamma = metricConcomitant["SpatialMetric"][metric, Sequence@@ newopts];
-			Q2 = weylConcomitant["WeylMatrixQ2"][metric, Sequence@@ newopts];
-			aa = weylConcomitant["TraceWeylMatrixQ2"][metric, Sequence@@ newopts];
-			Q3 = weylConcomitant["WeylMatrixQ3"][metric, Sequence@@ newopts];
-			bb = -weylConcomitant["TraceWeylMatrixQ3"][metric, Sequence@@ newopts];
+			Q = weylConcomitant["WeylMatrixQ"][metric, opts];
+			gamma = metricConcomitant["SpatialMetric"][metric, opts];
+			Q2 = weylConcomitant["WeylMatrixQ2"][metric, opts];
+			aa = weylConcomitant["TraceWeylMatrixQ2"][metric, opts];
+			Q3 = weylConcomitant["WeylMatrixQ3"][metric, opts];
+			bb = -weylConcomitant["TraceWeylMatrixQ3"][metric, opts];
 			Which[
 				Q === Zero,
        					"Type O"
@@ -1312,7 +1304,7 @@ petrovType2[metric_CTensor, opts : OptionsPattern[]] :=
 TODO: there are two algorithms for doing this computation. Merge them in the same function.
 *)
 
-Options[DebeverNullDirections] = {Method -> "Default", PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Observer" -> Null, "Bivector" -> Null}
+Options[DebeverNullDirections] = {Method -> "Default", PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Observer" -> Null, "Vector" -> Null, "Bivector" -> Null}
 
 (* Method 1: "WeylSelfdual" *)
 DebeverNullDirections[metric_CTensor, opts : OptionsPattern[]] :=
