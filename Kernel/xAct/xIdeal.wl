@@ -198,7 +198,7 @@ Begin["`Private`"]
 (* ::Section:: *)
 (* Computation of the metric concomitants *)
 (* TODO: we should avoid defining default options for private functions *)
-Options[metricConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True, "Observer" -> Null, "Method" -> Default}
+Options[metricConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True, "Observer" -> Null, "Vector" -> Null, "Method" -> Default}
 
 metricConcomitant["G2Form"][metric_CTensor, opts : OptionsPattern[]] :=
 (metricConcomitant["G2Form"][metric, opts] = 
