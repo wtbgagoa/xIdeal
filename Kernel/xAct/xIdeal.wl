@@ -799,7 +799,7 @@ weylConcomitant["WNullDirectionTypeD"][metric_CTensor, opts : OptionsPattern[]] 
   		canonicalbivector = weylConcomitant["PTDCanonicalBivector"][metric, opts];
 	 	mu = ComplexExpand[(canonicalbivector + Dagger[canonicalbivector])/Sqrt[2]];
      	lp = HeadOfTensor[(mu[-b1, i1] mu[-i1, a1] + mu[-b1, a1]) obs[b1], {a1}];
-       	lp = HeadOfTensor[(mu[-b1, i1] mu[-i1, a1] - mu[-b1, a1]) obs[b1], {a1}];
+       	lm = HeadOfTensor[(mu[-b1, i1] mu[-i1, a1] - mu[-b1, a1]) obs[b1], {a1}];
 	 	{simplf[lp], simplf[lm]}
 	]
 )
@@ -1227,7 +1227,7 @@ petrovType1[metric_CTensor, opts : OptionsPattern[]] :=
 			If[Not @ MetricQ @ metric,
 				Throw[Message[PetrovType::nometric, metric]]
 			];
-			simplf = OptionValue[PetrovType, opts, PSimplify];
+			simplf = OptionValue[PetrovType, {opts}, PSimplify];
 			cart = Part[metric, 2, 1, -1];
 			epsilonmetric = epsilon[metric];
 			weylcd = weylConcomitant["Weyl"][metric, opts];
@@ -1300,36 +1300,48 @@ petrovType2[metric_CTensor, opts : OptionsPattern[]] :=
 (* Computation of multiple Deveber null directions for each Petrov type *)
 
 
-(*
-TODO: there are two algorithms for doing this computation. Merge them in the same function.
-*)
-
 Options[DebeverNullDirections] = {Method -> "Default", PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Observer" -> Null, "Vector" -> Null, "Bivector" -> Null}
 
-(* Method 1: "WeylSelfdual" *)
 DebeverNullDirections[metric_CTensor, opts : OptionsPattern[]] :=
+    Module[{method},
+        method = OptionValue[Method];
+        Switch[method,
+            "Default" || "WeylSelfDual",
+                debeverNullDirections1[metric, opts]
+            ,
+            "PetrovMatrix",
+                debeverNullDirections2[metric, opts]
+            ,
+            _,
+                debeverNullDirections1[metric, opts]
+        ]
+    ]
+
+
+(* Method 1: "WeylSelfdual" *)
+debeverNullDirections1[metric_CTensor, opts : OptionsPattern[]] :=
 Catch@ Module[{ptype},
 		If[Not @ MetricQ @ metric,
 			Throw[Message[PetrovType::nometric, metric]]
 		];
-  		ptype = PetrovType[metric, opts, Method -> "WeylSelfdual"];
+  		ptype = PetrovType[metric, opts];
 		Which[
-			ptype == "Type O",
+			ptype === "Type O",
 				Print["Type O"]
 			,
-			ptype == "Type N",
+			ptype === "Type N",
 				Print["Type N"];
 				weylConcomitant["WNullDirectionTypeN"][metric, opts]
 			,
-			ptype == "Type III",
+			ptype === "Type III",
 				Print["Type III"];
 				weylConcomitant["WNullDirectionTypeIII"][metric, opts]
 			,
-			ptype == "Type D",
+			ptype === "Type D",
 				Print["Type D"];
 				weylConcomitant["WNullDirectionTypeD"][metric, opts]
 			,
-			ptype == "Type II",
+			ptype === "Type II",
 				Print["Type II"];
 				weylConcomitant["WNullDirectionTypeII"][metric, opts]
 			,
@@ -1340,29 +1352,29 @@ Catch@ Module[{ptype},
 
 (* Method 2: "PetrovMatrix" *)
 (* TODO: Make sure that, if Type D, "Observer" is a string with two arguments *)
-DebeverNullDirections[metric_CTensor, opts : OptionsPattern[]] :=
+debeverNullDirections2[metric_CTensor, opts : OptionsPattern[]] :=
 Catch@ Module[{ptype},
 		If[Not @ MetricQ @ metric,
 			Throw[Message[PetrovType::nometric, metric]]
 		];
-  		ptype = PetrovType[metric, opts, Method -> "PetrovMatrix"];
+  		ptype = PetrovType[metric, opts];
 		Which[
-			ptype == "Type O",
+			ptype === "Type O",
 				Print["Type O"]
 			,
-			ptype == "Type N",
+			ptype === "Type N",
 				Print["Type N"];
 				weylConcomitant["NullDirectionTypeN"][metric, opts]
 			,
-			ptype == "Type III",
+			ptype === "Type III",
 				Print["Type III"];
 				weylConcomitant["NullDirectionTypeIII"][metric, opts]
 			,
-			ptype == "Type D",
+			ptype === "Type D",
 				Print["Type D"];
 				weylConcomitant["NullDirectionTypeD"][metric, opts]
 			,
-			ptype == "Type II",
+			ptype === "Type II",
 				Print["Type II"];
 				weylConcomitant["NullDirectionTypeII"][metric, opts]
 			,

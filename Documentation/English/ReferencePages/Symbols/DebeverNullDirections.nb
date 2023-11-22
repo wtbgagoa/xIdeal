@@ -75,12 +75,12 @@ Notebook[
               nbobj$$ = 
                NotebookObject[
                 "0b060d88-c13f-4265-8c96-bf7aef502a48",
-                "42e9bde7-0698-4091-abb3-c09b17cc5244"
+                "33fff2be-4a79-4463-b656-2bbab3b17359"
                ],
               cellobj$$ = 
                CellObject[
-                "96c8e7f0-402e-4926-bfdd-3e07bd49320b",
-                "7d240b52-3315-4995-bdb0-af3467ebcced"
+                "332ca2c0-30fc-44e2-8a72-a5ea35e84699",
+                "8b87b185-13d7-4fb5-910f-53a77f3b42b6"
                ]
              },
              TemplateBox[
@@ -713,6 +713,8 @@ Notebook[
                 {
                  "metric",
                  ",",
+                 RowBox[{"Method", "->", "\"PetrovMatrix\""}],
+                 ",",
                  RowBox[{"\"Observer\"", "->", "u"}],
                  ",",
                  " ",
@@ -817,12 +819,12 @@ Notebook[
                   {
                    "\"    Constructed in \"",
                    "\[InvisibleSpace]",
-                   "0.000618`",
+                   "0.000603`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Constructed in "0.000618" seconds",
+                 "    Constructed in "0.000603" seconds",
                  Editable -> False
                 ]
                ],
@@ -839,12 +841,12 @@ Notebook[
                    "\[InvisibleSpace]",
                    "\" in \"",
                    "\[InvisibleSpace]",
-                   "1.991033`",
+                   "2.062242`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Applied "Simplify" in "1.991" seconds",
+                 "    Applied "Simplify" in "2.0622" seconds",
                  Editable -> False
                 ]
                ],
@@ -965,12 +967,12 @@ Notebook[
                   {
                    "\"    Constructed in \"",
                    "\[InvisibleSpace]",
-                   "0.000765`",
+                   "0.001354`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Constructed in "0.000765" seconds",
+                 "    Constructed in "0.001354" seconds",
                  Editable -> False
                 ]
                ],
@@ -987,12 +989,12 @@ Notebook[
                    "\[InvisibleSpace]",
                    "\" in \"",
                    "\[InvisibleSpace]",
-                   "0.050414`",
+                   "0.054118`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Applied "Simplify" in "0.050414" seconds",
+                 "    Applied "Simplify" in "0.054118" seconds",
                  Editable -> False
                 ]
                ],
@@ -1005,7 +1007,7 @@ Notebook[
                   {
                    "\"    Stored in \"",
                    "\[InvisibleSpace]",
-                   "0.000869`",
+                   "0.001355`",
                    "\[InvisibleSpace]",
                    "\" seconds and \"",
                    "\[InvisibleSpace]",
@@ -1014,7 +1016,7 @@ Notebook[
                    "\" bytes\""
                   }
                  ],
-                 "    Stored in "0.000869" seconds and "15040" bytes",
+                 "    Stored in "0.001355" seconds and "15040" bytes",
                  Editable -> False
                 ]
                ],
@@ -1060,12 +1062,12 @@ Notebook[
                   {
                    "\"    Constructed in \"",
                    "\[InvisibleSpace]",
-                   "0.002257`",
+                   "0.003559`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Constructed in "0.002257" seconds",
+                 "    Constructed in "0.003559" seconds",
                  Editable -> False
                 ]
                ],
@@ -1082,12 +1084,12 @@ Notebook[
                    "\[InvisibleSpace]",
                    "\" in \"",
                    "\[InvisibleSpace]",
-                   "0.029787`",
+                   "0.042885`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Applied "Simplify" in "0.029787" seconds",
+                 "    Applied "Simplify" in "0.042885" seconds",
                  Editable -> False
                 ]
                ],
@@ -1100,7 +1102,7 @@ Notebook[
                   {
                    "\"    Stored in \"",
                    "\[InvisibleSpace]",
-                   "0.000779`",
+                   "0.000838`",
                    "\[InvisibleSpace]",
                    "\" seconds and \"",
                    "\[InvisibleSpace]",
@@ -1109,7 +1111,7 @@ Notebook[
                    "\" bytes\""
                   }
                  ],
-                 "    Stored in "0.000779" seconds and "14432" bytes",
+                 "    Stored in "0.000838" seconds and "14432" bytes",
                  Editable -> False
                 ]
                ],
@@ -1145,12 +1147,12 @@ Notebook[
                   {
                    "\"    Constructed in \"",
                    "\[InvisibleSpace]",
-                   "0.000147`",
+                   "0.000152`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Constructed in "0.000147" seconds",
+                 "    Constructed in "0.000152" seconds",
                  Editable -> False
                 ]
                ],
@@ -1167,12 +1169,12 @@ Notebook[
                    "\[InvisibleSpace]",
                    "\" in \"",
                    "\[InvisibleSpace]",
-                   "0.034163`",
+                   "0.024259`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Applied "Simplify" in "0.034163" seconds",
+                 "    Applied "Simplify" in "0.024259" seconds",
                  Editable -> False
                 ]
                ],
@@ -1185,7 +1187,7 @@ Notebook[
                   {
                    "\"    Stored in \"",
                    "\[InvisibleSpace]",
-                   "0.000176`",
+                   "0.000188`",
                    "\[InvisibleSpace]",
                    "\" seconds and \"",
                    "\[InvisibleSpace]",
@@ -1194,7 +1196,7 @@ Notebook[
                    "\" bytes\""
                   }
                  ],
-                 "    Stored in "0.000176" seconds and "424" bytes",
+                 "    Stored in "0.000188" seconds and "424" bytes",
                  Editable -> False
                 ]
                ],
@@ -1223,7 +1225,7 @@ Notebook[
                   {
                    "\"    Constructed in \"",
                    "\[InvisibleSpace]",
-                   "0.000083`",
+                   "0.00007`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
@@ -1245,12 +1247,12 @@ Notebook[
                    "\[InvisibleSpace]",
                    "\" in \"",
                    "\[InvisibleSpace]",
-                   "0.041106`",
+                   "0.035852`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Applied "Simplify" in "0.041106" seconds",
+                 "    Applied "Simplify" in "0.035852" seconds",
                  Editable -> False
                 ]
                ],
@@ -1263,7 +1265,7 @@ Notebook[
                   {
                    "\"    Stored in \"",
                    "\[InvisibleSpace]",
-                   "0.000163`",
+                   "0.000143`",
                    "\[InvisibleSpace]",
                    "\" seconds and \"",
                    "\[InvisibleSpace]",
@@ -1272,7 +1274,7 @@ Notebook[
                    "\" bytes\""
                   }
                  ],
-                 "    Stored in "0.000163" seconds and "64" bytes",
+                 "    Stored in "0.000143" seconds and "64" bytes",
                  Editable -> False
                 ]
                ],
@@ -1318,12 +1320,12 @@ Notebook[
                   {
                    "\"    Constructed in \"",
                    "\[InvisibleSpace]",
-                   "0.000536`",
+                   "0.000517`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Constructed in "0.000536" seconds",
+                 "    Constructed in "0.000517" seconds",
                  Editable -> False
                 ]
                ],
@@ -1340,12 +1342,12 @@ Notebook[
                    "\[InvisibleSpace]",
                    "\" in \"",
                    "\[InvisibleSpace]",
-                   "0.053242`",
+                   "0.049675`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Applied "Simplify" in "0.053242" seconds",
+                 "    Applied "Simplify" in "0.049675" seconds",
                  Editable -> False
                 ]
                ],
@@ -1358,7 +1360,7 @@ Notebook[
                   {
                    "\"    Stored in \"",
                    "\[InvisibleSpace]",
-                   "0.00076`",
+                   "0.000836`",
                    "\[InvisibleSpace]",
                    "\" seconds and \"",
                    "\[InvisibleSpace]",
@@ -1367,314 +1369,13 @@ Notebook[
                    "\" bytes\""
                   }
                  ],
-                 "    Stored in "0.00076" seconds and "15040" bytes",
+                 "    Stored in "0.000836" seconds and "15040" bytes",
                  Editable -> False
                 ]
                ],
                "Print"
               ],
-              Cell[BoxData["\"Type D\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[{"\"Metric\"", "[", RowBox[{"1", ",", "1"}], "]"}]
-                  }
-                 ],
-                 "** ReportCompute: ""Metric"[1, 1],
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"DMetric\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}]
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""DMetric"[-1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"DDMetric\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}]
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""DDMetric"[-1, -1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Christoffel\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}]
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Christoffel"[-1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Christoffel\"",
-                     "[",
-                     RowBox[
-                      {"1", ",", RowBox[{"-", "1"}], ",", RowBox[{"-", "1"}]}
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Christoffel"[1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   "\"CovDOfMetric\""
-                  }
-                 ],
-                 "** ReportCompute: ""CovDOfMetric",
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Riemann\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}]
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Riemann"[-1, -1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Riemann\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       "1"
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Riemann"[-1, -1, -1, 1],
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Ricci\"",
-                     "[",
-                     RowBox[{RowBox[{"-", "1"}], ",", RowBox[{"-", "1"}]}],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Ricci"[-1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[{"\"RicciScalar\"", "[", "]"}]
-                  }
-                 ],
-                 "** ReportCompute: ""RicciScalar"[],
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Weyl\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}]
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Weyl"[-1, -1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"]
+              Cell[BoxData["\"Type D\""], "Print"]
              },
              Open
             ]
@@ -1875,6 +1576,743 @@ Notebook[
                             ]
                            ]
                           }
+                         ],
+                         ",",
+                         "0",
+                         ",",
+                         "0"
+                        }
+                       ],
+                       "}"
+                      }
+                     ],
+                     ",",
+                     RowBox[{"{", "ch", "}"}],
+                     ",",
+                     "0"
+                    }
+                   ],
+                   "]"
+                  }
+                 ]
+                }
+               ],
+               "}"
+              }
+             ]
+            ],
+            "Output"
+           ]
+          },
+          Open
+         ]
+        ],
+        Cell[
+         CellGroupData[
+          {
+           Cell[
+            BoxData[
+             RowBox[
+              {
+               "bv",
+               "=",
+               RowBox[
+                {
+                 "CTensor",
+                 "[",
+                 RowBox[
+                  {
+                   RowBox[
+                    {
+                     "{",
+                     RowBox[
+                      {
+                       RowBox[
+                        {"{", RowBox[{"0", ",", "1", ",", "0", ",", "0"}], "}"}
+                       ],
+                       ",",
+                       RowBox[
+                        {
+                         "{",
+                         RowBox[{RowBox[{"-", "1"}], ",", "0", ",", "0", ",", "0"}],
+                         "}"
+                        }
+                       ],
+                       ",",
+                       RowBox[
+                        {"{", RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}
+                       ],
+                       ",",
+                       RowBox[
+                        {"{", RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}
+                       ]
+                      }
+                     ],
+                     "}"
+                    }
+                   ],
+                   ",",
+                   RowBox[
+                    {
+                     "{",
+                     RowBox[{RowBox[{"-", "ch"}], ",", RowBox[{"-", "ch"}]}],
+                     "}"
+                    }
+                   ]
+                  }
+                 ],
+                 "]"
+                }
+               ]
+              }
+             ]
+            ],
+            "Input"
+           ],
+           Cell[
+            BoxData[
+             RowBox[
+              {
+               "CTensor",
+               "[",
+               RowBox[
+                {
+                 RowBox[
+                  {
+                   "{",
+                   RowBox[
+                    {
+                     RowBox[
+                      {"{", RowBox[{"0", ",", "1", ",", "0", ",", "0"}], "}"}
+                     ],
+                     ",",
+                     RowBox[
+                      {
+                       "{",
+                       RowBox[{RowBox[{"-", "1"}], ",", "0", ",", "0", ",", "0"}],
+                       "}"
+                      }
+                     ],
+                     ",",
+                     RowBox[
+                      {"{", RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}
+                     ],
+                     ",",
+                     RowBox[
+                      {"{", RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}
+                     ]
+                    }
+                   ],
+                   "}"
+                  }
+                 ],
+                 ",",
+                 RowBox[
+                  {
+                   "{",
+                   RowBox[{RowBox[{"-", "ch"}], ",", RowBox[{"-", "ch"}]}],
+                   "}"
+                  }
+                 ],
+                 ",",
+                 "0"
+                }
+               ],
+               "]"
+              }
+             ]
+            ],
+            "Output"
+           ]
+          },
+          Open
+         ]
+        ],
+        Cell[
+         CellGroupData[
+          {
+           Cell[
+            BoxData[
+             RowBox[
+              {
+               "DebeverNullDirections",
+               "[",
+               RowBox[
+                {
+                 "metric",
+                 ",",
+                 RowBox[{"Method", "->", "\"WeylSelfDual\""}],
+                 ",",
+                 RowBox[{"\"Observer\"", "->", "u"}],
+                 ",",
+                 " ",
+                 RowBox[{"\"Bivector\"", "->", "bv"}]
+                }
+               ],
+               "]"
+              }
+             ]
+            ],
+            "Input"
+           ],
+           Cell[
+            CellGroupData[
+             {
+              Cell[
+               BoxData[
+                InterpretationBox[
+                 RowBox[
+                  {
+                   "\"** ReportCompute: \"",
+                   "\[InvisibleSpace]",
+                   RowBox[{"\"Metric\"", "[", RowBox[{"1", ",", "1"}], "]"}]
+                  }
+                 ],
+                 "** ReportCompute: ""Metric"[1, 1],
+                 Editable -> False
+                ]
+               ],
+               "Print"
+              ],
+              Cell[BoxData["\"    Already cached\""], "Print"],
+              Cell[
+               BoxData[
+                InterpretationBox[
+                 RowBox[
+                  {
+                   "\"** ReportCompute: \"",
+                   "\[InvisibleSpace]",
+                   RowBox[
+                    {
+                     "\"DMetric\"",
+                     "[",
+                     RowBox[
+                      {
+                       RowBox[{"-", "1"}],
+                       ",",
+                       RowBox[{"-", "1"}],
+                       ",",
+                       RowBox[{"-", "1"}]
+                      }
+                     ],
+                     "]"
+                    }
+                   ]
+                  }
+                 ],
+                 "** ReportCompute: ""DMetric"[-1, -1, -1],
+                 Editable -> False
+                ]
+               ],
+               "Print"
+              ],
+              Cell[BoxData["\"    Already cached\""], "Print"],
+              Cell[
+               BoxData[
+                InterpretationBox[
+                 RowBox[
+                  {
+                   "\"** ReportCompute: \"",
+                   "\[InvisibleSpace]",
+                   RowBox[
+                    {
+                     "\"DDMetric\"",
+                     "[",
+                     RowBox[
+                      {
+                       RowBox[{"-", "1"}],
+                       ",",
+                       RowBox[{"-", "1"}],
+                       ",",
+                       RowBox[{"-", "1"}],
+                       ",",
+                       RowBox[{"-", "1"}]
+                      }
+                     ],
+                     "]"
+                    }
+                   ]
+                  }
+                 ],
+                 "** ReportCompute: ""DDMetric"[-1, -1, -1, -1],
+                 Editable -> False
+                ]
+               ],
+               "Print"
+              ],
+              Cell[BoxData["\"    Already cached\""], "Print"],
+              Cell[
+               BoxData[
+                InterpretationBox[
+                 RowBox[
+                  {
+                   "\"** ReportCompute: \"",
+                   "\[InvisibleSpace]",
+                   RowBox[
+                    {
+                     "\"Christoffel\"",
+                     "[",
+                     RowBox[
+                      {
+                       RowBox[{"-", "1"}],
+                       ",",
+                       RowBox[{"-", "1"}],
+                       ",",
+                       RowBox[{"-", "1"}]
+                      }
+                     ],
+                     "]"
+                    }
+                   ]
+                  }
+                 ],
+                 "** ReportCompute: ""Christoffel"[-1, -1, -1],
+                 Editable -> False
+                ]
+               ],
+               "Print"
+              ],
+              Cell[BoxData["\"    Already cached\""], "Print"],
+              Cell[
+               BoxData[
+                InterpretationBox[
+                 RowBox[
+                  {
+                   "\"** ReportCompute: \"",
+                   "\[InvisibleSpace]",
+                   RowBox[
+                    {
+                     "\"Christoffel\"",
+                     "[",
+                     RowBox[
+                      {"1", ",", RowBox[{"-", "1"}], ",", RowBox[{"-", "1"}]}
+                     ],
+                     "]"
+                    }
+                   ]
+                  }
+                 ],
+                 "** ReportCompute: ""Christoffel"[1, -1, -1],
+                 Editable -> False
+                ]
+               ],
+               "Print"
+              ],
+              Cell[BoxData["\"    Already cached\""], "Print"],
+              Cell[
+               BoxData[
+                InterpretationBox[
+                 RowBox[
+                  {
+                   "\"** ReportCompute: \"",
+                   "\[InvisibleSpace]",
+                   "\"CovDOfMetric\""
+                  }
+                 ],
+                 "** ReportCompute: ""CovDOfMetric",
+                 Editable -> False
+                ]
+               ],
+               "Print"
+              ],
+              Cell[BoxData["\"    Already cached\""], "Print"],
+              Cell[
+               BoxData[
+                InterpretationBox[
+                 RowBox[
+                  {
+                   "\"** ReportCompute: \"",
+                   "\[InvisibleSpace]",
+                   RowBox[
+                    {
+                     "\"Riemann\"",
+                     "[",
+                     RowBox[
+                      {
+                       RowBox[{"-", "1"}],
+                       ",",
+                       RowBox[{"-", "1"}],
+                       ",",
+                       RowBox[{"-", "1"}],
+                       ",",
+                       RowBox[{"-", "1"}]
+                      }
+                     ],
+                     "]"
+                    }
+                   ]
+                  }
+                 ],
+                 "** ReportCompute: ""Riemann"[-1, -1, -1, -1],
+                 Editable -> False
+                ]
+               ],
+               "Print"
+              ],
+              Cell[BoxData["\"    Already cached\""], "Print"],
+              Cell[
+               BoxData[
+                InterpretationBox[
+                 RowBox[
+                  {
+                   "\"** ReportCompute: \"",
+                   "\[InvisibleSpace]",
+                   RowBox[
+                    {
+                     "\"Riemann\"",
+                     "[",
+                     RowBox[
+                      {
+                       RowBox[{"-", "1"}],
+                       ",",
+                       RowBox[{"-", "1"}],
+                       ",",
+                       RowBox[{"-", "1"}],
+                       ",",
+                       "1"
+                      }
+                     ],
+                     "]"
+                    }
+                   ]
+                  }
+                 ],
+                 "** ReportCompute: ""Riemann"[-1, -1, -1, 1],
+                 Editable -> False
+                ]
+               ],
+               "Print"
+              ],
+              Cell[BoxData["\"    Already cached\""], "Print"],
+              Cell[
+               BoxData[
+                InterpretationBox[
+                 RowBox[
+                  {
+                   "\"** ReportCompute: \"",
+                   "\[InvisibleSpace]",
+                   RowBox[
+                    {
+                     "\"Ricci\"",
+                     "[",
+                     RowBox[{RowBox[{"-", "1"}], ",", RowBox[{"-", "1"}]}],
+                     "]"
+                    }
+                   ]
+                  }
+                 ],
+                 "** ReportCompute: ""Ricci"[-1, -1],
+                 Editable -> False
+                ]
+               ],
+               "Print"
+              ],
+              Cell[BoxData["\"    Already cached\""], "Print"],
+              Cell[
+               BoxData[
+                InterpretationBox[
+                 RowBox[
+                  {
+                   "\"** ReportCompute: \"",
+                   "\[InvisibleSpace]",
+                   RowBox[{"\"RicciScalar\"", "[", "]"}]
+                  }
+                 ],
+                 "** ReportCompute: ""RicciScalar"[],
+                 Editable -> False
+                ]
+               ],
+               "Print"
+              ],
+              Cell[BoxData["\"    Already cached\""], "Print"],
+              Cell[
+               BoxData[
+                InterpretationBox[
+                 RowBox[
+                  {
+                   "\"** ReportCompute: \"",
+                   "\[InvisibleSpace]",
+                   RowBox[
+                    {
+                     "\"Weyl\"",
+                     "[",
+                     RowBox[
+                      {
+                       RowBox[{"-", "1"}],
+                       ",",
+                       RowBox[{"-", "1"}],
+                       ",",
+                       RowBox[{"-", "1"}],
+                       ",",
+                       RowBox[{"-", "1"}]
+                      }
+                     ],
+                     "]"
+                    }
+                   ]
+                  }
+                 ],
+                 "** ReportCompute: ""Weyl"[-1, -1, -1, -1],
+                 Editable -> False
+                ]
+               ],
+               "Print"
+              ],
+              Cell[BoxData["\"    Already cached\""], "Print"],
+              Cell[BoxData["\"Type D\""], "Print"]
+             },
+             Open
+            ]
+           ],
+           Cell[
+            BoxData[
+             RowBox[
+              {
+               "{",
+               RowBox[
+                {
+                 RowBox[
+                  {
+                   "CTensor",
+                   "[",
+                   RowBox[
+                    {
+                     RowBox[
+                      {
+                       "{",
+                       RowBox[
+                        {
+                         SqrtBox[
+                          FractionBox[
+                           InterpretationBox[
+                            StyleBox[
+                             "r",
+                             ShowAutoStyles -> False,
+                             AutoSpacing -> False
+                            ],
+                            r[],
+                            Editable -> False
+                           ],
+                           RowBox[
+                            {
+                             RowBox[
+                              {
+                               RowBox[{"-", "2"}],
+                               " ",
+                               InterpretationBox[
+                                StyleBox[
+                                 "M",
+                                 ShowAutoStyles -> False,
+                                 AutoSpacing -> False
+                                ],
+                                mm,
+                                Editable -> False
+                               ]
+                              }
+                             ],
+                             "+",
+                             InterpretationBox[
+                              StyleBox[
+                               "r",
+                               ShowAutoStyles -> False,
+                               AutoSpacing -> False
+                              ],
+                              r[],
+                              Editable -> False
+                             ]
+                            }
+                           ]
+                          ]
+                         ],
+                         ",",
+                         SqrtBox[
+                          RowBox[
+                           {
+                            "1",
+                            "-",
+                            FractionBox[
+                             RowBox[
+                              {
+                               "2",
+                               " ",
+                               InterpretationBox[
+                                StyleBox[
+                                 "M",
+                                 ShowAutoStyles -> False,
+                                 AutoSpacing -> False
+                                ],
+                                mm,
+                                Editable -> False
+                               ]
+                              }
+                             ],
+                             InterpretationBox[
+                              StyleBox[
+                               "r",
+                               ShowAutoStyles -> False,
+                               AutoSpacing -> False
+                              ],
+                              r[],
+                              Editable -> False
+                             ]
+                            ]
+                           }
+                          ]
+                         ],
+                         ",",
+                         "0",
+                         ",",
+                         "0"
+                        }
+                       ],
+                       "}"
+                      }
+                     ],
+                     ",",
+                     RowBox[{"{", "ch", "}"}],
+                     ",",
+                     "0"
+                    }
+                   ],
+                   "]"
+                  }
+                 ],
+                 ",",
+                 RowBox[
+                  {
+                   "CTensor",
+                   "[",
+                   RowBox[
+                    {
+                     RowBox[
+                      {
+                       "{",
+                       RowBox[
+                        {
+                         SqrtBox[
+                          FractionBox[
+                           InterpretationBox[
+                            StyleBox[
+                             "r",
+                             ShowAutoStyles -> False,
+                             AutoSpacing -> False
+                            ],
+                            r[],
+                            Editable -> False
+                           ],
+                           RowBox[
+                            {
+                             RowBox[
+                              {
+                               RowBox[{"-", "2"}],
+                               " ",
+                               InterpretationBox[
+                                StyleBox[
+                                 "M",
+                                 ShowAutoStyles -> False,
+                                 AutoSpacing -> False
+                                ],
+                                mm,
+                                Editable -> False
+                               ]
+                              }
+                             ],
+                             "+",
+                             InterpretationBox[
+                              StyleBox[
+                               "r",
+                               ShowAutoStyles -> False,
+                               AutoSpacing -> False
+                              ],
+                              r[],
+                              Editable -> False
+                             ]
+                            }
+                           ]
+                          ]
+                         ],
+                         ",",
+                         FractionBox[
+                          RowBox[
+                           {
+                            RowBox[
+                             {
+                              "2",
+                              " ",
+                              InterpretationBox[
+                               StyleBox[
+                                "M",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               mm,
+                               Editable -> False
+                              ]
+                             }
+                            ],
+                            "-",
+                            InterpretationBox[
+                             StyleBox[
+                              "r",
+                              ShowAutoStyles -> False,
+                              AutoSpacing -> False
+                             ],
+                             r[],
+                             Editable -> False
+                            ]
+                           }
+                          ],
+                          SqrtBox[
+                           RowBox[
+                            {
+                             InterpretationBox[
+                              StyleBox[
+                               "r",
+                               ShowAutoStyles -> False,
+                               AutoSpacing -> False
+                              ],
+                              r[],
+                              Editable -> False
+                             ],
+                             " ",
+                             RowBox[
+                              {
+                               "(",
+                               RowBox[
+                                {
+                                 RowBox[
+                                  {
+                                   RowBox[{"-", "2"}],
+                                   " ",
+                                   InterpretationBox[
+                                    StyleBox[
+                                     "M",
+                                     ShowAutoStyles -> False,
+                                     AutoSpacing -> False
+                                    ],
+                                    mm,
+                                    Editable -> False
+                                   ]
+                                  }
+                                 ],
+                                 "+",
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "r",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  r[],
+                                  Editable -> False
+                                 ]
+                                }
+                               ],
+                               ")"
+                              }
+                             ]
+                            }
+                           ]
+                          ]
                          ],
                          ",",
                          "0",
@@ -2229,8 +2667,7 @@ Notebook[
              ],
              ";"
             }
-           ],
-           "\[IndentingNewLine]"
+           ]
           }
          ],
          "Input"
@@ -2487,6 +2924,847 @@ Notebook[
         Cell[
          CellGroupData[
           {
+           Cell[BoxData["metric"], "Input"],
+           Cell[
+            BoxData[
+             RowBox[
+              {
+               "CTensor",
+               "[",
+               RowBox[
+                {
+                 RowBox[
+                  {
+                   "{",
+                   RowBox[
+                    {
+                     RowBox[
+                      {
+                       "{",
+                       RowBox[
+                        {
+                         RowBox[
+                          {
+                           RowBox[{"-", "1"}],
+                           "+",
+                           FractionBox[
+                            RowBox[
+                             {
+                              "2",
+                              " ",
+                              InterpretationBox[
+                               StyleBox[
+                                "M",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               mm,
+                               Editable -> False
+                              ],
+                              " ",
+                              InterpretationBox[
+                               StyleBox[
+                                "r",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               r[],
+                               Editable -> False
+                              ]
+                             }
+                            ],
+                            RowBox[
+                             {
+                              RowBox[
+                               {
+                                SuperscriptBox[
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "a",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  AA,
+                                  Editable -> False
+                                 ],
+                                 "2"
+                                ],
+                                " ",
+                                SuperscriptBox[
+                                 RowBox[
+                                  {
+                                   InterpretationBox[
+                                    StyleBox[
+                                     "Cos",
+                                     ShowAutoStyles -> False,
+                                     AutoSpacing -> False
+                                    ],
+                                    Cos,
+                                    Editable -> False
+                                   ],
+                                   "[",
+                                   InterpretationBox[
+                                    StyleBox[
+                                     "\[Theta]",
+                                     ShowAutoStyles -> False,
+                                     AutoSpacing -> False
+                                    ],
+                                    \[Theta][],
+                                    Editable -> False
+                                   ],
+                                   "]"
+                                  }
+                                 ],
+                                 "2"
+                                ]
+                               }
+                              ],
+                              "+",
+                              SuperscriptBox[
+                               InterpretationBox[
+                                StyleBox[
+                                 "r",
+                                 ShowAutoStyles -> False,
+                                 AutoSpacing -> False
+                                ],
+                                r[],
+                                Editable -> False
+                               ],
+                               "2"
+                              ]
+                             }
+                            ]
+                           ]
+                          }
+                         ],
+                         ",",
+                         "0",
+                         ",",
+                         "0",
+                         ",",
+                         RowBox[
+                          {
+                           "-",
+                           FractionBox[
+                            RowBox[
+                             {
+                              "2",
+                              " ",
+                              InterpretationBox[
+                               StyleBox[
+                                "a",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               AA,
+                               Editable -> False
+                              ],
+                              " ",
+                              InterpretationBox[
+                               StyleBox[
+                                "M",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               mm,
+                               Editable -> False
+                              ],
+                              " ",
+                              InterpretationBox[
+                               StyleBox[
+                                "r",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               r[],
+                               Editable -> False
+                              ],
+                              " ",
+                              SuperscriptBox[
+                               RowBox[
+                                {
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "Sin",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  Sin,
+                                  Editable -> False
+                                 ],
+                                 "[",
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "\[Theta]",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  \[Theta][],
+                                  Editable -> False
+                                 ],
+                                 "]"
+                                }
+                               ],
+                               "2"
+                              ]
+                             }
+                            ],
+                            RowBox[
+                             {
+                              RowBox[
+                               {
+                                SuperscriptBox[
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "a",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  AA,
+                                  Editable -> False
+                                 ],
+                                 "2"
+                                ],
+                                " ",
+                                SuperscriptBox[
+                                 RowBox[
+                                  {
+                                   InterpretationBox[
+                                    StyleBox[
+                                     "Cos",
+                                     ShowAutoStyles -> False,
+                                     AutoSpacing -> False
+                                    ],
+                                    Cos,
+                                    Editable -> False
+                                   ],
+                                   "[",
+                                   InterpretationBox[
+                                    StyleBox[
+                                     "\[Theta]",
+                                     ShowAutoStyles -> False,
+                                     AutoSpacing -> False
+                                    ],
+                                    \[Theta][],
+                                    Editable -> False
+                                   ],
+                                   "]"
+                                  }
+                                 ],
+                                 "2"
+                                ]
+                               }
+                              ],
+                              "+",
+                              SuperscriptBox[
+                               InterpretationBox[
+                                StyleBox[
+                                 "r",
+                                 ShowAutoStyles -> False,
+                                 AutoSpacing -> False
+                                ],
+                                r[],
+                                Editable -> False
+                               ],
+                               "2"
+                              ]
+                             }
+                            ]
+                           ]
+                          }
+                         ]
+                        }
+                       ],
+                       "}"
+                      }
+                     ],
+                     ",",
+                     RowBox[
+                      {
+                       "{",
+                       RowBox[
+                        {
+                         "0",
+                         ",",
+                         FractionBox[
+                          RowBox[
+                           {
+                            RowBox[
+                             {
+                              SuperscriptBox[
+                               InterpretationBox[
+                                StyleBox[
+                                 "a",
+                                 ShowAutoStyles -> False,
+                                 AutoSpacing -> False
+                                ],
+                                AA,
+                                Editable -> False
+                               ],
+                               "2"
+                              ],
+                              " ",
+                              SuperscriptBox[
+                               RowBox[
+                                {
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "Cos",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  Cos,
+                                  Editable -> False
+                                 ],
+                                 "[",
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "\[Theta]",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  \[Theta][],
+                                  Editable -> False
+                                 ],
+                                 "]"
+                                }
+                               ],
+                               "2"
+                              ]
+                             }
+                            ],
+                            "+",
+                            SuperscriptBox[
+                             InterpretationBox[
+                              StyleBox[
+                               "r",
+                               ShowAutoStyles -> False,
+                               AutoSpacing -> False
+                              ],
+                              r[],
+                              Editable -> False
+                             ],
+                             "2"
+                            ]
+                           }
+                          ],
+                          RowBox[
+                           {
+                            SuperscriptBox[
+                             InterpretationBox[
+                              StyleBox[
+                               "a",
+                               ShowAutoStyles -> False,
+                               AutoSpacing -> False
+                              ],
+                              AA,
+                              Editable -> False
+                             ],
+                             "2"
+                            ],
+                            "-",
+                            RowBox[
+                             {
+                              "2",
+                              " ",
+                              InterpretationBox[
+                               StyleBox[
+                                "M",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               mm,
+                               Editable -> False
+                              ],
+                              " ",
+                              InterpretationBox[
+                               StyleBox[
+                                "r",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               r[],
+                               Editable -> False
+                              ]
+                             }
+                            ],
+                            "+",
+                            SuperscriptBox[
+                             InterpretationBox[
+                              StyleBox[
+                               "r",
+                               ShowAutoStyles -> False,
+                               AutoSpacing -> False
+                              ],
+                              r[],
+                              Editable -> False
+                             ],
+                             "2"
+                            ]
+                           }
+                          ]
+                         ],
+                         ",",
+                         "0",
+                         ",",
+                         "0"
+                        }
+                       ],
+                       "}"
+                      }
+                     ],
+                     ",",
+                     RowBox[
+                      {
+                       "{",
+                       RowBox[
+                        {
+                         "0",
+                         ",",
+                         "0",
+                         ",",
+                         RowBox[
+                          {
+                           RowBox[
+                            {
+                             SuperscriptBox[
+                              InterpretationBox[
+                               StyleBox[
+                                "a",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               AA,
+                               Editable -> False
+                              ],
+                              "2"
+                             ],
+                             " ",
+                             SuperscriptBox[
+                              RowBox[
+                               {
+                                InterpretationBox[
+                                 StyleBox[
+                                  "Cos",
+                                  ShowAutoStyles -> False,
+                                  AutoSpacing -> False
+                                 ],
+                                 Cos,
+                                 Editable -> False
+                                ],
+                                "[",
+                                InterpretationBox[
+                                 StyleBox[
+                                  "\[Theta]",
+                                  ShowAutoStyles -> False,
+                                  AutoSpacing -> False
+                                 ],
+                                 \[Theta][],
+                                 Editable -> False
+                                ],
+                                "]"
+                               }
+                              ],
+                              "2"
+                             ]
+                            }
+                           ],
+                           "+",
+                           SuperscriptBox[
+                            InterpretationBox[
+                             StyleBox[
+                              "r",
+                              ShowAutoStyles -> False,
+                              AutoSpacing -> False
+                             ],
+                             r[],
+                             Editable -> False
+                            ],
+                            "2"
+                           ]
+                          }
+                         ],
+                         ",",
+                         "0"
+                        }
+                       ],
+                       "}"
+                      }
+                     ],
+                     ",",
+                     RowBox[
+                      {
+                       "{",
+                       RowBox[
+                        {
+                         RowBox[
+                          {
+                           "-",
+                           FractionBox[
+                            RowBox[
+                             {
+                              "2",
+                              " ",
+                              InterpretationBox[
+                               StyleBox[
+                                "a",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               AA,
+                               Editable -> False
+                              ],
+                              " ",
+                              InterpretationBox[
+                               StyleBox[
+                                "M",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               mm,
+                               Editable -> False
+                              ],
+                              " ",
+                              InterpretationBox[
+                               StyleBox[
+                                "r",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               r[],
+                               Editable -> False
+                              ],
+                              " ",
+                              SuperscriptBox[
+                               RowBox[
+                                {
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "Sin",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  Sin,
+                                  Editable -> False
+                                 ],
+                                 "[",
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "\[Theta]",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  \[Theta][],
+                                  Editable -> False
+                                 ],
+                                 "]"
+                                }
+                               ],
+                               "2"
+                              ]
+                             }
+                            ],
+                            RowBox[
+                             {
+                              RowBox[
+                               {
+                                SuperscriptBox[
+                                 InterpretationBox[
+                                  StyleBox[
+                                   "a",
+                                   ShowAutoStyles -> False,
+                                   AutoSpacing -> False
+                                  ],
+                                  AA,
+                                  Editable -> False
+                                 ],
+                                 "2"
+                                ],
+                                " ",
+                                SuperscriptBox[
+                                 RowBox[
+                                  {
+                                   InterpretationBox[
+                                    StyleBox[
+                                     "Cos",
+                                     ShowAutoStyles -> False,
+                                     AutoSpacing -> False
+                                    ],
+                                    Cos,
+                                    Editable -> False
+                                   ],
+                                   "[",
+                                   InterpretationBox[
+                                    StyleBox[
+                                     "\[Theta]",
+                                     ShowAutoStyles -> False,
+                                     AutoSpacing -> False
+                                    ],
+                                    \[Theta][],
+                                    Editable -> False
+                                   ],
+                                   "]"
+                                  }
+                                 ],
+                                 "2"
+                                ]
+                               }
+                              ],
+                              "+",
+                              SuperscriptBox[
+                               InterpretationBox[
+                                StyleBox[
+                                 "r",
+                                 ShowAutoStyles -> False,
+                                 AutoSpacing -> False
+                                ],
+                                r[],
+                                Editable -> False
+                               ],
+                               "2"
+                              ]
+                             }
+                            ]
+                           ]
+                          }
+                         ],
+                         ",",
+                         "0",
+                         ",",
+                         "0",
+                         ",",
+                         RowBox[
+                          {
+                           SuperscriptBox[
+                            RowBox[
+                             {
+                              InterpretationBox[
+                               StyleBox[
+                                "Sin",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               Sin,
+                               Editable -> False
+                              ],
+                              "[",
+                              InterpretationBox[
+                               StyleBox[
+                                "\[Theta]",
+                                ShowAutoStyles -> False,
+                                AutoSpacing -> False
+                               ],
+                               \[Theta][],
+                               Editable -> False
+                              ],
+                              "]"
+                             }
+                            ],
+                            "2"
+                           ],
+                           " ",
+                           RowBox[
+                            {
+                             "(",
+                             RowBox[
+                              {
+                               SuperscriptBox[
+                                InterpretationBox[
+                                 StyleBox[
+                                  "a",
+                                  ShowAutoStyles -> False,
+                                  AutoSpacing -> False
+                                 ],
+                                 AA,
+                                 Editable -> False
+                                ],
+                                "2"
+                               ],
+                               "+",
+                               SuperscriptBox[
+                                InterpretationBox[
+                                 StyleBox[
+                                  "r",
+                                  ShowAutoStyles -> False,
+                                  AutoSpacing -> False
+                                 ],
+                                 r[],
+                                 Editable -> False
+                                ],
+                                "2"
+                               ],
+                               "+",
+                               FractionBox[
+                                RowBox[
+                                 {
+                                  "2",
+                                  " ",
+                                  SuperscriptBox[
+                                   InterpretationBox[
+                                    StyleBox[
+                                     "a",
+                                     ShowAutoStyles -> False,
+                                     AutoSpacing -> False
+                                    ],
+                                    AA,
+                                    Editable -> False
+                                   ],
+                                   "2"
+                                  ],
+                                  " ",
+                                  InterpretationBox[
+                                   StyleBox[
+                                    "M",
+                                    ShowAutoStyles -> False,
+                                    AutoSpacing -> False
+                                   ],
+                                   mm,
+                                   Editable -> False
+                                  ],
+                                  " ",
+                                  InterpretationBox[
+                                   StyleBox[
+                                    "r",
+                                    ShowAutoStyles -> False,
+                                    AutoSpacing -> False
+                                   ],
+                                   r[],
+                                   Editable -> False
+                                  ],
+                                  " ",
+                                  SuperscriptBox[
+                                   RowBox[
+                                    {
+                                     InterpretationBox[
+                                      StyleBox[
+                                       "Sin",
+                                       ShowAutoStyles -> False,
+                                       AutoSpacing -> False
+                                      ],
+                                      Sin,
+                                      Editable -> False
+                                     ],
+                                     "[",
+                                     InterpretationBox[
+                                      StyleBox[
+                                       "\[Theta]",
+                                       ShowAutoStyles -> False,
+                                       AutoSpacing -> False
+                                      ],
+                                      \[Theta][],
+                                      Editable -> False
+                                     ],
+                                     "]"
+                                    }
+                                   ],
+                                   "2"
+                                  ]
+                                 }
+                                ],
+                                RowBox[
+                                 {
+                                  RowBox[
+                                   {
+                                    SuperscriptBox[
+                                     InterpretationBox[
+                                      StyleBox[
+                                       "a",
+                                       ShowAutoStyles -> False,
+                                       AutoSpacing -> False
+                                      ],
+                                      AA,
+                                      Editable -> False
+                                     ],
+                                     "2"
+                                    ],
+                                    " ",
+                                    SuperscriptBox[
+                                     RowBox[
+                                      {
+                                       InterpretationBox[
+                                        StyleBox[
+                                         "Cos",
+                                         ShowAutoStyles -> False,
+                                         AutoSpacing -> False
+                                        ],
+                                        Cos,
+                                        Editable -> False
+                                       ],
+                                       "[",
+                                       InterpretationBox[
+                                        StyleBox[
+                                         "\[Theta]",
+                                         ShowAutoStyles -> False,
+                                         AutoSpacing -> False
+                                        ],
+                                        \[Theta][],
+                                        Editable -> False
+                                       ],
+                                       "]"
+                                      }
+                                     ],
+                                     "2"
+                                    ]
+                                   }
+                                  ],
+                                  "+",
+                                  SuperscriptBox[
+                                   InterpretationBox[
+                                    StyleBox[
+                                     "r",
+                                     ShowAutoStyles -> False,
+                                     AutoSpacing -> False
+                                    ],
+                                    r[],
+                                    Editable -> False
+                                   ],
+                                   "2"
+                                  ]
+                                 }
+                                ]
+                               ]
+                              }
+                             ],
+                             ")"
+                            }
+                           ]
+                          }
+                         ]
+                        }
+                       ],
+                       "}"
+                      }
+                     ]
+                    }
+                   ],
+                   "}"
+                  }
+                 ],
+                 ",",
+                 RowBox[
+                  {
+                   "{",
+                   RowBox[{RowBox[{"-", "ch"}], ",", RowBox[{"-", "ch"}]}],
+                   "}"
+                  }
+                 ],
+                 ",",
+                 "0"
+                }
+               ],
+               "]"
+              }
+             ]
+            ],
+            "Output"
+           ]
+          },
+          Open
+         ]
+        ],
+        Cell[
+         CellGroupData[
+          {
            Cell[
             BoxData[
              RowBox[
@@ -2496,6 +3774,8 @@ Notebook[
                RowBox[
                 {
                  "metric",
+                 ",",
+                 RowBox[{"Method", "->", "\"PetrovMatrix\""}],
                  ",",
                  RowBox[{"\"Observer\"", "->", "u"}],
                  ",",
@@ -2587,1065 +3867,9 @@ Notebook[
             CellTags -> "TextAnnotation"
            ],
            Cell[
-            CellGroupData[
-             {
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[{"\"Metric\"", "[", RowBox[{"1", ",", "1"}], "]"}]
-                  }
-                 ],
-                 "** ReportCompute: ""Metric"[1, 1],
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData["\"    Already cached\""],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"DMetric\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}]
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""DMetric"[-1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData["\"    Already cached\""],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"DDMetric\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}]
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""DDMetric"[-1, -1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"    Constructed in \"",
-                   "\[InvisibleSpace]",
-                   "0.001129`",
-                   "\[InvisibleSpace]",
-                   "\" seconds\""
-                  }
-                 ],
-                 "    Constructed in "0.001129" seconds",
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"    Applied \"",
-                   "\[InvisibleSpace]",
-                   "Simplify",
-                   "\[InvisibleSpace]",
-                   "\" in \"",
-                   "\[InvisibleSpace]",
-                   "1.582397`",
-                   "\[InvisibleSpace]",
-                   "\" seconds\""
-                  }
-                 ],
-                 "    Applied "Simplify" in "1.5824" seconds",
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Christoffel\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}]
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Christoffel"[-1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData["\"    Already cached\""],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Christoffel\"",
-                     "[",
-                     RowBox[
-                      {"1", ",", RowBox[{"-", "1"}], ",", RowBox[{"-", "1"}]}
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Christoffel"[1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData["\"    Already cached\""],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   "\"CovDOfMetric\""
-                  }
-                 ],
-                 "** ReportCompute: ""CovDOfMetric",
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData["\"    Already cached\""],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Riemann\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}]
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Riemann"[-1, -1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"    Constructed in \"",
-                   "\[InvisibleSpace]",
-                   "0.001443`",
-                   "\[InvisibleSpace]",
-                   "\" seconds\""
-                  }
-                 ],
-                 "    Constructed in "0.001443" seconds",
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"    Applied \"",
-                   "\[InvisibleSpace]",
-                   "Simplify",
-                   "\[InvisibleSpace]",
-                   "\" in \"",
-                   "\[InvisibleSpace]",
-                   "0.582508`",
-                   "\[InvisibleSpace]",
-                   "\" seconds\""
-                  }
-                 ],
-                 "    Applied "Simplify" in "0.58251" seconds",
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"    Stored in \"",
-                   "\[InvisibleSpace]",
-                   "0.002643`",
-                   "\[InvisibleSpace]",
-                   "\" seconds and \"",
-                   "\[InvisibleSpace]",
-                   "191552",
-                   "\[InvisibleSpace]",
-                   "\" bytes\""
-                  }
-                 ],
-                 "    Stored in "0.002643" seconds and "191552" bytes",
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Riemann\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       "1"
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Riemann"[-1, -1, -1, 1],
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"    Constructed in \"",
-                   "\[InvisibleSpace]",
-                   "0.004816`",
-                   "\[InvisibleSpace]",
-                   "\" seconds\""
-                  }
-                 ],
-                 "    Constructed in "0.004816" seconds",
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"    Applied \"",
-                   "\[InvisibleSpace]",
-                   "Simplify",
-                   "\[InvisibleSpace]",
-                   "\" in \"",
-                   "\[InvisibleSpace]",
-                   "0.669555`",
-                   "\[InvisibleSpace]",
-                   "\" seconds\""
-                  }
-                 ],
-                 "    Applied "Simplify" in "0.66956" seconds",
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"    Stored in \"",
-                   "\[InvisibleSpace]",
-                   "0.003321`",
-                   "\[InvisibleSpace]",
-                   "\" seconds and \"",
-                   "\[InvisibleSpace]",
-                   "218888",
-                   "\[InvisibleSpace]",
-                   "\" bytes\""
-                  }
-                 ],
-                 "    Stored in "0.003321" seconds and "218888" bytes",
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Ricci\"",
-                     "[",
-                     RowBox[{RowBox[{"-", "1"}], ",", RowBox[{"-", "1"}]}],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Ricci"[-1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"    Constructed in \"",
-                   "\[InvisibleSpace]",
-                   "0.000315`",
-                   "\[InvisibleSpace]",
-                   "\" seconds\""
-                  }
-                 ],
-                 "    Constructed in "0.000315" seconds",
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"    Applied \"",
-                   "\[InvisibleSpace]",
-                   "Simplify",
-                   "\[InvisibleSpace]",
-                   "\" in \"",
-                   "\[InvisibleSpace]",
-                   "0.044121`",
-                   "\[InvisibleSpace]",
-                   "\" seconds\""
-                  }
-                 ],
-                 "    Applied "Simplify" in "0.044121" seconds",
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"    Stored in \"",
-                   "\[InvisibleSpace]",
-                   "0.000311`",
-                   "\[InvisibleSpace]",
-                   "\" seconds and \"",
-                   "\[InvisibleSpace]",
-                   "424",
-                   "\[InvisibleSpace]",
-                   "\" bytes\""
-                  }
-                 ],
-                 "    Stored in "0.000311" seconds and "424" bytes",
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[{"\"RicciScalar\"", "[", "]"}]
-                  }
-                 ],
-                 "** ReportCompute: ""RicciScalar"[],
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"    Constructed in \"",
-                   "\[InvisibleSpace]",
-                   "0.000084`",
-                   "\[InvisibleSpace]",
-                   "\" seconds\""
-                  }
-                 ],
-                 "    Constructed in "0.0" seconds",
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"    Applied \"",
-                   "\[InvisibleSpace]",
-                   "Simplify",
-                   "\[InvisibleSpace]",
-                   "\" in \"",
-                   "\[InvisibleSpace]",
-                   "0.0182`",
-                   "\[InvisibleSpace]",
-                   "\" seconds\""
-                  }
-                 ],
-                 "    Applied "Simplify" in "0.0182" seconds",
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"    Stored in \"",
-                   "\[InvisibleSpace]",
-                   "0.00049`",
-                   "\[InvisibleSpace]",
-                   "\" seconds and \"",
-                   "\[InvisibleSpace]",
-                   "64",
-                   "\[InvisibleSpace]",
-                   "\" bytes\""
-                  }
-                 ],
-                 "    Stored in "0.00049" seconds and "64" bytes",
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Weyl\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}]
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Weyl"[-1, -1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"    Constructed in \"",
-                   "\[InvisibleSpace]",
-                   "0.000622`",
-                   "\[InvisibleSpace]",
-                   "\" seconds\""
-                  }
-                 ],
-                 "    Constructed in "0.000622" seconds",
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"    Applied \"",
-                   "\[InvisibleSpace]",
-                   "Simplify",
-                   "\[InvisibleSpace]",
-                   "\" in \"",
-                   "\[InvisibleSpace]",
-                   "0.128357`",
-                   "\[InvisibleSpace]",
-                   "\" seconds\""
-                  }
-                 ],
-                 "    Applied "Simplify" in "0.12836" seconds",
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"    Stored in \"",
-                   "\[InvisibleSpace]",
-                   "0.003116`",
-                   "\[InvisibleSpace]",
-                   "\" seconds and \"",
-                   "\[InvisibleSpace]",
-                   "191552",
-                   "\[InvisibleSpace]",
-                   "\" bytes\""
-                  }
-                 ],
-                 "    Stored in "0.003116" seconds and "191552" bytes",
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData["\"Type D\""],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[{"\"Metric\"", "[", RowBox[{"1", ",", "1"}], "]"}]
-                  }
-                 ],
-                 "** ReportCompute: ""Metric"[1, 1],
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData["\"    Already cached\""],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"DMetric\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}]
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""DMetric"[-1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData["\"    Already cached\""],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"DDMetric\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}]
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""DDMetric"[-1, -1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData["\"    Already cached\""],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Christoffel\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}]
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Christoffel"[-1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData["\"    Already cached\""],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Christoffel\"",
-                     "[",
-                     RowBox[
-                      {"1", ",", RowBox[{"-", "1"}], ",", RowBox[{"-", "1"}]}
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Christoffel"[1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData["\"    Already cached\""],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   "\"CovDOfMetric\""
-                  }
-                 ],
-                 "** ReportCompute: ""CovDOfMetric",
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData["\"    Already cached\""],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Riemann\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}]
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Riemann"[-1, -1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData["\"    Already cached\""],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Riemann\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       "1"
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Riemann"[-1, -1, -1, 1],
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData["\"    Already cached\""],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Ricci\"",
-                     "[",
-                     RowBox[{RowBox[{"-", "1"}], ",", RowBox[{"-", "1"}]}],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Ricci"[-1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData["\"    Already cached\""],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[{"\"RicciScalar\"", "[", "]"}]
-                  }
-                 ],
-                 "** ReportCompute: ""RicciScalar"[],
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData["\"    Already cached\""],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Weyl\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}]
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Weyl"[-1, -1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ],
-              Cell[
-               BoxData["\"    Already cached\""],
-               "Print",
-               CellTags -> "TextAnnotation"
-              ]
-             },
-             Open
-            ]
+            BoxData["\"Type D\""],
+            "Print",
+            CellTags -> "TextAnnotation"
            ],
            Cell[
             BoxData[
@@ -13826,7 +14050,13 @@ Notebook[
                "DebeverNullDirections",
                "[",
                RowBox[
-                {"metric", ",", RowBox[{"\"Observer\"", "->", "u"}]}
+                {
+                 "metric",
+                 ",",
+                 RowBox[{"Method", "->", "\"PetrovMatrix\""}],
+                 ",",
+                 RowBox[{"\"Observer\"", "->", "u"}]
+                }
                ],
                "]"
               }
@@ -13926,12 +14156,12 @@ Notebook[
                   {
                    "\"    Constructed in \"",
                    "\[InvisibleSpace]",
-                   "0.000898`",
+                   "0.000905`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Constructed in "0.000898" seconds",
+                 "    Constructed in "0.000905" seconds",
                  Editable -> False
                 ]
                ],
@@ -13948,12 +14178,12 @@ Notebook[
                    "\[InvisibleSpace]",
                    "\" in \"",
                    "\[InvisibleSpace]",
-                   "0.026318`",
+                   "0.023545`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Applied "Simplify" in "0.026318" seconds",
+                 "    Applied "Simplify" in "0.023545" seconds",
                  Editable -> False
                 ]
                ],
@@ -14074,12 +14304,12 @@ Notebook[
                   {
                    "\"    Constructed in \"",
                    "\[InvisibleSpace]",
-                   "0.000729`",
+                   "0.000741`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Constructed in "0.000729" seconds",
+                 "    Constructed in "0.000741" seconds",
                  Editable -> False
                 ]
                ],
@@ -14096,12 +14326,12 @@ Notebook[
                    "\[InvisibleSpace]",
                    "\" in \"",
                    "\[InvisibleSpace]",
-                   "0.045529`",
+                   "0.06319`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Applied "Simplify" in "0.045529" seconds",
+                 "    Applied "Simplify" in "0.06319" seconds",
                  Editable -> False
                 ]
                ],
@@ -14114,7 +14344,7 @@ Notebook[
                   {
                    "\"    Stored in \"",
                    "\[InvisibleSpace]",
-                   "0.000954`",
+                   "0.001046`",
                    "\[InvisibleSpace]",
                    "\" seconds and \"",
                    "\[InvisibleSpace]",
@@ -14123,7 +14353,7 @@ Notebook[
                    "\" bytes\""
                   }
                  ],
-                 "    Stored in "0.000954" seconds and "41888" bytes",
+                 "    Stored in "0.001046" seconds and "41888" bytes",
                  Editable -> False
                 ]
                ],
@@ -14169,12 +14399,12 @@ Notebook[
                   {
                    "\"    Constructed in \"",
                    "\[InvisibleSpace]",
-                   "0.002422`",
+                   "0.002553`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Constructed in "0.002422" seconds",
+                 "    Constructed in "0.002553" seconds",
                  Editable -> False
                 ]
                ],
@@ -14191,12 +14421,12 @@ Notebook[
                    "\[InvisibleSpace]",
                    "\" in \"",
                    "\[InvisibleSpace]",
-                   "0.042203`",
+                   "0.08381`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Applied "Simplify" in "0.042203" seconds",
+                 "    Applied "Simplify" in "0.08381" seconds",
                  Editable -> False
                 ]
                ],
@@ -14209,7 +14439,7 @@ Notebook[
                   {
                    "\"    Stored in \"",
                    "\[InvisibleSpace]",
-                   "0.00142`",
+                   "0.000871`",
                    "\[InvisibleSpace]",
                    "\" seconds and \"",
                    "\[InvisibleSpace]",
@@ -14218,7 +14448,7 @@ Notebook[
                    "\" bytes\""
                   }
                  ],
-                 "    Stored in "0.00142" seconds and "29944" bytes",
+                 "    Stored in "0.000871" seconds and "29944" bytes",
                  Editable -> False
                 ]
                ],
@@ -14254,12 +14484,12 @@ Notebook[
                   {
                    "\"    Constructed in \"",
                    "\[InvisibleSpace]",
-                   "0.000239`",
+                   "0.000174`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Constructed in "0.000239" seconds",
+                 "    Constructed in "0.000174" seconds",
                  Editable -> False
                 ]
                ],
@@ -14276,12 +14506,12 @@ Notebook[
                    "\[InvisibleSpace]",
                    "\" in \"",
                    "\[InvisibleSpace]",
-                   "0.016419`",
+                   "0.044522`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Applied "Simplify" in "0.016419" seconds",
+                 "    Applied "Simplify" in "0.044522" seconds",
                  Editable -> False
                 ]
                ],
@@ -14294,7 +14524,7 @@ Notebook[
                   {
                    "\"    Stored in \"",
                    "\[InvisibleSpace]",
-                   "0.000165`",
+                   "0.000291`",
                    "\[InvisibleSpace]",
                    "\" seconds and \"",
                    "\[InvisibleSpace]",
@@ -14303,7 +14533,7 @@ Notebook[
                    "\" bytes\""
                   }
                  ],
-                 "    Stored in "0.000165" seconds and "424" bytes",
+                 "    Stored in "0.000291" seconds and "424" bytes",
                  Editable -> False
                 ]
                ],
@@ -14332,12 +14562,12 @@ Notebook[
                   {
                    "\"    Constructed in \"",
                    "\[InvisibleSpace]",
-                   "0.000069`",
+                   "0.000115`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Constructed in "0.0" seconds",
+                 "    Constructed in "0.000115" seconds",
                  Editable -> False
                 ]
                ],
@@ -14354,12 +14584,12 @@ Notebook[
                    "\[InvisibleSpace]",
                    "\" in \"",
                    "\[InvisibleSpace]",
-                   "0.034179`",
+                   "0.033323`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Applied "Simplify" in "0.034179" seconds",
+                 "    Applied "Simplify" in "0.033323" seconds",
                  Editable -> False
                 ]
                ],
@@ -14372,7 +14602,7 @@ Notebook[
                   {
                    "\"    Stored in \"",
                    "\[InvisibleSpace]",
-                   "0.000168`",
+                   "0.000142`",
                    "\[InvisibleSpace]",
                    "\" seconds and \"",
                    "\[InvisibleSpace]",
@@ -14381,7 +14611,7 @@ Notebook[
                    "\" bytes\""
                   }
                  ],
-                 "    Stored in "0.000168" seconds and "64" bytes",
+                 "    Stored in "0.000142" seconds and "64" bytes",
                  Editable -> False
                 ]
                ],
@@ -14427,12 +14657,12 @@ Notebook[
                   {
                    "\"    Constructed in \"",
                    "\[InvisibleSpace]",
-                   "0.000678`",
+                   "0.000686`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Constructed in "0.000678" seconds",
+                 "    Constructed in "0.000686" seconds",
                  Editable -> False
                 ]
                ],
@@ -14449,12 +14679,12 @@ Notebook[
                    "\[InvisibleSpace]",
                    "\" in \"",
                    "\[InvisibleSpace]",
-                   "0.060565`",
+                   "0.060114`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Applied "Simplify" in "0.060565" seconds",
+                 "    Applied "Simplify" in "0.060114" seconds",
                  Editable -> False
                 ]
                ],
@@ -14467,7 +14697,7 @@ Notebook[
                   {
                    "\"    Stored in \"",
                    "\[InvisibleSpace]",
-                   "0.001053`",
+                   "0.000966`",
                    "\[InvisibleSpace]",
                    "\" seconds and \"",
                    "\[InvisibleSpace]",
@@ -14476,7 +14706,7 @@ Notebook[
                    "\" bytes\""
                   }
                  ],
-                 "    Stored in "0.001053" seconds and "41888" bytes",
+                 "    Stored in "0.000966" seconds and "41888" bytes",
                  Editable -> False
                 ]
                ],
@@ -14868,7 +15098,13 @@ Notebook[
                "DebeverNullDirections",
                "[",
                RowBox[
-                {"metric", ",", RowBox[{"\"Observer\"", "->", "u"}]}
+                {
+                 "metric",
+                 ",",
+                 RowBox[{"Method", "->", "\"PetrovMatrix\""}],
+                 ",",
+                 RowBox[{"\"Observer\"", "->", "u"}]
+                }
                ],
                "]"
               }
@@ -14968,12 +15204,12 @@ Notebook[
                   {
                    "\"    Constructed in \"",
                    "\[InvisibleSpace]",
-                   "0.000994`",
+                   "0.000584`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Constructed in "0.000994" seconds",
+                 "    Constructed in "0.000584" seconds",
                  Editable -> False
                 ]
                ],
@@ -14990,12 +15226,12 @@ Notebook[
                    "\[InvisibleSpace]",
                    "\" in \"",
                    "\[InvisibleSpace]",
-                   "0.016237`",
+                   "0.013975`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Applied "Simplify" in "0.016237" seconds",
+                 "    Applied "Simplify" in "0.013975" seconds",
                  Editable -> False
                 ]
                ],
@@ -15116,12 +15352,12 @@ Notebook[
                   {
                    "\"    Constructed in \"",
                    "\[InvisibleSpace]",
-                   "0.00084`",
+                   "0.000795`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Constructed in "0.00084" seconds",
+                 "    Constructed in "0.000795" seconds",
                  Editable -> False
                 ]
                ],
@@ -15138,12 +15374,12 @@ Notebook[
                    "\[InvisibleSpace]",
                    "\" in \"",
                    "\[InvisibleSpace]",
-                   "0.059281`",
+                   "0.052936`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Applied "Simplify" in "0.059281" seconds",
+                 "    Applied "Simplify" in "0.052936" seconds",
                  Editable -> False
                 ]
                ],
@@ -15156,7 +15392,7 @@ Notebook[
                   {
                    "\"    Stored in \"",
                    "\[InvisibleSpace]",
-                   "0.000987`",
+                   "0.000913`",
                    "\[InvisibleSpace]",
                    "\" seconds and \"",
                    "\[InvisibleSpace]",
@@ -15165,7 +15401,7 @@ Notebook[
                    "\" bytes\""
                   }
                  ],
-                 "    Stored in "0.000987" seconds and "21120" bytes",
+                 "    Stored in "0.000913" seconds and "21120" bytes",
                  Editable -> False
                 ]
                ],
@@ -15211,12 +15447,12 @@ Notebook[
                   {
                    "\"    Constructed in \"",
                    "\[InvisibleSpace]",
-                   "0.003158`",
+                   "0.003083`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Constructed in "0.003158" seconds",
+                 "    Constructed in "0.003083" seconds",
                  Editable -> False
                 ]
                ],
@@ -15233,12 +15469,12 @@ Notebook[
                    "\[InvisibleSpace]",
                    "\" in \"",
                    "\[InvisibleSpace]",
-                   "0.054571`",
+                   "0.052057`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Applied "Simplify" in "0.054571" seconds",
+                 "    Applied "Simplify" in "0.052057" seconds",
                  Editable -> False
                 ]
                ],
@@ -15251,7 +15487,7 @@ Notebook[
                   {
                    "\"    Stored in \"",
                    "\[InvisibleSpace]",
-                   "0.001092`",
+                   "0.00098`",
                    "\[InvisibleSpace]",
                    "\" seconds and \"",
                    "\[InvisibleSpace]",
@@ -15260,7 +15496,7 @@ Notebook[
                    "\" bytes\""
                   }
                  ],
-                 "    Stored in "0.001092" seconds and "23840" bytes",
+                 "    Stored in "0.00098" seconds and "23840" bytes",
                  Editable -> False
                 ]
                ],
@@ -15296,12 +15532,12 @@ Notebook[
                   {
                    "\"    Constructed in \"",
                    "\[InvisibleSpace]",
-                   "0.000178`",
+                   "0.000148`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Constructed in "0.000178" seconds",
+                 "    Constructed in "0.000148" seconds",
                  Editable -> False
                 ]
                ],
@@ -15318,12 +15554,12 @@ Notebook[
                    "\[InvisibleSpace]",
                    "\" in \"",
                    "\[InvisibleSpace]",
-                   "0.018989`",
+                   "0.010992`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Applied "Simplify" in "0.018989" seconds",
+                 "    Applied "Simplify" in "0.010992" seconds",
                  Editable -> False
                 ]
                ],
@@ -15336,7 +15572,7 @@ Notebook[
                   {
                    "\"    Stored in \"",
                    "\[InvisibleSpace]",
-                   "0.00043`",
+                   "0.000205`",
                    "\[InvisibleSpace]",
                    "\" seconds and \"",
                    "\[InvisibleSpace]",
@@ -15345,7 +15581,7 @@ Notebook[
                    "\" bytes\""
                   }
                  ],
-                 "    Stored in "0.00043" seconds and "1240" bytes",
+                 "    Stored in "0.000205" seconds and "1240" bytes",
                  Editable -> False
                 ]
                ],
@@ -15374,12 +15610,12 @@ Notebook[
                   {
                    "\"    Constructed in \"",
                    "\[InvisibleSpace]",
-                   "0.000141`",
+                   "0.000107`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Constructed in "0.000141" seconds",
+                 "    Constructed in "0.000107" seconds",
                  Editable -> False
                 ]
                ],
@@ -15396,12 +15632,12 @@ Notebook[
                    "\[InvisibleSpace]",
                    "\" in \"",
                    "\[InvisibleSpace]",
-                   "0.044297`",
+                   "0.035994`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Applied "Simplify" in "0.044297" seconds",
+                 "    Applied "Simplify" in "0.035994" seconds",
                  Editable -> False
                 ]
                ],
@@ -15414,7 +15650,7 @@ Notebook[
                   {
                    "\"    Stored in \"",
                    "\[InvisibleSpace]",
-                   "0.000198`",
+                   "0.000185`",
                    "\[InvisibleSpace]",
                    "\" seconds and \"",
                    "\[InvisibleSpace]",
@@ -15423,7 +15659,7 @@ Notebook[
                    "\" bytes\""
                   }
                  ],
-                 "    Stored in "0.000198" seconds and "144" bytes",
+                 "    Stored in "0.000185" seconds and "144" bytes",
                  Editable -> False
                 ]
                ],
@@ -15469,12 +15705,12 @@ Notebook[
                   {
                    "\"    Constructed in \"",
                    "\[InvisibleSpace]",
-                   "0.001017`",
+                   "0.00085`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Constructed in "0.001017" seconds",
+                 "    Constructed in "0.00085" seconds",
                  Editable -> False
                 ]
                ],
@@ -15491,12 +15727,12 @@ Notebook[
                    "\[InvisibleSpace]",
                    "\" in \"",
                    "\[InvisibleSpace]",
-                   "0.046174`",
+                   "0.059988`",
                    "\[InvisibleSpace]",
                    "\" seconds\""
                   }
                  ],
-                 "    Applied "Simplify" in "0.046174" seconds",
+                 "    Applied "Simplify" in "0.059988" seconds",
                  Editable -> False
                 ]
                ],
@@ -15509,7 +15745,7 @@ Notebook[
                   {
                    "\"    Stored in \"",
                    "\[InvisibleSpace]",
-                   "0.001267`",
+                   "0.000905`",
                    "\[InvisibleSpace]",
                    "\" seconds and \"",
                    "\[InvisibleSpace]",
@@ -15518,314 +15754,13 @@ Notebook[
                    "\" bytes\""
                   }
                  ],
-                 "    Stored in "0.001267" seconds and "22000" bytes",
+                 "    Stored in "0.000905" seconds and "22000" bytes",
                  Editable -> False
                 ]
                ],
                "Print"
               ],
-              Cell[BoxData["\"Type II\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[{"\"Metric\"", "[", RowBox[{"1", ",", "1"}], "]"}]
-                  }
-                 ],
-                 "** ReportCompute: ""Metric"[1, 1],
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"DMetric\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}]
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""DMetric"[-1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"DDMetric\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}]
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""DDMetric"[-1, -1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Christoffel\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}]
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Christoffel"[-1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Christoffel\"",
-                     "[",
-                     RowBox[
-                      {"1", ",", RowBox[{"-", "1"}], ",", RowBox[{"-", "1"}]}
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Christoffel"[1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   "\"CovDOfMetric\""
-                  }
-                 ],
-                 "** ReportCompute: ""CovDOfMetric",
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Riemann\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}]
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Riemann"[-1, -1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Riemann\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       "1"
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Riemann"[-1, -1, -1, 1],
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Ricci\"",
-                     "[",
-                     RowBox[{RowBox[{"-", "1"}], ",", RowBox[{"-", "1"}]}],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Ricci"[-1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[{"\"RicciScalar\"", "[", "]"}]
-                  }
-                 ],
-                 "** ReportCompute: ""RicciScalar"[],
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"],
-              Cell[
-               BoxData[
-                InterpretationBox[
-                 RowBox[
-                  {
-                   "\"** ReportCompute: \"",
-                   "\[InvisibleSpace]",
-                   RowBox[
-                    {
-                     "\"Weyl\"",
-                     "[",
-                     RowBox[
-                      {
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}],
-                       ",",
-                       RowBox[{"-", "1"}]
-                      }
-                     ],
-                     "]"
-                    }
-                   ]
-                  }
-                 ],
-                 "** ReportCompute: ""Weyl"[-1, -1, -1, -1],
-                 Editable -> False
-                ]
-               ],
-               "Print"
-              ],
-              Cell[BoxData["\"    Already cached\""], "Print"]
+              Cell[BoxData["\"Type II\""], "Print"]
              },
              Open
             ]
