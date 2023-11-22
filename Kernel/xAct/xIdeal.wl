@@ -269,7 +269,7 @@ ClearxIdealCache["MetricConcomitants"] :=
 (* Computation of the Weyl concomitants *)
 
 (* TODO: we should avoid defining default options for private functions *)
-Options[weylConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True, "Observer" -> Null, Method -> "Default"}
+Options[weylConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True, "Observer" -> Null, "Vector" -> Null, "Bivector" -> Null, Method -> "Default"}
 
 weylConcomitant["Weyl"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["Weyl"][metric, opts] = 
