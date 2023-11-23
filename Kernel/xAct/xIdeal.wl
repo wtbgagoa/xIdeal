@@ -1848,7 +1848,7 @@ exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "ParameterNam
 
 exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "ParameterAssumptions"}] = exactSolsData["GeneralSpherical", "ParameterAssumptions"]
 
-exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "FunctionNames"}] = {"\[Lambda]", "\[Mu]", "\[Nu]"}
+exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "ScalarFunctionNames"}] = {"\[Lambda]", "\[Mu]", "\[Nu]"}
 
 
 (* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
@@ -1874,14 +1874,14 @@ Options[SaveExactSolution] = {
 	"CoordinateSystemName" -> " ",
 	"CoordinateNames" -> {},
 	"CoordinateAssumptions" -> Null,
-	"ScalarFunctions" -> {},
+	"ScalarFunctionsNames" -> {},
 	"Classes" -> {" "}
 }
 
 SaveExactSolution[metric_Function, exactsolname_String, opts : OptionsPattern[]] :=
-	Module[{params, paramassmp, isideal, coords, sclrs, coordsassmp, cls},
+	Module[{params, paramassmp, isideal, coords, sclrs, coordsassmp, funcs, cls},
 
-		{params, paramassmp, isideal, sclrs, coords, coordsassmp, cls} = OptionValue[{"ParameterNames", "ParameterAssumptions", "IsIdeal", "CoordinateNames", "CoordinateSystemName", "CoordinateAssumptions", "Classes"}];
+		{params, paramassmp, isideal, sclrs, coords, coordsassmp, funcs, cls} = OptionValue[{"ParameterNames", "ParameterAssumptions", "IsIdeal", "CoordinateNames", "CoordinateSystemName", "CoordinateAssumptions", "ScalarFunctionNames", "Classes"}];
 
 		exactSolsData[exactsolname, "ParameterNames"] = params;
 
@@ -1893,12 +1893,13 @@ SaveExactSolution[metric_Function, exactsolname_String, opts : OptionsPattern[]]
 
 		exactSolsData[exactsolname, {coords, "CoordinateNames"}] = sclrs;
 
-		(* The syntax is exactSolsData[args__][coords_List, parameters_List, functions_List] *)
 		exactSolsData[exactsolname, {coords, "CoordinateAssumptions"}] = coordsassmp;
 
-		exactSolsData[exactsolname, {coords, "ParameterNames"}] = exactSolsData[metricname, "ParameterNames"];
+		exactSolsData[exactsolname, {coords, "ParameterNames"}] = exactSolsData[exactsolname, "ParameterNames"];
 
-		exactSolsData[exactsolname, {coords, "ParameterAssumptions"}] = exactSolsData[metricname, "ParameterAssumptions"];
+		exactSolsData[exactsolname, {coords, "ParameterAssumptions"}] = exactSolsData[exactsolname, "ParameterAssumptions"];
+
+		exactSolsData[exactsolname, {coords, "ScalarFunctionNames"}] = funcs;
 
 		exactSolsData[exactsolname, {coords, "Metric"}] = metric;
 
