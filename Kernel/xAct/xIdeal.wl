@@ -1887,7 +1887,7 @@ Options[SaveExactSolution] = {
 	"CoordinateSystemName" -> " ",
 	"CoordinateNames" -> {},
 	"CoordinateAssumptions" -> Null,
-	"ScalarFunctionsNames" -> {},
+	"ScalarFunctionNames" -> {},
 	"Classes" -> {" "}
 }
 
