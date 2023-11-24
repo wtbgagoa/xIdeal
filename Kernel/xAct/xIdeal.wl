@@ -200,12 +200,28 @@ Begin["`Private`"]
 (* TODO: we should avoid defining default options for private functions *)
 Options[metricConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True, "Observer" -> Null, "Vector" -> Null, "Method" -> Default}
 
-metricConcomitant["G2Form"][metric_CTensor, opts : OptionsPattern[]] :=
-(metricConcomitant["G2Form"][metric, opts] = 
-	Module[{simplf, cart, a1, b1, c1, d1, e1, f1, epsilonmetric},
+metricConcomitant["G"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["G"][metric, opts] = 
+	Module[{simplf, cart, a1, b1, c1, d1},
 		simplf = OptionValue[metricConcomitant, PSimplify];
 		cart = 	Part[metric, 2, 1, -1];
-		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
+		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
+		epsilonmetric = epsilon[metric];
+		simplf[
+			HeadOfTensor[
+				metric[-a1, -b1] metric[-c1, -d1] - metric[-a1, -d1] metric[-c1, -b1], 
+				{-a1, -b1, -c1, -d1}
+			]
+		]
+	]
+)
+
+metricConcomitant["G2Form"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["G2Form"][metric, opts] = 
+	Module[{simplf, cart, a1, b1, c1, d1, epsilonmetric},
+		simplf = OptionValue[metricConcomitant, PSimplify];
+		cart = 	Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
 		epsilonmetric = epsilon[metric];
 		simplf[
 			HeadOfTensor[
@@ -232,6 +248,15 @@ metricConcomitant["SpatialMetric"][metric_CTensor, opts : OptionsPattern[]] :=
 				HeadOfTensor[metric[-a1, -b1] - obs[-a1] obs[-b1], {-a1, -b1}]
 			]
 		]
+	]
+)
+
+metricConcomitant["Ricci"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["Ricci"][metric, opts] = 
+	Module[{cd},
+		cd = CovDOfMetric[metric];
+		weylConcomitant["Weyl"][metric, opts];
+		Ricci[cd]
 	]
 )
 
@@ -568,6 +593,55 @@ weylConcomitant["ConformalLambda"][metric_CTensor, opts : OptionsPattern[]] :=
 		lambda = (2 / weylcdweylcd) weylcd[-a1, b1, c1, d1]Antisymmetrize[cdschouten[-b1, -c1, -d1], {-d1, -b1}];
 		lambda = simplf[HeadOfTensor[lambda, {-a1}]];
 		simplf[cdw + 2 w lambda]
+	]
+)
+
+weylConcomitant["ScalarRho"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["ScalarRho"][metric, opts] = 
+	Module[{simplf, cart, trw3},
+		simplf = OptionValue[weylConcomitant, PSimplify];
+		cart = Part[metric, 2, 1, -1];	
+		trw3 = weylConcomitant["TraceWeyl3"][metric, opts];
+		simplf[-(trw3 / 12)^(1/3)]
+	]
+)
+
+weylConcomitant["TensorS"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["TensorS"][metric, opts] = 
+	Module[{simplf, cart, w, G, rho},
+		simplf = OptionValue[weylConcomitant, PSimplify];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];		
+		w = weylConcomitant["Weyl"][metric, opts];
+		G = metricConcomitant["G"][metric, opts];
+		rho = weylConcomitant["ScalarRho"][metric, opts];
+		simplf[(w - rho G) / (3 rho)]
+	]
+)
+
+weylConcomitant["VectorPhi"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["TensorS"][metric, opts] = 
+	Module[{simplf, cart, S, cd, cds, a1, b1, c1, d1},
+		simplf = OptionValue[weylConcomitant, PSimplify];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];		
+		S = weylConcomitant["TensorS"][metric, opts];
+		cd = CovDOfMetric[metric];
+		cds = simplf[HeadOfTensor[cd[-a1][S[a1, -b1, -c1, -d1]], {-b1, -c1, -d1}]];
+		simplf[HeadOfTensor[S[a1, -b1, c1, d1]cds[-a1, -c1, -d1], {-b1}]]
+	]
+)
+
+weylConcomitant["TensorB"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["TensorS"][metric, opts] = 
+	Module[{simplf, cart, S, R, r, a1, b1, c1, d1},
+		simplf = OptionValue[weylConcomitant, PSimplify];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];		
+		S = weylConcomitant["TensorS"][metric, opts];
+		R = weylConcomitant["Ricci"][metric, opts];
+		r = weylConcomitant["RicciScalar"][metric, opts];
+		simplf[HeadOfTensor[R[-a1, -b1] - 1/2 S[-a1, -b1, -c1, -d1] R[c1, d1] - 1/2 r metric[-a1, -b1], {-a1, -b1}]]
 	]
 )
 
