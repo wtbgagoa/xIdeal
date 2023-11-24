@@ -1706,17 +1706,18 @@ allmetrics = {
 	"KasnerIII",
 	"Kerr",
  	"KerrNut",
-	"LemaitreTolmanBondi",
+	"LemaitreTolman",
 	"TaubI",
 	"TaubII",
+	"ThermodynamicStephani",
 	"PetrovSolution",
 	"PPWave",
 	"ReissnerNordstrom",
 	"Schwarzschild",
    	"Stephani",
+	"StephaniSpherical",
     "SzekeresSzafronI",
     "SzekeresSzafronII",
-    "StephaniSpherical",
     "Wills",
 	"WindmillI"
 }
@@ -1733,6 +1734,7 @@ allclasses = {
 	"G1",
 	"G2",
 	"G3",
+	"G3S2",
 	"G4",
 	"G5",
 	"G6",
@@ -1753,7 +1755,6 @@ allclasses = {
 	"SpatialG4", 
 	"SpatialG5",
 	"SpatialG6", 
-	"SpatiallyHomogeneous",
 	"SphericalSymmetry",
 	"Static", 
 	"Stationary",
@@ -1775,6 +1776,7 @@ allmetricproperties = {
 }
 
 allcoordinatesystems = {
+	"AdaptedCoordinates",
 	"BoyerLindquistCoordinates",
 	"ExpansionGradientAdaptedCoordinates",
  	"IsotropicCoordinates",
