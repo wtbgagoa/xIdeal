@@ -133,6 +133,11 @@ exactSolsData["Vacuum"] = {
 (* Exact solutions database *)
 
 
+(* The syntax is GRData[args__String, {coords_List, parameters_List, functions_List}] *)
+
+xAct`xIdeal`GRData[solname_String, coordname_String, "Metric", {coords_List, parameters_List, functions_List}] := exactSolsData[solname, {coordname, "Metric"}][coords, parameters, functions]
+
+
 (* ::Subsection:: *)
 (* GeneralSpherical metric in spherical coordinates *)
 
@@ -152,6 +157,7 @@ exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "ParameterAss
 
 exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "ScalarFunctionNames"}] = {"\[Lambda]", "\[Mu]", "\[Nu]"}
 
+defaultcoordinates["GeneralSphericalSymmetry"] = "SphericalCoordinates"
 
 (* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
 
@@ -187,6 +193,8 @@ exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ParameterNames"}] =
 
 exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ParameterAssumptions"}] = exactSolsData["Schwarzschild", "ParameterAssumptions"]
 
+defaultcoordinates["Schwarzschild"] = "SchwarzschildCoordinates"
+
 (* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
 
 exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "Metric"}] = 
@@ -195,6 +203,61 @@ exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "Metric"}] =
 			DiagonalMatrix[{-(1 - (2 m) / r), (1 - (2 m) / r)^-1, r^2, r^2 Sin[theta]^2}] 
 		]
 	]
+
+(* ::Subsection:: *)
+(* Stephani in adapted coordinates *)
+
+exactSolsData["Stephani", "Classes"] = {"PerfectFluid", "ThermodynamicPerfectFluid",
+     "G3S2", "SpatialG6", "ConformallyFlat"}
+
+exactSolsData["Stephani", "IsIDEAL"] = True
+
+exactSolsData["Stephani", "ParameterAssumptions"] = Null
+
+exactSolsData["Stephani", "ParameterNames"] = {"\[CurlyEpsilon]"}
+
+exactSolsData["Stephani", {"AdaptedCoordinates", "CoordinateAssumptions"}] = Null
+
+exactSolsData["Stephani", {"AdaptedCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
+
+exactSolsData["Stephani", {"AdaptedCoordinates", "Metric"}] =
+    Function[{coords, params, scfuncs},
+        With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = 
+            coords[[4]], epsilon = params[[1]], w = scfuncs[[1]], L = scfuncs[[2]],
+            Omega = scfuncs[[3]], alpha = scfuncs[[4]], R = scfuncs[[5]], b = scfuncs[[6]]},
+            w =
+                Function[{x, y, z},
+                    2 * (z / (1 + epsilon * ((x^2 + y^2 + z^2) / 4)))            
+                ];
+            L =
+                Function[{R, b, t, w, x, y, z},
+                    R[t] / (1 + b[t] * w[x, y, z])
+                ];
+            Omega =
+                Function[{w, x, y, z, L, R, b, t},
+                    w[x, y, z] * (L[R, b, t, w, x, y, z] / (2 * z))
+                ];
+            alpha =
+                Function[{R, t, L, b, w, x, y, z},
+                    R[t] * (D[L[R, b, t, w, x, y, z], t] / (L[R, b, t, w, x, y, z] * D[R[t], t]))
+                ];
+            DiagonalMatrix[
+				{
+					-alpha[R, t, L, b, w, x, y, z] ^ 2, 
+					Omega[w, x, y, z, L, R, b, t] ^ 2, 
+					Omega[w, x, y, z, L, R, b, t] ^ 2, 
+					Omega[w, x, y, z, L, R, b, t] ^ 2
+				}
+			]
+        ]
+    ]
+
+exactSolsData["Stephani", {"AdaptedCoordinates", "ParameterAssumptions"}] = Null
+
+exactSolsData["Stephani", {"AdaptedCoordinates", "ParameterNames"}] = {"\[CurlyEpsilon]"}
+
+exactSolsData["Stephani", {"AdaptedCoordinates", "ScalarFunctionNames"}] = {"w", "L", "\[CapitalOmega]", "\[Alpha]", "R", "b"}
+
 
 (****************************************************************)
 
