@@ -132,31 +132,6 @@ exactSolsData["Vacuum"] = {
 (* ::Section:: *)
 (* Exact solutions database *)
 
-(* ::Subsection:: *)
-(* Schwarzschild in Schwarzschild coordinates *)
-
-exactSolsData["Schwarzschild", "ParameterNames"] = {"m"}
-
-exactSolsData["Schwarzschild", "ParameterAssumptions"] = #[[1]] > 0 &
-
-exactSolsData["Schwarzschild", "IsIDEAL"] = True
-
-exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "CoordinateNames"}] = {"t", "r", "\[Theta]", "\[Phi]"}
-
-exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "CoordinateAssumptions"}] = #[[2]] > 0 && Pi > #[[3]] > 0 &
-
-exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ParameterNames"}] = exactSolsData["Schwarzschild", "ParameterNames"]
-
-exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ParameterAssumptions"}] = exactSolsData["Schwarzschild", "ParameterAssumptions"]
-
-(* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
-
-exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "Metric"}] = 
-	Function[{coords, params, funcs},
-		With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]], m = params[[1]]},
-			DiagonalMatrix[{-(1 - (2 m) / r), (1 - (2 m) / r)^-1, r^2, r^2 Sin[theta]^2}] 
-		]
-	]
 
 (* ::Subsection:: *)
 (* GeneralSpherical metric in spherical coordinates *)
@@ -193,6 +168,40 @@ exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "Metric"}] =
 			]
 		] 
 	]
+
+
+(* ::Subsection:: *)
+(* Schwarzschild in Schwarzschild coordinates *)
+
+exactSolsData["Schwarzschild", "ParameterNames"] = {"m"}
+
+exactSolsData["Schwarzschild", "ParameterAssumptions"] = #[[1]] > 0 &
+
+exactSolsData["Schwarzschild", "IsIDEAL"] = True
+
+exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "CoordinateNames"}] = {"t", "r", "\[Theta]", "\[Phi]"}
+
+exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "CoordinateAssumptions"}] = #[[2]] > 0 && Pi > #[[3]] > 0 &
+
+exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ParameterNames"}] = exactSolsData["Schwarzschild", "ParameterNames"]
+
+exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ParameterAssumptions"}] = exactSolsData["Schwarzschild", "ParameterAssumptions"]
+
+(* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
+
+exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "Metric"}] = 
+	Function[{coords, params, funcs},
+		With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]], m = params[[1]]},
+			DiagonalMatrix[{-(1 - (2 m) / r), (1 - (2 m) / r)^-1, r^2, r^2 Sin[theta]^2}] 
+		]
+	]
+
+(****************************************************************)
+
+(****************** 5. End private and package ******************)
+
+(****************************************************************)
+
 
 End[]
 
