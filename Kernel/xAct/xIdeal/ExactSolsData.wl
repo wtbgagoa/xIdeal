@@ -210,6 +210,53 @@ exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "Metric"}] =
 	]
 
 (* ::Subsection:: *)
+(* Schwarzschild in Isotropic coordinates *)
+
+exactSolsData["Schwarzschild", {"IsotropicCoordinates", "ParameterNames"}] = {"m"}
+
+exactSolsData["Schwarzschild", {"IsotropicCoordinates", "ParameterAssumptions"}] =
+    Function[{coords, params, scfuncs},
+        With[{m = params[[1]]},
+            m > 0
+        ]
+    ]
+
+exactSolsData["Schwarzschild", {"IsotropicCoordinates", "ScalarFunctionNames"}] = {"R"}
+
+exactSolsData["Schwarzschild", {"IsotropicCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
+
+exactSolsData["Schwarzschild", {"IsotropicCoordinates", "CoordinateAssumptions"}] =
+    Function[{coords, params, scfuncs},
+        With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = 
+            coords[[4]], m = params[[1]], R = scfuncs[[1]]},
+            R =
+                Function[{x, y, z},
+                    Sqrt[x^2 + y^2 + z^2]
+                ];
+            m >= 0 && R[x, y, z] > 2 * m
+        ]
+    ]
+
+exactSolsData["Schwarzschild", {"IsotropicCoordinates", "Metric"}] =
+    Function[{coords, params, scfuncs},
+        With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = 
+            coords[[4]], m = params[[1]], R = scfuncs[[1]]},
+            R =
+                Function[{x, y, z},
+                    Sqrt[x^2 + y^2 + z^2]
+                ];
+            DiagonalMatrix[
+				{
+					-((1 - m / (2 * R[x, y, z])) ^ 2 / (1 + m / (2 * R[x, y, z])) ^ 2), 
+					(1 + m / (2 * R[x, y, z])) ^ 4, 
+					(1 + m / (2 * R[x, y, z])) ^ 4, 
+					(1 + m / (2 * R[x, y, z])) ^ 4
+				}
+			]
+        ]
+    ]
+
+(* ::Subsection:: *)
 (* Stephani Thermodynamic in adapted coordinates *)
 
 exactSolsData["StephaniThermodynamic", "Classes"] = {"PerfectFluid", "ThermodynamicPerfectFluid",
