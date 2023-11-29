@@ -8,6 +8,9 @@ Begin["xAct`xIdeal`Private`"]
 allmetrics = {
 	"BertottiRobinson",
  	"Friedmann",
+	"FarnsworthKerrI",
+	"FarnsworthKerrII",
+	"FarnsworthKerrIII",
 	"GeneralSphericalSymmetry",
  	"GeneralSzekeresSzafron",
  	"KantowskiSachs",
@@ -89,6 +92,7 @@ allmetricproperties = {
 allcoordinatesystems = {
 	"AdaptedCoordinates",
 	"BoyerLindquistCoordinates",
+	"CanonicalCoordinates",
 	"ExpansionGradientAdaptedCoordinates",
  	"IsotropicCoordinates",
   	"ReducedCircumferencePolarCoordinates",
