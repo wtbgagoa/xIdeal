@@ -204,34 +204,45 @@ Options[metricConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Ver
 
 metricConcomitant["G"][metric_CTensor, opts : OptionsPattern[]] :=
 (metricConcomitant["G"][metric, opts] = 
-	Module[{simplf, cart, a1, b1, c1, d1},
-		simplf = OptionValue[metricConcomitant, PSimplify];
+	Module[{simplf, cart, a1, b1, c1, d1, gmetric, time, vb},
+		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = 	Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
-		epsilonmetric = epsilon[metric];
-		simplf[
-			HeadOfTensor[
-				metric[-a1, -b1] metric[-c1, -d1] - metric[-a1, -d1] metric[-c1, -b1], 
-				{-a1, -b1, -c1, -d1}
-			]
-		]
+		gmetric = metric[-a1, -b1] metric[-c1, -d1] - metric[-a1, -d1] metric[-c1, -b1];
+		If[vb,
+			Print["** ReportCompute: computing metric concomitant \"G\" in", AbsoluteTime[] - time, " seconds:"];
+		];
+		gmetric = HeadOfTensor[gmetric, {-a1, -b1, -c1, -d1}];
+		Print["ReportCompute: applying  ", simplf, " to metric concomitant \"G\":"];
+		time = AbsoluteTime[];
+		simplf[gmetric];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"G2Form\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		gmetric
 	]
 )
 
 metricConcomitant["G2Form"][metric_CTensor, opts : OptionsPattern[]] :=
 (metricConcomitant["G2Form"][metric, opts] = 
-	Module[{simplf, cart, a1, b1, c1, d1, epsilonmetric},
-		simplf = OptionValue[metricConcomitant, PSimplify];
+	Module[{simplf, cart, a1, b1, c1, d1, epsilonmetric, gmetric, time, vb},
+		{simplf, vb} = OptionValue[metricConcomitant, {opts} ,{PSimplify, Verbose}];
 		cart = 	Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
 		epsilonmetric = epsilon[metric];
-		simplf[
-			HeadOfTensor[
-				1/2 (-I epsilonmetric[-a1, -b1, -c1, -d1] + 
-				metric[-a1, -c1] metric[-b1, -d1] - metric[-a1, -d1] metric[-b1, -c1]), 
-				{-a1, -b1, -c1, -d1}
-			]
-		]
+		time = AbsoluteTime[];
+		gmetric = 1/2 (-I epsilonmetric[-a1, -b1, -c1, -d1] + 
+			metric[-a1, -c1] metric[-b1, -d1] - metric[-a1, -d1] metric[-b1, -c1]);
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"G2Form\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		gmetric = HeadOfTensor[gmetric, {-a1, -b1, -c1, -d1}];
+		time = AbsoluteTime[];
+		gmetric = simplf[gmetric];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"G2Form\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		gmetric
 	]
 )
 
