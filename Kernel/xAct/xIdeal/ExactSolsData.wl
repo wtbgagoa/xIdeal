@@ -25,7 +25,8 @@ allmetrics = {
 	"ReissnerNordstrom",
 	"Schwarzschild",
    	"Stephani",
-	"StephaniSpherical",
+	"StephaniThermodynamic",
+	"StephaniThermodynamicSpherical",
     "SzekeresSzafronI",
     "SzekeresSzafronII",
     "Wills",
@@ -205,22 +206,22 @@ exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "Metric"}] =
 	]
 
 (* ::Subsection:: *)
-(* Stephani in adapted coordinates *)
+(* Stephani Thermodynamic in adapted coordinates *)
 
-exactSolsData["Stephani", "Classes"] = {"PerfectFluid", "ThermodynamicPerfectFluid",
+exactSolsData["StephaniThermodynamic", "Classes"] = {"PerfectFluid", "ThermodynamicPerfectFluid",
      "G3S2", "SpatialG6", "ConformallyFlat"}
 
-exactSolsData["Stephani", "IsIDEAL"] = True
+exactSolsData["StephaniThermodynamic", "IsIDEAL"] = True
 
-exactSolsData["Stephani", "ParameterAssumptions"] = Null
+exactSolsData["StephaniThermodynamic", "ParameterAssumptions"] = Null
 
-exactSolsData["Stephani", "ParameterNames"] = {"\[CurlyEpsilon]"}
+exactSolsData["StephaniThermodynamic", "ParameterNames"] = {"\[CurlyEpsilon]"}
 
-exactSolsData["Stephani", {"AdaptedCoordinates", "CoordinateAssumptions"}] = Null
+exactSolsData["StephaniThermodynamic", {"AdaptedCoordinates", "CoordinateAssumptions"}] = Null
 
-exactSolsData["Stephani", {"AdaptedCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
+exactSolsData["StephaniThermodynamic", {"AdaptedCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
 
-exactSolsData["Stephani", {"AdaptedCoordinates", "Metric"}] =
+exactSolsData["StephaniThermodynamic", {"AdaptedCoordinates", "Metric"}] =
     Function[{coords, params, scfuncs},
         With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = 
             coords[[4]], epsilon = params[[1]], w = scfuncs[[1]], L = scfuncs[[2]],
@@ -252,11 +253,11 @@ exactSolsData["Stephani", {"AdaptedCoordinates", "Metric"}] =
         ]
     ]
 
-exactSolsData["Stephani", {"AdaptedCoordinates", "ParameterAssumptions"}] = Null
+exactSolsData["StephaniThermodynamic", {"AdaptedCoordinates", "ParameterAssumptions"}] = Null
 
-exactSolsData["Stephani", {"AdaptedCoordinates", "ParameterNames"}] = {"\[CurlyEpsilon]"}
+exactSolsData["StephaniThermodynamic", {"AdaptedCoordinates", "ParameterNames"}] = {"\[CurlyEpsilon]"}
 
-exactSolsData["Stephani", {"AdaptedCoordinates", "ScalarFunctionNames"}] = {"w", "L", "\[CapitalOmega]", "\[Alpha]", "R", "b"}
+exactSolsData["StephaniThermodynamic", {"AdaptedCoordinates", "ScalarFunctionNames"}] = {"w", "L", "\[CapitalOmega]", "\[Alpha]", "R", "b"}
 
 
 (****************************************************************)
