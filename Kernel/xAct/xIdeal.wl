@@ -213,11 +213,10 @@ metricConcomitant["G"][metric_CTensor, opts : OptionsPattern[]] :=
 			Print["** ReportCompute: computing metric concomitant \"G\" in", AbsoluteTime[] - time, " seconds:"];
 		];
 		gmetric = HeadOfTensor[gmetric, {-a1, -b1, -c1, -d1}];
-		Print["ReportCompute: applying  ", simplf, " to metric concomitant \"G\":"];
 		time = AbsoluteTime[];
 		simplf[gmetric];
 		If[vb,
-			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"G2Form\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"G\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		gmetric
 	]
