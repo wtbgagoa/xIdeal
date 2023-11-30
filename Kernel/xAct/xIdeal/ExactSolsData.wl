@@ -142,6 +142,47 @@ exactSolsData["Vacuum"] = {
 
 xAct`xIdeal`GRData[solname_String, coordname_String, "Metric", {coords_List, parameters_List, functions_List}] := exactSolsData[solname, {coordname, "Metric"}][coords, parameters, functions]
 
+(* ::Subsection:: *)
+(* Friedmann in reduced circumference polar coordinates *)
+
+exactSolsData["Friedmann", "Classes"] = {"PerfectFluid", "ThermodynamicPerfectFluid",
+     "ConformallyFlat", "SpatiallyHomogeneous", "SpatialG6", "BarotropicPerfectFluid",
+     "ConformallyStatic"}
+
+exactSolsData["Friedmann", "IsIDEAL"] = True
+
+exactSolsData["Friedmann", "ParameterNames"] = {"k"}
+
+exactSolsData["Friedmann", "ParameterAssumptions"] = Null
+
+exactSolsData["Friedmann", {"ReducedCircumferencePolarCoordinates", "CoordinateNames"}] = {"t", "r", "\[Theta]", "\[Phi]"}
+
+exactSolsData["Friedmann", {"ReducedCircumferencePolarCoordinates", "CoordinateAssumptions"}] = Null
+
+exactSolsData["Friedmann", {"ReducedCircumferencePolarCoordinates", "ParameterNames"}] = {"k"}
+
+exactSolsData["Friedmann", {"ReducedCircumferencePolarCoordinates", "ParameterAssumptions"}] = Null
+
+exactSolsData["Friedmann", {"ReducedCircumferencePolarCoordinates", "ScalarFunctionNames"}] = {"R"}
+
+
+exactSolsData["Friedmann", {"ReducedCircumferencePolarCoordinates", "Metric"}] =
+    Function[{coords, params, scfuncs},
+        With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], 
+            phi = coords[[4]], k = params[[1]], R = scfuncs[[1]]},
+            DiagonalMatrix[
+				{
+					-1, 
+					R[t] ^ 2 / (1 - k * r^2), 
+					R[t] ^ 2 * r^2, 
+					R[t] ^ 2 * r^2 * Sin[theta] ^ 2
+				}
+			]
+        ]
+    ]
+
+
+
 
 (* ::Subsection:: *)
 (* GeneralSpherical metric in spherical coordinates *)
