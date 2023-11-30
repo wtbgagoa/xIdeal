@@ -208,6 +208,7 @@ metricConcomitant["G"][metric_CTensor, opts : OptionsPattern[]] :=
 		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = 	Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
+		time = AbsoluteTime[];
 		gmetric = metric[-a1, -b1] metric[-c1, -d1] - metric[-a1, -d1] metric[-c1, -b1];
 		If[vb,
 			Print["** ReportCompute: computing metric concomitant \"G\" in", AbsoluteTime[] - time, " seconds:"];
