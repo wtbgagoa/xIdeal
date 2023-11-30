@@ -567,7 +567,7 @@ weylConcomitant["TraceWeylSelfDual3"][metric_CTensor, opts : OptionsPattern[]] :
 			Print["** ReportCompute: computing metric concomitant \"TraceWeylSelfDual3\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		time = AbsoluteTime[];
-		trweylselfdual3 = simplf[trweylselfdual3]
+		trweylselfdual3 = simplf[trweylselfdual3];
 		If[vb,
 			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"TraceWeylSelfDual3\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
