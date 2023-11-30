@@ -223,6 +223,31 @@ exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "Metric"}] =
 
 
 (* ::Subsection:: *)
+(* Reissner-Nordström *)
+
+exactSolsData["ReissnerNordstrom", "ParameterNames"] = {"m", "rQ"}
+
+exactSolsData["ReissnerNordstrom", "ParameterAssumptions"] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{m = params[[1]], rQ = params[[2]]}, 
+			m > 0 && rQ > 0
+		]
+	]
+
+exactSolsData["ReissnerNordstrom", "IsIDEAL"] = True
+
+exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "CoordinateNames"}] = {"t", "r", "\[Theta]", "\[Phi]"}
+
+exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "CoordinateAssumptions"}] = 
+	Function[{coords, params, scfuncs}, 
+     	With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]]}, 
+			r > 0 && Pi > theta > 0
+		]
+	]
+
+exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "ScalarFunctionNames"}] = {}
+
+(* ::Subsection:: *)
 (* Schwarzschild in Schwarzschild coordinates *)
 
 exactSolsData["Schwarzschild", "ParameterNames"] = {"m"}
