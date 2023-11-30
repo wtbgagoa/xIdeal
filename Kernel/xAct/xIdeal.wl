@@ -189,7 +189,7 @@ SaveExactSolution::usage = " ";
 
 PetrovType::nometric = "Metric `1` has not been registered as a metric";
 
-
+PetrovType::noobserver = "Value `1` for \"Observer\" is invalid";
 
 (* ::Section:: *)
 (* BeginPrivate *)
@@ -226,7 +226,7 @@ metricConcomitant["G"][metric_CTensor, opts : OptionsPattern[]] :=
 metricConcomitant["G2Form"][metric_CTensor, opts : OptionsPattern[]] :=
 (metricConcomitant["G2Form"][metric, opts] = 
 	Module[{simplf, cart, a1, b1, c1, d1, epsilonmetric, gmetric, time, vb},
-		{simplf, vb} = OptionValue[metricConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = 	Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
 		epsilonmetric = epsilon[metric];
@@ -248,18 +248,18 @@ metricConcomitant["G2Form"][metric_CTensor, opts : OptionsPattern[]] :=
 
 metricConcomitant["SpatialMetric"][metric_CTensor, opts : OptionsPattern[]] :=
 (metricConcomitant["SpatialMetric"][metric, opts] = 
-	Module[{simplf, cart, obs, a1, b1},
-		simplf = OptionValue[metricConcomitant, PSimplify];
-		obs = OptionValue[metricConcomitant, {opts}, "Observer"];
+	Module[{simplf, cart, obs, a1, b1, smetric},
+		{obs, simplf} = OptionValue[metricConcomitant, {opts}, {"Observer", PSimplify}];
+		If[Head[obs] =!= CTensor,
+			Throw[Message[PetrovType::noobserver, obs]]
+		];
 		cart = 	Part[metric, 2, 1, -1];
 		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
 		If[ SignatureOfMetric[metric] === {3, 1, 0},
-			simplf[
-				HeadOfTensor[metric[-a1, -b1] + obs[-a1] obs[-b1], {-a1, -b1}]
-			],
-			simplf[
-				HeadOfTensor[metric[-a1, -b1] - obs[-a1] obs[-b1], {-a1, -b1}]
-			]
+			smetric = HeadOfTensor[metric[-a1, -b1] + obs[-a1] obs[-b1], {-a1, -b1}];
+			simplf[smetric],
+			smetric = HeadOfTensor[metric[-a1, -b1] - obs[-a1] obs[-b1], {-a1, -b1}];
+			simplf[smetric]
 		]
 	]
 )
