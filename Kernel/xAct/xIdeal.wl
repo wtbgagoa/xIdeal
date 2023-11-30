@@ -544,7 +544,7 @@ weylConcomitant["WeylSelfDual3"][metric_CTensor, opts : OptionsPattern[]] :=
 		If[vb, 
 			Print["** ReportCompute: computing metric concomitant \"WeylSelfDual3\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
-		weylselfdual3 = [HeadOfTensor[weylselfdual3, {-a1, -b1, -c1, -d1}]];
+		weylselfdual3 = HeadOfTensor[weylselfdual3, {-a1, -b1, -c1, -d1}];
 		time = AbsoluteTime[];
 		weylselfdual3 = simplf[weylselfdual3];
 		If[vb,
