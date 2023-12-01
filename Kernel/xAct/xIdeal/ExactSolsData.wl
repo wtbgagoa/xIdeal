@@ -236,6 +236,9 @@ exactSolsData["ReissnerNordstrom", "ParameterAssumptions"] =
 
 exactSolsData["ReissnerNordstrom", "IsIDEAL"] = True
 
+exactSolsData["ReissnerNordstrom", "Classes"] = {"DMetrics", "PetrovTypeD", 
+	"SphericalSymmetry", "Warped22", "Static", "EinsteinMaxwellSolution"}
+
 exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "CoordinateNames"}] = {"t", "r", "\[Theta]", "\[Phi]"}
 
 exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "CoordinateAssumptions"}] = 
@@ -246,6 +249,24 @@ exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "CoordinateAssum
 	]
 
 exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "ScalarFunctionNames"}] = {}
+
+exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "ParameterNames"}] = exactSolsData["ReissnerNordstrom", "ParameterNames"]
+
+exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "ParameterAssumptions"}] = exactSolsData["ReissnerNordstrom", "ParameterAssumptions"]
+
+exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "Metric"}] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]], m = params[[1]], rQ = params[[2]]}, 
+    		DiagonalMatrix[
+				{
+					-(1 - (2*m)/r + rQ^2/r^2), 
+					(1 - (2*m)/r + rQ^2/r^2)^(-1), 
+					r^2, 
+					r^2*Sin[theta]^2
+				}
+			]
+		]
+	]
 
 (* ::Subsection:: *)
 (* Schwarzschild in Schwarzschild coordinates *)
