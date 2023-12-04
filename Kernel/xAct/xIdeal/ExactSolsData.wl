@@ -345,6 +345,43 @@ exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "ScalarFunction
 
 
 (* ::Subsection:: *)
+(* Lemaitre-Tolman *)
+
+exactSolsData["LemaitreTolman", "Classes"] = {"DMetrics", "PerfectFluid", 
+    "PetrovTypeD", "ThermodynamicPerfectFluid", "SphericalSymmetry", "Warped22"}
+ 
+exactSolsData["LemaitreTolman", "IsIDEAL"] = True
+ 
+exactSolsData["LemaitreTolman", "ParameterAssumptions"] = Null
+ 
+exactSolsData["LemaitreTolman", "ParameterNames"] = {}
+ 
+exactSolsData["LemaitreTolman", {"SphericalCoordinates", "CoordinateAssumptions"}] = Null
+ 
+exactSolsData["LemaitreTolman", {"SphericalCoordinates", "CoordinateNames"}] = {"t", "r", "\[Theta]", "\[Phi]"}
+ 
+exactSolsData["LemaitreTolman", {"SphericalCoordinates", "Metric"}] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]], R = scfuncs[[1]]}, 
+			DiagonalMatrix[
+       			{
+					-1, 
+					D[R[t, r], r]^2, 
+					R[t, r]^2, 
+					R[t, r]^2*Sin[theta]^2
+				}
+			]
+		]
+	]
+ 
+exactSolsData["LemaitreTolman", {"SphericalCoordinates", "ParameterAssumptions"}] = exactSolsData["LemaitreTolman", "ParameterAssumptions"]
+ 
+exactSolsData["LemaitreTolman", {"SphericalCoordinates", "ParameterNames"}] = exactSolsData["LemaitreTolman", "ParameterNames"]
+ 
+exactSolsData["LemaitreTolman", {"SphericalCoordinates", "ScalarFunctionNames"}] = {"R"}
+
+
+(* ::Subsection:: *)
 (* Reissner-Nordström *)
 
 exactSolsData["ReissnerNordstrom", "ParameterNames"] = {"m", "rQ"}
@@ -464,6 +501,52 @@ exactSolsData["Schwarzschild", {"IsotropicCoordinates", "Metric"}] =
 			]
         ]
     ]
+
+
+(* ::Subsection:: *)
+(* Stephani in adapted coordinates *)
+
+exactSolsData["Stephani", "Classes"] = {"PerfectFluid", "SpatialG6", "ConformallyFlat"}
+ 
+exactSolsData["Stephani", "IsIDEAL"] = True
+ 
+exactSolsData["Stephani", "ParameterAssumptions"] = exactSolsData["Stephani", "ParameterAssumptions"]
+ 
+exactSolsData["Stephani", "ParameterNames"] = exactSolsData["Stephani", "ParameterNames"]
+ 
+exactSolsData["Stephani", {"AdaptedCoordinates", "CoordinateAssumptions"}] = Null
+ 
+exactSolsData["Stephani", {"AdaptedCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
+ 
+exactSolsData["Stephani", {"AdaptedCoordinates", "Metric"}] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], Omega = scfuncs[[1]], alpha = scfuncs[[2]], 
+    		R = scfuncs[[3]], b1 = scfuncs[[4]], b2 = scfuncs[[5]], b3 = scfuncs[[6]], K = scfuncs[[7]]}, 
+      			Omega = 
+					Function[{R, t, b1, b2, b3, x, y, z, K}, 
+         				R[t]/(1 + 2*(b1[t]*x + b2[t]*y + b3[t]*z) + K[t]*((x^2 + y^2 + z^2)/4))
+					]; 
+       			alpha = 
+					Function[{R, t, b1, b2, b3, x, y, z, K}, 
+        				R[t]*(D[Omega[R, t, b1, b2, b3, x, y, z, K], t]/(Omega[R, t, b1, b2, b3, x, y, z, K]*D[R[t], t]))
+					]; 
+       			DiagonalMatrix[
+					{
+						-alpha[R, t, b1, b2, b3, x, y, z, K]^2, 
+        				Omega[R, t, b1, b2, b3, x, y, z, K]^2, 
+						Omega[R, t, b1, b2, b3, x, y, z, K]^2, 
+						Omega[R, t, b1, b2, b3, x, y, z, K]^2
+					}
+				]
+		]
+	]
+ 
+exactSolsData["Stephani", {"AdaptedCoordinates", "ParameterAssumptions"}] = Null
+ 
+exactSolsData["Stephani", {"AdaptedCoordinates", "ParameterNames"}] = {}
+ 
+exactSolsData["Stephani", {"AdaptedCoordinates", "ScalarFunctionNames"}] = {"\[CapitalOmega]", "\[Alpha]", "R", "b1", "b2", "b3", "K"}
+
 
 (* ::Subsection:: *)
 (* Stephani Thermodynamic in adapted coordinates *)
