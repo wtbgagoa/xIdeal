@@ -223,6 +223,128 @@ exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "Metric"}] =
 
 
 (* ::Subsection:: *)
+(* Kerr *)
+
+exactSolsData["Kerr", "Classes"] = {"DMetrics", "PetrovTypeD", 
+	"AxialSymmetry", "Vacuum", "Stationary"}
+ 
+exactSolsData["Kerr", "IsIDEAL"] = True
+ 
+exactSolsData["Kerr", "ParameterAssumptions"] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{m = params[[1]], a = params[[2]]}, 
+			m > 0 && a >= 0
+		]
+	]
+ 
+exactSolsData["Kerr", "ParameterNames"] = {"m", "a"}
+ 
+exactSolsData["Kerr", {"BoyerLindquistCoordinates", "CoordinateAssumptions"}] = 
+	Function[{coords, params, scfuncs}, 
+    	With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], 
+    		phi = coords[[4]], m = params[[1]], a = params[[2]], Sigma = scfuncs[[1]]}, 
+				Sigma = 
+					Function[{r, a, theta}, 
+						r^2 + a^2*Cos[theta]^2
+					]; 
+				r > 0 && Pi > theta > 0 && Element[Cos[theta], Reals] && 
+					Sin[theta] > 0 && Sigma > 0
+		]
+	]
+ 
+exactSolsData["Kerr", {"BoyerLindquistCoordinates", "CoordinateNames"}] = 
+    {"t", "r", "\[Theta]", "\[Phi]"}
+ 
+exactSolsData["Kerr", {"BoyerLindquistCoordinates", "Metric"}] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]], 
+			m = params[[1]], a = params[[2]], Sigma = scfuncs[[1]], Delta = scfuncs[[2]]}, 
+    			Sigma = 
+					Function[{r, a, theta}, 
+						r^2 + a^2*Cos[theta]^2
+					]; 
+       			Delta = 
+					Function[{r, m, a}, 
+						r^2 - 2*m*r + a^2
+					]; 
+        		{
+					{-(1 - (2*m*r)/Sigma[r, a, theta]), 0, 0, -((2*m*r*a*Sin[theta]^2)/Sigma[r, a, theta])}, 
+        			{0, Sigma[r, a, theta]/Delta[r, m, a], 0, 0}, 
+        			{0, 0, Sigma[r, a, theta], 0}, 
+        			{-((2*m*r*a*Sin[theta]^2)/Sigma[r, a, theta]), 0, 0, 
+						(r^2 + a^2 + ((2*m*r*a^2)/Sigma[r, a, theta])*Sin[theta]^2)*Sin[theta]^2}
+				}
+		]
+	]
+ 
+exactSolsData["Kerr", {"BoyerLindquistCoordinates", "ParameterAssumptions"}] = exactSolsData["Kerr", "ParameterAssumptions"]
+ 
+exactSolsData["Kerr", {"BoyerLindquistCoordinates", "ParameterNames"}] = exactSolsData["Kerr", "ParameterNames"]
+ 
+exactSolsData["Kerr", {"BoyerLindquistCoordinates", "ScalarFunctionNames"}] = 
+    {"\[CapitalSigma]", "\[CapitalDelta]"}
+
+
+(* ::Subsection:: *)
+(* Kerr-NUT *)
+
+exactSolsData["KerrNut", "Classes"] = {"DMetrics", "PetrovTypeD", "Vacuum"}
+ 
+exactSolsData["KerrNut", "IsIDEAL"] = True
+ 
+exactSolsData["KerrNut", "ParameterAssumptions"] = Null
+ 
+exactSolsData["KerrNut", "ParameterNames"] = {"p", "k", "s"}
+ 
+exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "CoordinateAssumptions"}] = 
+	Function[{coords, params, scfuncs}, 
+    	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], p = params[[1]], 
+			k = params[[2]], s = params[[3]], alpha = scfuncs[[1]], beta = scfuncs[[2]]}, 
+      			alpha = 
+					Function[{p, x, k, s}, 
+						p*x^2 + k*(3 - k^2)*(x/(1 + k^2)^3) + s
+					]; 
+				beta = 
+					Function[{p, y, k, s}, 
+						(-p)*y^2 + (3*k^2 - 1)*(y/(1 + k^2)^3) + s
+					]; 
+				x^2 + y^2 > 0 && alpha > 0 && beta > 0
+		]
+	]
+ 
+exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
+ 
+exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "Metric"}] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], p = params[[1]], 
+			k = params[[2]], s = params[[3]], alpha = scfuncs[[1]], beta = scfuncs[[2]]}, 
+      			alpha = 
+					Function[{p, x, k, s}, 
+						p*x^2 + k*(3 - k^2)*(x/(1 + k^2)^3) + s
+					]; 
+				beta = 
+					Function[{p, y, k, s}, 
+						(-p)*y^2 + (3*k^2 - 1)*(y/(1 + k^2)^3) + s
+					]; 
+       			{
+					{-((alpha[p, x, k, s]*y^4 - beta[p, y, k, s]*x^4)/(x^2 + y^2)), 0, 0, 
+        				-((alpha[p, x, k, s]*y^2 + beta[p, y, k, s]*x^2)/(x^2 + y^2))}, 
+        			{0, (x^2 + y^2)/alpha[p, x, k, s], 0, 0}, 
+       				{0, 0, (x^2 + y^2)/beta[p, y, k, s], 0}, 
+        			{-((alpha[p, x, k, s]*y^2 + beta[p, y, k, s]*x^2)/(x^2 + y^2)), 0, 0, 
+        				(beta[p, y, k, s] - alpha[p, x, k, s])/(x^2 + y^2)}
+				};
+		]
+	]
+ 
+exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "ParameterAssumptions"}] = exactSolsData["KerrNut", "ParameterAssumptions"]
+ 
+exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "ParameterNames"}] = exactSolsData["KerrNut", "ParameterNames"]
+ 
+exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "ScalarFunctionNames"}] = {"\[Alpha]", "\[Beta]"}
+
+
+(* ::Subsection:: *)
 (* Reissner-Nordström *)
 
 exactSolsData["ReissnerNordstrom", "ParameterNames"] = {"m", "rQ"}
