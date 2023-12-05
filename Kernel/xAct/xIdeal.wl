@@ -340,13 +340,13 @@ weylConcomitant["Weyl2"][metric_CTensor, opts : OptionsPattern[]] :=
 		time = AbsoluteTime[];
 		weyl2cd = 1/2 weylcd[-a1, -b1, i1, j1] weylcd[-i1, -j1, -c1, -d1]; 
 		If[vb, 
-			Print["** ReportCompute: computing metric concomitant \"Weyl2\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: computing Weyl concomitant \"Weyl2\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		weyl2cd = HeadOfTensor[weyl2cd, {-a1, -b1, -c1, -d1}]; 
 		time = AbsoluteTime[];
 		simplf[weyl2cd];
 		If[vb,
-			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"Weyl2\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"Weyl2\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		weyl2cd
 	]
@@ -363,12 +363,12 @@ weylConcomitant["Weyl3"][metric_CTensor, opts : OptionsPattern[]] :=
 		time = AbsoluteTime[];
 		weyl3cd = 1/2 weyl2cd[-a1, -b1, i1, j1] weylcd[-i1, -j1, -c1, -d1];
 		If[vb, 
-			Print["** ReportCompute: computing metric concomitant \"Weyl3\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: computing Weyl concomitant \"Weyl3\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		weyl3cd = HeadOfTensor[weyl3cd, {-a1, -b1, -c1, -d1}];
 		weyl3cd = simplf[weyl3cd];
 		If[vb,
-			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"Weyl3\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"Weyl3\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		weyl3cd
 	]
@@ -384,11 +384,11 @@ weylConcomitant["TraceWeyl3"][metric_CTensor, opts : OptionsPattern[]] :=
 		time = AbsoluteTime[];
 		trweyl3 = 1/2 weyl3cd[-a1, -b1, a1, b1]; 
 		If[vb, 
-			Print["** ReportCompute: computing metric concomitant \"TraceWeyl3\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: computing Weyl concomitant \"TraceWeyl3\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		trweyl3 = simplf[weyl3cd];
 		If[vb,
-			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"TraceWeyl3\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"TraceWeyl3\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		trweyl3
 	]
@@ -406,14 +406,14 @@ weylConcomitant["WeylDual"][metric_CTensor, opts : OptionsPattern[]] :=
 		time = AbsoluteTime[];
 		weyldual = 1/2 epsilonmetric[-c1, -d1, -e1, -f1] weylcd[e1, f1, -a1, -b1];
 		If[vb, 
-			Print["** ReportCompute: computing metric concomitant \"WeylDual\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: computing Weyl concomitant \"WeylDual\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		weyldual = ToCCanonical[weyldual];
 		weyldual = HeadOfTensor[weyldual, {-c1, -d1, -a1, -b1}];
 		time = AbsoluteTime[];
 		weyldual = simplf[weyldual];
 		If[vb,
-			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"WeylDual\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"WeylDual\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		weyldual
 	]
@@ -429,12 +429,12 @@ weylConcomitant["WeylSelfDual"][metric_CTensor, opts : OptionsPattern[]] :=
 		time = AbsoluteTime[];
 		weylsd = 1/2 (weylcd - I * weyldual);
 		If[vb, 
-			Print["** ReportCompute: computing metric concomitant \"WeylSelfDual\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: computing Weyl concomitant \"WeylSelfDual\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		time = AbsoluteTime[];
 		weylsd = simplf[weylsd];
 		If[vb,
-			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"WeylSelfDual\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"WeylSelfDual\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		weylsd
 	]
@@ -451,13 +451,13 @@ weylConcomitant["WeylMatrixQ"][metric_CTensor, opts : OptionsPattern[]] :=
 		time = AbsoluteTime[];
 		mq = 2 obs[a1] obs[c1] weylConcomitant["WeylSelfDual"][metric, opts][-a1, -b1, -c1, -d1];
 		If[vb, 
-			Print["** ReportCompute: computing metric concomitant \"WeylMatrixQ\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: computing Weyl concomitant \"WeylMatrixQ\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		mq = HeadOfTensor[mq, {-b1, -d1}];
 		time = AbsoluteTime[];
 		mq = simplf[mq];
 		If[vb,
-			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"WeylMatrixQ\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"WeylMatrixQ\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		mq
 	]
@@ -473,12 +473,12 @@ weylConcomitant["TraceWeylMatrixQ"][metric_CTensor, opts : OptionsPattern[]] :=
 		time = AbsoluteTime[];
 		trmq = mq[a1, -a1];
 		If[vb, 
-			Print["** ReportCompute: computing metric concomitant \"TraceWeylMatrixQ\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: computing Weyl concomitant \"TraceWeylMatrixQ\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		time = AbsoluteTime[];
 		trmq = simplf[trmq];
 		If[vb,
-			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"TraceWeylMatrixQ\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"TraceWeylMatrixQ\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		trmq
 	]
@@ -494,13 +494,13 @@ weylConcomitant["WeylMatrixQ2"][metric_CTensor, opts : OptionsPattern[]] :=
 		time = AbsoluteTime[];
 		mq2 = mq[-a1, -b1] mq[b1, -c1];
 		If[vb, 
-			Print["** ReportCompute: computing metric concomitant \"WeylMatrixQ2\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: computing Weyl concomitant \"WeylMatrixQ2\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		mq2 = HeadOfTensor[mq2, {-a1, -c1}];
 		time = AbsoluteTime[];
 		mq2 = simplf[mq2];
 		If[vb,
-			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"WeylMatrixQ2\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"WeylMatrixQ2\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		mq2
 	]
@@ -516,12 +516,12 @@ weylConcomitant["TraceWeylMatrixQ2"][metric_CTensor, opts : OptionsPattern[]] :=
 		time = AbsoluteTime[];
 		trmq2 = mq2[a1, -a1];
 		If[vb, 
-			Print["** ReportCompute: computing metric concomitant \"TraceWeylMatrixQ2\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: computing Weyl concomitant \"TraceWeylMatrixQ2\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		time = AbsoluteTime[];
 		trmq2 = simplf[trmq2];
 		If[vb,
-			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"TraceWeylMatrixQ2\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"TraceWeylMatrixQ2\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		trmq2
 	]
@@ -538,13 +538,13 @@ weylConcomitant["WeylMatrixQ3"][metric_CTensor, opts : OptionsPattern[]] :=
 		time = AbsoluteTime[];
 		mq3 = mq2[-a1, -b1] mq[b1, -c1];
 		If[vb, 
-			Print["** ReportCompute: computing metric concomitant \"WeylMatrixQ3\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: computing Weyl concomitant \"WeylMatrixQ3\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		mq3 = HeadOfTensor[mq3, {-a1, -c1}];
 		time = AbsoluteTime[];
 		mq3 = simplf[mq3];
 		If[vb,
-			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"WeylMatrixQ3\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"WeylMatrixQ3\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		mq3
 	]
@@ -560,12 +560,12 @@ weylConcomitant["TraceWeylMatrixQ3"][metric_CTensor, opts : OptionsPattern[]] :=
 		time = AbsoluteTime[];
 		trmq3 = mq[a1, -a1];
 		If[vb, 
-			Print["** ReportCompute: computing metric concomitant \"TraceWeylMatrixQ3\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: computing Weyl concomitant \"TraceWeylMatrixQ3\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		time = AbsoluteTime[];
 		trmq3 = simplf[trmq3];
 		If[vb,
-			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"TraceWeylMatrixQ3\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"TraceWeylMatrixQ3\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		trmq3
 	]
@@ -581,13 +581,13 @@ weylConcomitant["WeylSelfDual2"][metric_CTensor, opts : OptionsPattern[]] :=
 		time = AbsoluteTime[];
 		weylselfdual2 = 1/2 weylselfdual[-a1, -b1, e1, f1] weylselfdual[-e1, -f1, -c1, -d1];
 		If[vb, 
-			Print["** ReportCompute: computing metric concomitant \"WeylSelfDual2\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: computing Weyl concomitant \"WeylSelfDual2\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		weylselfdual2 = HeadOfTensor[weylselfdual2, {-a1, -b1, -c1, -d1}];
 		time = AbsoluteTime[];
 		weylselfdual2 = simplf[weylselfdual2];
 		If[vb,
-			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"WeylSelfDual2\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"WeylSelfDual2\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		weylselfdual2
 	]
@@ -603,12 +603,12 @@ weylConcomitant["TraceWeylSelfDual2"][metric_CTensor, opts : OptionsPattern[]] :
 		time = AbsoluteTime[];
 		trweylselfdual2 = weylselfdual2[-a1, -b1, a1, b1] / 2;
 		If[vb, 
-			Print["** ReportCompute: computing metric concomitant \"TraceWeylSelfDual2\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: computing Weyl concomitant \"TraceWeylSelfDual2\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		time = AbsoluteTime[];
 		trweylselfdual2 = simplf[trweylselfdual2];
 		If[vb,
-			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"TraceWeylSelfDual2\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"TraceWeylSelfDual2\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		trweylselfdual2
 	]
@@ -625,13 +625,13 @@ weylConcomitant["WeylSelfDual3"][metric_CTensor, opts : OptionsPattern[]] :=
 		time = AbsoluteTime[];
 		weylselfdual3 = 1/2 weylselfdual2[-a1, -b1, e1, f1] weylselfdual[-e1, -f1, -c1, -d1];
 		If[vb, 
-			Print["** ReportCompute: computing metric concomitant \"WeylSelfDual3\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: computing Weyl concomitant \"WeylSelfDual3\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		weylselfdual3 = HeadOfTensor[weylselfdual3, {-a1, -b1, -c1, -d1}];
 		time = AbsoluteTime[];
 		weylselfdual3 = simplf[weylselfdual3];
 		If[vb,
-			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"WeylSelfDual3\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"WeylSelfDual3\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		weylselfdual3
 	]
@@ -647,12 +647,12 @@ weylConcomitant["TraceWeylSelfDual3"][metric_CTensor, opts : OptionsPattern[]] :
 		time = AbsoluteTime[];
 		trweylselfdual3 = weylselfdual3[-a1, -b1, a1, b1] / 2;
 		If[vb, 
-			Print["** ReportCompute: computing metric concomitant \"TraceWeylSelfDual3\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: computing Weyl concomitant \"TraceWeylSelfDual3\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		time = AbsoluteTime[];
 		trweylselfdual3 = simplf[trweylselfdual3];
 		If[vb,
-			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"TraceWeylSelfDual3\" in ", AbsoluteTime[] - time, " seconds:"]
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"TraceWeylSelfDual3\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		trweylselfdual3
 	]
@@ -768,50 +768,100 @@ weylConcomitant["ConformalLambda"][metric_CTensor, opts : OptionsPattern[]] :=
 
 weylConcomitant["ScalarRho"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["ScalarRho"][metric, opts] = 
-	Module[{simplf, cart, trw3},
-		simplf = OptionValue[weylConcomitant, PSimplify];
+	Module[{simplf, cart, trw3, rho, vb, time},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];	
 		trw3 = weylConcomitant["TraceWeyl3"][metric, opts];
-		simplf[-(trw3 / 12)^(1/3)]
+		time = AbsoluteTime[];
+		rho = -(trw3 / 12)^(1/3);
+		If[vb, 
+			Print["** ReportCompute: computing Weyl concomitant \"ScalarRho\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		rho = simplf[rho];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"ScalarRho\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		rho
 	]
 )
 
 weylConcomitant["TensorS"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["TensorS"][metric, opts] = 
-	Module[{simplf, cart, w, G, rho},
-		simplf = OptionValue[weylConcomitant, PSimplify];
+	Module[{simplf, cart, w, G, rho, s, vb, time},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];		
 		w = weylConcomitant["Weyl"][metric, opts];
 		G = metricConcomitant["G"][metric, opts];
 		rho = weylConcomitant["ScalarRho"][metric, opts];
-		simplf[(w - rho G) / (3 rho)]
+		time = AbsoluteTime[];
+		s = (w - rho G) / (3 rho);
+		If[vb, 
+			Print["** ReportCompute: computing Weyl concomitant \"TensorS\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		s = simplf[s];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"TensorS\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		s
 	]
 )
 
 weylConcomitant["VectorPhi"][metric_CTensor, opts : OptionsPattern[]] :=
-(weylConcomitant["TensorS"][metric, opts] = 
-	Module[{simplf, cart, S, cd, cds, a1, b1, c1, d1},
-		simplf = OptionValue[weylConcomitant, PSimplify];
+(weylConcomitant["TensorPhi"][metric, opts] = 
+	Module[{simplf, cart, S, cd, cds, a1, b1, c1, d1, phi, vb, time},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];		
 		S = weylConcomitant["TensorS"][metric, opts];
 		cd = CovDOfMetric[metric];
-		cds = simplf[HeadOfTensor[cd[-a1][S[a1, -b1, -c1, -d1]], {-b1, -c1, -d1}]];
-		simplf[HeadOfTensor[S[a1, -b1, c1, d1]cds[-a1, -c1, -d1], {-b1}]]
+		time = AbsoluteTime[];
+		cds = cd[-a1][S[a1, -b1, -c1, -d1]];
+		If[vb, 
+			Print["** ReportCompute: computing covariant derivative of Weyl concomitant \"TensorS\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		cds = HeadOfTensor[cds, {-b1, -c1, -d1}];
+		time = AbsoluteTime[];
+		cds = simplf[cds];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to covariant derivative of Weyl concomitant \"TensorS\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		phi = S[a1, -b1, c1, d1]cds[-a1, -c1, -d1];
+		If[vb, 
+			Print["** ReportCompute: computing Weyl concomitant \"VectorPhi\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		phi = HeadOfTensor[phi, {-b1}];
+		time = AbsoluteTime[];
+		phi = simplf[phi];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"VectorPhi\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		phi
 	]
 )
 
 weylConcomitant["TensorB"][metric_CTensor, opts : OptionsPattern[]] :=
-(weylConcomitant["TensorS"][metric, opts] = 
-	Module[{simplf, cart, S, R, r, a1, b1, c1, d1},
-		simplf = OptionValue[weylConcomitant, PSimplify];
+(weylConcomitant["TensorB"][metric, opts] = 
+	Module[{simplf, cart, S, R, r, a1, b1, c1, d1, B, vb, time},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];		
 		S = weylConcomitant["TensorS"][metric, opts];
 		R = weylConcomitant["Ricci"][metric, opts];
 		r = weylConcomitant["RicciScalar"][metric, opts];
-		simplf[HeadOfTensor[R[-a1, -b1] - 1/2 S[-a1, -b1, -c1, -d1] R[c1, d1] - 1/2 r metric[-a1, -b1], {-a1, -b1}]]
+		time = AbsoluteTime[];
+		B = R[-a1, -b1] - 1/2 S[-a1, -b1, -c1, -d1] R[c1, d1] - 1/2 r metric[-a1, -b1];
+		If[vb, 
+			Print["** ReportCompute: computing Weyl concomitant \"TensorB\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		B = HeadOfTensor[R[-a1, -b1] - 1/2 S[-a1, -b1, -c1, -d1] R[c1, d1] - 1/2 r metric[-a1, -b1], {-a1, -b1}];
+		time = AbsoluteTime[];
+		B = simplf[B];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"TensorB\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		B
 	]
 )
 
@@ -819,18 +869,25 @@ weylConcomitant["TensorB"][metric_CTensor, opts : OptionsPattern[]] :=
 
 weylConcomitant["PTNCanonicalBivector"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["PTNCanonicalBivector"][metric, opts] = 
-	Module[{simplf, cart, obs, X, weylselfdual, cbv, a1, b1, i1, j1, k1, l1},
+	Module[{simplf, cart, obs, X, weylselfdual, cbv, a1, b1, i1, j1, k1, l1, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, i1, j1, k1, l1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];		
-		simplf = OptionValue[weylConcomitant, PSimplify];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
   		obs = OptionValue[weylConcomitant, {opts}, "Observer"];
     	X = OptionValue[weylConcomitant, {opts}, "Bivector"];
       	weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
-		cbv = HeadOfTensor[
-    			weylselfdual[-a1, -b1, -i1, -j1] X[i1, j1] / Sqrt[weylselfdual[-i1, -j1, -k1, -l1] X[i1, j1] X[k1, l1]], 
-       			{-a1, -b1}
-	  	];
-    	simplf[cbv]
+		time = AbsoluteTime[];
+		cbv = weylselfdual[-a1, -b1, -i1, -j1] X[i1, j1] / Sqrt[weylselfdual[-i1, -j1, -k1, -l1] X[i1, j1] X[k1, l1]];
+		If[vb, 
+			Print["** ReportCompute: computing Weyl concomitant \"PTNCanonicalBivector\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		cbv = HeadOfTensor[cbv, {-a1, -b1}];
+		time = AbsoluteTime[];
+    	cbv = simplf[cbv];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"PTNCanonicalBivector\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		cbv
 	]
 )
 
