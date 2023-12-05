@@ -1,4 +1,4 @@
-BeginPackage["xAct`xIdeal`ExactSolsData`"]
+BeginPackage["xAct`ExactSolsData`"]
 
 Begin["xAct`xIdeal`Private`"]
 
@@ -162,7 +162,7 @@ exactSolsData["Vacuum"] = {
 
 (* The syntax is GRData[args__String, {coords_List, parameters_List, functions_List}] *)
 
-xAct`xIdeal`GRData[solname_String, coordname_String, "Metric", {coords_List, parameters_List, functions_List}] := exactSolsData[solname, {coordname, "Metric"}][coords, parameters, functions]
+xAct`xIdeal`GenRelExactSolsData[solname_String, coordname_String, "Metric", {coords_List, parameters_List, functions_List}] := exactSolsData[solname, {coordname, "Metric"}][coords, parameters, functions]
 
 (* ::Subsection:: *)
 (* Friedmann in reduced circumference polar coordinates *)

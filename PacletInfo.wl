@@ -6,7 +6,7 @@ PacletObject[
 			{
 				"Kernel",
 				Root -> "Kernel",
-				Context -> {"xAct`xIdeal`", "xAct`xIdeal`ExactSolsData`"}
+				Context -> {"xAct`xIdeal`", "xAct`ExactSolsData`"}
 			},
 			{
 			"Documentation"

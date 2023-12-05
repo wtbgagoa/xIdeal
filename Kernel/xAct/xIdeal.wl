@@ -107,7 +107,7 @@ If[Unevaluated[xAct`xCore`Private`$LastPackage] === xAct`xCore`Private`$LastPack
 (* Explicit (not hidden) import of xTensor, xPerm and xCore: *)
 
 BeginPackage["xAct`xIdeal`", {"xAct`xCoba`", "xAct`xTensor`", "xAct`xPerm`",
-	 "xAct`xCore`", "xAct`xIdeal`ExactSolsData`"}]
+	 "xAct`xCore`", "xAct`ExactSolsData`"}]
 
 If[Not @ OrderedQ @ Map[Last, {xAct`xIdeal`$xTensorVersionExpected, xAct`xTensor`$Version
 	}],
@@ -167,7 +167,7 @@ PetrovType::usage = " ";
 
 DebeverNullDirections::usage = " ";
 
-GRData::usage = " ";
+GenRelExactSolsData::usage = " ";
 
 TypeDClassify::usage = " ";
 
