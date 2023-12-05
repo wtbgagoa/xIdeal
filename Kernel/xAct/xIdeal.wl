@@ -191,6 +191,8 @@ PetrovType::nometric = "Metric `1` has not been registered as a metric";
 
 PetrovType::noobserver = "Value `1` for \"Observer\" is invalid";
 
+PetrovType::nospatialmetric = "Invalid spatial metric for spacetime metric `1` or \" Observer\" `2`";
+
 (* ::Section:: *)
 (* BeginPrivate *)
 
@@ -248,18 +250,46 @@ metricConcomitant["G2Form"][metric_CTensor, opts : OptionsPattern[]] :=
 
 metricConcomitant["SpatialMetric"][metric_CTensor, opts : OptionsPattern[]] :=
 (metricConcomitant["SpatialMetric"][metric, opts] = 
-	Module[{simplf, cart, obs, a1, b1, smetric},
-		{obs, simplf} = OptionValue[metricConcomitant, {opts}, {"Observer", PSimplify}];
-		If[Head[obs] =!= CTensor,
+	Module[{simplf, cart, obs, a1, b1, vb, time, smetric},
+		{obs, simplf, vb} = OptionValue[metricConcomitant, {opts}, {"Observer", PSimplify, Verbose}];
+		If[Head[obs] =!= CTensor || TensorRank[Part[obs, 1]] =!= 1,
 			Throw[Message[PetrovType::noobserver, obs]]
 		];
 		cart = 	Part[metric, 2, 1, -1];
 		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
-		If[ SignatureOfMetric[metric] === {3, 1, 0},
-			smetric = HeadOfTensor[metric[-a1, -b1] + obs[-a1] obs[-b1], {-a1, -b1}];
-			simplf[smetric],
-			smetric = HeadOfTensor[metric[-a1, -b1] - obs[-a1] obs[-b1], {-a1, -b1}];
-			simplf[smetric]
+		Which[
+			SignatureOfMetric[metric] === {3, 1, 0},
+				If[Simplify[obs[a1]metric[-a1, -b1]obs[b1]] =!= -1,
+					Throw[Message[PetrovType::noobserver, obs]]
+				];
+				time = AbsoluteTime[];
+				smetric = HeadOfTensor[metric[-a1, -b1] + obs[-a1] obs[-b1], {-a1, -b1}];
+				If[vb, 
+					Print["** ReportCompute: computing metric concomitant \"SpatialMetric\" in ", AbsoluteTime[] - time, " seconds:"]
+				];
+				time = AbsoluteTime[];
+				simplf[smetric];
+				If[vb,
+					Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"SpatialMetric\" in ", AbsoluteTime[] - time, " seconds:"]
+				];
+				smetric,
+			SignatureOfMetric[metric] === {1, 3, 0},
+				If[Simplify[obs[a1]metric[-a1, -b1]obs[b1]]  =!= 1,
+					Throw[Message[PetrovType::noobserver, obs]]
+				];
+				time = AbsoluteTime[];
+				smetric = HeadOfTensor[metric[-a1, -b1] - obs[-a1] obs[-b1], {-a1, -b1}];
+				If[vb, 
+					Print["** ReportCompute: computing metric concomitant \"SpatialMetric\" in ", AbsoluteTime[] - time, " seconds:"]
+				];
+				time = AbsoluteTime[];
+				simplf[smetric];
+				If[vb,
+					Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"SpatialMetric\" in ", AbsoluteTime[] - time, " seconds:"]
+				];
+				smetric,
+			True,
+				Throw[Message[PetrovType::nospatialmetric, metric, obs]]
 		]
 	]
 )
