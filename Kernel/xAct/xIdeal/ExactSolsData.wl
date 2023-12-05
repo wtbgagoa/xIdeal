@@ -48,7 +48,29 @@ allclasses = {
 	"G1",
 	"G2",
 	"G3",
-	"G3S2",
+	"G3onS2",
+	"G3IonS3", 
+	"G3IIonS3", 
+	"G3IIIonS3", 
+	"G3IVonS3", 
+	"G3VonS3", 
+	"G3VI0onS3", 
+	"G3VIhonS3", 
+	"G3VII0onS3", 
+	"G3VIIhonS3", 
+	"G3VIIIonS3", 
+	"G3IXonS3",
+	"G3IonT3", 
+	"G3IIonT3", 
+	"G3IIIonT3", 
+	"G3IVonT3", 
+	"G3VonT3", 
+	"G3VI0onT3", 
+	"G3VIhonT3", 
+	"G3VII0onT3", 
+	"G3VIIhonT3", 
+	"G3VIIIonT3", 
+	"G3IXonT3",  
 	"G4",
 	"G5",
 	"G6",
@@ -186,6 +208,9 @@ exactSolsData["Friedmann", {"ReducedCircumferencePolarCoordinates", "Metric"}] =
 
 (* ::Subsection:: *)
 (* GeneralSpherical metric in spherical coordinates *)
+
+exactSolsData["Kerr", "Classes"] = {"DMetrics", "PerfectFluid", "PetrovTypeD", 
+	"ThermodynamicPerfectFluid", "SphericalSymmetry", "Warped22"}
 
 exactSolsData["GeneralSphericalSymmetry", "ParameterNames"] = {}
 
@@ -379,6 +404,40 @@ exactSolsData["LemaitreTolman", {"SphericalCoordinates", "ParameterAssumptions"}
 exactSolsData["LemaitreTolman", {"SphericalCoordinates", "ParameterNames"}] = exactSolsData["LemaitreTolman", "ParameterNames"]
  
 exactSolsData["LemaitreTolman", {"SphericalCoordinates", "ScalarFunctionNames"}] = {"R"}
+
+
+(* ::Subsection:: *)
+(* Petrov Solution *)
+
+exactSolsData["PetrovSolution", "Classes"] = {"Vacuum", "G4", "G3IonT3", "G3VIIhonT3", "PetrovTypeI"}
+ 
+exactSolsData["PetrovSolution", "IsIDEAL"] = False
+ 
+exactSolsData["PetrovSolution", "ParameterAssumptions"] = Null
+ 
+exactSolsData["PetrovSolution", "ParameterNames"] = {"k"}
+ 
+exactSolsData["PetrovSolution", {"CanonicalCoordinates", "CoordinateAssumptions"}] = Null
+ 
+exactSolsData["PetrovSolution", {"CanonicalCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
+ 
+exactSolsData["PetrovSolution", {"CanonicalCoordinates", "Metric"}] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], k = params[[1]]}, 
+    		{
+				{(-E^x)*Cos[Sqrt[3]*x], 0, 0, (-E^x)*Sin[Sqrt[3]*x]}, 
+				{0, 1, 0, 0}, 
+        		{0, 0, E^(-2*x), 0}, 
+				{(-E^x)*Sin[Sqrt[3]*x], 0, 0, E^x*Cos[Sqrt[3]*x]}
+			}/k^2; 
+		]
+	]
+ 
+exactSolsData["PetrovSolution", {"CanonicalCoordinates", "ParameterAssumptions"}] = Null
+ 
+exactSolsData["PetrovSolution", {"CanonicalCoordinates", "ParameterNames"}] = {"k"}
+ 
+exactSolsData["PetrovSolution", {"CanonicalCoordinates", "ScalarFunctionNames"}] = {}
 
 
 (* ::Subsection:: *)
@@ -601,6 +660,52 @@ exactSolsData["StephaniThermodynamic", {"AdaptedCoordinates", "ParameterAssumpti
 exactSolsData["StephaniThermodynamic", {"AdaptedCoordinates", "ParameterNames"}] = {"\[CurlyEpsilon]"}
 
 exactSolsData["StephaniThermodynamic", {"AdaptedCoordinates", "ScalarFunctionNames"}] = {"w", "L", "\[CapitalOmega]", "\[Alpha]", "R", "b"}
+
+
+(* ::Subsection:: *)
+(* Stephani Thermodynamic and Spherically symmetric in adapted coordinates *)
+
+exactSolsData["StephaniThermodynamicSpherical", "Classes"] = {"PerfectFluid", "ThermodynamicPerfectFluid", "G3onS2", "SpatialG6", 
+    "ConformallyFlat", "SphericalSymmetry", "Warped22"}
+ 
+exactSolsData["StephaniThermodynamicSpherical", "IsIDEAL"] = True
+ 
+exactSolsData["StephaniThermodynamicSpherical", "ParameterAssumptions"] = Null
+ 
+exactSolsData["StephaniThermodynamicSpherical", "ParameterNames"] = {}
+ 
+exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "CoordinateAssumptions"}] = Null
+ 
+exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "CoordinateNames"}] = {"t", "r", "\[Theta]", "\[Phi]"}
+ 
+exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "Metric"}] = 
+	Function[{coords, params, scfuncs}, 
+    	With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]], 
+			Omega = scfuncs[[1]], alpha = scfuncs[[2]], R = scfuncs[[3]], k = scfuncs[[4]]}, 
+    			Omega = 
+					Function[{R, t, k, r}, 
+						R[t]/(1 + k[t]*(r^2/4))
+					]; 
+    			alpha = 
+					Function[{R, t, Omega, k, r}, 
+						R[t]*(D[Omega[R, t, k, r], t]/(Omega[R, t, k, r]*D[R[t], t]))
+					]; 
+				DiagonalMatrix[
+       				{
+						-alpha[R, t, Omega, k, r]^2, 
+						Omega[R, t, k, r]^2, 
+        				Omega[R, t, k, r]^2*r^2, 
+						Omega[R, t, k, r]^2*r^2*Sin[theta]^2
+					}
+				]; 
+		]
+	]
+ 
+exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "ParameterAssumptions"}] = Null
+ 
+exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "ParameterNames"}] = {}
+ 
+exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "ScalarFunctionNames"}] = {"\[CapitalOmega]", "\[Alpha]", "R", "k"}
 
 
 (****************************************************************)
