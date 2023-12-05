@@ -558,7 +558,7 @@ weylConcomitant["TraceWeylMatrixQ3"][metric_CTensor, opts : OptionsPattern[]] :=
 		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
 		mq3 = weylConcomitant["WeylMatrixQ3"][metric, opts];
 		time = AbsoluteTime[];
-		trmq3 = mq[a1, -a1];
+		trmq3 = mq3[a1, -a1];
 		If[vb, 
 			Print["** ReportCompute: computing Weyl concomitant \"TraceWeylMatrixQ3\" in ", AbsoluteTime[] - time, " seconds:"]
 		];

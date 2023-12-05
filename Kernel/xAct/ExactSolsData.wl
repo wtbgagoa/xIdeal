@@ -580,21 +580,21 @@ exactSolsData["Stephani", {"AdaptedCoordinates", "CoordinateNames"}] = {"t", "x"
 exactSolsData["Stephani", {"AdaptedCoordinates", "Metric"}] = 
     Function[{coords, params, scfuncs}, 
     	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], Omega = scfuncs[[1]], alpha = scfuncs[[2]], 
-    		R = scfuncs[[3]], b1 = scfuncs[[4]], b2 = scfuncs[[5]], b3 = scfuncs[[6]], K = scfuncs[[7]]}, 
+    		R = scfuncs[[3]], b1 = scfuncs[[4]], b2 = scfuncs[[5]], b3 = scfuncs[[6]], k = scfuncs[[7]]}, 
       			Omega = 
-					Function[{R, t, b1, b2, b3, x, y, z, K}, 
-         				R[t]/(1 + 2*(b1[t]*x + b2[t]*y + b3[t]*z) + K[t]*((x^2 + y^2 + z^2)/4))
+					Function[{R, t, b1, b2, b3, x, y, z, k}, 
+         				R[t]/(1 + 2*(b1[t]*x + b2[t]*y + b3[t]*z) + k[t]*((x^2 + y^2 + z^2)/4))
 					]; 
        			alpha = 
-					Function[{R, t, b1, b2, b3, x, y, z, K}, 
-        				R[t]*(D[Omega[R, t, b1, b2, b3, x, y, z, K], t]/(Omega[R, t, b1, b2, b3, x, y, z, K]*D[R[t], t]))
+					Function[{R, t, b1, b2, b3, x, y, z, k}, 
+        				R[t]*(D[Omega[R, t, b1, b2, b3, x, y, z, k], t]/(Omega[R, t, b1, b2, b3, x, y, z, k]*D[R[t], t]))
 					]; 
        			DiagonalMatrix[
 					{
-						-alpha[R, t, b1, b2, b3, x, y, z, K]^2, 
-        				Omega[R, t, b1, b2, b3, x, y, z, K]^2, 
-						Omega[R, t, b1, b2, b3, x, y, z, K]^2, 
-						Omega[R, t, b1, b2, b3, x, y, z, K]^2
+						-alpha[R, t, b1, b2, b3, x, y, z, k]^2, 
+        				Omega[R, t, b1, b2, b3, x, y, z, k]^2, 
+						Omega[R, t, b1, b2, b3, x, y, z, k]^2, 
+						Omega[R, t, b1, b2, b3, x, y, z, k]^2
 					}
 				]
 		]
