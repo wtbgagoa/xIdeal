@@ -193,11 +193,20 @@ PetrovType::noobserver = "Value `1` for \"Observer\" is invalid";
 
 PetrovType::nospatialmetric = "Invalid spatial metric for spacetime metric `1` or \" Observer\" `2`";
 
+PetrovType::nopsimplify = "Value `1` for \"PSimplify\" is invalid\" ";
+
 (* ::Section:: *)
 (* BeginPrivate *)
 
 
 Begin["`Private`"]
+
+(* ::Section:: *)
+(* Utilities *)
+applyfunc[expr_, func_, head_, errortag_String] := 
+	With[{res = func[expr]},
+		If[Head[res] === func, Throw[Message[MessageName[head, errortag], func]], res]
+	]
 
 (* ::Section:: *)
 (* Computation of the metric concomitants *)
@@ -268,7 +277,7 @@ metricConcomitant["SpatialMetric"][metric_CTensor, opts : OptionsPattern[]] :=
 					Print["** ReportCompute: computing metric concomitant \"SpatialMetric\" in ", AbsoluteTime[] - time, " seconds:"]
 				];
 				time = AbsoluteTime[];
-				smetric = simplf[smetric];
+				smetric = applyfunc[smetric, simplf, PetrovType, "nopsimplify"];
 				If[vb,
 					Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"SpatialMetric\" in ", AbsoluteTime[] - time, " seconds:"]
 				];
@@ -283,7 +292,7 @@ metricConcomitant["SpatialMetric"][metric_CTensor, opts : OptionsPattern[]] :=
 					Print["** ReportCompute: computing metric concomitant \"SpatialMetric\" in ", AbsoluteTime[] - time, " seconds:"]
 				];
 				time = AbsoluteTime[];
-				smetric = simplf[smetric];
+				smetric = applyfunc[smetric, simplf, PetrovType, "nopsimplify"];
 				If[vb,
 					Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"SpatialMetric\" in ", AbsoluteTime[] - time, " seconds:"]
 				];
