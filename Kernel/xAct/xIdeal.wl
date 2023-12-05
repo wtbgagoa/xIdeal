@@ -268,7 +268,7 @@ metricConcomitant["SpatialMetric"][metric_CTensor, opts : OptionsPattern[]] :=
 					Print["** ReportCompute: computing metric concomitant \"SpatialMetric\" in ", AbsoluteTime[] - time, " seconds:"]
 				];
 				time = AbsoluteTime[];
-				simplf[smetric];
+				smetric = simplf[smetric];
 				If[vb,
 					Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"SpatialMetric\" in ", AbsoluteTime[] - time, " seconds:"]
 				];
@@ -283,7 +283,7 @@ metricConcomitant["SpatialMetric"][metric_CTensor, opts : OptionsPattern[]] :=
 					Print["** ReportCompute: computing metric concomitant \"SpatialMetric\" in ", AbsoluteTime[] - time, " seconds:"]
 				];
 				time = AbsoluteTime[];
-				simplf[smetric];
+				smetric = simplf[smetric];
 				If[vb,
 					Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"SpatialMetric\" in ", AbsoluteTime[] - time, " seconds:"]
 				];
