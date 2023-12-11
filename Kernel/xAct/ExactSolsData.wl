@@ -115,7 +115,9 @@ allcoordinatesystems = {
 	"AdaptedCoordinates",
 	"BoyerLindquistCoordinates",
 	"CanonicalCoordinates",
+	"ComplexCoordinates",
 	"ExpansionGradientAdaptedCoordinates",
+	"GroupGeneratorsAdaptedCoordinates",
  	"IsotropicCoordinates",
   	"ReducedCircumferencePolarCoordinates",
  	"SchwarzschildCoordinates",
@@ -163,6 +165,162 @@ exactSolsData["Vacuum"] = {
 (* The syntax is GRData[args__String, {coords_List, parameters_List, functions_List}] *)
 
 xAct`xIdeal`GenRelExactSolsData[solname_String, coordname_String, "Metric", {coords_List, parameters_List, functions_List}] := exactSolsData[solname, {coordname, "Metric"}][coords, parameters, functions]
+
+(* ::Subsection:: *)
+(* Bertotti-Robinson Solution *)
+
+exactSolsData["BertottiRobinsonSolution", "Classes"] = {"EinsteinMaxwellSolution", "PetrovTypeN", "ConformallyFlat"}
+ 
+exactSolsData["BertottiRobinsonSolution", "IsIDEAL"] = False
+ 
+exactSolsData["BertottiRobinsonSolution", "ParameterAssumptions"] = Null
+ 
+exactSolsData["BertottiRobinsonSolution", "ParameterNames"] = {"k"}
+ 
+exactSolsData["BertottiRobinsonSolution", {"ComplexCoordinates", "CoordinateAssumptions"}] = Null
+ 
+exactSolsData["BertottiRobinsonSolution", {"ComplexCoordinates", "CoordinateNames"}] = {"u", "v", "x1", "x2"}
+ 
+exactSolsData["BertottiRobinsonSolution", {"ComplexCoordinates", "Metric"}] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{u = coords[[1]], v = coords[[2]], x1 = coords[[3]], x2 = coords[[4]], k = params[[1]]}, 
+    		{
+				{(-k)*v^2, -1, 0, 0}, 
+				{-1, 0, 0, 0}, 
+				{0, 0, 0, (1 + (k/2)*x1*x2)^(-2)}, 
+				{0, 0, (1 + (k/2)*x1*x2)^(-2), 0}
+			};
+		]
+	]
+ 
+exactSolsData["BertottiRobinsonSolution", {"ComplexCoordinates", "ParameterAssumptions"}] = exactSolsData["BertottiRobinsonSolution", "ParameterAssumptions"]
+ 
+exactSolsData["BertottiRobinsonSolution", {"ComplexCoordinates", "ParameterNames"}] = exactSolsData["BertottiRobinsonSolution", "ParameterNames"]
+ 
+exactSolsData["BertottiRobinsonSolution", {"ComplexCoordinates", "ScalarFunctionNames"}] = {}
+
+
+(* ::Subsection:: *)
+(* Farnsworth-Kerr I *)
+
+exactSolsData["FarnsworthKerrI", "Classes"] = {"PerfectFluid", "Homogeneous", "G4", "G3IXonS3"}
+ 
+exactSolsData["FarnsworthKerrI", "IsIDEAL"] = False
+ 
+exactSolsData["FarnsworthKerrI", "ParameterAssumptions"] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{k = params[[1]], a = params[[2]]}, 
+    		Element[k, Reals] && Abs[k] < 1/2 && Element[a, Reals];
+		]
+	]
+ 
+exactSolsData["FarnsworthKerrI", "ParameterNames"] = {"k", "a"}
+ 
+exactSolsData["FarnsworthKerrI", {"CanonicalCoordinates", "CoordinateAssumptions"}] = Null
+ 
+exactSolsData["FarnsworthKerrI", {"CanonicalCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
+ 
+exactSolsData["FarnsworthKerrI", {"CanonicalCoordinates", "Metric"}] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], k = params[[1]], a = params[[2]]}, 
+    		a^2*{
+				{-1, 0, (-Sqrt[1 - 2*k^2])*Sin[x], (-Sqrt[1 - 2*k^2])*Cos[x]*Cos[y]}, 
+				{0, 1 - k, 0, (1 - k)*Sin[y]}, 
+        		{(-Sqrt[1 - 2*k^2])*Sin[x], 0, (1 + k)*Cos[x]^2 + (1 + 2*k^2)*Sin[x]^2, 
+					k*(2*k - 1)*Cos[x]*Sin[x]*Cos[y]}, 
+				{(-Sqrt[1 - 2*k^2])*Cos[x]*Cos[y], (1 - k)*Sin[y], k*(2*k - 1)*Cos[x]*Sin[x]*Cos[y], 
+					(1 - k)*Sin[y]^2 + (1 + k)*Sin[x]^2*Cos[y]^2 + (1 + 2*k^2)*Cos[x]^2*Cos[y]^2}
+			};
+		]
+	]
+ 
+exactSolsData["FarnsworthKerrI", {"CanonicalCoordinates", "ParameterAssumptions"}] = exactSolsData["FarnsworthKerrI", "ParameterAssumptions"]
+ 
+exactSolsData["FarnsworthKerrI", {"CanonicalCoordinates", "ParameterNames"}] = exactSolsData["FarnsworthKerrI", "ParameterNames"]
+ 
+exactSolsData["FarnsworthKerrI", {"CanonicalCoordinates", "ScalarFunctionNames"}] = {}
+
+
+(* ::Subsection:: *)
+(* Farnsworth-Kerr II *)
+
+exactSolsData["FarnsworthKerrII", "Classes"] = {"PerfectFluid", "Homogeneous", "G4", "G3VIIIonT3", "G3IIIonS3"}
+ 
+exactSolsData["FarnsworthKerrII", "IsIDEAL"] = False
+ 
+exactSolsData["FarnsworthKerrII", "ParameterAssumptions"] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{k = params[[1]], a = params[[2]]}, 
+      		Element[k, Reals] && Inequality[1, Less, 4*k^2, LessEqual, 2] && Element[a, Reals];
+		]
+	]
+ 
+exactSolsData["FarnsworthKerrII", "ParameterNames"] = {"k", "a"}
+ 
+exactSolsData["FarnsworthKerrII", {"CanonicalCoordinates", "CoordinateAssumptions"}] = Null
+ 
+exactSolsData["FarnsworthKerrII", {"CanonicalCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
+ 
+exactSolsData["FarnsworthKerrII", {"CanonicalCoordinates", "Metric"}] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], k = params[[1]], a = params[[2]]}, 
+    		(-a^2)*{
+				{1, 0, Sqrt[1 - 2*k^2]*Sin[x], Sqrt[1 - 2*k^2]*Cos[x]*Cosh[y]}, 
+        		{0, 1 - k, 0, (1 - k)*Sinh[y]}, 
+				{Sqrt[1 - 2*k^2]*Sin[x], 0, (1 + k)*Cos[x]^2 - (1 + 2*k^2)*Sin[x]^2, 
+					(-(2 + k + 2*k^2))*Cos[x]*Sin[x]*Cosh[y]}, 
+				{Sqrt[1 - 2*k^2]*Cos[x]*Cosh[y], (1 - k)*Sinh[y], (-(2 + k + 2*k^2))*Cos[x]*Sin[x]*Cosh[y], 
+					(1 - k)*Sinh[y]^2 + (1 + k)*Sin[x]^2*Cosh[y]^2 - (1 + 2*k^2)*Cos[x]^2*Cosh[y]^2}
+			};
+		]
+	]
+ 
+exactSolsData["FarnsworthKerrII", {"CanonicalCoordinates", "ParameterAssumptions"}] = exactSolsData["FarnsworthKerrII", "ParameterAssumptions"]
+ 
+exactSolsData["FarnsworthKerrII", {"CanonicalCoordinates", "ParameterNames"}] = exactSolsData["FarnsworthKerrII", "ParameterNames"]
+ 
+exactSolsData["FarnsworthKerrII", {"CanonicalCoordinates", "ScalarFunctionNames"}] = {}
+
+
+(* ::Subsection:: *)
+(* Farnsworth-Kerr III *)
+
+exactSolsData["FarnsworthKerrIII", "Classes"] = {"DMetrics", "PetrovTypeD", "PerfectFluid", "Homogeneous", "G4", "G3IXonS3"}
+ 
+exactSolsData["FarnsworthKerrIII", "IsIDEAL"] = False
+ 
+exactSolsData["FarnsworthKerrIII", "ParameterAssumptions"] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{s = params[[1]], a = params[[2]]}, 
+    		Element[s, Reals] && Abs[s] < 1 && Element[a, Reals];
+		]
+	]
+ 
+exactSolsData["FarnsworthKerrIII", "ParameterNames"] = {"s", "a"}
+ 
+exactSolsData["FarnsworthKerrIII", {"CanonicalCoordinates", "CoordinateAssumptions"}] = Null
+ 
+exactSolsData["FarnsworthKerrIII", {"CanonicalCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
+ 
+exactSolsData["FarnsworthKerrIII", {"CanonicalCoordinates", "Metric"}] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], s = params[[1]], a = params[[2]]}, 
+    		(-a^2)*{
+				{1, 0, 0, 0}, 
+				{0, 1 - s, 0, (-(1 - s))*Sinh[y]}, 
+        		{0, 0, (1 + s)*Cos[x]^2 - 2*Sin[x]^2, (-(3 + s))*Cos[x]*Sin[x]*Cosh[y]}, 
+				{0, (-(1 - s))*Sinh[y], (-(3 + s))*Cos[x]*Sin[x]*Cosh[y], 
+					(1 - s)*Sinh[y]^2 + (1 + s)*Sin[x]^2*Cosh[y]^2 - 2*Cos[x]^2*Cosh[y]^2}
+			};
+		]
+	]
+ 
+exactSolsData["FarnsworthKerrIII", {"CanonicalCoordinates", "ParameterAssumptions"}] = exactSolsData["FarnsworthKerrIII", "ParameterAssumptions"]
+ 
+exactSolsData["FarnsworthKerrIII", {"CanonicalCoordinates", "ParameterNames"}] = exactSolsData["FarnsworthKerrIII", "ParameterNames"]
+ 
+exactSolsData["FarnsworthKerrIII", {"CanonicalCoordinates", "ScalarFunctionNames"}] = {}
+
 
 (* ::Subsection:: *)
 (* Friedmann in reduced circumference polar coordinates *)
