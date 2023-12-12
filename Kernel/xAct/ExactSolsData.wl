@@ -567,6 +567,8 @@ exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "ScalarFunction
 
 exactSolsData["LemaitreTolman", "Classes"] = {"DMetrics", "PerfectFluid", 
     "PetrovTypeD", "ThermodynamicPerfectFluid", "SphericalSymmetry", "Warped22"}
+
+exactSolsData["LemaitreTolman", "CoordinateSystems"] = {"SphericalCoordinates"}
  
 exactSolsData["LemaitreTolman", "IsIDEAL"] = True
  
@@ -603,6 +605,8 @@ exactSolsData["LemaitreTolman", {"SphericalCoordinates", "ScalarFunctionNames"}]
 (* Petrov Solution *)
 
 exactSolsData["PetrovSolution", "Classes"] = {"Vacuum", "G4", "G3IonT3", "G3VIIhonT3", "PetrovTypeI"}
+
+exactSolsData["PetrovSolution", "CoordinateSystems"] = {"CanonicalCoordinates"}
  
 exactSolsData["PetrovSolution", "IsIDEAL"] = False
  
@@ -635,6 +639,8 @@ exactSolsData["PetrovSolution", {"CanonicalCoordinates", "ScalarFunctionNames"}]
 
 (* ::Subsection:: *)
 (* Reissner-Nordström *)
+
+exactSolsData["ReissnerNordstrom", "CoordinateSystems"] = {"SchwarzschildCoordinates"}
 
 exactSolsData["ReissnerNordstrom", "ParameterNames"] = {"m", "rQ"}
 
@@ -762,6 +768,8 @@ exactSolsData["Schwarzschild", {"IsotropicCoordinates", "Metric"}] =
 (* Stephani in adapted coordinates *)
 
 exactSolsData["Stephani", "Classes"] = {"PerfectFluid", "SpatialG6", "ConformallyFlat"}
+
+exactSolsData["Stephani", "CoordinateSystems"] = {"AdaptedCoordinates"}
  
 exactSolsData["Stephani", "IsIDEAL"] = True
  
@@ -808,6 +816,8 @@ exactSolsData["Stephani", {"AdaptedCoordinates", "ScalarFunctionNames"}] = {"\[C
 
 exactSolsData["StephaniThermodynamic", "Classes"] = {"PerfectFluid", "ThermodynamicPerfectFluid",
      "G3S2", "SpatialG6", "ConformallyFlat"}
+
+exactSolsData["StephaniThermodynamic", "CoordinateSystems"] = {"AdaptedCoordinates"}
 
 exactSolsData["StephaniThermodynamic", "IsIDEAL"] = True
 
@@ -863,6 +873,8 @@ exactSolsData["StephaniThermodynamic", {"AdaptedCoordinates", "ScalarFunctionNam
 
 exactSolsData["StephaniThermodynamicSpherical", "Classes"] = {"PerfectFluid", "ThermodynamicPerfectFluid", "G3onS2", "SpatialG6", 
     "ConformallyFlat", "SphericalSymmetry", "Warped22"}
+
+exactSolsData["StephaniThermodynamicSpherical", "CoordinateSystems"] = {"SphericalCoordinates"}
  
 exactSolsData["StephaniThermodynamicSpherical", "IsIDEAL"] = True
  
