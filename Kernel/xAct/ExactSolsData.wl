@@ -110,7 +110,8 @@ allmetricproperties = {
 	"CoordinateNames",
 	"ParameterNames",
 	"FunctionNames",
-	"ExactSolutionName"
+	"ExactSolutionName",
+	"Metric"
 }
 
 allcoordinatesystems = {
@@ -130,7 +131,7 @@ exactSolsData["Solutions"] = allmetrics
 
 exactSolsData["Classes"] = allclasses
 
-exactSolsData["MetricProperties"] = allmetricproperties
+exactSolsData["Properties"] = allmetricproperties
 
 exactSolsData["CoordinateSystems"] = allcoordinatesystems
 
@@ -907,12 +908,10 @@ exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "Scalar
 
 (* Metrics *)
 
-iGenRelExactSolsData[metric_?metricQ] := 
-
 
 (* Special definitions *)
 iGenRelExactSolsData[] = allmetrics;
-iGenRelExactSolsData["Metrics"] = allmetrics;
+iGenRelExactSolsData["ExactSolutions"] = allmetrics;
 iGenRelExactSolsData[All] = allmetrics;
 iGenRelExactSolsData["Classes"] = allclasses;
 iGenRelExactSolsData[All, "Classes"] = allclasses;
