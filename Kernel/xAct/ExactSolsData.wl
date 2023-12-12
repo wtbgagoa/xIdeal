@@ -889,11 +889,14 @@ exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "Scalar
 
 (* Special definitions *)
 iGenRelExactSolsData[] = allmetrics;
+iGenRelExactSolsData["Metrics"] = allmetrics;
 iGenRelExactSolsData[All] = allmetrics;
-iGenRelExactSolsData["Classes" | "Groups"] = allclasses;
+iGenRelExactSolsData["Classes"] = allclasses;
+iGenRelExactSolsData[All, "Classes"] = allclasses;
 iGenRelExactSolsData["Properties"] = allmetricproperties;
 iGenRelExactSolsData[All, "Properties"] = allmetricproperties;
 iGenRelExactSolsData["CoordinateSystems"] = allcoordinatesystems;
+iGenRelExactSolsData[All, "CoordinateSystems"] = allcoordinatesystems;
 
 iGenRelExactSolsData[___] := $Failed;
 
