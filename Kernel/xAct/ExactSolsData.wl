@@ -188,7 +188,9 @@ iGenRelExactSolsData[solname_String, coordname_String, "Metric", {coords_List, p
 (* Bertotti-Robinson Solution *)
 
 exactSolsData["BertottiRobinsonSolution", "Classes"] = {"EinsteinMaxwellSolution", "PetrovTypeN", "ConformallyFlat"}
- 
+
+exactSolsData["BertottiRobinsonSolution", "CoordinateSystems"] = {"ComplexCoordinates"}
+
 exactSolsData["BertottiRobinsonSolution", "IsIDEAL"] = False
  
 exactSolsData["BertottiRobinsonSolution", "ParameterAssumptions"] = Null
@@ -223,6 +225,8 @@ exactSolsData["BertottiRobinsonSolution", {"ComplexCoordinates", "ScalarFunction
 
 exactSolsData["FarnsworthKerrI", "Classes"] = {"PerfectFluid", "Homogeneous", "G4", "G3IXonS3"}
  
+exactSolsData["FarnsworthKerrI", "CoordinateSystems"] = {"CanonicalCoordinates"}
+
 exactSolsData["FarnsworthKerrI", "IsIDEAL"] = False
  
 exactSolsData["FarnsworthKerrI", "ParameterAssumptions"] = 
@@ -264,6 +268,8 @@ exactSolsData["FarnsworthKerrI", {"CanonicalCoordinates", "ScalarFunctionNames"}
 
 exactSolsData["FarnsworthKerrII", "Classes"] = {"PerfectFluid", "Homogeneous", "G4", "G3VIIIonT3", "G3IIIonS3"}
  
+exactSolsData["FarnsworthKerrII", "CoordinateSystems"] = {"CanonicalCoordinates"}
+
 exactSolsData["FarnsworthKerrII", "IsIDEAL"] = False
  
 exactSolsData["FarnsworthKerrII", "ParameterAssumptions"] = 
@@ -305,6 +311,8 @@ exactSolsData["FarnsworthKerrII", {"CanonicalCoordinates", "ScalarFunctionNames"
 
 exactSolsData["FarnsworthKerrIII", "Classes"] = {"DMetrics", "PetrovTypeD", "PerfectFluid", "Homogeneous", "G4", "G3IXonS3"}
  
+exactSolsData["FarnsworthKerrIII", "CoordinateSystems"] = {"CanonicalCoordinates"}
+
 exactSolsData["FarnsworthKerrIII", "IsIDEAL"] = False
  
 exactSolsData["FarnsworthKerrIII", "ParameterAssumptions"] = 
@@ -347,6 +355,8 @@ exactSolsData["Friedmann", "Classes"] = {"PerfectFluid", "ThermodynamicPerfectFl
      "ConformallyFlat", "SpatiallyHomogeneous", "SpatialG6", "BarotropicPerfectFluid",
      "ConformallyStatic"}
 
+exactSolsData["Friedmann", "CoordinateSystems"] = {"ReducedCircumferencePolarCoordinates"}
+
 exactSolsData["Friedmann", "IsIDEAL"] = True
 
 exactSolsData["Friedmann", "ParameterNames"] = {"k"}
@@ -385,8 +395,10 @@ exactSolsData["Friedmann", {"ReducedCircumferencePolarCoordinates", "Metric"}] =
 (* ::Subsection:: *)
 (* GeneralSpherical metric in spherical coordinates *)
 
-exactSolsData["Kerr", "Classes"] = {"DMetrics", "PerfectFluid", "PetrovTypeD", 
+exactSolsData["GeneralSphericalSymmetry", "Classes"] = {"DMetrics", "PerfectFluid", "PetrovTypeD", 
 	"ThermodynamicPerfectFluid", "SphericalSymmetry", "Warped22"}
+
+exactSolsData["GeneralSphericalSymmetry", "CoordinateSystems"] = {"SphericalCoordinates"} 
 
 exactSolsData["GeneralSphericalSymmetry", "ParameterNames"] = {}
 
@@ -429,6 +441,8 @@ exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "Metric"}] =
 exactSolsData["Kerr", "Classes"] = {"DMetrics", "PetrovTypeD", 
 	"AxialSymmetry", "Vacuum", "Stationary"}
  
+exactSolsData["Kerr", "CoordinateSystems"] = {"BoyerLindquistCoordinates"}
+
 exactSolsData["Kerr", "IsIDEAL"] = True
  
 exactSolsData["Kerr", "ParameterAssumptions"] = 
@@ -490,6 +504,8 @@ exactSolsData["Kerr", {"BoyerLindquistCoordinates", "ScalarFunctionNames"}] =
 (* Kerr-NUT *)
 
 exactSolsData["KerrNut", "Classes"] = {"DMetrics", "PetrovTypeD", "Vacuum"}
+
+exactSolsData["KerrNut", "CoordinateSystems"] = {"ExpansionGradientAdaptedCoordinates"}
  
 exactSolsData["KerrNut", "IsIDEAL"] = True
  
@@ -664,6 +680,9 @@ exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "Metric"}] =
 
 (* ::Subsection:: *)
 (* Schwarzschild in Schwarzschild coordinates *)
+exactSolsData["Schwarzschild", "Classes"] = {"PetrovTypeD", "Static", "SphericalSymmetry", "Vacuum", "VacuumTypeD"}
+
+exactSolsData["Schwarzschild", "CoordinateSystems"] = {"SchwarzschildCoordinates", "IsotropicCoordinates"}
 
 exactSolsData["Schwarzschild", "ParameterNames"] = {"m"}
 
@@ -885,6 +904,10 @@ exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "Scalar
 
 (* ::Section:: *)
 (* GenRelExactSolsData *)
+
+(* Metrics *)
+
+iGenRelExactSolsData[metric_?metricQ] := 
 
 
 (* Special definitions *)
