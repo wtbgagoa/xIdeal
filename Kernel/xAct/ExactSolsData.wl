@@ -1,5 +1,7 @@
 BeginPackage["xAct`ExactSolsData`"]
 
+GenRelExactSolsData::usage = " ";
+
 Begin["xAct`xIdeal`Private`"]
 
 (* ::Section:: *)
@@ -132,6 +134,22 @@ exactSolsData["MetricProperties"] = allmetricproperties
 
 exactSolsData["CoordinateSystems"] = allcoordinatesystems
 
+(* Valid metrics *)
+Set[metricQ[#], True]& /@ allmetrics;
+metricQ[_] := False;
+
+(* Valid classes of exact solutions/metrics *)
+Set[exactsolclassQ[#], True]& /@ allclasses;
+exactsolclassQ[_] := False;
+
+(* Valid properties of exactsolutions/metrics *)
+Set[metricpropertyQ[#], True]& /@ allmetricproperties;
+metricpropertyQ[_] := False;
+
+(* Valid coordinate systems *)
+Set[coordinatesystemQ[#], True]& /@ allcoordinatesystems;
+coordinatesystemQ[_] := False;
+
 
 (* ::Section:: *)
 (* Classification of exact solutions *)
@@ -164,7 +182,7 @@ exactSolsData["Vacuum"] = {
 
 (* The syntax is GRData[args__String, {coords_List, parameters_List, functions_List}] *)
 
-xAct`xIdeal`GenRelExactSolsData[solname_String, coordname_String, "Metric", {coords_List, parameters_List, functions_List}] := exactSolsData[solname, {coordname, "Metric"}][coords, parameters, functions]
+iGenRelExactSolsData[solname_String, coordname_String, "Metric", {coords_List, parameters_List, functions_List}] := exactSolsData[solname, {coordname, "Metric"}][coords, parameters, functions]
 
 (* ::Subsection:: *)
 (* Bertotti-Robinson Solution *)
@@ -865,6 +883,22 @@ exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "Parame
  
 exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "ScalarFunctionNames"}] = {"\[CapitalOmega]", "\[Alpha]", "R", "k"}
 
+(* ::Section:: *)
+(* GenRelExactSolsData *)
+
+
+(* Special definitions *)
+iGenRelExactSolsData[] = allmetrics;
+iGenRelExactSolsData[All] = allmetrics;
+iGenRelExactSolsData["Classes" | "Groups"] = allclasses;
+iGenRelExactSolsData["Properties"] = allmetricproperties;
+iGenRelExactSolsData[All, "Properties"] = allmetricproperties;
+iGenRelExactSolsData["CoordinateSystems"] = allcoordinatesystems;
+
+iGenRelExactSolsData[___] := $Failed;
+
+(* Entry point of GenRelExactSolsData *)
+GenRelExactSolsData[args___]:= Module[{res = iGenRelExactSolsData[args]}, (res/; UnsameQ[res, $Failed])]
 
 (****************************************************************)
 

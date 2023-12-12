@@ -167,8 +167,6 @@ PetrovType::usage = " ";
 
 DebeverNullDirections::usage = " ";
 
-GenRelExactSolsData::usage = " ";
-
 TypeDClassify::usage = " ";
 
 PSimplify::usage = " ";
