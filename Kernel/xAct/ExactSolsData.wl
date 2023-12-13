@@ -192,6 +192,8 @@ exactSolsData["BertottiRobinsonSolution", "Classes"] = {"EinsteinMaxwellSolution
 
 exactSolsData["BertottiRobinsonSolution", "CoordinateSystems"] = {"ComplexCoordinates"}
 
+exactSolsData["BertottiRobinsonSolution", "DefaultCoordinates"] = "ComplexCoordinates"
+
 exactSolsData["BertottiRobinsonSolution", "IsIDEAL"] = False
  
 exactSolsData["BertottiRobinsonSolution", "ParameterAssumptions"] = Null
@@ -227,6 +229,8 @@ exactSolsData["BertottiRobinsonSolution", {"ComplexCoordinates", "ScalarFunction
 exactSolsData["FarnsworthKerrI", "Classes"] = {"PerfectFluid", "Homogeneous", "G4", "G3IXonS3"}
  
 exactSolsData["FarnsworthKerrI", "CoordinateSystems"] = {"CanonicalCoordinates"}
+
+exactSolsData["FarnsworthKerrI", "DefaultCoordinates"] = "CanonicalCoordinates"
 
 exactSolsData["FarnsworthKerrI", "IsIDEAL"] = False
  
@@ -271,6 +275,8 @@ exactSolsData["FarnsworthKerrII", "Classes"] = {"PerfectFluid", "Homogeneous", "
  
 exactSolsData["FarnsworthKerrII", "CoordinateSystems"] = {"CanonicalCoordinates"}
 
+exactSolsData["FarnsworthKerrII", "DefaultCoordinates"] = "CanonicalCoordinates"
+
 exactSolsData["FarnsworthKerrII", "IsIDEAL"] = False
  
 exactSolsData["FarnsworthKerrII", "ParameterAssumptions"] = 
@@ -313,6 +319,8 @@ exactSolsData["FarnsworthKerrII", {"CanonicalCoordinates", "ScalarFunctionNames"
 exactSolsData["FarnsworthKerrIII", "Classes"] = {"DMetrics", "PetrovTypeD", "PerfectFluid", "Homogeneous", "G4", "G3IXonS3"}
  
 exactSolsData["FarnsworthKerrIII", "CoordinateSystems"] = {"CanonicalCoordinates"}
+
+exactSolsData["FarnsworthKerrIII", "DefaultCoordinates"] = "CanonicalCoordinates"
 
 exactSolsData["FarnsworthKerrIII", "IsIDEAL"] = False
  
@@ -358,6 +366,8 @@ exactSolsData["Friedmann", "Classes"] = {"PerfectFluid", "ThermodynamicPerfectFl
 
 exactSolsData["Friedmann", "CoordinateSystems"] = {"ReducedCircumferencePolarCoordinates"}
 
+exactSolsData["Friedmann", "DefaultCoordinates"] = "ReducedCircumferencePolarCoordinates"
+
 exactSolsData["Friedmann", "IsIDEAL"] = True
 
 exactSolsData["Friedmann", "ParameterNames"] = {"k"}
@@ -401,6 +411,8 @@ exactSolsData["GeneralSphericalSymmetry", "Classes"] = {"DMetrics", "PerfectFlui
 
 exactSolsData["GeneralSphericalSymmetry", "CoordinateSystems"] = {"SphericalCoordinates"} 
 
+exactSolsData["GeneralSphericalSymmetry", "DefaultCoordinates"] = "SphericalCoordinates"
+
 exactSolsData["GeneralSphericalSymmetry", "ParameterNames"] = {}
 
 exactSolsData["GeneralSphericalSymmetry", "ParameterAssumptions"] = Null
@@ -443,6 +455,8 @@ exactSolsData["Kerr", "Classes"] = {"DMetrics", "PetrovTypeD",
 	"AxialSymmetry", "Vacuum", "Stationary"}
  
 exactSolsData["Kerr", "CoordinateSystems"] = {"BoyerLindquistCoordinates"}
+
+exactSolsData["Kerr", "DefaultCoordinates"] = "BoyerLindquistCoordinates"
 
 exactSolsData["Kerr", "IsIDEAL"] = True
  
@@ -507,6 +521,8 @@ exactSolsData["Kerr", {"BoyerLindquistCoordinates", "ScalarFunctionNames"}] =
 exactSolsData["KerrNut", "Classes"] = {"DMetrics", "PetrovTypeD", "Vacuum"}
 
 exactSolsData["KerrNut", "CoordinateSystems"] = {"ExpansionGradientAdaptedCoordinates"}
+
+exactSolsData["KerrNut", "DefaultCoordinates"] = "ExpansionGradientAdaptedCoordinates"
  
 exactSolsData["KerrNut", "IsIDEAL"] = True
  
@@ -569,7 +585,9 @@ exactSolsData["LemaitreTolman", "Classes"] = {"DMetrics", "PerfectFluid",
     "PetrovTypeD", "ThermodynamicPerfectFluid", "SphericalSymmetry", "Warped22"}
 
 exactSolsData["LemaitreTolman", "CoordinateSystems"] = {"SphericalCoordinates"}
- 
+
+exactSolsData["LemaitreTolman", "DefaultCoordinates"] = "SphericalCoordinates"
+
 exactSolsData["LemaitreTolman", "IsIDEAL"] = True
  
 exactSolsData["LemaitreTolman", "ParameterAssumptions"] = Null
@@ -607,6 +625,8 @@ exactSolsData["LemaitreTolman", {"SphericalCoordinates", "ScalarFunctionNames"}]
 exactSolsData["PetrovSolution", "Classes"] = {"Vacuum", "G4", "G3IonT3", "G3VIIhonT3", "PetrovTypeI"}
 
 exactSolsData["PetrovSolution", "CoordinateSystems"] = {"CanonicalCoordinates"}
+
+exactSolsData["PetrovSolution", "DefaultCoordinates"] = "CanonicalCoordinates"
  
 exactSolsData["PetrovSolution", "IsIDEAL"] = False
  
@@ -641,6 +661,8 @@ exactSolsData["PetrovSolution", {"CanonicalCoordinates", "ScalarFunctionNames"}]
 (* Reissner-Nordström *)
 
 exactSolsData["ReissnerNordstrom", "CoordinateSystems"] = {"SchwarzschildCoordinates"}
+
+exactSolsData["ReissnerNordstrom", "DefaultCoordinates"] = "SchwarzschildCoordinates"
 
 exactSolsData["ReissnerNordstrom", "ParameterNames"] = {"m", "rQ"}
 
@@ -690,6 +712,8 @@ exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "Metric"}] =
 exactSolsData["Schwarzschild", "Classes"] = {"PetrovTypeD", "Static", "SphericalSymmetry", "Vacuum", "VacuumTypeD"}
 
 exactSolsData["Schwarzschild", "CoordinateSystems"] = {"SchwarzschildCoordinates", "IsotropicCoordinates"}
+
+exactSolsData["Schwarzschild", "DefaultCoordinates"] = "Schwarzschild"
 
 exactSolsData["Schwarzschild", "ParameterNames"] = {"m"}
 
@@ -770,6 +794,8 @@ exactSolsData["Schwarzschild", {"IsotropicCoordinates", "Metric"}] =
 exactSolsData["Stephani", "Classes"] = {"PerfectFluid", "SpatialG6", "ConformallyFlat"}
 
 exactSolsData["Stephani", "CoordinateSystems"] = {"AdaptedCoordinates"}
+
+exactSolsData["Stephani", "DefaultCoordinates"] = "AdaptedCoordinates"
  
 exactSolsData["Stephani", "IsIDEAL"] = True
  
@@ -818,6 +844,8 @@ exactSolsData["StephaniThermodynamic", "Classes"] = {"PerfectFluid", "Thermodyna
      "G3S2", "SpatialG6", "ConformallyFlat"}
 
 exactSolsData["StephaniThermodynamic", "CoordinateSystems"] = {"AdaptedCoordinates"}
+
+exactSolsData["StephaniThermodynamic", "DefaultCoordinates"] = "AdaptedCoordinates"
 
 exactSolsData["StephaniThermodynamic", "IsIDEAL"] = True
 
@@ -875,6 +903,8 @@ exactSolsData["StephaniThermodynamicSpherical", "Classes"] = {"PerfectFluid", "T
     "ConformallyFlat", "SphericalSymmetry", "Warped22"}
 
 exactSolsData["StephaniThermodynamicSpherical", "CoordinateSystems"] = {"SphericalCoordinates"}
+
+exactSolsData["StephaniThermodynamicSpherical", "DefaultCoordinates"] = "SphericalCoordinates"
  
 exactSolsData["StephaniThermodynamicSpherical", "IsIDEAL"] = True
  
