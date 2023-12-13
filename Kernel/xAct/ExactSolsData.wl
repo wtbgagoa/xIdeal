@@ -217,7 +217,7 @@ exactSolsData["BertottiRobinsonSolution", {"ComplexCoordinates", "Metric"}] =
 				{-1, 0, 0, 0}, 
 				{0, 0, 0, (1 + (k/2)*x1*x2)^(-2)}, 
 				{0, 0, (1 + (k/2)*x1*x2)^(-2), 0}
-			};
+			}
 		]
 	]
  
@@ -262,7 +262,7 @@ exactSolsData["FarnsworthKerrI", {"CanonicalCoordinates", "Metric"}] =
 					k*(2*k - 1)*Cos[x]*Sin[x]*Cos[y]}, 
 				{(-Sqrt[1 - 2*k^2])*Cos[x]*Cos[y], (1 - k)*Sin[y], k*(2*k - 1)*Cos[x]*Sin[x]*Cos[y], 
 					(1 - k)*Sin[y]^2 + (1 + k)*Sin[x]^2*Cos[y]^2 + (1 + 2*k^2)*Cos[x]^2*Cos[y]^2}
-			};
+			}
 		]
 	]
  
@@ -307,7 +307,7 @@ exactSolsData["FarnsworthKerrII", {"CanonicalCoordinates", "Metric"}] =
 					(-(2 + k + 2*k^2))*Cos[x]*Sin[x]*Cosh[y]}, 
 				{Sqrt[1 - 2*k^2]*Cos[x]*Cosh[y], (1 - k)*Sinh[y], (-(2 + k + 2*k^2))*Cos[x]*Sin[x]*Cosh[y], 
 					(1 - k)*Sinh[y]^2 + (1 + k)*Sin[x]^2*Cosh[y]^2 - (1 + 2*k^2)*Cos[x]^2*Cosh[y]^2}
-			};
+			}
 		]
 	]
  
@@ -351,7 +351,7 @@ exactSolsData["FarnsworthKerrIII", {"CanonicalCoordinates", "Metric"}] =
         		{0, 0, (1 + s)*Cos[x]^2 - 2*Sin[x]^2, (-(3 + s))*Cos[x]*Sin[x]*Cosh[y]}, 
 				{0, (-(1 - s))*Sinh[y], (-(3 + s))*Cos[x]*Sin[x]*Cosh[y], 
 					(1 - s)*Sinh[y]^2 + (1 + s)*Sin[x]^2*Cosh[y]^2 - 2*Cos[x]^2*Cosh[y]^2}
-			};
+			}
 		]
 	]
  
@@ -572,7 +572,7 @@ exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "Metric"}] =
        				{0, 0, (x^2 + y^2)/beta[p, y, k, s], 0}, 
         			{-((alpha[p, x, k, s]*y^2 + beta[p, y, k, s]*x^2)/(x^2 + y^2)), 0, 0, 
         				(beta[p, y, k, s] - alpha[p, x, k, s])/(x^2 + y^2)}
-				};
+				}
 		]
 	]
  
@@ -675,7 +675,7 @@ exactSolsData["OsvathKoutrasI", {"GroupGeneratorsAdaptedCoordinates", "Metric"}]
 						((4/b[s]^2)*B[beta, s]^2 - 1)*Exp[2*B[beta, s]*z], 0, 0}, 
 					{0, 0, Exp[2*F[s]*z], 0}, 
         			{0, 0, 0, 1}
-				};
+				}
 		]
 	]
  
@@ -723,7 +723,7 @@ exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "Metric"}
 					{(-4^(-1))*(b[s] - 1/b[s])^2*E^z*z, E^z*(1 - (z^2/4)*(b[s] - 1/b[s])^2), 0, 0}, 
 					{0, 0, E^(2*F[s]*z), 0}, 
 					{0, 0, 0, 1}
-				};
+				}
 		]
 	]
  
@@ -784,7 +784,7 @@ exactSolsData["OsvathKoutrasIII", {"GroupGeneratorsAdaptedCoordinates", "Metric"
 					}, 
          			{0, 0, Exp[2*F[s]*z], 0}, 
 		 			{0, 0, 0, 1}
-				};
+				}
 		]
 	]
  
@@ -822,7 +822,7 @@ exactSolsData["PetrovSolution", {"CanonicalCoordinates", "Metric"}] =
 				{0, 1, 0, 0}, 
         		{0, 0, E^(-2*x), 0}, 
 				{(-E^x)*Sin[Sqrt[3]*x], 0, 0, E^x*Cos[Sqrt[3]*x]}
-			}/k^2; 
+			}/k^2
 		]
 	]
  
