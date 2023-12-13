@@ -8,7 +8,7 @@ Begin["xAct`xIdeal`Private`"]
 (* Data *)
 
 allmetrics = {
-	"BertottiRobinson",
+	"BertottiRobinsonSolution",
  	"Friedmann",
 	"FarnsworthKerrI",
 	"FarnsworthKerrII",
@@ -114,7 +114,7 @@ allmetricproperties = {
 	"ParameterAssumptions",
 	"CoordinateNames",
 	"ParameterNames",
-	"FunctionNames",
+	"ScalarFunctionNames",
 	"ExactSolutionName",
 	"Metric"
 }
@@ -185,10 +185,6 @@ exactSolsData["Vacuum"] = {
 (* ::Section:: *)
 (* Exact solutions database *)
 
-
-(* The syntax is GRData[args__String, {coords_List, parameters_List, functions_List}] *)
-
-iGenRelExactSolsData[solname_String, coordname_String, "Metric", {coords_List, parameters_List, functions_List}] := exactSolsData[solname, {coordname, "Metric"}][coords, parameters, functions]
 
 (* ::Subsection:: *)
 (* Bertotti-Robinson Solution *)
@@ -1124,10 +1120,53 @@ exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "Scalar
 (* ::Section:: *)
 (* GenRelExactSolsData *)
 
+(* ::Subsection:: *)
 (* Metrics *)
 
+iGenRelExactSolsData[metric_?metricQ] := exactSolsData[metric, "CoordinateSystems"]
 
-(* Special definitions *)
+iGenRelExactSolsData[metric_?metricQ, coords_?coordinatesystemQ] := exactSolsData[metric, {coords, "Metric"}]
+
+(* The syntax is GRData[args__String, {coords_List, parameters_List, functions_List}] *)
+
+iGenRelExactSolsData[metric_?metricQ, coordname_?coordinatesystemQ, {coords_List, parameters_List, functions_List}] := exactSolsData[metric, {coordname, "Metric"}][coords, parameters, functions]
+
+iGenRelExactSolsData[metric_?metricQ, "Properties"] := allmetricproperties
+
+iGenRelExactSolsData[metric_?metricQ, "IsIDEAL"] := exactSolsData[metric, "IsIDEAL"]
+
+iGenRelExactSolsData[metric_?metricQ, "CoordinateAssumptions"] := Module[{coords},
+	coords = exactSolsData[metric, "DefaultCoordinates"];
+	exactSolsData[metric, {coords, "CoordinateAssumptions"}]
+]
+
+iGenRelExactSolsData[metric_?metricQ, "CoordinateSystemName"] := Module[{coords},
+	coords = exactSolsData[metric, "DefaultCoordinates"]
+]
+
+iGenRelExactSolsData[metric_?metricQ, "CoordinateNames"] := Module[{coords},
+	coords = exactSolsData[metric, "DefaultCoordinates"];
+	exactSolsData[metric, {coords, "CoordinateNames"}]
+]
+
+iGenRelExactSolsData[metric_?metricQ, "ParameterAssumptions"] := exactSolsData[metric, "ParameterAssumptions"]
+
+iGenRelExactSolsData[metric_?metricQ, "ParameterNames"] := exactSolsData[metric, "ParameterNames"]
+
+iGenRelExactSolsData[metric_?metricQ, "ScalarFunctionNames"] := Module[{coords},
+	coords = exactSolsData[metric, "DefaultCoordinates"];
+	exactSolsData[metric, {coords, "ScalarFunctionNames"}]
+]
+
+iGenRelExactSolsData[metric_?metricQ, "Metric"] := Module[{coords},
+	coords = exactSolsData[metric, "DefaultCoordinates"];
+	exactSolsData[metric, {coords, "Metric"}]
+]
+
+
+
+(* ::Subsection:: *)
+(* General definitions *)
 iGenRelExactSolsData[] = allmetrics;
 iGenRelExactSolsData["ExactSolutions"] = allmetrics;
 iGenRelExactSolsData[All] = allmetrics;
