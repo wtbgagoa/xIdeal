@@ -20,7 +20,7 @@ allmetrics = {
 	"KasnerII",
 	"KasnerIII",
 	"Kerr",
- 	"KerrNut",
+ 	"KerrNUT",
 	"LemaitreTolman",
 	"TaubI",
 	"TaubII",
@@ -523,19 +523,19 @@ exactSolsData["Kerr", {"BoyerLindquistCoordinates", "ScalarFunctionNames"}] =
 (* ::Subsection:: *)
 (* Kerr-NUT *)
 
-exactSolsData["KerrNut", "Classes"] = {"DMetrics", "PetrovTypeD", "Vacuum"}
+exactSolsData["KerrNUT", "Classes"] = {"DMetrics", "PetrovTypeD", "Vacuum"}
 
-exactSolsData["KerrNut", "CoordinateSystems"] = {"ExpansionGradientAdaptedCoordinates"}
+exactSolsData["KerrNUT", "CoordinateSystems"] = {"ExpansionGradientAdaptedCoordinates"}
 
-exactSolsData["KerrNut", "DefaultCoordinates"] = "ExpansionGradientAdaptedCoordinates"
+exactSolsData["KerrNUT", "DefaultCoordinates"] = "ExpansionGradientAdaptedCoordinates"
  
-exactSolsData["KerrNut", "IsIDEAL"] = True
+exactSolsData["KerrNUT", "IsIDEAL"] = True
  
-exactSolsData["KerrNut", "ParameterAssumptions"] = Null
+exactSolsData["KerrNUT", "ParameterAssumptions"] = Null
  
-exactSolsData["KerrNut", "ParameterNames"] = {"p", "k", "s"}
+exactSolsData["KerrNUT", "ParameterNames"] = {"p", "k", "s"}
  
-exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "CoordinateAssumptions"}] = 
+exactSolsData["KerrNUT", {"ExpansionGradientAdaptedCoordinates", "CoordinateAssumptions"}] = 
 	Function[{coords, params, scfuncs}, 
     	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], p = params[[1]], 
 			k = params[[2]], s = params[[3]], alpha = scfuncs[[1]], beta = scfuncs[[2]]}, 
@@ -547,13 +547,13 @@ exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "CoordinateAssu
 					Function[{p, y, k, s}, 
 						(-p)*y^2 + (3*k^2 - 1)*(y/(1 + k^2)^3) + s
 					]; 
-				x^2 + y^2 > 0 && alpha > 0 && beta > 0
+				x^2 + y^2 > 0 && alpha[p, x, k, s] > 0 && beta[p, y, k, s] > 0
 		]
 	]
  
-exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
+exactSolsData["KerrNUT", {"ExpansionGradientAdaptedCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
  
-exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "Metric"}] = 
+exactSolsData["KerrNUT", {"ExpansionGradientAdaptedCoordinates", "Metric"}] = 
     Function[{coords, params, scfuncs}, 
     	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], p = params[[1]], 
 			k = params[[2]], s = params[[3]], alpha = scfuncs[[1]], beta = scfuncs[[2]]}, 
@@ -576,11 +576,11 @@ exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "Metric"}] =
 		]
 	]
  
-exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "ParameterAssumptions"}] = exactSolsData["KerrNut", "ParameterAssumptions"]
+exactSolsData["KerrNUT", {"ExpansionGradientAdaptedCoordinates", "ParameterAssumptions"}] = exactSolsData["KerrNUT", "ParameterAssumptions"]
  
-exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "ParameterNames"}] = exactSolsData["KerrNut", "ParameterNames"]
+exactSolsData["KerrNUT", {"ExpansionGradientAdaptedCoordinates", "ParameterNames"}] = exactSolsData["KerrNUT", "ParameterNames"]
  
-exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "ScalarFunctionNames"}] = {"\[Alpha]", "\[Beta]"}
+exactSolsData["KerrNUT", {"ExpansionGradientAdaptedCoordinates", "ScalarFunctionNames"}] = {"\[Alpha]", "\[Beta]"}
 
 
 (* ::Subsection:: *)
