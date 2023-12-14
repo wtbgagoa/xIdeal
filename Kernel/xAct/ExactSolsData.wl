@@ -20,11 +20,14 @@ allmetrics = {
 	"KasnerII",
 	"KasnerIII",
 	"Kerr",
- 	"KerrNut",
+ 	"KerrNUT",
 	"LemaitreTolman",
 	"TaubI",
 	"TaubII",
 	"ThermodynamicStephani",
+	"OsvathKoutrasI",
+	"OsvathKoutrasII",
+	"OsvathKoutrasIII",
 	"PetrovSolution",
 	"PPWave",
 	"ReissnerNordstrom",
@@ -39,6 +42,7 @@ allmetrics = {
 }
 
 allclasses = {
+	"AbelianG3onT3",
 	"AxialSymmetry",
 	"BarotropicPerfectFluid",
  	"ConformallyFlat",
@@ -67,6 +71,7 @@ allclasses = {
 	"G3IIIonT3", 
 	"G3IVonT3", 
 	"G3VonT3", 
+	"G3VIonT3", 
 	"G3VI0onT3", 
 	"G3VIhonT3", 
 	"G3VII0onT3", 
@@ -212,7 +217,7 @@ exactSolsData["BertottiRobinsonSolution", {"ComplexCoordinates", "Metric"}] =
 				{-1, 0, 0, 0}, 
 				{0, 0, 0, (1 + (k/2)*x1*x2)^(-2)}, 
 				{0, 0, (1 + (k/2)*x1*x2)^(-2), 0}
-			};
+			}
 		]
 	]
  
@@ -257,7 +262,7 @@ exactSolsData["FarnsworthKerrI", {"CanonicalCoordinates", "Metric"}] =
 					k*(2*k - 1)*Cos[x]*Sin[x]*Cos[y]}, 
 				{(-Sqrt[1 - 2*k^2])*Cos[x]*Cos[y], (1 - k)*Sin[y], k*(2*k - 1)*Cos[x]*Sin[x]*Cos[y], 
 					(1 - k)*Sin[y]^2 + (1 + k)*Sin[x]^2*Cos[y]^2 + (1 + 2*k^2)*Cos[x]^2*Cos[y]^2}
-			};
+			}
 		]
 	]
  
@@ -302,7 +307,7 @@ exactSolsData["FarnsworthKerrII", {"CanonicalCoordinates", "Metric"}] =
 					(-(2 + k + 2*k^2))*Cos[x]*Sin[x]*Cosh[y]}, 
 				{Sqrt[1 - 2*k^2]*Cos[x]*Cosh[y], (1 - k)*Sinh[y], (-(2 + k + 2*k^2))*Cos[x]*Sin[x]*Cosh[y], 
 					(1 - k)*Sinh[y]^2 + (1 + k)*Sin[x]^2*Cosh[y]^2 - (1 + 2*k^2)*Cos[x]^2*Cosh[y]^2}
-			};
+			}
 		]
 	]
  
@@ -346,7 +351,7 @@ exactSolsData["FarnsworthKerrIII", {"CanonicalCoordinates", "Metric"}] =
         		{0, 0, (1 + s)*Cos[x]^2 - 2*Sin[x]^2, (-(3 + s))*Cos[x]*Sin[x]*Cosh[y]}, 
 				{0, (-(1 - s))*Sinh[y], (-(3 + s))*Cos[x]*Sin[x]*Cosh[y], 
 					(1 - s)*Sinh[y]^2 + (1 + s)*Sin[x]^2*Cosh[y]^2 - 2*Cos[x]^2*Cosh[y]^2}
-			};
+			}
 		]
 	]
  
@@ -518,19 +523,19 @@ exactSolsData["Kerr", {"BoyerLindquistCoordinates", "ScalarFunctionNames"}] =
 (* ::Subsection:: *)
 (* Kerr-NUT *)
 
-exactSolsData["KerrNut", "Classes"] = {"DMetrics", "PetrovTypeD", "Vacuum"}
+exactSolsData["KerrNUT", "Classes"] = {"DMetrics", "PetrovTypeD", "Vacuum"}
 
-exactSolsData["KerrNut", "CoordinateSystems"] = {"ExpansionGradientAdaptedCoordinates"}
+exactSolsData["KerrNUT", "CoordinateSystems"] = {"ExpansionGradientAdaptedCoordinates"}
 
-exactSolsData["KerrNut", "DefaultCoordinates"] = "ExpansionGradientAdaptedCoordinates"
+exactSolsData["KerrNUT", "DefaultCoordinates"] = "ExpansionGradientAdaptedCoordinates"
  
-exactSolsData["KerrNut", "IsIDEAL"] = True
+exactSolsData["KerrNUT", "IsIDEAL"] = True
  
-exactSolsData["KerrNut", "ParameterAssumptions"] = Null
+exactSolsData["KerrNUT", "ParameterAssumptions"] = Null
  
-exactSolsData["KerrNut", "ParameterNames"] = {"p", "k", "s"}
+exactSolsData["KerrNUT", "ParameterNames"] = {"p", "k", "s"}
  
-exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "CoordinateAssumptions"}] = 
+exactSolsData["KerrNUT", {"ExpansionGradientAdaptedCoordinates", "CoordinateAssumptions"}] = 
 	Function[{coords, params, scfuncs}, 
     	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], p = params[[1]], 
 			k = params[[2]], s = params[[3]], alpha = scfuncs[[1]], beta = scfuncs[[2]]}, 
@@ -542,13 +547,13 @@ exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "CoordinateAssu
 					Function[{p, y, k, s}, 
 						(-p)*y^2 + (3*k^2 - 1)*(y/(1 + k^2)^3) + s
 					]; 
-				x^2 + y^2 > 0 && alpha > 0 && beta > 0
+				x^2 + y^2 > 0 && alpha[p, x, k, s] > 0 && beta[p, y, k, s] > 0
 		]
 	]
  
-exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
+exactSolsData["KerrNUT", {"ExpansionGradientAdaptedCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
  
-exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "Metric"}] = 
+exactSolsData["KerrNUT", {"ExpansionGradientAdaptedCoordinates", "Metric"}] = 
     Function[{coords, params, scfuncs}, 
     	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], p = params[[1]], 
 			k = params[[2]], s = params[[3]], alpha = scfuncs[[1]], beta = scfuncs[[2]]}, 
@@ -567,15 +572,15 @@ exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "Metric"}] =
        				{0, 0, (x^2 + y^2)/beta[p, y, k, s], 0}, 
         			{-((alpha[p, x, k, s]*y^2 + beta[p, y, k, s]*x^2)/(x^2 + y^2)), 0, 0, 
         				(beta[p, y, k, s] - alpha[p, x, k, s])/(x^2 + y^2)}
-				};
+				}
 		]
 	]
  
-exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "ParameterAssumptions"}] = exactSolsData["KerrNut", "ParameterAssumptions"]
+exactSolsData["KerrNUT", {"ExpansionGradientAdaptedCoordinates", "ParameterAssumptions"}] = exactSolsData["KerrNUT", "ParameterAssumptions"]
  
-exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "ParameterNames"}] = exactSolsData["KerrNut", "ParameterNames"]
+exactSolsData["KerrNUT", {"ExpansionGradientAdaptedCoordinates", "ParameterNames"}] = exactSolsData["KerrNUT", "ParameterNames"]
  
-exactSolsData["KerrNut", {"ExpansionGradientAdaptedCoordinates", "ScalarFunctionNames"}] = {"\[Alpha]", "\[Beta]"}
+exactSolsData["KerrNUT", {"ExpansionGradientAdaptedCoordinates", "ScalarFunctionNames"}] = {"\[Alpha]", "\[Beta]"}
 
 
 (* ::Subsection:: *)
@@ -620,6 +625,177 @@ exactSolsData["LemaitreTolman", {"SphericalCoordinates", "ScalarFunctionNames"}]
 
 
 (* ::Subsection:: *)
+(* Osvath-Koutras I *)
+
+exactSolsData["OsvathKoutrasI", "Classes"] = {"PetrovTypeI", "PerfectFluid", "Homogeneous", "G4", 
+	"AbelianG3onT3", "G3VIhonS3", "G3VIonT3"}
+
+exactSolsData["OsvathKoutrasI", "CoordinateSystems"] = {"GroupGeneratorsAdaptedCoordinates"}
+
+exactSolsData["OsvathKoutrasI", "DefaultCoordinates"] = "GroupGeneratorsAdaptedCoordinates"
+ 
+exactSolsData["OsvathKoutrasI", "IsIDEAL"] = False
+ 
+exactSolsData["OsvathKoutrasI", "ParameterAssumptions"] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{s = params[[1]], a = params[[2]]}, 
+    		Inequality[1/2, LessEqual, s^2, Less, 1.2296814706969093] && Element[a, Reals]
+		]
+	]
+ 
+exactSolsData["OsvathKoutrasI", "ParameterNames"] = {"s", "a", "\[Beta]", "A", "B", "F", "b"}
+ 
+exactSolsData["OsvathKoutrasI", {"GroupGeneratorsAdaptedCoordinates", "CoordinateAssumptions"}] = Null
+ 
+exactSolsData["OsvathKoutrasI", {"GroupGeneratorsAdaptedCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
+ 
+exactSolsData["OsvathKoutrasI", {"GroupGeneratorsAdaptedCoordinates", "Metric"}] = 
+	Function[{coords, params, scfuncs}, 
+    	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], s = params[[1]], a = params[[2]], 
+			beta = params[[3]], A = params[[4]], B = params[[5]], F = params[[6]], b = params[[7]]}, 
+      			beta = 
+					Function[{s}, 
+						Sqrt[1 + 2*s^2*(1 - s^2)*(3 - s^2)]
+					]; 
+       			A = Function[{beta, s}, 
+						(1 - beta[s])/2
+					]; 
+       			B = 
+					Function[{beta, s}, 
+						(1 + beta[s])/2]; F = Function[{s}, 1 - s^2
+					]; 
+       			b = 
+					Function[{s}, 
+						Sqrt[2]*s*(3 - s^2)
+					]; 
+    			a^2*{
+					{((4/b[s]^2)*A[beta, s]^2 - 1)*Exp[2*A[beta, s]*z], 
+						((4/b[s]^2)*A[beta, s]*B[beta, s] - 1)*Exp[(A[beta, s] + B[beta, s])*z], 0, 0}, 
+        			{((4/b[s]^2)*A[beta, s]*B[beta, s] - 1)*Exp[(A[beta, s] + B[beta, s])*z], 
+						((4/b[s]^2)*B[beta, s]^2 - 1)*Exp[2*B[beta, s]*z], 0, 0}, 
+					{0, 0, Exp[2*F[s]*z], 0}, 
+        			{0, 0, 0, 1}
+				}
+		]
+	]
+ 
+exactSolsData["OsvathKoutrasI", {"GroupGeneratorsAdaptedCoordinates", "ParameterAssumptions"}] = exactSolsData["OsvathKoutrasI", "ParameterAssumptions"]
+ 
+exactSolsData["OsvathKoutrasI", {"GroupGeneratorsAdaptedCoordinates", "ParameterNames"}] = exactSolsData["OsvathKoutrasI", "ParameterNames"]
+ 
+exactSolsData["OsvathKoutrasI", {"GroupGeneratorsAdaptedCoordinates", "ScalarFunctionNames"}] = {}
+
+
+(* ::Subsection:: *)
+(* Osvath-Koutras II *)
+
+exactSolsData["OsvathKoutrasII", "Classes"] = {"PetrovTypeI", "PerfectFluid", "Homogeneous", "G4", 
+	"AbelianG3onT3", "G3VIhonS3", "G3IVonT3"}
+
+exactSolsData["OsvathKoutrasII", "CoordinateSystems"] = {"GroupGeneratorsAdaptedCoordinates"}
+
+exactSolsData["OsvathKoutrasII", "DefaultCoordinates"] = "GroupGeneratorsAdaptedCoordinates"
+ 
+exactSolsData["OsvathKoutrasII", "IsIDEAL"] = False
+ 
+exactSolsData["OsvathKoutrasII", "ParameterAssumptions"] = 
+    Function[{coords, params, scfuncs}, 
+		With[{a = params[[2]]}, 
+    		Element[a, Reals]
+		]
+	]
+ 
+exactSolsData["OsvathKoutrasII", "ParameterNames"] = {"s", "a", "F", "b"}
+ 
+exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "CoordinateAssumptions"}] = Null
+ 
+exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
+ 
+exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "Metric"}] = 
+	Function[{coords, params, scfuncs}, 
+    	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], s = params[[1]], a = params[[2]], 
+			F = params[[3]], b = params[[4]]}, 
+				s = Sqrt[1.2296814706969093]; 
+       			F = Function[{s}, 1 - s^2]; 
+				b = Function[{s}, Sqrt[2]*s*(3 - s^2)]; 
+       			a^2*{
+					{(-4^(-1))*(b[s] - 1/b[s])^2*E^z, (-4^(-1))*(b[s] - 1/b[s])^2*E^z*z, 0, 0}, 
+					{(-4^(-1))*(b[s] - 1/b[s])^2*E^z*z, E^z*(1 - (z^2/4)*(b[s] - 1/b[s])^2), 0, 0}, 
+					{0, 0, E^(2*F[s]*z), 0}, 
+					{0, 0, 0, 1}
+				}
+		]
+	]
+ 
+exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "ParameterAssumptions"}] = exactSolsData["OsvathKoutrasII", "ParameterAssumptions"]
+ 
+exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "ParameterNames"}] = exactSolsData["OsvathKoutrasII", "ParameterNames"]
+ 
+exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "ScalarFunctionNames"}] = {}
+
+
+(* ::Subsection:: *)
+(* Osvath-Koutras III *)
+
+exactSolsData["OsvathKoutrasIII", "Classes"] = {"PetrovTypeI", "PerfectFluid", "Homogeneous", "G4", 
+	"AbelianG3onT3", "G3VIIhonS3"}
+
+exactSolsData["OsvathKoutrasIII", "CoordinateSystems"] = {"GroupGeneratorsAdaptedCoordinates"}
+
+exactSolsData["OsvathKoutrasIII", "DefaultCoordinates"] = "GroupGeneratorsAdaptedCoordinates"
+ 
+exactSolsData["OsvathKoutrasIII", "IsIDEAL"] = False
+ 
+exactSolsData["OsvathKoutrasIII", "ParameterAssumptions"] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{s = params[[1]], a = params[[2]]}, 
+    		Inequality[1.2296814706969093, Less, s^2, LessEqual, 2] && Element[a, Reals]
+		]
+	]
+ 
+exactSolsData["OsvathKoutrasIII", "ParameterNames"] = {"s", "a", "\[Beta]2", "F", "b", "k"}
+ 
+exactSolsData["OsvathKoutrasIII", {"GroupGeneratorsAdaptedCoordinates", "CoordinateAssumptions"}] = Null
+ 
+exactSolsData["OsvathKoutrasIII", {"GroupGeneratorsAdaptedCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
+ 
+exactSolsData["OsvathKoutrasIII", {"GroupGeneratorsAdaptedCoordinates", "Metric"}] = 
+	Function[{coords, params, scfuncs}, 
+    	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], s = params[[1]], a = params[[2]], 
+       		beta2 = params[[3]], F = params[[4]], b = params[[5]], k = params[[6]]}, 
+	   			beta2 = Function[{s}, 1 + 2*s^2*(1 - s^2)*(3 - s^2)]; 
+				F = Function[{s}, 1 - s^2]; 
+       			b = Function[{s}, Sqrt[2]*s*(3 - s^2)]; 
+       			k = Function[{beta2, s}, Sqrt[-beta2]/2]; 
+       			a^2*{
+					{
+						E^z*((1/b[s]^2)*(Cos[k[beta2, s]*z] - 2*k[beta2, s]*Sin[k[beta2, s]*z])^2 - Cos[k[beta2, s]*z]^2), 
+          				E^z*((1/b[s]^2)*(Cos[k[beta2, s]*z] - 2*k[beta2, s]*Sin[k[beta2, s]*z])*(2*k[beta2, s]*Cos[k[beta2, s]*z] + 
+							Sin[k[beta2, s]*z]) - Cos[k[beta2, s]*z]*Sin[k[beta2, s]*z]), 
+          				0, 
+						0
+					}, 
+		  			{
+						E^z*((1/b[s]^2)*(Cos[k[beta2, s]*z] - 2*k[beta2, s]*Sin[k[beta2, s]*z])*(2*k[beta2, s]*Cos[k[beta2, s]*z] + 
+              				Sin[k[beta2, s]*z]) - Cos[k[beta2, s]*z]*Sin[k[beta2, s]*z]), 
+          				E^z*((1/b[s]^2)*(2*k[beta2, s]*Cos[k[beta2, s]*z] + Sin[k[beta2, s]*z])^2 - Sin[k[beta2, s]*z]^2), 
+						0, 
+						0
+					}, 
+         			{0, 0, Exp[2*F[s]*z], 0}, 
+		 			{0, 0, 0, 1}
+				}
+		]
+	]
+ 
+exactSolsData["OsvathKoutrasIII", {"GroupGeneratorsAdaptedCoordinates", "ParameterAssumptions"}] = exactSolsData["OsvathKoutrasIII", "ParameterAssumptions"]
+ 
+exactSolsData["OsvathKoutrasIII", {"GroupGeneratorsAdaptedCoordinates", "ParameterNames"}] = exactSolsData["OsvathKoutrasIII", "ParameterNames"]
+ 
+exactSolsData["OsvathKoutrasIII", {"GroupGeneratorsAdaptedCoordinates", "ScalarFunctionNames"}] = {}
+
+
+(* ::Subsection:: *)
 (* Petrov Solution *)
 
 exactSolsData["PetrovSolution", "Classes"] = {"Vacuum", "G4", "G3IonT3", "G3VIIhonT3", "PetrovTypeI"}
@@ -646,7 +822,7 @@ exactSolsData["PetrovSolution", {"CanonicalCoordinates", "Metric"}] =
 				{0, 1, 0, 0}, 
         		{0, 0, E^(-2*x), 0}, 
 				{(-E^x)*Sin[Sqrt[3]*x], 0, 0, E^x*Cos[Sqrt[3]*x]}
-			}/k^2; 
+			}/k^2
 		]
 	]
  
