@@ -115,7 +115,7 @@ allmetricproperties = {
 	"CoordinateNames",
 	"ParameterNames",
 	"FunctionNames",
-	"ExactSolutionName",
+	"DefaultExactSolutionName",
 	"Metric"
 }
 
@@ -193,6 +193,8 @@ iGenRelExactSolsData[solname_String, coordname_String, "Metric", {coords_List, p
 (* ::Subsection:: *)
 (* Bertotti-Robinson Solution *)
 
+exactSolsData["BertottiRobinsonSolution", "DefaultExactSolutionName"] = "BertottiRobinsonSolution"
+
 exactSolsData["BertottiRobinsonSolution", "Classes"] = {"EinsteinMaxwellSolution", "PetrovTypeN", "ConformallyFlat"}
 
 exactSolsData["BertottiRobinsonSolution", "CoordinateSystems"] = {"ComplexCoordinates"}
@@ -230,6 +232,8 @@ exactSolsData["BertottiRobinsonSolution", {"ComplexCoordinates", "ScalarFunction
 
 (* ::Subsection:: *)
 (* Farnsworth-Kerr I *)
+
+exactSolsData["FarnsworthKerrI", "DefaultExactSolutionName"] = "FarnsworthKerrI"
 
 exactSolsData["FarnsworthKerrI", "Classes"] = {"PerfectFluid", "Homogeneous", "G4", "G3IXonS3"}
  
@@ -276,6 +280,8 @@ exactSolsData["FarnsworthKerrI", {"CanonicalCoordinates", "ScalarFunctionNames"}
 (* ::Subsection:: *)
 (* Farnsworth-Kerr II *)
 
+exactSolsData["FarnsworthKerrII", "DefaultExactSolutionName"] = "FarnsworthKerrII"
+
 exactSolsData["FarnsworthKerrII", "Classes"] = {"PerfectFluid", "Homogeneous", "G4", "G3VIIIonT3", "G3IIIonS3"}
  
 exactSolsData["FarnsworthKerrII", "CoordinateSystems"] = {"CanonicalCoordinates"}
@@ -321,6 +327,8 @@ exactSolsData["FarnsworthKerrII", {"CanonicalCoordinates", "ScalarFunctionNames"
 (* ::Subsection:: *)
 (* Farnsworth-Kerr III *)
 
+exactSolsData["FarnsworthKerrIII", "DefaultExactSolutionName"] = "FarnsworthKerrIII"
+
 exactSolsData["FarnsworthKerrIII", "Classes"] = {"DMetrics", "PetrovTypeD", "PerfectFluid", "Homogeneous", "G4", "G3IXonS3"}
  
 exactSolsData["FarnsworthKerrIII", "CoordinateSystems"] = {"CanonicalCoordinates"}
@@ -364,6 +372,8 @@ exactSolsData["FarnsworthKerrIII", {"CanonicalCoordinates", "ScalarFunctionNames
 
 (* ::Subsection:: *)
 (* Friedmann in reduced circumference polar coordinates *)
+
+exactSolsData["Friedmann", "DefaultExactSolutionName"] = "Friedmann"
 
 exactSolsData["Friedmann", "Classes"] = {"PerfectFluid", "ThermodynamicPerfectFluid",
      "ConformallyFlat", "SpatiallyHomogeneous", "SpatialG6", "BarotropicPerfectFluid",
@@ -411,6 +421,8 @@ exactSolsData["Friedmann", {"ReducedCircumferencePolarCoordinates", "Metric"}] =
 (* ::Subsection:: *)
 (* GeneralSpherical metric in spherical coordinates *)
 
+exactSolsData["GeneralSphericalSymmetry", "DefaultExactSolutionName"] = "GeneralSphericalSymmetry"
+
 exactSolsData["GeneralSphericalSymmetry", "Classes"] = {"DMetrics", "PerfectFluid", "PetrovTypeD", 
 	"ThermodynamicPerfectFluid", "SphericalSymmetry", "Warped22"}
 
@@ -455,6 +467,8 @@ exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "Metric"}] =
 
 (* ::Subsection:: *)
 (* Kerr *)
+
+exactSolsData["Kerr", "DefaultExactSolutionName"] = "Kerr"
 
 exactSolsData["Kerr", "Classes"] = {"DMetrics", "PetrovTypeD", 
 	"AxialSymmetry", "Vacuum", "Stationary"}
@@ -523,6 +537,8 @@ exactSolsData["Kerr", {"BoyerLindquistCoordinates", "ScalarFunctionNames"}] =
 (* ::Subsection:: *)
 (* Kerr-NUT *)
 
+exactSolsData["KerrNUT", "DefaultExactSolutionName"] = "KerrNUT"
+
 exactSolsData["KerrNUT", "Classes"] = {"DMetrics", "PetrovTypeD", "Vacuum"}
 
 exactSolsData["KerrNUT", "CoordinateSystems"] = {"ExpansionGradientAdaptedCoordinates"}
@@ -586,6 +602,8 @@ exactSolsData["KerrNUT", {"ExpansionGradientAdaptedCoordinates", "ScalarFunction
 (* ::Subsection:: *)
 (* Lemaitre-Tolman *)
 
+exactSolsData["LemaitreTolman", "DefaultExactSolutionName"] = "LemaitreTolman"
+
 exactSolsData["LemaitreTolman", "Classes"] = {"DMetrics", "PerfectFluid", 
     "PetrovTypeD", "ThermodynamicPerfectFluid", "SphericalSymmetry", "Warped22"}
 
@@ -626,6 +644,8 @@ exactSolsData["LemaitreTolman", {"SphericalCoordinates", "ScalarFunctionNames"}]
 
 (* ::Subsection:: *)
 (* Osvath-Koutras I *)
+
+exactSolsData["OsvathKoutrasI", "DefaultExactSolutionName"] = "OsvathKoutrasI"
 
 exactSolsData["OsvathKoutrasI", "Classes"] = {"PetrovTypeI", "PerfectFluid", "Homogeneous", "G4", 
 	"AbelianG3onT3", "G3VIhonS3", "G3VIonT3"}
@@ -689,6 +709,8 @@ exactSolsData["OsvathKoutrasI", {"GroupGeneratorsAdaptedCoordinates", "ScalarFun
 (* ::Subsection:: *)
 (* Osvath-Koutras II *)
 
+exactSolsData["OsvathKoutrasII", "DefaultExactSolutionName"] = "OsvathKoutrasII"
+
 exactSolsData["OsvathKoutrasII", "Classes"] = {"PetrovTypeI", "PerfectFluid", "Homogeneous", "G4", 
 	"AbelianG3onT3", "G3VIhonS3", "G3IVonT3"}
 
@@ -736,6 +758,8 @@ exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "ScalarFu
 
 (* ::Subsection:: *)
 (* Osvath-Koutras III *)
+
+exactSolsData["OsvathKoutrasIII", "DefaultExactSolutionName"] = "OsvathKoutrasIII"
 
 exactSolsData["OsvathKoutrasIII", "Classes"] = {"PetrovTypeI", "PerfectFluid", "Homogeneous", "G4", 
 	"AbelianG3onT3", "G3VIIhonS3"}
@@ -798,6 +822,8 @@ exactSolsData["OsvathKoutrasIII", {"GroupGeneratorsAdaptedCoordinates", "ScalarF
 (* ::Subsection:: *)
 (* Petrov Solution *)
 
+exactSolsData["PetrovSolution", "DefaultExactSolutionName"] = "PetrovSolution"
+
 exactSolsData["PetrovSolution", "Classes"] = {"Vacuum", "G4", "G3IonT3", "G3VIIhonT3", "PetrovTypeI"}
 
 exactSolsData["PetrovSolution", "CoordinateSystems"] = {"CanonicalCoordinates"}
@@ -835,6 +861,8 @@ exactSolsData["PetrovSolution", {"CanonicalCoordinates", "ScalarFunctionNames"}]
 
 (* ::Subsection:: *)
 (* Reissner-Nordström *)
+
+exactSolsData["ReissnerNordstrom", "DefaultExactSolutionName"] = "ReissnerNordstrom"
 
 exactSolsData["ReissnerNordstrom", "CoordinateSystems"] = {"SchwarzschildCoordinates"}
 
@@ -885,6 +913,9 @@ exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "Metric"}] =
 
 (* ::Subsection:: *)
 (* Schwarzschild in Schwarzschild coordinates *)
+
+exactSolsData["Schwarzschild", "DefaultExactSolutionName"] = "Schwarzschild"
+
 exactSolsData["Schwarzschild", "Classes"] = {"PetrovTypeD", "Static", "SphericalSymmetry", "Vacuum", "VacuumTypeD"}
 
 exactSolsData["Schwarzschild", "CoordinateSystems"] = {"SchwarzschildCoordinates", "IsotropicCoordinates"}
@@ -967,6 +998,8 @@ exactSolsData["Schwarzschild", {"IsotropicCoordinates", "Metric"}] =
 (* ::Subsection:: *)
 (* Stephani in adapted coordinates *)
 
+exactSolsData["Stephani", "DefaultExactSolutionName"] = "Stephani"
+
 exactSolsData["Stephani", "Classes"] = {"PerfectFluid", "SpatialG6", "ConformallyFlat"}
 
 exactSolsData["Stephani", "CoordinateSystems"] = {"AdaptedCoordinates"}
@@ -1015,6 +1048,8 @@ exactSolsData["Stephani", {"AdaptedCoordinates", "ScalarFunctionNames"}] = {"\[C
 
 (* ::Subsection:: *)
 (* Stephani Thermodynamic in adapted coordinates *)
+
+exactSolsData["StephaniThermodynamic", "DefaultExactSolutionName"] = "StephaniThermodynamic"
 
 exactSolsData["StephaniThermodynamic", "Classes"] = {"PerfectFluid", "ThermodynamicPerfectFluid",
      "G3S2", "SpatialG6", "ConformallyFlat"}
@@ -1074,6 +1109,8 @@ exactSolsData["StephaniThermodynamic", {"AdaptedCoordinates", "ScalarFunctionNam
 
 (* ::Subsection:: *)
 (* Stephani Thermodynamic and Spherically symmetric in adapted coordinates *)
+
+exactSolsData["StephaniThermodynamicSpherical", "DefaultExactSolutionName"] = "StephaniThermodynamicSpherical"
 
 exactSolsData["StephaniThermodynamicSpherical", "Classes"] = {"PerfectFluid", "ThermodynamicPerfectFluid", "G3onS2", "SpatialG6", 
     "ConformallyFlat", "SphericalSymmetry", "Warped22"}
