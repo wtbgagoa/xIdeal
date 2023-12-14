@@ -885,7 +885,7 @@ exactSolsData["Schwarzschild", "Classes"] = {"PetrovTypeD", "Static", "Spherical
 
 exactSolsData["Schwarzschild", "CoordinateSystems"] = {"SchwarzschildCoordinates", "IsotropicCoordinates"}
 
-exactSolsData["Schwarzschild", "DefaultCoordinates"] = "Schwarzschild"
+exactSolsData["Schwarzschild", "DefaultCoordinates"] = "SchwarzschildCoordinates"
 
 exactSolsData["Schwarzschild", "ParameterNames"] = {"m"}
 
@@ -1121,9 +1121,11 @@ exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "Scalar
 (* GenRelExactSolsData *)
 
 (* ::Subsection:: *)
-(* Metrics *)
+(* Metrics: default coordinates *)
 
 iGenRelExactSolsData[metric_?metricQ] := exactSolsData[metric, "CoordinateSystems"]
+
+iGenRelExactSolsData[metric_?metricQ, "CoordinateSystems"] := exactSolsData[metric, "CoordinateSystems"]
 
 iGenRelExactSolsData[metric_?metricQ, coords_?coordinatesystemQ] := exactSolsData[metric, {coords, "Metric"}]
 
@@ -1163,6 +1165,17 @@ iGenRelExactSolsData[metric_?metricQ, "Metric"] := Module[{coords},
 	exactSolsData[metric, {coords, "Metric"}]
 ]
 
+(* ::Subsection:: *)
+(* Metrics: user given coordinates *)
+
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "CoordinateAssumptions"}] := 
+	exactSolsData[metric, {coordname, "CoordinateAssumptions"}]
+ 
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "CoordinateNames"}] := 
+	exactSolsData[metric, {coordname, "CoordinateNames"}]
+ 
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "Metric"}] :=
+	exactSolsData[metric, {coordname, "Metric"}]
 
 
 (* ::Subsection:: *)
