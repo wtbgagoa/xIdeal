@@ -901,6 +901,8 @@ exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ParameterNames"}] =
 
 exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ParameterAssumptions"}] = exactSolsData["Schwarzschild", "ParameterAssumptions"]
 
+exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ScalarFunctionNames"}] = {}
+
 defaultcoordinates["Schwarzschild"] = "SchwarzschildCoordinates"
 
 (* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
@@ -1169,13 +1171,53 @@ iGenRelExactSolsData[metric_?metricQ, "Metric"] := Module[{coords},
 (* Metrics: user given coordinates *)
 
 iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "CoordinateAssumptions"}] := 
-	exactSolsData[metric, {coordname, "CoordinateAssumptions"}]
+	If[
+		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
+		(* TODO: error control *)
+		Throw[$Failed],
+		exactSolsData[metric, {coordname, "CoordinateAssumptions"}]
+	]
+	
  
 iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "CoordinateNames"}] := 
-	exactSolsData[metric, {coordname, "CoordinateNames"}]
- 
+	If[
+		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
+		(* TODO: error control *)
+		Throw[$Failed],
+		exactSolsData[metric, {coordname, "CoordinateNames"}]
+	]
+
 iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "Metric"}] :=
-	exactSolsData[metric, {coordname, "Metric"}]
+	If[
+		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
+		(* TODO: error control *)
+		Throw[$Failed],
+		exactSolsData[metric, {coordname, "Metric"}]
+	]
+
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ParameterNames"}] :=
+	If[
+		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
+		(* TODO: error control *)
+		Throw[$Failed],
+		exactSolsData[metric, {coordname, "ParameterNames"}]
+	]
+
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ParameterAssumptions"}] :=
+	If[
+		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
+		(* TODO: error control *)
+		Throw[$Failed],
+		exactSolsData[metric, {coordname, "ParameterAssumptions"}]
+	]
+
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ScalarFunctionNames"}] :=
+	If[
+		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
+		(* TODO: error control *)
+		Throw[$Failed],
+		exactSolsData[metric, {coordname, "ScalarFunctionNames"}]
+	]
 
 
 (* ::Subsection:: *)
