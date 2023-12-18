@@ -1526,159 +1526,217 @@ ClearxIdealCache["WeylConcomitants"] :=
 
 (*
 NOTE: I put H as an input in the functions that compute its derivative concomitants
-instead of calling RframeConcomitant["ConnectionTensor"] in case it is not computed from the R-frame.
+instead of calling ConnectionTensorConcomitant["ConnectionTensor"] in case it is not computed from the R-frame.
 *)
 
-(* TODO: Add different options to compute H to RframeConcomitant["ConnectionTensor"] *)
+(* TODO: Add different options to compute H to ConnectionTensorConcomitant["ConnectionTensor"] *)
 
-Options[RframeConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True}
+Options[ConnectionTensorConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True}
 
-RframeConcomitant["C1"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
-(RframeConcomitant["C1"][metric, H, opts] = 
-	Module[{simplf, cart, cd, a1, b1, c1, d1, i1},
-		simplf = OptionValue[RframeConcomitant, PSimplify];
+ConnectionTensorConcomitant["C1"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
+(ConnectionTensorConcomitant["C1"][metric, H, opts] = 
+	Module[{simplf, cart, cd, a1, b1, c1, d1, i1, vb, time, ce1},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, i1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 5];
 		cd = CovDOfMetric[metric];
-		simplf[HeadOfTensor[
-  			cd[-a1][H[-b1, -c1, -d1]] + H[-a1, -b1, i1] H[-i1, -c1, -d1] + H[-a1, -c1, i1] H[-b1, -i1, -d1] + 
-			H[-a1, -d1, i1] H[-b1, -c1, -i1], {-a1, -b1, -c1, -d1}
-   			]
-   		]
+		time = AbsoluteTime[];
+		ce1 = cd[-a1][H[-b1, -c1, -d1]] + H[-a1, -b1, i1] H[-i1, -c1, -d1] + H[-a1, -c1, i1] H[-b1, -i1, -d1] + 
+			H[-a1, -d1, i1] H[-b1, -c1, -i1];
+		If[vb, 
+			Print["** ReportCompute: computing Connection Tensor concomitant \"C1\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce1 = HeadOfTensor[ce1, {-a1, -b1, -c1, -d1}];
+		time = AbsoluteTime[];
+		ce1 = simplf[ce1];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Connection Tensor concomitant \"C1\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce1
   	]
 )
 
-RframeConcomitant["C11"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
-(RframeConcomitant["C11"][metric, H, opts] = 
-	Module[{simplf, cart, epsilonmetric, ce1, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1},
-		simplf = OptionValue[RframeConcomitant, PSimplify];
+ConnectionTensorConcomitant["C11"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
+(ConnectionTensorConcomitant["C11"][metric, H, opts] = 
+	Module[{simplf, cart, epsilonmetric, ce1, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, vb, time, ce11},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 10];
   		epsilonmetric = epsilon[metric];
-    		ce1 = RframeConcomitant["C1"][metric, H, opts];
-		simplf[HeadOfTensor[
-  			epsilonmetric[i1, j1, a1, b1] C1[-i1, -c1, -d1, -e1] C1[-j1, -f1, -g1, -h1], {a1, b1, -c1, -d1, -e1, -f1, -g1, -h1}
-     			]
-     		]
-  	]
+    	ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+		time = AbsoluteTime[];
+		ce11 = epsilonmetric[i1, j1, a1, b1] C1[-i1, -c1, -d1, -e1] C1[-j1, -f1, -g1, -h1];
+		If[vb, 
+			Print["** ReportCompute: computing Connection Tensor concomitant \"C11\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce11 = HeadOfTensor[ce11, {a1, b1, -c1, -d1, -e1, -f1, -g1, -h1}];
+		time = AbsoluteTime[];
+		ce11 = simplf[ce11];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Connection Tensor concomitant \"C11\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce11
+    ]
 )
 
-RframeConcomitant["C2"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
-(RframeConcomitant["C2"][metric, H, opts] = 
-	Module[{simplf, cart, cd, ce1, a1, b1, c1, d1, e1, i1},
-		simplf = OptionValue[RframeConcomitant, PSimplify];
+ConnectionTensorConcomitant["C2"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
+(ConnectionTensorConcomitant["C2"][metric, H, opts] = 
+	Module[{simplf, cart, cd, ce1, a1, b1, c1, d1, e1, i1, vb, time, ce2},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, i1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
   		cd = CovDOfMetric[metric];
-    		ce1 = RframeConcomitant["C1"][metric, H, opts];
-		simplf[HeadOfTensor[
-  			cd[-a1][ce1[-b1, -c1, -d1, -e1]] + H[-a1, -b1, i1] ce1[-i1, -c1, -d1, -e1] +
+    	ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+		time = AbsoluteTime[];
+		ce2 = cd[-a1][ce1[-b1, -c1, -d1, -e1]] + H[-a1, -b1, i1] ce1[-i1, -c1, -d1, -e1] +
 	   		H[-a1, -c1, i1] ce1[-b1, -i1, -d1, -e1] + H[-a1, -d1, i1] ce1[-b1, -c1, -i1, -e1] + 
-         		H[-a1, -e1, i1] ce1[-b1, -c1, -d1, -i1], {-a1, -b1, -c1, -d1, -e1}
-	   		]
-	   	]
+         	H[-a1, -e1, i1] ce1[-b1, -c1, -d1, -i1];
+		If[vb, 
+			Print["** ReportCompute: computing Connection Tensor concomitant \"C2\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce2 = HeadOfTensor[ce2, {-a1, -b1, -c1, -d1, -e1}];
+		time = AbsoluteTime[];
+		ce2 = simplf[];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Connection Tensor concomitant \"C2\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce2
   	]
 )
 
-RframeConcomitant["C12"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
-(RframeConcomitant["C12"][metric, H, opts] = 
-	Module[{simplf, cart, epsilonmetric, ce1, ce2, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1},
-		simplf = OptionValue[RframeConcomitant, PSimplify];
+ConnectionTensorConcomitant["C12"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
+(ConnectionTensorConcomitant["C12"][metric, H, opts] = 
+	Module[{simplf, cart, epsilonmetric, ce1, ce2, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, vb, time, ce12},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 11];
   		epsilonmetric = epsilon[metric];
-    		ce1 = RframeConcomitant["C1"][metric, H, opts];
-      		ce2 = RframeConcomitant["C2"][metric, H, opts];
-		simplf[HeadOfTensor[
-  			epsilonmetric[i1, j1, a1, b1] ce1[-i1, -c1, -d1, -e1] ce2[-j1, -f1, -g1, -h1, -k1], 
-	   		{a1, b1, -c1, -d1, -e1, -f1, -g1, -h1, -k1}
-      			]
-      		]
+    	ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+      	ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
+		time = AbsoluteTime[];
+		ce12 = epsilonmetric[i1, j1, a1, b1] ce1[-i1, -c1, -d1, -e1] ce2[-j1, -f1, -g1, -h1, -k1];
+		If[vb, 
+			Print["** ReportCompute: computing Connection Tensor concomitant \"C12\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce12 = HeadOfTensor[ce12, {a1, b1, -c1, -d1, -e1, -f1, -g1, -h1, -k1}];
+		time = AbsoluteTime[];
+		ce12 = simplf[ce12];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Connection Tensor concomitant \"C12\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce12
   	]
 )
 
-RframeConcomitant["C122"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
-(RframeConcomitant["C122"][metric, H, opts] = 
-	Module[{simplf, cart, epsilonmetric, ce1, ce2, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1},
-		simplf = OptionValue[RframeConcomitant, PSimplify];
+ConnectionTensorConcomitant["C122"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
+(ConnectionTensorConcomitant["C122"][metric, H, opts] = 
+	Module[{simplf, cart, epsilonmetric, ce1, ce2, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, vb, time, ce122},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 15];
   		epsilonmetric = epsilon[metric];
-    		ce1 = RframeConcomitant["C1"][metric, H, opts];
-      		ce2 = RframeConcomitant["C2"][metric, H, opts];
-		simplf[HeadOfTensor[
-  			epsilonmetric[i1, j1, k1, a1] ce1[-i1, -b1, -c1, -d1] ce2[-j1, -e1, -f1, -g1, -h1] 
-	   		ce2[-k1, -l1, -m1, -n1, -o1], {a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -l1, -m1, -n1, -o1}
-      			]
-      		]
+    	ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+      	ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
+		ce122 = epsilonmetric[i1, j1, k1, a1] ce1[-i1, -b1, -c1, -d1] ce2[-j1, -e1, -f1, -g1, -h1] ce2[-k1, -l1, -m1, -n1, -o1];
+		If[vb, 
+			Print["** ReportCompute: computing Connection Tensor concomitant \"C122\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce122 = HeadOfTensor[ce122, {a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -l1, -m1, -n1, -o1}];
+		time = AbsoluteTime[];
+		ce122 = simplf[ce122];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Connection Tensor concomitant \"C122\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce122
   	]
 )
 
-RframeConcomitant["C3"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
-(RframeConcomitant["C3"][metric, H, opts] = 
-	Module[{simplf, cart, cd, ce2, a1, b1, c1, d1, e1, f1, i1},
-		simplf = OptionValue[RframeConcomitant, PSimplify];
+ConnectionTensorConcomitant["C3"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
+(ConnectionTensorConcomitant["C3"][metric, H, opts] = 
+	Module[{simplf, cart, cd, ce2, a1, b1, c1, d1, e1, f1, i1, vb, time, ce3},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, i1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 7];
   		cd = CovDOfMetric[metric];
-    		ce2 = RframeConcomitant["C2"][metric, H, opts];
-		simplf[HeadOfTensor[
-  			cd[-a1][ce2[-b1, -c1, -d1, -e1, -f1]] + H[-a1, -b1, i1] ce2[-i1, -c1, -d1, -e1, -f1] + 
-              		H[-a1, -c1, i1] ce2[-b1, -i1, -d1, -e1, -f1] + H[-a1, -d1, i1] ce2[-b1, -c1, -i1, -e1, -f1] + 
-          		H[-a1, -e1, i1] ce2[-b1, -c1, -d1, -i1, -f1] + H[-a1, -f1, i1] ce2[-b1, -c1, -d1, -e1, -i1], 
-		  	{-a1, -b1, -c1, -d1, -e1, -f1}
-     			]
-     		]
+    	ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
+		time = AbsoluteTime[];
+		ce3 = cd[-a1][ce2[-b1, -c1, -d1, -e1, -f1]] + H[-a1, -b1, i1] ce2[-i1, -c1, -d1, -e1, -f1] + 
+            H[-a1, -c1, i1] ce2[-b1, -i1, -d1, -e1, -f1] + H[-a1, -d1, i1] ce2[-b1, -c1, -i1, -e1, -f1] + 
+          	H[-a1, -e1, i1] ce2[-b1, -c1, -d1, -i1, -f1] + H[-a1, -f1, i1] ce2[-b1, -c1, -d1, -e1, -i1];
+		If[vb, 
+			Print["** ReportCompute: computing Connection Tensor concomitant \"C3\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce3 = HeadOfTensor[ce3, {-a1, -b1, -c1, -d1, -e1, -f1}];
+		time = AbsoluteTime[];
+		ce3 = simplf[ce3];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Connection Tensor concomitant \"C3\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce3
   	]
 )
 
-RframeConcomitant["C123"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
-(RframeConcomitant["C123"][metric, H, opts] = 
-	Module[{simplf, cart, epsilonmetric, ce1, ce2, ce3, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1},
-		simplf = OptionValue[RframeConcomitant, PSimplify];
+ConnectionTensorConcomitant["C123"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
+(ConnectionTensorConcomitant["C123"][metric, H, opts] = 
+	Module[{simplf, cart, epsilonmetric, ce1, ce2, ce3, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, vb, time, ce123},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 16];
   		epsilonmetric = epsilon[metric];
-    		ce1 = RframeConcomitant["C1"][metric, H, opts];
-     		ce2 = RframeConcomitant["C2"][metric, H, opts];
-    		ce3 = RframeConcomitant["C3"][metric, H, opts];
-		simplf[HeadOfTensor[
-  			epsilonmetric[i1, j1, k1, a1] ce1[-i1, -b1, -c1, -d1] ce2[-j1, -e1, -f1, -g1, -h1] 
-	      		ce3[-k1, -l1, -m1, -n1, -o1, -p1], {a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -l1, -m1, -n1, -o1, -p1}
-	 		]
-	 	]
+    	ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+     	ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
+    	ce3 = ConnectionTensorConcomitant["C3"][metric, H, opts];
+		time = AbsoluteTime[];
+		ce123 = epsilonmetric[i1, j1, k1, a1] ce1[-i1, -b1, -c1, -d1] ce2[-j1, -e1, -f1, -g1, -h1] ce3[-k1, -l1, -m1, -n1, -o1, -p1];
+		If[vb, 
+			Print["** ReportCompute: computing Connection Tensor concomitant \"C123\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce123 = HeadOfTensor[ce123, {a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -l1, -m1, -n1, -o1, -p1}];
+		time = AbsoluteTime[];
+		ce123 = simplf[ce123];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Connection Tensor concomitant \"C123\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce123
   	]
 )
 
-RframeConcomitant["C1233"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
-(RframeConcomitant["C1233"][metric, H, opts] = 
+ConnectionTensorConcomitant["C1233"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
+(ConnectionTensorConcomitant["C1233"][metric, H, opts] = 
 	Module[{simplf, cart, epsilonmetric, ce1, ce2, ce3, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, 
- 		q1, r1, s1, t1, u1},
-		simplf = OptionValue[RframeConcomitant, PSimplify];
+ 		q1, r1, s1, t1, u1, vb, time, ce1233},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1, r1, s1, t1, u1} = 
   			GetIndicesOfVBundle[VBundleOfBasis @ cart, 21];
   		epsilonmetric = epsilon[metric];
-    		ce1 = RframeConcomitant["C1"][metric, H, opts];
-     		ce2 = RframeConcomitant["C2"][metric, H, opts];
-    		ce3 = RframeConcomitant["C3"][metric, H, opts];
-		simplf[HeadOfTensor[
-  			epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce2[-j1, -d1, -e1, -f1, -g1] 
-	      		ce3[-k1, -h1, -m1, -n1, -o1, -p1] ce3[-l1, -q1, -r1, -s1, -t1, -u1], 
-	      		{-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1, -q1, -r1, -s1, -t1, -u1}
-	 		]
-	 	]
+    	ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+     	ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
+    	ce3 = ConnectionTensorConcomitant["C3"][metric, H, opts];
+		time = AbsoluteTime[];
+		ce1233 = 
+			epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce2[-j1, -d1, -e1, -f1, -g1] ce3[-k1, -h1, -m1, -n1, -o1, -p1] ce3[-l1, -q1, -r1, -s1, -t1, -u1];
+		If[vb, 
+			Print["** ReportCompute: computing Connection Tensor concomitant \"C1233\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce1233 = HeadOfTensor[ce1233, {-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1, -q1, -r1, -s1, -t1, -u1}];
+		time = AbsoluteTime[];
+		ce1233 = simplf[ce1233];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Connection Tensor concomitant \"C1233\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce1233
   	]
 )
 
-RframeConcomitant["C4"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
-(RframeConcomitant["C4"][metric, H, opts] = 
+ConnectionTensorConcomitant["C4"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
+(ConnectionTensorConcomitant["C4"][metric, H, opts] = 
 	Module[{simplf, cart, cd, ce3, a1, b1, c1, d1, e1, f1, g1, i1},
-		simplf = OptionValue[RframeConcomitant, PSimplify];
+		simplf = OptionValue[ConnectionTensorConcomitant, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, i1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 8];
   		cd = CovDOfMetric[metric];
-    		ce3 = RframeConcomitant["C3"][metric, H, opts];
+    		ce3 = ConnectionTensorConcomitant["C3"][metric, H, opts];
 		simplf[HeadOfTensor[
   			cd[-a1][ce3[-b1, -c1, -d1, -e1, -f1, -g1]] + H[-a1, -b1, i1] ce3[-i1, -c1, -d1, -e1, -f1, -g1] + 
           		H[-a1, -c1, i1] ce3[-b1, -i1, -d1, -e1, -f1, -g1] + H[-a1, -d1, i1] ce3[-b1, -c1, -i1, -e1, -f1, -g1] + 
@@ -1689,19 +1747,19 @@ RframeConcomitant["C4"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
   	]
 )
 
-RframeConcomitant["C1234"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
-(RframeConcomitant["C1234"][metric, H, opts] = 
+ConnectionTensorConcomitant["C1234"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
+(ConnectionTensorConcomitant["C1234"][metric, H, opts] = 
 	Module[{simplf, cart, epsilonmetric, ce1, ce2, ce3, ce4, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, 
  		q1, r1, s1, t1, u1, v1},
-		simplf = OptionValue[RframeConcomitant, PSimplify];
+		simplf = OptionValue[ConnectionTensorConcomitant, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1, r1, s1, t1, u1, v1} = 
   			GetIndicesOfVBundle[VBundleOfBasis @ cart, 22];
   		epsilonmetric = epsilon[metric];
-    		ce1 = RframeConcomitant["C1"][metric, H, opts];
-     		ce2 = RframeConcomitant["C2"][metric, H, opts];
-    		ce3 = RframeConcomitant["C3"][metric, H, opts];
-      		ce4 = RframeConcomitant["C4"][metric, H, opts];
+    		ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+     		ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
+    		ce3 = ConnectionTensorConcomitant["C3"][metric, H, opts];
+      		ce4 = ConnectionTensorConcomitant["C4"][metric, H, opts];
 		simplf[HeadOfTensor[
   			epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce2[-j1, -d1, -e1, -f1, -g1] 
 	       		ce3[-k1, -h1, -m1, -n1, -o1, -p1] ce4[-l1, -q1, -r1, -s1, -t1, -u1, -v1], 
@@ -1711,17 +1769,17 @@ RframeConcomitant["C1234"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :
   	]
 )
 
-RframeConcomitant["C1222"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
-(RframeConcomitant["C1222"][metric, H, opts] = 
+ConnectionTensorConcomitant["C1222"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
+(ConnectionTensorConcomitant["C1222"][metric, H, opts] = 
 	Module[{simplf, cart, epsilonmetric, ce1, ce2, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, 
  		q1, r1, s1},
-		simplf = OptionValue[RframeConcomitant, PSimplify];
+		simplf = OptionValue[ConnectionTensorConcomitant, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1, r1, s1} = 
   			GetIndicesOfVBundle[VBundleOfBasis @ cart, 19];
   		epsilonmetric = epsilon[metric];
-    		ce1 = RframeConcomitant["C1"][metric, H, opts];
-     		ce2 = RframeConcomitant["C2"][metric, H, opts];
+    		ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+     		ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
 		simplf[HeadOfTensor[
   			epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce2[-j1, -d1, -e1, -f1, -g1] 
 	   		ce2[-k1, -h1, -m1, -n1, -o1] ce2[-l1, -p1, -q1, -r1, -s1], 
@@ -1731,18 +1789,18 @@ RframeConcomitant["C1222"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :
   	]
 )
 
-RframeConcomitant["C1223"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
-(RframeConcomitant["C1223"][metric, H, opts] = 
+ConnectionTensorConcomitant["C1223"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
+(ConnectionTensorConcomitant["C1223"][metric, H, opts] = 
 	Module[{simplf, cart, epsilonmetric, ce1, ce2, ce3, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, 
  		q1, r1, s1, t1},
-		simplf = OptionValue[RframeConcomitant, PSimplify];
+		simplf = OptionValue[ConnectionTensorConcomitant, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1, r1, s1, t1} = 
   			GetIndicesOfVBundle[VBundleOfBasis @ cart, 20];
   		epsilonmetric = epsilon[metric];
-    		ce1 = RframeConcomitant["C1"][metric, H, opts];
-     		ce2 = RframeConcomitant["C2"][metric, H, opts];
-       		ce3 = RframeConcomitant["C3"][metric, H, opts];
+    		ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+     		ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
+       		ce3 = ConnectionTensorConcomitant["C3"][metric, H, opts];
 		simplf[HeadOfTensor[
   			epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce2[-j1, -d1, -e1, -f1, -g1] 
 	   		ce2[-k1, -h1, -m1, -n1, -o1] ce3[-l1, -p1, -q1, -r1, -s1, -t1], 
@@ -1752,14 +1810,14 @@ RframeConcomitant["C1223"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :
   	]
 )
 
-RframeConcomitant["C111"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
-(RframeConcomitant["C111"][metric, H, opts] = 
+ConnectionTensorConcomitant["C111"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
+(ConnectionTensorConcomitant["C111"][metric, H, opts] = 
 	Module[{simplf, cart, epsilonmetric, ce1, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, m1, n1},
-		simplf = OptionValue[RframeConcomitant, PSimplify];
+		simplf = OptionValue[ConnectionTensorConcomitant, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, m1, n1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 13];
   		epsilonmetric = epsilon[metric];
-    		ce1 = RframeConcomitant["C1"][metric, H, opts];
+    		ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
 		simplf[HeadOfTensor[
   			epsilonmetric[i1, j1, k1, a1] ce1[-i1, -b1, -c1, -d1] ce1[-j1, -e1, -f1, -g1] 
 	   		ce1[-k1, -h1, -m1, -n1], {a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -l1, -m1, -n1}
@@ -1768,15 +1826,15 @@ RframeConcomitant["C111"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
   	]
 )
 
-RframeConcomitant["C112"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
-(RframeConcomitant["C112"][metric, H, opts] = 
+ConnectionTensorConcomitant["C112"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
+(ConnectionTensorConcomitant["C112"][metric, H, opts] = 
 	Module[{simplf, cart, epsilonmetric, ce1, ce2, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, m1, n1, o1},
-		simplf = OptionValue[RframeConcomitant, PSimplify];
+		simplf = OptionValue[ConnectionTensorConcomitant, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, m1, n1, o1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 14];
   		epsilonmetric = epsilon[metric];
-    		ce1 = RframeConcomitant["C1"][metric, H, opts];
-      		ce2 = RframeConcomitant["C2"][metric, H, opts];
+    		ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+      		ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
 		simplf[HeadOfTensor[
   			epsilonmetric[i1, j1, k1, a1] ce1[-i1, -b1, -c1, -d1] ce1[-j1, -e1, -f1, -g1] 
 	   		ce2[-k1, -h1, -m1, -n1, -o1], {a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -l1, -m1, -n1}
@@ -1785,17 +1843,17 @@ RframeConcomitant["C112"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
   	]
 )
 
-RframeConcomitant["C1122"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
-(RframeConcomitant["C1122"][metric, H, opts] = 
+ConnectionTensorConcomitant["C1122"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
+(ConnectionTensorConcomitant["C1122"][metric, H, opts] = 
 	Module[{simplf, cart, epsilonmetric, ce1, ce2, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, 
  		q1, r1},
-		simplf = OptionValue[RframeConcomitant, PSimplify];
+		simplf = OptionValue[ConnectionTensorConcomitant, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1, r1} = 
   			GetIndicesOfVBundle[VBundleOfBasis @ cart, 18];
   		epsilonmetric = epsilon[metric];
-    		ce1 = RframeConcomitant["C1"][metric, H, opts];
-     		ce2 = RframeConcomitant["C2"][metric, H, opts];
+    		ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+     		ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
 		simplf[HeadOfTensor[
   			epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce1[-j1, -d1, -e1, -f1] 
 	   		ce2[-k1, -g1, -h1, -m1, -n1] ce2[-l1, -o1, -p1, -q1, -r1], 
@@ -1805,18 +1863,18 @@ RframeConcomitant["C1122"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :
   	]
 )
 
-RframeConcomitant["C1123"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
-(RframeConcomitant["C1123"][metric, H, opts] = 
+ConnectionTensorConcomitant["C1123"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
+(ConnectionTensorConcomitant["C1123"][metric, H, opts] = 
 	Module[{simplf, cart, epsilonmetric, ce1, ce2, ce3, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, 
  		q1, r1, s1},
-		simplf = OptionValue[RframeConcomitant, PSimplify];
+		simplf = OptionValue[ConnectionTensorConcomitant, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1, r1,s1} = 
   			GetIndicesOfVBundle[VBundleOfBasis @ cart, 19];
   		epsilonmetric = epsilon[metric];
-    		ce1 = RframeConcomitant["C1"][metric, H, opts];
-     		ce2 = RframeConcomitant["C2"][metric, H, opts];
-       		ce3 = RframeConcomitant["C3"][metric, H, opts];
+    		ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+     		ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
+       		ce3 = ConnectionTensorConcomitant["C3"][metric, H, opts];
 		simplf[HeadOfTensor[
   			epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce1[-j1, -d1, -e1, -f1] 
 	   		ce2[-k1, -g1, -h1, -m1, -n1] ce3[-l1, -o1, -p1, -q1, -r1, -s1], 
@@ -1826,15 +1884,15 @@ RframeConcomitant["C1123"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :
   	]
 )
 
-RframeConcomitant["C1111"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
-(RframeConcomitant["C1111"][metric, H, opts] = 
+ConnectionTensorConcomitant["C1111"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
+(ConnectionTensorConcomitant["C1111"][metric, H, opts] = 
 	Module[{simplf, cart, epsilonmetric, ce1, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1},
-		simplf = OptionValue[RframeConcomitant, PSimplify];
+		simplf = OptionValue[ConnectionTensorConcomitant, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1} = 
   			GetIndicesOfVBundle[VBundleOfBasis @ cart, 16];
   		epsilonmetric = epsilon[metric];
-    		ce1 = RframeConcomitant["C1"][metric, H, opts];
+    		ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
 		simplf[HeadOfTensor[
   			epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce1[-j1, -d1, -e1, -f1] ce1[-k1, -g1, -h1, -m1] 
   			ce1[-l1, -n1, -o1, -p1], {-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1}
@@ -1843,16 +1901,16 @@ RframeConcomitant["C1111"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :
   	]
 )
 
-RframeConcomitant["C1112"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
-(RframeConcomitant["C1112"][metric, H, opts] = 
+ConnectionTensorConcomitant["C1112"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
+(ConnectionTensorConcomitant["C1112"][metric, H, opts] = 
 	Module[{simplf, cart, epsilonmetric, ce1, ce2, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1},
-		simplf = OptionValue[RframeConcomitant, PSimplify];
+		simplf = OptionValue[ConnectionTensorConcomitant, PSimplify];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1} = 
   			GetIndicesOfVBundle[VBundleOfBasis @ cart, 17];
   		epsilonmetric = epsilon[metric];
-    		ce1 = RframeConcomitant["C1"][metric, H, opts];
-      		ce2 = RframeConcomitant["C2"][metric, H, opts];
+    		ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+      		ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
 		simplf[HeadOfTensor[
   			epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce1[-j1, -d1, -e1, -f1] ce1[-k1, -g1, -h1, -m1] 
   			ce2[-l1, -n1, -o1, -p1, -q1], {-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1, -q1}
@@ -1861,11 +1919,11 @@ RframeConcomitant["C1112"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :
   	]
 )
 
-(* This deletes Rframe concomitants for all metrics  *)
+(* This deletes ConnectionTensor concomitants for all metrics  *)
 
-ClearxIdealCache["RframeConcomitants"] := 
+ClearxIdealCache["ConnectionTensorConcomitants"] := 
 	Module[{},
-		SubValues[RframeConcomitant] = DeleteCases[SubValues[RframeConcomitant], _?(FreeQ[First[#], Pattern] &)];
+		SubValues[ConnectionTensorConcomitant] = DeleteCases[SubValues[ConnectionTensorConcomitant], _?(FreeQ[First[#], Pattern] &)];
 	]
 
 (* ::Section:: *)
@@ -2287,33 +2345,33 @@ IsometryGroupDimension[metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
    			If[Not@MetricQ@metric, 
     				Throw[Message[IsometryGroupDimension::nometric, metric]]];
 			simplf = OptionValue[PSimplify];
-   			C1 = RframeConcomitant["C1"][metric, H, opts];
+   			C1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
    			Which[
       
     				C1 === Zero,
     					Print["\!\(\*SubscriptBox[\(G\), \(4\)]\)"],
 	 
-    				C11 = RframeConcomitant["C11"][metric, H, opts];
+    				C11 = ConnectionTensorConcomitant["C11"][metric, H, opts];
     				C11 === Zero,
     					Which[
 	 
-     						C12 = RframeConcomitant["C12"][metric, H, opts];
+     						C12 = ConnectionTensorConcomitant["C12"][metric, H, opts];
      						C12 === Zero,
      							Print["\!\(\*SubscriptBox[\(G\), \(3\)]\)"],
      				
-     						C122 = RframeConcomitant["C122"][metric, H, opts];
+     						C122 = ConnectionTensorConcomitant["C122"][metric, H, opts];
      						C122 === Zero,
      							Which[
 	    
-      								C123 = RframeConcomitant["C123"][metric, H, opts];
+      								C123 = ConnectionTensorConcomitant["C123"][metric, H, opts];
       								C123 === Zero,
       									Print["\!\(\*SubscriptBox[\(G\), \(2  b\)]\)"],
       						
-      								C1233 = RframeConcomitant["C1233"][metric, H, opts];
+      								C1233 = ConnectionTensorConcomitant["C1233"][metric, H, opts];
       								Not[C1233 == Zero],
       									Print["No symmetries"],
       						
-      								C1234 = RframeConcomitant["C1234"][metric, H, opts];
+      								C1234 = ConnectionTensorConcomitant["C1234"][metric, H, opts];
       								C1234 === Zero,
       									Print["\!\(\*SubscriptBox[\(G\), \(1  d\)]\)"],
 	       
@@ -2321,41 +2379,41 @@ IsometryGroupDimension[metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
       									Print["No symmetries"]
       							],
      				
-     						C1222 = RframeConcomitant["C1222"][metric, H, opts];
+     						C1222 = ConnectionTensorConcomitant["C1222"][metric, H, opts];
      						Not[C1222 === Zero],
      							Print["No symmetries"],
      				
-     						C1223 = RframeConcomitant["C1223"][metric, H, opts];
+     						C1223 = ConnectionTensorConcomitant["C1223"][metric, H, opts];
      						C1223 === Zero,
      							Print["\!\(\*SubscriptBox[\(G\), \(1  c\)]\)"],
 	    
      						True,
      							Print["No symmetries"]
      					],
-    				C111 = RframeConcomitant["C111"][metric, H, opts];
+    				C111 = ConnectionTensorConcomitant["C111"][metric, H, opts];
     				C111 === Zero,
     					Which[
      				
-     						C112 = RframeConcomitant["C112"][metric, H, opts];
+     						C112 = ConnectionTensorConcomitant["C112"][metric, H, opts];
      						C112 === Zero,
      							Print["\!\(\*SubscriptBox[\(G\), \(2  a\)]\)"],
      				
-     						C1122 = RframeConcomitant["C1122"][metric, H, opts];
+     						C1122 = ConnectionTensorConcomitant["C1122"][metric, H, opts];
      						Not[C1122 === Zero],
      							Print["No symmetries"],
      				
-     						C1123 = RframeConcomitant["C1123"][metric, H, opts];
+     						C1123 = ConnectionTensorConcomitant["C1123"][metric, H, opts];
      						C1123 === Zero,
      							Print["\!\(\*SubscriptBox[\(G\), \(1  b\)]\)"],
 	    
      						True,
      							Print["No symmetries"]
      					],
-    				C1111 = RframeConcomitant["C1111"][metric, H, opts];
+    				C1111 = ConnectionTensorConcomitant["C1111"][metric, H, opts];
     				Not[C1111 === Zero],
     					Print["No symmetries"],
 	 
-    				C1112 = RframeConcomitant["C1112"][metric, H, opts];
+    				C1112 = ConnectionTensorConcomitant["C1112"][metric, H, opts];
     				C1112 === Zero,
     					Print["\!\(\*SubscriptBox[\(G\), \(1  a\)]\)"],
 	 
