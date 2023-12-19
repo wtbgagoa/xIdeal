@@ -370,7 +370,7 @@ weylConcomitant["Weyl"][metric_CTensor, opts : OptionsPattern[]] :=
 weylConcomitant["Weyl2"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["Weyl2"][metric, opts] = 
 	Module[{simplf, cart, a1, b1, c1, d1, i1, j1, weylcd, weyl2cd, vb, time},
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, i1, j1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
 		weylcd = weylConcomitant["Weyl"][metric, opts];
@@ -392,7 +392,7 @@ weylConcomitant["Weyl2"][metric_CTensor, opts : OptionsPattern[]] :=
 weylConcomitant["Weyl3"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["Weyl3"][metric, opts] = 
 	Module[{simplf, cart, a1, b1, c1, d1, i1, j1, weylcd, weyl2cd, weyl3cd, vb, time},
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, i1, j1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
 		weylcd = weylConcomitant["Weyl"][metric, opts];
@@ -414,7 +414,7 @@ weylConcomitant["Weyl3"][metric_CTensor, opts : OptionsPattern[]] :=
 weylConcomitant["TraceWeyl3"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["TraceWeyl3"][metric, opts] = 
 	Module[{simplf, cart, a1, b1, weyl3cd, trweyl3, vb, time},
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
   		weyl3cd = weylConcomitant["Weyl3"][metric, opts];
@@ -434,7 +434,7 @@ weylConcomitant["TraceWeyl3"][metric_CTensor, opts : OptionsPattern[]] :=
 weylConcomitant["WeylDual"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["WeylDual"][metric, opts] = 
 	Module[{simplf, cart, a1, b1, c1, d1, e1, f1, cd, weylcd, epsilonmetric, weyldual, vb, time},
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
 		cd = CovDOfMetric[metric];
@@ -460,7 +460,7 @@ weylConcomitant["WeylDual"][metric_CTensor, opts : OptionsPattern[]] :=
 weylConcomitant["WeylSelfDual"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["WeylSelfDual"][metric, opts] = 
 	Module[{simplf, weylcd, weyldual, weylsd, vb, time},
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		weylcd = weylConcomitant["Weyl"][metric, opts];
 		weyldual = weylConcomitant["WeylDual"][metric, opts];
 		time = AbsoluteTime[];
@@ -482,7 +482,7 @@ weylConcomitant["WeylMatrixQ"][metric_CTensor, opts : OptionsPattern[]] :=
 	Module[{cart, simplf, obs, mq, a1, b1, c1, d1, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		(* In this particular case we need to input the opts arg. Why? *)
 		obs = OptionValue[weylConcomitant, {opts}, "Observer"];
 		time = AbsoluteTime[];
@@ -505,7 +505,7 @@ weylConcomitant["TraceWeylMatrixQ"][metric_CTensor, opts : OptionsPattern[]] :=
 	Module[{cart, simplf, obs, mq, trmq, a1, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 1];
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		mq = weylConcomitant["WeylMatrixQ"][metric, opts];
 		time = AbsoluteTime[];
 		trmq = mq[a1, -a1];
@@ -526,7 +526,7 @@ weylConcomitant["WeylMatrixQ2"][metric_CTensor, opts : OptionsPattern[]] :=
 	Module[{cart, simplf, mq, mq2, a1, b1, c1, d1, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 3];
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		mq = weylConcomitant["WeylMatrixQ"][metric, opts];
 		time = AbsoluteTime[];
 		mq2 = mq[-a1, -b1] mq[b1, -c1];
@@ -548,7 +548,7 @@ weylConcomitant["TraceWeylMatrixQ2"][metric_CTensor, opts : OptionsPattern[]] :=
 	Module[{cart, simplf, obs, mq2, trmq2, a1, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 1];
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		mq2 = weylConcomitant["WeylMatrixQ2"][metric, opts];
 		time = AbsoluteTime[];
 		trmq2 = mq2[a1, -a1];
@@ -569,7 +569,7 @@ weylConcomitant["WeylMatrixQ3"][metric_CTensor, opts : OptionsPattern[]] :=
 	Module[{cart, simplf, mq, mq2, mq3, a1, b1, c1, d1, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		mq = weylConcomitant["WeylMatrixQ"][metric, opts];
 		mq2 = weylConcomitant["WeylMatrixQ2"][metric, opts];
 		time = AbsoluteTime[];
@@ -592,7 +592,7 @@ weylConcomitant["TraceWeylMatrixQ3"][metric_CTensor, opts : OptionsPattern[]] :=
 	Module[{cart, simplf, mq3, trmq3, a1, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 1];
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		mq3 = weylConcomitant["WeylMatrixQ3"][metric, opts];
 		time = AbsoluteTime[];
 		trmq3 = mq3[a1, -a1];
@@ -613,7 +613,7 @@ weylConcomitant["WeylSelfDual2"][metric_CTensor, opts : OptionsPattern[]] :=
 	Module[{simplf, weylselfdual, weylselfdual2, cart, a1, b1, c1, d1, e1, f1, time, vb},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
 		time = AbsoluteTime[];
 		weylselfdual2 = 1/2 weylselfdual[-a1, -b1, e1, f1] weylselfdual[-e1, -f1, -c1, -d1];
@@ -633,7 +633,7 @@ weylConcomitant["WeylSelfDual2"][metric_CTensor, opts : OptionsPattern[]] :=
 weylConcomitant["TraceWeylSelfDual2"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["TraceWeylSelfDual2"][metric, opts] = 
 	Module[{weylselfdual2, trweylselfdual2, simplf, cart, a1, b1, vb, time},
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
 		weylselfdual2 = weylConcomitant["WeylSelfDual2"][metric, opts];
@@ -654,7 +654,7 @@ weylConcomitant["TraceWeylSelfDual2"][metric_CTensor, opts : OptionsPattern[]] :
 weylConcomitant["WeylSelfDual3"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["WeylSelfDual3"][metric, opts] = 
 	Module[{simplf, weylselfdual, weylselfdual2, weylselfdual3, cart, a1, b1, c1, d1, e1, f1, vb, time},
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
 		weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
@@ -677,7 +677,7 @@ weylConcomitant["WeylSelfDual3"][metric_CTensor, opts : OptionsPattern[]] :=
 weylConcomitant["TraceWeylSelfDual3"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["TraceWeylSelfDual3"][metric, opts] = 
 	Module[{weylselfdual3, trweylselfdual3, simplf, cart, a1, b1, vb, time},
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
 		weylselfdual3 = weylConcomitant["WeylSelfDual3"][metric, opts];
@@ -806,7 +806,7 @@ weylConcomitant["ConformalLambda"][metric_CTensor, opts : OptionsPattern[]] :=
 weylConcomitant["ScalarRho"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["ScalarRho"][metric, opts] = 
 	Module[{simplf, cart, trw3, rho, vb, time},
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];	
 		trw3 = weylConcomitant["TraceWeyl3"][metric, opts];
 		time = AbsoluteTime[];
@@ -825,7 +825,7 @@ weylConcomitant["ScalarRho"][metric_CTensor, opts : OptionsPattern[]] :=
 weylConcomitant["TensorS"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["TensorS"][metric, opts] = 
 	Module[{simplf, cart, w, G, rho, s, vb, time},
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];		
 		w = weylConcomitant["Weyl"][metric, opts];
@@ -847,7 +847,7 @@ weylConcomitant["TensorS"][metric_CTensor, opts : OptionsPattern[]] :=
 weylConcomitant["VectorPhi"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["TensorPhi"][metric, opts] = 
 	Module[{simplf, cart, S, cd, cds, a1, b1, c1, d1, phi, vb, time},
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];		
 		S = weylConcomitant["TensorS"][metric, opts];
@@ -881,7 +881,7 @@ weylConcomitant["VectorPhi"][metric_CTensor, opts : OptionsPattern[]] :=
 weylConcomitant["TensorB"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["TensorB"][metric, opts] = 
 	Module[{simplf, cart, S, R, r, a1, b1, c1, d1, B, vb, time},
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];		
 		S = weylConcomitant["TensorS"][metric, opts];
@@ -909,7 +909,7 @@ weylConcomitant["PTNCanonicalBivector"][metric_CTensor, opts : OptionsPattern[]]
 	Module[{simplf, cart, obs, X, weylselfdual, cbv, a1, b1, i1, j1, k1, l1, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, i1, j1, k1, l1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];		
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
   		obs = OptionValue[weylConcomitant, {opts}, "Observer"];
     	X = OptionValue[weylConcomitant, {opts}, "Bivector"];
       	weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
@@ -933,7 +933,7 @@ weylConcomitant["PTIIICanonicalBivector1"][metric_CTensor, opts : OptionsPattern
 	Module[{simplf, cart, obs, X, weylselfdual2, cbv, a1, b1, i1, j1, k1, l1, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, i1, j1, k1, l1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];		
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
   		obs = OptionValue[weylConcomitant, {opts}, "Observer"];
     	X = OptionValue[weylConcomitant, {opts}, "Bivector"];
       	weylselfdual2 = weylConcomitant["WeylSelfDual2"][metric, opts];
@@ -957,7 +957,7 @@ weylConcomitant["PTIIICanonicalBivector2"][metric_CTensor, opts : OptionsPattern
 	Module[{simplf, cart, obs, X, weylselfdual, g2form, scrh, cbv, a1, b1, i1, j1, k1, l1, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, i1, j1, k1, l1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];		
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
   		obs = OptionValue[weylConcomitant, {opts}, "Observer"];
     	X = OptionValue[weylConcomitant, {opts}, "Bivector"];
       	weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
@@ -984,7 +984,7 @@ weylConcomitant["PTDCanonicalBivector"][metric_CTensor, opts : OptionsPattern[]]
 	Module[{simplf, cart, obs, X, aa, bb, rho, weylselfdual, g2form, scrp, scrp2, cbv, a1, b1, i1, j1, k1, l1, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, i1, j1, k1, l1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];		
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
   		obs = OptionValue[weylConcomitant, {opts}, "Observer"];
     	X = OptionValue[weylConcomitant, {opts}, "Bivector"];
       	bb = -weylConcomitant["TraceWeylSelfDual3"][metric, opts];
@@ -1033,7 +1033,7 @@ weylConcomitant["PTIICanonicalBivector1"][metric_CTensor, opts : OptionsPattern[
 	Module[{simplf, cart, obs, X, aa, bb, rho, weylselfdual, g2form, scrq, cbv, a1, b1, i1, j1, k1, l1, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, i1, j1, k1, l1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];		
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
   		obs = OptionValue[weylConcomitant, {opts}, "Observer"];
     	X = OptionValue[weylConcomitant, {opts}, "Bivector"];
       	bb = -weylConcomitant["TraceWeylSelfDual3"][metric, opts];
@@ -1071,7 +1071,7 @@ weylConcomitant["PTIICanonicalBivector2"][metric_CTensor, opts : OptionsPattern[
 	Module[{simplf, cart, obs, X, aa, bb, rho, weylselfdual, g2form, p, scrp, scrp2, cbv, a1, b1, i1, j1, k1, l1, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, i1, j1, k1, l1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];		
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
   		obs = OptionValue[weylConcomitant, {opts}, "Observer"];
     	X = OptionValue[weylConcomitant, {opts}, "Bivector"];
       	bb = -weylConcomitant["TraceWeylSelfDual3"][metric, opts];
@@ -1133,7 +1133,7 @@ weylConcomitant["NullDirectionTypeN"][metric_CTensor, opts : OptionsPattern[]] :
 	Module[{cart, simplf, obs, mq, dir, a1, b1, c1, d1, e1, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 5];
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		obs = OptionValue[weylConcomitant, {opts}, "Observer"];
 		mq = weylConcomitant["WeylMatrixQ"][metric, opts];
 		time = AbsoluteTime[];
@@ -1156,7 +1156,7 @@ weylConcomitant["WNullDirectionTypeN"][metric_CTensor, opts : OptionsPattern[]] 
 	Module[{cart, simplf, obs, weylselfdual, canonicalbivector, mh, mh2, dir, a1, b1, i1, j1, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, i1, j1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
   		obs = OptionValue[weylConcomitant, {opts}, "Observer"];
   		canonicalbivector = weylConcomitant["PTNCanonicalBivector"][metric, opts];
 		time = AbsoluteTime[];
@@ -1195,7 +1195,7 @@ weylConcomitant["NullDirectionTypeIII"][metric_CTensor, opts : OptionsPattern[]]
 	Module[{cart, simplf, obs, mq, a1, b1, c1, d1, e1, dir, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 5];
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		obs = OptionValue[weylConcomitant, {opts}, "Observer"];
 		mq = weylConcomitant["WeylMatrixQ2"][metric, opts];
 		time = AbsoluteTime[];
@@ -1218,7 +1218,7 @@ weylConcomitant["WNullDirectionTypeIII"][metric_CTensor, opts : OptionsPattern[]
 	Module[{cart, simplf, obs, weylselfdual, canonicalbivector, mh, mh2, dir, a1, b1, i1, j1, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, i1, j1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
   		obs = OptionValue[weylConcomitant, {opts}, "Observer"];
   		canonicalbivector = weylConcomitant["PTIIICanonicalBivector1"][metric, opts];
 		time = AbsoluteTime[];
@@ -1258,7 +1258,7 @@ weylConcomitant["NullDirectionTypeD"][metric_CTensor, opts : OptionsPattern[]] :
 	Module[{cart, simplf, obs, w, a1, b1, c1, d1, e1, bb, aa, mq, rho, gamma, P, Pdag, scrP, scrP2, S, dseda, Ch2, v0, v1, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 5];
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		obs = OptionValue[weylConcomitant, {opts}, "Observer"];
 		w = OptionValue[weylConcomitant, {opts}, "Vector"];
 		bb = -weylConcomitant["TraceWeylMatrixQ3"][metric, opts];
@@ -1399,7 +1399,7 @@ weylConcomitant["WNullDirectionTypeD"][metric_CTensor, opts : OptionsPattern[]] 
 	Module[{cart, simplf, obs, canonicalbivector, mu, lp, lm, a1, b1, i1, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, i1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 3];
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
   		obs = OptionValue[weylConcomitant, {opts}, "Observer"];
   		canonicalbivector = weylConcomitant["PTDCanonicalBivector"][metric, opts];
 	 	mu = ComplexExpand[(canonicalbivector + Dagger[canonicalbivector])/Sqrt[2]];
@@ -1433,7 +1433,7 @@ weylConcomitant["NullDirectionTypeII"][metric_CTensor, opts : OptionsPattern[]] 
 	Module[{cart, simplf, obs, mq, mq2, a1, b1, c1, d1, e1, bb, aa, gamma, rho, P, dvb, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 5];
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		obs = OptionValue[weylConcomitant, {opts}, "Observer"];
 		(* In the following calls the "Observer" option is supossed to be non-Null *)
 		mq = weylConcomitant["WeylMatrixQ"][metric, opts];
@@ -1481,7 +1481,7 @@ weylConcomitant["WNullDirectionTypeII"][metric_CTensor, opts : OptionsPattern[]]
 	Module[{cart, simplf, obs, canonicalbivector, mh, mh2, dir, a1, b1, i1, j1, k1, l1, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, i1, j1, k1, l1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
   		obs = OptionValue[weylConcomitant, {opts}, "Observer"];
   		canonicalbivector = weylConcomitant["PTIICanonicalBivector1"][metric, opts]];
 		time = AbsoluteTime[];
@@ -1536,7 +1536,7 @@ Options[ConnectionTensorConcomitant] = {PSimplify -> $CVSimplify, Parallelize ->
 ConnectionTensorConcomitant["C1"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
 (ConnectionTensorConcomitant["C1"][metric, H, opts] = 
 	Module[{simplf, cart, cd, a1, b1, c1, d1, i1, vb, time, ce1},
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, i1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 5];
 		cd = CovDOfMetric[metric];
@@ -1559,7 +1559,7 @@ ConnectionTensorConcomitant["C1"][metric_CTensor, H_CTensor, opts : OptionsPatte
 ConnectionTensorConcomitant["C11"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
 (ConnectionTensorConcomitant["C11"][metric, H, opts] = 
 	Module[{simplf, cart, epsilonmetric, ce1, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, vb, time, ce11},
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 10];
   		epsilonmetric = epsilon[metric];
@@ -1582,7 +1582,7 @@ ConnectionTensorConcomitant["C11"][metric_CTensor, H_CTensor, opts : OptionsPatt
 ConnectionTensorConcomitant["C2"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
 (ConnectionTensorConcomitant["C2"][metric, H, opts] = 
 	Module[{simplf, cart, cd, ce1, a1, b1, c1, d1, e1, i1, vb, time, ce2},
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, i1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
   		cd = CovDOfMetric[metric];
@@ -1607,7 +1607,7 @@ ConnectionTensorConcomitant["C2"][metric_CTensor, H_CTensor, opts : OptionsPatte
 ConnectionTensorConcomitant["C12"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
 (ConnectionTensorConcomitant["C12"][metric, H, opts] = 
 	Module[{simplf, cart, epsilonmetric, ce1, ce2, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, vb, time, ce12},
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 11];
   		epsilonmetric = epsilon[metric];
@@ -1631,7 +1631,7 @@ ConnectionTensorConcomitant["C12"][metric_CTensor, H_CTensor, opts : OptionsPatt
 ConnectionTensorConcomitant["C122"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
 (ConnectionTensorConcomitant["C122"][metric, H, opts] = 
 	Module[{simplf, cart, epsilonmetric, ce1, ce2, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, vb, time, ce122},
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 15];
   		epsilonmetric = epsilon[metric];
@@ -1654,7 +1654,7 @@ ConnectionTensorConcomitant["C122"][metric_CTensor, H_CTensor, opts : OptionsPat
 ConnectionTensorConcomitant["C3"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
 (ConnectionTensorConcomitant["C3"][metric, H, opts] = 
 	Module[{simplf, cart, cd, ce2, a1, b1, c1, d1, e1, f1, i1, vb, time, ce3},
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, i1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 7];
   		cd = CovDOfMetric[metric];
@@ -1679,7 +1679,7 @@ ConnectionTensorConcomitant["C3"][metric_CTensor, H_CTensor, opts : OptionsPatte
 ConnectionTensorConcomitant["C123"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
 (ConnectionTensorConcomitant["C123"][metric, H, opts] = 
 	Module[{simplf, cart, epsilonmetric, ce1, ce2, ce3, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, vb, time, ce123},
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 16];
   		epsilonmetric = epsilon[metric];
@@ -1705,7 +1705,7 @@ ConnectionTensorConcomitant["C1233"][metric_CTensor, H_CTensor, opts : OptionsPa
 (ConnectionTensorConcomitant["C1233"][metric, H, opts] = 
 	Module[{simplf, cart, epsilonmetric, ce1, ce2, ce3, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, 
  		q1, r1, s1, t1, u1, vb, time, ce1233},
-		{simplf, vb} = OptionValue[weylConcomitant, {opts} ,{PSimplify, Verbose}];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1, r1, s1, t1, u1} = 
   			GetIndicesOfVBundle[VBundleOfBasis @ cart, 21];
@@ -1731,191 +1731,257 @@ ConnectionTensorConcomitant["C1233"][metric_CTensor, H_CTensor, opts : OptionsPa
 
 ConnectionTensorConcomitant["C4"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
 (ConnectionTensorConcomitant["C4"][metric, H, opts] = 
-	Module[{simplf, cart, cd, ce3, a1, b1, c1, d1, e1, f1, g1, i1},
-		simplf = OptionValue[ConnectionTensorConcomitant, PSimplify];
+	Module[{simplf, cart, cd, ce3, a1, b1, c1, d1, e1, f1, g1, i1, vb, time, ce4},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, i1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 8];
   		cd = CovDOfMetric[metric];
-    		ce3 = ConnectionTensorConcomitant["C3"][metric, H, opts];
-		simplf[HeadOfTensor[
-  			cd[-a1][ce3[-b1, -c1, -d1, -e1, -f1, -g1]] + H[-a1, -b1, i1] ce3[-i1, -c1, -d1, -e1, -f1, -g1] + 
-          		H[-a1, -c1, i1] ce3[-b1, -i1, -d1, -e1, -f1, -g1] + H[-a1, -d1, i1] ce3[-b1, -c1, -i1, -e1, -f1, -g1] + 
-           		H[-a1, -e1, i1] ce3[-b1, -c1, -d1, -i1, -f1, -g1] + H[-a1, -f1, i1] ce3[-b1, -c1, -d1, -e1, -i1, -g1] + 
-          		H[-a1, -g1, i1] ce3[-b1, -c1, -d1, -e1, -f1, -i1], {-a1, -b1, -c1, -d1, -e1, -f1, -g1}
-	    		]
-	    	]
+    	ce3 = ConnectionTensorConcomitant["C3"][metric, H, opts];
+		time = AbsoluteTime[];
+		ce4 = cd[-a1][ce3[-b1, -c1, -d1, -e1, -f1, -g1]] + H[-a1, -b1, i1] ce3[-i1, -c1, -d1, -e1, -f1, -g1] + 
+          	H[-a1, -c1, i1] ce3[-b1, -i1, -d1, -e1, -f1, -g1] + H[-a1, -d1, i1] ce3[-b1, -c1, -i1, -e1, -f1, -g1] + 
+           	H[-a1, -e1, i1] ce3[-b1, -c1, -d1, -i1, -f1, -g1] + H[-a1, -f1, i1] ce3[-b1, -c1, -d1, -e1, -i1, -g1] + 
+          	H[-a1, -g1, i1] ce3[-b1, -c1, -d1, -e1, -f1, -i1];
+		If[vb, 
+			Print["** ReportCompute: computing Connection Tensor concomitant \"C4\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce4 = HeadOfTensor[ce4, {-a1, -b1, -c1, -d1, -e1, -f1, -g1}];
+		time = AbsoluteTime[];
+		ce4 = simplf[ce4];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Connection Tensor concomitant \"C4\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce4
   	]
 )
 
 ConnectionTensorConcomitant["C1234"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
 (ConnectionTensorConcomitant["C1234"][metric, H, opts] = 
 	Module[{simplf, cart, epsilonmetric, ce1, ce2, ce3, ce4, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, 
- 		q1, r1, s1, t1, u1, v1},
-		simplf = OptionValue[ConnectionTensorConcomitant, PSimplify];
+ 		q1, r1, s1, t1, u1, v1, vb, time, ce1234},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1, r1, s1, t1, u1, v1} = 
   			GetIndicesOfVBundle[VBundleOfBasis @ cart, 22];
   		epsilonmetric = epsilon[metric];
-    		ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
-     		ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
-    		ce3 = ConnectionTensorConcomitant["C3"][metric, H, opts];
-      		ce4 = ConnectionTensorConcomitant["C4"][metric, H, opts];
-		simplf[HeadOfTensor[
-  			epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce2[-j1, -d1, -e1, -f1, -g1] 
-	       		ce3[-k1, -h1, -m1, -n1, -o1, -p1] ce4[-l1, -q1, -r1, -s1, -t1, -u1, -v1], 
-			{-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1, -q1, -r1, -s1, -t1, -u1, -v1}
-   			]
-   		]
+    	ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+     	ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
+    	ce3 = ConnectionTensorConcomitant["C3"][metric, H, opts];
+      	ce4 = ConnectionTensorConcomitant["C4"][metric, H, opts];
+		time = AbsoluteTime[];
+		ce1234 = epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce2[-j1, -d1, -e1, -f1, -g1] ce3[-k1, -h1, -m1, -n1, -o1, -p1] ce4[-l1, -q1, -r1, -s1, -t1, -u1, -v1];
+		If[vb, 
+			Print["** ReportCompute: computing Connection Tensor concomitant \"C1234\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce1234 = HeadOfTensor[ce1234, {-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1, -q1, -r1, -s1, -t1, -u1, -v1}];
+		time = AbsoluteTime[];
+		ce1234 = simplf[ce1234];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Connection Tensor concomitant \"C1234\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce1234
   	]
 )
 
 ConnectionTensorConcomitant["C1222"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
 (ConnectionTensorConcomitant["C1222"][metric, H, opts] = 
 	Module[{simplf, cart, epsilonmetric, ce1, ce2, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, 
- 		q1, r1, s1},
-		simplf = OptionValue[ConnectionTensorConcomitant, PSimplify];
+ 		q1, r1, s1, vb, time, ce1222},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1, r1, s1} = 
   			GetIndicesOfVBundle[VBundleOfBasis @ cart, 19];
   		epsilonmetric = epsilon[metric];
-    		ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
-     		ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
-		simplf[HeadOfTensor[
-  			epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce2[-j1, -d1, -e1, -f1, -g1] 
-	   		ce2[-k1, -h1, -m1, -n1, -o1] ce2[-l1, -p1, -q1, -r1, -s1], 
-	  		{-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1, -q1, -r1, -s1}
-     			]
-     		]
+    	ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+     	ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
+		time = AbsoluteTime[];
+		ce1222 = epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce2[-j1, -d1, -e1, -f1, -g1] ce2[-k1, -h1, -m1, -n1, -o1] ce2[-l1, -p1, -q1, -r1, -s1];
+		If[vb, 
+			Print["** ReportCompute: computing Connection Tensor concomitant \"C1222\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce1222 = HeadOfTensor[ce1222, {-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1, -q1, -r1, -s1}];
+		time = AbsoluteTime[];
+		ce1222 = simplf[ce1222];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Connection Tensor concomitant \"C1222\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce1222
   	]
 )
 
 ConnectionTensorConcomitant["C1223"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
 (ConnectionTensorConcomitant["C1223"][metric, H, opts] = 
 	Module[{simplf, cart, epsilonmetric, ce1, ce2, ce3, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, 
- 		q1, r1, s1, t1},
-		simplf = OptionValue[ConnectionTensorConcomitant, PSimplify];
+ 		q1, r1, s1, t1, vb, time, ce1223},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1, r1, s1, t1} = 
   			GetIndicesOfVBundle[VBundleOfBasis @ cart, 20];
   		epsilonmetric = epsilon[metric];
-    		ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
-     		ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
-       		ce3 = ConnectionTensorConcomitant["C3"][metric, H, opts];
-		simplf[HeadOfTensor[
-  			epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce2[-j1, -d1, -e1, -f1, -g1] 
-	   		ce2[-k1, -h1, -m1, -n1, -o1] ce3[-l1, -p1, -q1, -r1, -s1, -t1], 
-	  		{-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1, -q1, -r1, -s1, -t1}
-     			]
-     		]
+    	ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+     	ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
+       	ce3 = ConnectionTensorConcomitant["C3"][metric, H, opts];
+		time = AbsoluteTime[];
+		ce1223 = epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce2[-j1, -d1, -e1, -f1, -g1] ce2[-k1, -h1, -m1, -n1, -o1] ce3[-l1, -p1, -q1, -r1, -s1, -t1];
+		If[vb, 
+			Print["** ReportCompute: computing Connection Tensor concomitant \"C1223\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce1223 = HeadOfTensor[ce1223, {-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1, -q1, -r1, -s1, -t1}];
+		time = AbsoluteTime[];
+		ce1223 = simplf[];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Connection Tensor concomitant \"C1223\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce1223
   	]
 )
 
 ConnectionTensorConcomitant["C111"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
 (ConnectionTensorConcomitant["C111"][metric, H, opts] = 
-	Module[{simplf, cart, epsilonmetric, ce1, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, m1, n1},
-		simplf = OptionValue[ConnectionTensorConcomitant, PSimplify];
+	Module[{simplf, cart, epsilonmetric, ce1, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, m1, n1, vb, time, ce111},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, m1, n1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 13];
   		epsilonmetric = epsilon[metric];
-    		ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
-		simplf[HeadOfTensor[
-  			epsilonmetric[i1, j1, k1, a1] ce1[-i1, -b1, -c1, -d1] ce1[-j1, -e1, -f1, -g1] 
-	   		ce1[-k1, -h1, -m1, -n1], {a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -l1, -m1, -n1}
-      			]
-      		]
+    	ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+		time = AbsoluteTime[];
+		ce111 = epsilonmetric[i1, j1, k1, a1] ce1[-i1, -b1, -c1, -d1] ce1[-j1, -e1, -f1, -g1] ce1[-k1, -h1, -m1, -n1];
+		If[vb, 
+			Print["** ReportCompute: computing Connection Tensor concomitant \"C111\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		HeadOfTensor[ce111, {a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -l1, -m1, -n1}];
+		time = AbsoluteTime[];
+		ce111 = simplf[ce111];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Connection Tensor concomitant \"C111\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce111
   	]
 )
 
 ConnectionTensorConcomitant["C112"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
 (ConnectionTensorConcomitant["C112"][metric, H, opts] = 
-	Module[{simplf, cart, epsilonmetric, ce1, ce2, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, m1, n1, o1},
-		simplf = OptionValue[ConnectionTensorConcomitant, PSimplify];
+	Module[{simplf, cart, epsilonmetric, ce1, ce2, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, m1, n1, o1, vb, time, ce112},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, m1, n1, o1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 14];
   		epsilonmetric = epsilon[metric];
-    		ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
-      		ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
-		simplf[HeadOfTensor[
-  			epsilonmetric[i1, j1, k1, a1] ce1[-i1, -b1, -c1, -d1] ce1[-j1, -e1, -f1, -g1] 
-	   		ce2[-k1, -h1, -m1, -n1, -o1], {a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -l1, -m1, -n1}
-      			]
-      		]
+    	ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+      	ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
+		time = AbsoluteTime[];
+		ce112 = epsilonmetric[i1, j1, k1, a1] ce1[-i1, -b1, -c1, -d1] ce1[-j1, -e1, -f1, -g1] ce2[-k1, -h1, -m1, -n1, -o1];
+		If[vb, 
+			Print["** ReportCompute: computing Connection Tensor concomitant \"C112\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce112 = HeadOfTensor[ce112, {a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -l1, -m1, -n1}];
+		time = AbsoluteTime[];
+		ce112 = simplf[ce112];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Connection Tensor concomitant \"C112\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce112
   	]
 )
 
 ConnectionTensorConcomitant["C1122"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
 (ConnectionTensorConcomitant["C1122"][metric, H, opts] = 
 	Module[{simplf, cart, epsilonmetric, ce1, ce2, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, 
- 		q1, r1},
-		simplf = OptionValue[ConnectionTensorConcomitant, PSimplify];
+ 		q1, r1, vb, time, ce1122},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1, r1} = 
   			GetIndicesOfVBundle[VBundleOfBasis @ cart, 18];
   		epsilonmetric = epsilon[metric];
-    		ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
-     		ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
-		simplf[HeadOfTensor[
-  			epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce1[-j1, -d1, -e1, -f1] 
-	   		ce2[-k1, -g1, -h1, -m1, -n1] ce2[-l1, -o1, -p1, -q1, -r1], 
-	  		{-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1, -q1, -r1}
-     			]
-     		]
+    	ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+     	ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
+		time = AbsoluteTime[];
+		ce1122 = epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce1[-j1, -d1, -e1, -f1] ce2[-k1, -g1, -h1, -m1, -n1] ce2[-l1, -o1, -p1, -q1, -r1];
+		If[vb, 
+			Print["** ReportCompute: computing Connection Tensor concomitant \"C1122\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce1122 = HeadOfTensor[ce1122, {-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1, -q1, -r1}];
+		time = AbsoluteTime[];
+		ce1122 = simplf[ce1122];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Connection Tensor concomitant \"C1122\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce1122
   	]
 )
 
 ConnectionTensorConcomitant["C1123"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
 (ConnectionTensorConcomitant["C1123"][metric, H, opts] = 
 	Module[{simplf, cart, epsilonmetric, ce1, ce2, ce3, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, 
- 		q1, r1, s1},
-		simplf = OptionValue[ConnectionTensorConcomitant, PSimplify];
+ 		q1, r1, s1, vb, time, ce1123},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1, r1,s1} = 
   			GetIndicesOfVBundle[VBundleOfBasis @ cart, 19];
   		epsilonmetric = epsilon[metric];
-    		ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
-     		ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
-       		ce3 = ConnectionTensorConcomitant["C3"][metric, H, opts];
-		simplf[HeadOfTensor[
-  			epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce1[-j1, -d1, -e1, -f1] 
-	   		ce2[-k1, -g1, -h1, -m1, -n1] ce3[-l1, -o1, -p1, -q1, -r1, -s1], 
-	  		{-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1, -q1, -r1, -s1}
-     			]
-     		]
+    	ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+     	ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
+       	ce3 = ConnectionTensorConcomitant["C3"][metric, H, opts];
+		time = AbsoluteTime[];
+		ce1123 = epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce1[-j1, -d1, -e1, -f1] ce2[-k1, -g1, -h1, -m1, -n1] ce3[-l1, -o1, -p1, -q1, -r1, -s1];
+		If[vb, 
+			Print["** ReportCompute: computing Connection Tensor concomitant \"C1123\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce1123 = HeadOfTensor[ce1123, {-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1, -q1, -r1, -s1}];
+		time = AbsoluteTime[];
+		ce1123 = simplf[ce1123];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Connection Tensor concomitant \"C1123\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce1123
   	]
 )
 
 ConnectionTensorConcomitant["C1111"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
 (ConnectionTensorConcomitant["C1111"][metric, H, opts] = 
-	Module[{simplf, cart, epsilonmetric, ce1, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1},
-		simplf = OptionValue[ConnectionTensorConcomitant, PSimplify];
+	Module[{simplf, cart, epsilonmetric, ce1, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, vb, time, ce1111},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1} = 
   			GetIndicesOfVBundle[VBundleOfBasis @ cart, 16];
   		epsilonmetric = epsilon[metric];
-    		ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
-		simplf[HeadOfTensor[
-  			epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce1[-j1, -d1, -e1, -f1] ce1[-k1, -g1, -h1, -m1] 
-  			ce1[-l1, -n1, -o1, -p1], {-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1}
-     			]
-     		]
+    	ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+		time = AbsoluteTime[];
+		ce1111 = epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce1[-j1, -d1, -e1, -f1] ce1[-k1, -g1, -h1, -m1] ce1[-l1, -n1, -o1, -p1];
+		If[vb, 
+			Print["** ReportCompute: computing Connection Tensor concomitant \"C1111\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce1111 = HeadOfTensor[ce1111, {-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1}];
+		time = AbsoluteTime[];
+		ce1111 = simplf[ce1111];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Connection Tensor concomitant \"C1111\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce1111
   	]
 )
 
 ConnectionTensorConcomitant["C1112"][metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
 (ConnectionTensorConcomitant["C1112"][metric, H, opts] = 
-	Module[{simplf, cart, epsilonmetric, ce1, ce2, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1},
-		simplf = OptionValue[ConnectionTensorConcomitant, PSimplify];
+	Module[{simplf, cart, epsilonmetric, ce1, ce2, a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1, vb, time, ce1112},
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1, i1, j1, k1, l1, m1, n1, o1, p1, q1} = 
   			GetIndicesOfVBundle[VBundleOfBasis @ cart, 17];
   		epsilonmetric = epsilon[metric];
-    		ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
-      		ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
-		simplf[HeadOfTensor[
-  			epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce1[-j1, -d1, -e1, -f1] ce1[-k1, -g1, -h1, -m1] 
-  			ce2[-l1, -n1, -o1, -p1, -q1], {-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1, -q1}
-     			]
-     		]
+    	ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
+      	ce2 = ConnectionTensorConcomitant["C2"][metric, H, opts];
+		time = AbsoluteTime[];
+		ce1112 = epsilonmetric[i1, j1, k1, l1] ce1[-i1, -a1, -b1, -c1] ce1[-j1, -d1, -e1, -f1] ce1[-k1, -g1, -h1, -m1] ce2[-l1, -n1, -o1, -p1, -q1];
+		If[vb, 
+			Print["** ReportCompute: computing Connection Tensor concomitant \"C1112\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce1112 = HeadOfTensor[ce1112, {-a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1, -o1, -p1, -q1}];
+		time = AbsoluteTime[];
+		ce1112 = simplf[ce1112];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Connection Tensor concomitant \"C1112\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		ce1112
   	]
 )
 
