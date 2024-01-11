@@ -163,7 +163,8 @@ $PrePrint = ScreenDollarIndices;
 (* Usage information *)
 
 
-PetrovType::usage = " ";
+PetrovType::usage = "PetrovType[metric] returns the Petrov Type of metric. By default, it determines it with the \"WeylSelfDual\" method. Using the Method option, 
+	it can also be determined following the \"PetrovMatrix\" method: PetrovType[metric, Method -> \"PetrovMatrix\", \"Observer\" -> u], but then it also needs an observer.";
 
 DebeverNullDirections::usage = " ";
 
