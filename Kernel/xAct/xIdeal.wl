@@ -163,10 +163,9 @@ $PrePrint = ScreenDollarIndices;
 (* Usage information *)
 
 
-PetrovType::usage = "PetrovType[metric] returns the Petrov Type of metric. By default, it determines it with the \"WeylSelfDual\" method. Using the Method option, 
-	it can also be determined following the \"PetrovMatrix\" method: PetrovType[metric, Method -> \"PetrovMatrix\", \"Observer\" -> u], but then it also needs an observer.";
+PetrovType::usage = "PetrovType[metric] returns the Petrov Type of metric. By default, it determines it with the \"WeylSelfDual\" method. Using the Method option, it can also be determined following the \"PetrovMatrix\" method: PetrovType[metric, Method -> \"PetrovMatrix\", \"Observer\" -> u], but then it also needs an observer.";
 
-DebeverNullDirections::usage = " ";
+DebeverNullDirections::usage = "DebeverNullDirections[metric, \"Observer\" -> u] returns the multiple Debever null directions of metric. By default, it determines them with the \"WeylSelfDual\" method and therefore needs an arbitrary bivector (with some restrictions) and an observer to be given, DebeverNullDirections[metric, \"Observer\" -> u, \"Bivector\" -> X]. Using the Method option, they can also be determined following the \"PetrovMatrix\" method: DebeverNullDirections[metric, Method -> \"PetrovMatrix\", \"Observer\" -> u], but then it does not need the arbitrary bivector and, if metric is of Petrov Type D, it needs an arbitrary vector (with some restrictions), DebeverNullDirections[metric, Method -> \"PetrovMatrix\", \"Observer\" -> u, \"Vector\" -> w].";
 
 TypeDClassify::usage = " ";
 
@@ -210,7 +209,7 @@ applyfunc[expr_, func_, head_, errortag_String] :=
 (* ::Section:: *)
 (* Computation of the metric concomitants *)
 (* TODO: we should avoid defining default options for private functions *)
-Options[metricConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True, "Observer" -> Null, "Vector" -> Null, "Method" -> Default}
+Options[metricConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True, "Observer" -> Null, "Vector" -> Null, "Bivector" -> Null, "Method" -> Default}
 
 metricConcomitant["G"][metric_CTensor, opts : OptionsPattern[]] :=
 (metricConcomitant["G"][metric, opts] = 
