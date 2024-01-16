@@ -1203,7 +1203,7 @@ weylConcomitant["NullDirectionTypeIII"][metric_CTensor, opts : OptionsPattern[]]
 		If[vb, 
 			Print["** ReportCompute: computing Weyl concomitant \"NullDirectionTypeIII\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
-		HeadOfTensor[dir, {c1}];
+		dir = HeadOfTensor[dir, {c1}];
 		time = AbsoluteTime[];
 		dir = simplf[dir];
 		If[vb,
