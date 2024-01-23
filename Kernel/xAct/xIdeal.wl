@@ -167,7 +167,7 @@ PetrovType::usage = "PetrovType[metric] returns the Petrov Type of metric. By de
 
 DebeverNullDirections::usage = "DebeverNullDirections[metric, \"Observer\" -> u] returns the multiple Debever null directions of metric. By default, it determines them with the \"WeylSelfDual\" method and therefore needs an arbitrary bivector (with some restrictions) and an observer to be given, DebeverNullDirections[metric, \"Observer\" -> u, \"Bivector\" -> X]. Using the Method option, they can also be determined following the \"PetrovMatrix\" method: DebeverNullDirections[metric, Method -> \"PetrovMatrix\", \"Observer\" -> u], but then it does not need the arbitrary bivector and, if metric is of Petrov Type D, it needs an arbitrary vector (with some restrictions), DebeverNullDirections[metric, Method -> \"PetrovMatrix\", \"Observer\" -> u, \"Vector\" -> w].";
 
-TypeDClassify::usage = " ";
+TypeDClassify::usage = "TypeDClassify[metric,w] returns the subfamily of vacuum Type D solutions to which metric belongs. To do so, it needs an arbitrary unitary time-like vector w.";
 
 PSimplify::usage = " ";
 
@@ -353,7 +353,7 @@ ClearxIdealCache["MetricConcomitants"] :=
 (* Computation of the Weyl concomitants *)
 
 (* TODO: we should avoid defining default options for private functions *)
-Options[weylConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True, "Observer" -> Null, "Vector" -> Null, "Bivector" -> Null, Method -> "Default"}
+Options[weylConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Assumptions -> True, Verbose -> True, "Observer" -> Null, "Vector" -> Null, "Bivector" -> Null, Method -> "Default"}
 
 weylConcomitant["Weyl"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["Weyl"][metric, opts] = 
@@ -423,7 +423,7 @@ weylConcomitant["TraceWeyl3"][metric_CTensor, opts : OptionsPattern[]] :=
 		If[vb, 
 			Print["** ReportCompute: computing Weyl concomitant \"TraceWeyl3\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
-		trweyl3 = simplf[weyl3cd];
+		trweyl3 = simplf[trweyl3];
 		If[vb,
 			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"TraceWeyl3\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
@@ -2238,9 +2238,9 @@ TypeDClassify[metric_CTensor, w_CTensor, opts : OptionsPattern[]] :=
 			dlogrho = simplf[TensorDerivative[logrho, cd]];
 			alpha = simplf[1/9 metric[-i, -j] dlogrho[i] dlogrho[j] - 2 rho[]];
 			S = HeadOfTensor[
-       					1 / (3 rho[]) (W[-a, -b, -c, -d] - rho[] (metric[-a, -c] metric[-b, -d] - 
+       				1 / (3 rho[]) (W[-a, -b, -c, -d] - rho[] (metric[-a, -c] metric[-b, -d] - 
 					metric[-a, -d] metric[-b, -c])), {-a, -b, -c, -d}
-     				];
+     			];
 			S = simplf[S];
 			P = HeadOfTensor[epsilonmetric[-a, -b, -i, -j] W[-k, i, -l, j] drho[k] drho[l], {-a, -b}];
 			P = simplf[P];
