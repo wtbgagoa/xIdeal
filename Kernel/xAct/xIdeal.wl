@@ -175,7 +175,7 @@ ConnectionTensor::usage = " ";
 
 IsometryGroupDimension::usage = " ";
 
-KerrSolutionQ::usage = " ";
+KerrSolutionQ::usage = "KerrSolutionQ[metric] returns True if metric is Kerr metric and False otherwise.";
 
 ClearxIdealCache::usage = " ";
 
