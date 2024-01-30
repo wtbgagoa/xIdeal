@@ -1565,7 +1565,7 @@ ConnectionTensorConcomitant["C11"][metric_CTensor, H_CTensor, opts : OptionsPatt
   		epsilonmetric = epsilon[metric];
     	ce1 = ConnectionTensorConcomitant["C1"][metric, H, opts];
 		time = AbsoluteTime[];
-		ce11 = epsilonmetric[i1, j1, a1, b1] C1[-i1, -c1, -d1, -e1] C1[-j1, -f1, -g1, -h1];
+		ce11 = epsilonmetric[i1, j1, a1, b1] ce1[-i1, -c1, -d1, -e1] ce1[-j1, -f1, -g1, -h1];
 		If[vb, 
 			Print["** ReportCompute: computing Connection Tensor concomitant \"C11\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
