@@ -173,7 +173,7 @@ PSimplify::usage = " ";
 
 ConnectionTensor::usage = " ";
 
-IsometryGroupDimension::usage = " ";
+IsometryGroupDimension::usage = "IsometryGroupDimension[metric, H] returns the dimension of the maximal isometry group admitted by metric.";
 
 KerrSolutionQ::usage = "KerrSolutionQ[metric] returns True if metric is Kerr metric and False otherwise.";
 
@@ -1596,7 +1596,7 @@ ConnectionTensorConcomitant["C2"][metric_CTensor, H_CTensor, opts : OptionsPatte
 		];
 		ce2 = HeadOfTensor[ce2, {-a1, -b1, -c1, -d1, -e1}];
 		time = AbsoluteTime[];
-		ce2 = simplf[];
+		ce2 = simplf[ce2];
 		If[vb,
 			Print["** ReportCompute: applying  ", simplf, " to Connection Tensor concomitant \"C2\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
@@ -2484,7 +2484,7 @@ IsometryGroupDimension[metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
     					Print["\!\(\*SubscriptBox[\(G\), \(1  a\)]\)"],
 	 
     				True,
-    					Print["No symmetries C1112"]		
+    					Print["No symmetries"]		
     			]
    
    		]
