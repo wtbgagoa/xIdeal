@@ -403,6 +403,7 @@ weylConcomitant["Weyl3"][metric_CTensor, opts : OptionsPattern[]] :=
 			Print["** ReportCompute: computing Weyl concomitant \"Weyl3\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		weyl3cd = HeadOfTensor[weyl3cd, {-a1, -b1, -c1, -d1}];
+		time = AbsoluteTime[];
 		weyl3cd = simplf[weyl3cd];
 		If[vb,
 			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"Weyl3\" in ", AbsoluteTime[] - time, " seconds:"]
@@ -423,6 +424,7 @@ weylConcomitant["TraceWeyl3"][metric_CTensor, opts : OptionsPattern[]] :=
 		If[vb, 
 			Print["** ReportCompute: computing Weyl concomitant \"TraceWeyl3\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
+		time = AbsoluteTime[];
 		trweyl3 = simplf[trweyl3];
 		If[vb,
 			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"TraceWeyl3\" in ", AbsoluteTime[] - time, " seconds:"]
@@ -814,6 +816,7 @@ weylConcomitant["ScalarRho"][metric_CTensor, opts : OptionsPattern[]] :=
 		If[vb, 
 			Print["** ReportCompute: computing Weyl concomitant \"ScalarRho\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
+		time = AbsoluteTime[];
 		rho = simplf[rho];
 		If[vb,
 			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"ScalarRho\" in ", AbsoluteTime[] - time, " seconds:"]
@@ -836,6 +839,7 @@ weylConcomitant["TensorS"][metric_CTensor, opts : OptionsPattern[]] :=
 		If[vb, 
 			Print["** ReportCompute: computing Weyl concomitant \"TensorS\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
+		time = AbsoluteTime[];
 		s = simplf[s];
 		If[vb,
 			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"TensorS\" in ", AbsoluteTime[] - time, " seconds:"]
