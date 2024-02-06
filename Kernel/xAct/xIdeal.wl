@@ -360,8 +360,7 @@ weylConcomitant["Weyl"][metric_CTensor, opts : OptionsPattern[]] :=
 	Module[{cart, cd, parallel, vb},
 		cart = 	Part[metric, 2, 1, -1];
 		cd = CovDOfMetric[metric];
-		parallel = OptionValue[weylConcomitant, Parallelize];
-		vb = OptionValue[weylConcomitant, Verbose];
+		{parallel, vb} = OptionValue[weylConcomitant, {opts}, {Parallelize, Verbose}];
 		MetricCompute[metric, cart, "Weyl"[-1, -1, -1, -1], Parallelize -> parallel, Verbose -> vb];
 		Weyl[cd]
 	]
