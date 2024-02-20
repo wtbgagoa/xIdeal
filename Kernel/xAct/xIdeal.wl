@@ -165,7 +165,7 @@ $PrePrint = ScreenDollarIndices;
 
 PetrovType::usage = "PetrovType[metric] returns the Petrov Type of metric.";
 
-DebeverNullDirections::usage = "DebeverNullDirections[metric, \"Observer\" -> u] returns the multiple Debever null directions of metric. By default, it determines them with the \"WeylSelfDual\" method and therefore needs an arbitrary bivector (with some restrictions) and an observer to be given, DebeverNullDirections[metric, \"Observer\" -> u, \"Bivector\" -> X]. Using the Method option, they can also be determined following the \"PetrovMatrix\" method: DebeverNullDirections[metric, Method -> \"PetrovMatrix\", \"Observer\" -> u], but then it does not need the arbitrary bivector and, if metric is of Petrov Type D, it needs an arbitrary vector (with some restrictions), DebeverNullDirections[metric, Method -> \"PetrovMatrix\", \"Observer\" -> u, \"Vector\" -> w].";
+DebeverNullDirections::usage = "DebeverNullDirections[metric] returns the multiple Debever null directions of metric.";
 
 TypeDClassify::usage = "TypeDClassify[metric,w] returns the subfamily of vacuum Type D solutions to which metric belongs. To do so, it needs an arbitrary unitary time-like vector w.";
 
