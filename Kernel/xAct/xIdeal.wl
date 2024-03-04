@@ -1996,6 +1996,16 @@ ClearxIdealCache["ConnectionTensorConcomitants"] :=
 	]
 
 (* ::Section:: *)
+(* Clear cache *)
+
+ClearxIdealCache[] :=
+    (
+        ClearxIdealCache["MetricConcomitants"];
+        ClearxIdealCache["WeylConcomitants"];
+        ClearxIdealCache["ConnectionTensorConcomitants"]
+    )
+
+(* ::Section:: *)
 (* Computation of the Petrov types *)
 
 
