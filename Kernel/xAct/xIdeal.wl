@@ -171,7 +171,7 @@ TypeDClassify::usage = "TypeDClassify[metric,w] returns the subfamily of vacuum 
 
 PSimplify::usage = " ";
 
-ConnectionTensor::usage = " ";
+ConnectionTensor::usage = "ConnectionTensor[metric, opts] returns the connection tensor of metric.";
 
 IsometryGroupDimension::usage = "IsometryGroupDimension[metric, H] returns the dimension of the maximal isometry group admitted by metric.";
 
