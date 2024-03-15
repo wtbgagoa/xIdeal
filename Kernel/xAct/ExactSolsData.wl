@@ -111,6 +111,7 @@ allmetricproperties = {
 	"IsIDEAL",
 	"CoordinateAssumptions",
 	"CoordinateSystemName",
+	"CoordinateSystems",
 	"ParameterAssumptions",
 	"CoordinateNames",
 	"ParameterNames",
@@ -1129,6 +1130,8 @@ iGenRelExactSolsData[metric_?metricQ] := exactSolsData[metric, "CoordinateSystem
 
 iGenRelExactSolsData[metric_?metricQ, "CoordinateSystems"] := exactSolsData[metric, "CoordinateSystems"]
 
+iGenRelExactSolsData[metric_?metricQ, "Classes"] := exactSolsData[metric, "Classes"]
+
 iGenRelExactSolsData[metric_?metricQ, coords_?coordinatesystemQ] := exactSolsData[metric, {coords, "Metric"}]
 
 (* The syntax is GRData[args__String, {coords_List, parameters_List, functions_List}] *)
@@ -1169,6 +1172,24 @@ iGenRelExactSolsData[metric_?metricQ, "Metric"] := Module[{coords},
 
 (* ::Subsection:: *)
 (* Metrics: user given coordinates *)
+
+(* Available properties for a given coordinate system *)
+allcoordinateproperties = {
+	"CoordinateAssumptions", 
+	"CoordinateNames",
+	(* TODO: it should be "MetricTensor" *)
+	"Metric",
+	"ParameterNames",
+	"ParameterAssumptions",
+	"ScalarFunctionNames"
+	}
+
+(* Valid coordinate systems *)
+Set[coordinatepropertyQ[#], True]& /@ allcoordinateproperties;
+coordinatesystemQ[_] := False;
+
+
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "Properties"}] := allcoordinateproperties
 
 iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "CoordinateAssumptions"}] := 
 	If[
