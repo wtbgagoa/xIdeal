@@ -1253,6 +1253,9 @@ iGenRelExactSolsData[All, "Properties"] = allmetricproperties;
 iGenRelExactSolsData["CoordinateSystems"] = allcoordinatesystems;
 iGenRelExactSolsData[All, "CoordinateSystems"] = allcoordinatesystems;
 
+(* Metrics contained in a given class *)
+iGenRelExactSolsData[class_?exactsolclassQ] := exactSolsData[class]
+
 iGenRelExactSolsData[___] := $Failed;
 
 (* Entry point of GenRelExactSolsData *)
