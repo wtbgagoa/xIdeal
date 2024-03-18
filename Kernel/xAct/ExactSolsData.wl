@@ -108,16 +108,17 @@ allclasses = {
 }
 
 allmetricproperties = {
-	"IsIDEAL",
+	"Classes",
 	"CoordinateAssumptions",
+	"CoordinateNames",
 	"CoordinateSystemName",
 	"CoordinateSystems",
-	"ParameterAssumptions",
-	"CoordinateNames",
-	"ParameterNames",
-	"ScalarFunctionNames",
 	"ExactSolutionName",
-	"Metric"
+	"IsIDEAL",
+	"Metric",
+	"ParameterAssumptions",
+	"ParameterNames",
+	"ScalarFunctionNames"
 }
 
 allcoordinatesystems = {
@@ -480,7 +481,7 @@ exactSolsData["Kerr", {"BoyerLindquistCoordinates", "CoordinateAssumptions"}] =
 						r^2 + a^2*Cos[theta]^2
 					]; 
 				r > 0 && Pi > theta > 0 && Element[Cos[theta], Reals] && 
-					Sin[theta] > 0 && Sigma > 0
+					Sin[theta] > 0 && Sigma[r, a, theta] > 0
 		]
 	]
  
