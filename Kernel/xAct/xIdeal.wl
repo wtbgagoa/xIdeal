@@ -181,6 +181,10 @@ ClearxIdealCache::usage = " ";
 
 SaveExactSolution::usage = " ";
 
+PerfectFluidQ::usage = " ";
+
+PerfectFluidVariables::usage = " ";
+
 (* ::Section:: *)
 (* Messages *)
 
@@ -340,6 +344,204 @@ metricConcomitant["SchoutenTensor"][metric_CTensor, opts : OptionsPattern[]] :=
 			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"SchoutenTensor\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		schouten
+	]
+)
+
+metricConcomitant["STensor"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["STensor"][metric, opts] = 
+	Module[{simplf, cart, cd, ricciscalarcd, ricci, a1, b1, stensor, vb, time},
+		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
+		cd = CovDOfMetric[metric];
+		ricciscalarcd = metricConcomitant["RicciScalar"][metric, opts];
+		ricci = Ricci[cd];
+		time = AbsoluteTime[];
+		stensor = ricci[-a1, -b1] - 1/4 ricciscalarcd[] metric[-a1, -b1];
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"STensor\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		stensor = HeadOfTensor[stensor, {-a1, -b1}];
+		time = AbsoluteTime[];
+		stensor = simplf[stensor];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"STensor\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		stensor
+	]
+)
+
+metricConcomitant["qScalar"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["qScalar"][metric, opts] = 
+	Module[{simplf, cart, st, s2, s3, trS2,trS3, a1, b1, c1, q, vb, time},
+		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 3];
+		st = metricConcomitant["STensor"][metric, opts];
+		time = AbsoluteTime[];
+		s2 = st[-a1, -c1] st[c1, -b1];
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"STensor2\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		s2 = HeadOfTensor[s2, {-a1, -b1}];
+		time = AbsoluteTime[];
+		s2 = simplf[s2];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"STensor2\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		s3 = s2[-a1, -c1] st[c1, -b1];
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"STensor3\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		s3 = HeadOfTensor[s3, {-a1, -b1}];
+		time = AbsoluteTime[];
+		s3 = simplf[s3];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"STensor3\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		trs2 = s2[-a1, a1];
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"TrSTensor2\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		trs2 = simplf[trs2];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"TrSTensor2\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		trs3 = s3[-a1, a1];
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"TrSTensor3\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		trs3 = simplf[trs3];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"TrSTensor3\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		q = -2 trs3 / trs2;
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"qScalar\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		q = simplf[q];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"qScalar\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		q
+	]
+)
+
+metricConcomitant["QTensor"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["QTensor"][metric, opts] = 
+	Module[{simplf, cart, st, q, a1, b1, qtensor, vb, time},
+		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
+		st = metricConcomitant["STensor"][metric, opts];
+		q = metricConcomitant["qScalar"][metric, opts];
+		time = AbsoluteTime[];
+		qtensor = st - 1/4 q metric;
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"QTensor\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		qtensor = simplf[qtensor];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"QTensor\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		qtensor
+	]
+)
+
+metricConcomitant["QTensor2"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["QTensor2"][metric, opts] = 
+	Module[{simplf, cart, qt, q2, a1, b1, c1, vb, time},
+		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 3];
+		qt = metricConcomitant["QTensor"][metric, opts];
+		time = AbsoluteTime[];
+		q2 = qt[-a1, -b1] qt[b1, -c1];
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"QTensor2\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		q2 = HeadOfTensor[q2, {-a1, -c1}];
+		time = AbsoluteTime[];
+		q2 = simplf[q2];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"QTensor2\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		q2
+	]
+)
+
+metricConcomitant["FlowProjector"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["FlowProjector"][metric, opts] = 
+	Module[{simplf, cart, qt, q, a1, b1, fp, vb, time},
+		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
+		qt = metricConcomitant["QTensor"][metric, opts];
+		q = metricConcomitant["qScalar"][metric, opts];
+		time = AbsoluteTime[];
+		sp = qt / q;
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"FlowProjector\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		fp = simplf[fp];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"FlowProjector\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		fp
+	]
+)
+
+metricConcomitant["FluPerCond1"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["FluPerCond1"][metric, opts] = 
+	Module[{simplf, cart, qt, q, q2, a1, b1, cond1, vb, time},
+		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
+		qt = metricConcomitant["QTensor"][metric, opts];
+		q = metricConcomitant["qScalar"][metric, opts];
+		q2 = metricConcomitant["QTensor2"][metric, opts];
+		time = AbsoluteTime[];
+		cond1 = q2 + q qt;
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"FluPerCond1\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		cond1 = simplf[cond1];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"FluPerCond1\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		cond1
+	]
+)
+
+metricConcomitant["FluPerCond2"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["FluPerCond2"][metric, opts] = 
+	Module[{simplf, cart, qt, q, v, a1, b1, cond1, vb, time},
+		{v, simplf, vb} = OptionValue[metricConcomitant, {opts}, {"Vector", PSimplify, Verbose}];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
+		qt = metricConcomitant["QTensor"][metric, opts];
+		q = metricConcomitant["qScalar"][metric, opts];
+		time = AbsoluteTime[];
+		cond2 = q qt[-a1, -b1] v[a1] v[b1];
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"FluPerCond2\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		cond2 = simplf[cond2];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"FluPerCond2\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		cond2
 	]
 )
 
@@ -2391,6 +2593,71 @@ Catch @
 		]
 
 (* ::Section:: *)
+(* Perfect fluid characterization *)
+
+(* TODO: Add the documentation of this function *)
+(* TODO: Check that an arbitrary time-like vector is given *)
+Options[PerfectFluidQ] = {Assumptions -> True, PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
+
+PerfectFluidQ[metric_CTensor, opts : OptionsPattern[]] :=
+	Catch@ 
+		Module[{cond1, cond2},
+			If[Not @ MetricQ @ metric, 
+    					Throw[Message[PetrovType::nometric, metric]]];
+			Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
+				cond1 = metricConcomitant["FluPerCond1"][metric, opts];
+				cond2 = metricConcomitant["FluPerCond2"][metric, opts];
+				If[cond1 === Zero && SymbolicPositiveQ[cond2], True, False, False]
+			]
+		]
+
+(* TODO: Add the documentation of this function *)
+(* TODO: Check that an arbitrary time-like vector is given *)
+Options[PerfectFluidVars] = {PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
+
+PerfectFluidVars[metric_CTensor, opts : OptionsPattern[]] :=
+	Catch@ 
+		Module[{q, r, proj, v, edens, press, flow, a1, b1, vb, time},
+			If[Not @ MetricQ @ metric, 
+    					Throw[Message[PetrovType::nometric, metric]]];
+			{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
+			cart = Part[metric, 2, 1, -1];
+			{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
+			q = metricConcomitant["qScalar"][metric, opts];
+			r = metricConcomitant["RicciScalar"][metric, opts];
+			proj = metricConcomitant["FlowProjector"][metric, opts];
+			time = AbsoluteTime[];
+			edens = (3 q + r) / 4;
+			If[vb, 
+				Print["** ReportCompute: computing metric concomitant \"energy density\" in ", AbsoluteTime[] - time, " seconds:"]
+			];
+			time = AbsoluteTime[];
+			edens = simplf[edens];
+			If[vb,
+				Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"energy density\" in ", AbsoluteTime[] - time, " seconds:"]
+			];
+			press = (q - r) / 4;
+			If[vb, 
+				Print["** ReportCompute: computing metric concomitant \"pressure\" in ", AbsoluteTime[] - time, " seconds:"]
+			];
+			time = AbsoluteTime[];
+			press = simplf[press];
+			If[vb,
+				Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"pressure\" in ", AbsoluteTime[] - time, " seconds:"]
+			];
+			flow = proj[-a1, -b1] v[b1] / Sqrt[proj[-a1, -b1] v[b1] v[a1]];
+			If[vb, 
+				Print["** ReportCompute: computing metric concomitant \"fluid flow\" in ", AbsoluteTime[] - time, " seconds:"]
+			];
+			flow = HeadOfTensor[flow, {-a1}];
+			time = AbsoluteTime[];
+			flow = simplf[flow];
+			If[vb,
+				Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"fluid flow\" in ", AbsoluteTime[] - time, " seconds:"]
+			];
+		]
+
+(* ::Section:: *)
 (*  Determination of the Connection Tensor*)
 
 (*TODO: Add the documentation of this function*)
@@ -2503,7 +2770,7 @@ IsometryGroupDimension[metric_CTensor, H_CTensor, opts : OptionsPattern[]] :=
    		]
 
 
-		(* ::Section:: *)
+(* ::Section:: *)
 (* SaveExactSolution *)
 
 
