@@ -2406,7 +2406,7 @@ Catch@ Module[{ptype},
 Recall that the value of Assumptions option is always logical statement. 
 Therefore it should be expressed in terms of the logical syntax  
 *)
-Options[SymbolicPositiveQ] := {Assumptions -> True, PSimplify -> Simplify, Verbose -> True};
+Options[SymbolicPositiveQ] = {Assumptions -> True, PSimplify -> Simplify, Verbose -> True};
 SymbolicPositiveQ[x_, OptionsPattern[]] :=
 	Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
 		Which[
