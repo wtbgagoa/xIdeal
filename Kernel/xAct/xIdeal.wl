@@ -487,7 +487,7 @@ metricConcomitant["FlowProjector"][metric_CTensor, opts : OptionsPattern[]] :=
 		qt = metricConcomitant["QTensor"][metric, opts];
 		q = metricConcomitant["qScalar"][metric, opts];
 		time = AbsoluteTime[];
-		sp = qt / q;
+		fp = qt / q;
 		If[vb, 
 			Print["** ReportCompute: computing metric concomitant \"FlowProjector\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
@@ -542,6 +542,90 @@ metricConcomitant["FluPerCond2"][metric_CTensor, opts : OptionsPattern[]] :=
 			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"FluPerCond2\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		cond2
+	]
+)
+
+metricConcomitant["rScalar"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["rScalar"][metric, opts] = 
+	Module[{simplf, cart, cd, riccicd, r, a1, vb, time},
+		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
+		cart = Part[metric, 2, 1, -1];
+		{a1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 1];
+		cd = CovDOfMetric[metric];
+		riccicd = metricConcomitant["Ricci"][metric, opts];
+		time = AbsoluteTime[];
+		r = riccicd[-a1, a1];
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"rScalar\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		r = simplf[r];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"rScalar\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		r
+	]
+)
+
+metricConcomitant["EnergyDensity"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["EnergyDensity"][metric, opts] = 
+	Module[{simplf, q, r, edens, vb, time},
+		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
+		q = metricConcomitant["qScalar"][metric, opts];
+		r = metricConcomitant["rScalar"][metric, opts];
+		time = AbsoluteTime[];
+		edens = (3 q + r) / 4;
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"EnergyDensity\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		edens = simplf[edens];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"EnergyDensity\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		edens
+	]
+)
+
+metricConcomitant["Pressure"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["Pressure"][metric, opts] = 
+	Module[{simplf, q, r, press, vb, time},
+		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
+		q = metricConcomitant["qScalar"][metric, opts];
+		r = metricConcomitant["rScalar"][metric, opts];
+		time = AbsoluteTime[];
+		press = (q - r) / 4;
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"Pressure\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		press = simplf[press];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"Pressure\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		press
+	]
+)
+
+metricConcomitant["FluPerFlow"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["FluPerFlow"][metric, opts] = 
+	Module[{simplf, cart, proj, v, a1, b1, flow, vb, time},
+		{v, simplf, vb} = OptionValue[metricConcomitant, {opts}, {"Vector", PSimplify, Verbose}];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
+		proj = metricConcomitant["FlowProjector"][metric, opts];
+		time = AbsoluteTime[];
+		flow = proj[-a1, -b1] v[b1] / Sqrt[proj[-a1, -b1] v[b1] v[a1]];
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"FluPerFlow\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		flow = HeadOfTensor[flow, {-a1}];
+		time = AbsoluteTime[];
+		flow = simplf[flow];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"FluPerFlow\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		flow
 	]
 )
 
@@ -2613,48 +2697,18 @@ PerfectFluidQ[metric_CTensor, opts : OptionsPattern[]] :=
 
 (* TODO: Add the documentation of this function *)
 (* TODO: Check that an arbitrary time-like vector is given *)
-Options[PerfectFluidVars] = {PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
+(* TODO: Check that it is indeed a perfect fluid *)
+Options[PerfectFluidVariables] = {PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
 
-PerfectFluidVars[metric_CTensor, opts : OptionsPattern[]] :=
+PerfectFluidVariables[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch@ 
-		Module[{q, r, proj, v, edens, press, flow, a1, b1, vb, time},
+		Module[{edens, press, flow},
 			If[Not @ MetricQ @ metric, 
     					Throw[Message[PetrovType::nometric, metric]]];
-			{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
-			cart = Part[metric, 2, 1, -1];
-			{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
-			q = metricConcomitant["qScalar"][metric, opts];
-			r = metricConcomitant["RicciScalar"][metric, opts];
-			proj = metricConcomitant["FlowProjector"][metric, opts];
-			time = AbsoluteTime[];
-			edens = (3 q + r) / 4;
-			If[vb, 
-				Print["** ReportCompute: computing metric concomitant \"energy density\" in ", AbsoluteTime[] - time, " seconds:"]
-			];
-			time = AbsoluteTime[];
-			edens = simplf[edens];
-			If[vb,
-				Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"energy density\" in ", AbsoluteTime[] - time, " seconds:"]
-			];
-			press = (q - r) / 4;
-			If[vb, 
-				Print["** ReportCompute: computing metric concomitant \"pressure\" in ", AbsoluteTime[] - time, " seconds:"]
-			];
-			time = AbsoluteTime[];
-			press = simplf[press];
-			If[vb,
-				Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"pressure\" in ", AbsoluteTime[] - time, " seconds:"]
-			];
-			flow = proj[-a1, -b1] v[b1] / Sqrt[proj[-a1, -b1] v[b1] v[a1]];
-			If[vb, 
-				Print["** ReportCompute: computing metric concomitant \"fluid flow\" in ", AbsoluteTime[] - time, " seconds:"]
-			];
-			flow = HeadOfTensor[flow, {-a1}];
-			time = AbsoluteTime[];
-			flow = simplf[flow];
-			If[vb,
-				Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"fluid flow\" in ", AbsoluteTime[] - time, " seconds:"]
-			];
+			edens = metricConcomitant["EnergyDensity"][metric, opts];
+			press = metricConcomitant["Pressure"][metric, opts];
+			flow = metricConcomitant["FluPerFlow"][metric, opts];
+			{edens, press, flow}
 		]
 
 (* ::Section:: *)
