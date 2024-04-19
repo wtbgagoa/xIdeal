@@ -1415,6 +1415,66 @@ weylConcomitant["PTIICanonicalBivector2"][metric_CTensor, opts : OptionsPattern[
 	]
 )
 
+(* Connection tensor for different Petrov Types as Weyl concomitants *)
+
+weylConcomitant["PTIConnectionTensor"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["PTIConnectionTensor"][metric, opts] = 
+	Module[{cart, simplf, aa, bb, selfdualW, selfdualW2, G2form, cd, scX, scY, selfdualH, H, a1, b1, c1, d1, e1, f1, vb, time},
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1, e1, f1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
+		selfdualW = weylConcomitant["WeylSelfDual"][metric, opts];
+		selfdualW2 = weylConcomitant["WeylSelfDual2"][metric, opts];
+		aa = weylConcomitant["TraceWeylSelfDual2"][metric, opts];
+		bb = weylConcomitant["TraceWeylSelfDual3"][metric, opts];
+		G2form = metricConcomitant["G2Form"];
+		cd = CovDOfMetric[metric];
+		time = AbsoluteTime[];
+		scX = cd[-a1][selfdualW[-b1, -c1, -d1, -e1]] selfdualW[d1, e1, c1, -f1] / 2;
+		If[vb, 
+			Print["** ReportCompute: computing Weyl concomitant \"scXtensor\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		scX = HeadOfTensor[scX, {-a1, -b1, -f1}];
+		time = AbsoluteTime[];
+		scX = simplf[scX];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"scXtensor\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		scY = (3 aa selfdualW2 + 6 bb selfdualW + aa^2 G2form / 2) / (aa^3 - 6 bb^2);
+		If[vb, 
+			Print["** ReportCompute: computing Weyl concomitant \"scYtensor\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		scY = simplf[scY];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"scYtensor\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		selfdualH = scX[-a1, -b1, -c1] scY[b1, c1, -d1, -e1] / Sqrt[2];
+		If[vb, 
+			Print["** ReportCompute: computing Weyl concomitant \"SelfDualPTIConnectionTensor\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		selfdualH = HeadOfTensor[selfdualH, {-a1, -d1, -e1}];
+		time = AbsoluteTime[];
+		selfdualH = simplf[selfdualH];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"SelfDualPTIConnectionTensor\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		H = (selfdualH + Dagger[selfdualH]) / Sqrt[2];
+		If[vb, 
+			Print["** ReportCompute: computing Weyl concomitant \"PTIConnectionTensor\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		H = simplf[H];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"PTIConnectionTensor\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		H
+	]
+)
+
 (* Debever directions as Weyl concomitants *)
 
 weylConcomitant["NullDirectionTypeN"][metric_CTensor, opts : OptionsPattern[]] :=
