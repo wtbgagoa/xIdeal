@@ -639,7 +639,7 @@ ClearxIdealCache["MetricConcomitants"] :=
 (* Computation of the Weyl concomitants *)
 
 (* TODO: we should avoid defining default options for private functions *)
-Options[weylConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Assumptions -> True, Verbose -> True, "Observer" -> Null, "Vector" -> Null, "Bivector" -> Null, Method -> "Default"}
+Options[weylConcomitant] = {PSimplify -> $CVSimplify, Parallelize -> True, Assumptions -> True, Verbose -> True, "Observer" -> Null, "Vector" -> Null, "Bivector" -> Null, "Bivector2" -> Null, Method -> "Default"}
 
 weylConcomitant["Weyl"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["Weyl"][metric, opts] = 
@@ -1470,6 +1470,64 @@ weylConcomitant["PTIConnectionTensor"][metric_CTensor, opts : OptionsPattern[]] 
 		H = simplf[H];
 		If[vb,
 			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"PTIConnectionTensor\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		H
+	]
+)
+
+weylConcomitant["PTIIConnectionTensor"][metric_CTensor, opts : OptionsPattern[]] :=
+(weylConcomitant["PTIIConnectionTensor"][metric, opts] = 
+	Module[{cart, simplf, cd, scU, scLp, scS, scLm, selfdualH, H, a1, b1, c1, d1, e1, f1, g1, h1, vb, time},
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1, e1, f1, g1, h1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 8];
+		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
+		scU = weylConcomitant["PTIICanonicalBivector2"];
+		scLp = weylConcomitant["PTIICanonicalBivector1"];
+		G2form = metricConcomitant["G2Form"];
+		cd = CovDOfMetric[metric];
+		X = OptionValue[weylConcomitant, {opts}, "Bivector"];
+		time = AbsoluteTime[];
+		scS = G2form[-a1, -b1, -c1, -d1] + scU[-a1, -b1] scU[-c1, -d1];
+		If[vb, 
+			Print["** ReportCompute: computing Weyl concomitant \"scStensor\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		scS = HeadOfTensor[scS, {-a1, -b1, -c1, -d1}];
+		time = AbsoluteTime[];
+		scS = simplf[scS];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"scStensor\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		scLm = (scS[-a1, -b1, -c1, -d1] X[a1, b1] X[c1, d1] scLp[-e1, -f1, -g1, -h1] - 2 scLp[-e1, -f1, -a1, -b1] X[a1, b1] scS[-g1, -h1, -c1, -d1] X[c1, d1]) / (2 scLp[-a1, -b1, -c1, -d1] X[c1, d1] scLp[a1, b1, -e1, -f1] X[e1, f1]);
+		If[vb, 
+			Print["** ReportCompute: computing Weyl concomitant \"PTIINullEigenBivectorm\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		scLm = HeadOfTensor[scLm, {-e1, -f1, -g1, -h1}];
+		time = AbsoluteTime[];
+		scLm = simplf[scLm];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"PTIINullEigenBivectorm\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		selfdualH = - (cd[-a1][scU[-b1, -c1]] scU[c1, -d1] + cd[-a1][scLp[-b1, -c1]] scLm[c1, -d1] + cd[-a1][scLm[-b1, -c1]] scLp[c1, -d1]) / Sqrt[2];
+		If[vb, 
+			Print["** ReportCompute: computing Weyl concomitant \"SelfDualPTIIConnectionTensor\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		selfdualH = HeadOfTensor[selfdualH, {-a1, -b1, -d1}];
+		time = AbsoluteTime[];
+		selfdualH = simplf[selfdualH];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"SelfDualPTIIConnectionTensor\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		H = (selfdualH + Dagger[selfdualH]) / Sqrt[2];
+		If[vb, 
+			Print["** ReportCompute: computing Weyl concomitant \"PTIIConnectionTensor\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		H = simplf[H];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"PTIIConnectionTensor\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		H
 	]
