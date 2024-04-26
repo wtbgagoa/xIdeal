@@ -2891,23 +2891,56 @@ PerfectFluidVariables[metric_CTensor, opts : OptionsPattern[]] :=
 (*  Determination of the Connection Tensor*)
 
 (*TODO: Add the documentation of this function*)
-Options[ConnectionTensor] = {Method -> "Default", PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True}
+(*TODO: If no R-frame is given, depending on the Petrov Type more options will be necessary*)
+(*TODO: Fix the fact that weylConcomitants do not recognize the "Rframe" option*)
+Options[ConnectionTensor] = {Rframe -> {Null, Null, Null, Null}, PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True}
 
-ConnectionTensor[metric_CTensor, e0_CTensor, e1_CTensor, e2_CTensor, e3_CTensor, opts : OptionsPattern[]] :=
+ConnectionTensor[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch@ 
-		Module[{simplf, cart, cd, a1, b1, c1},
+		Module[{simplf, e0, e1, e2, e3, connectionTens, cart, cd, a1, b1, c1, vb, time},
 			If[Not@MetricQ@metric, 
     				Throw[Message[IsometryGroupDimension::nometric, metric]]];
-			simplf = OptionValue[PSimplify];
+			{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
+			{e0, e1, e2, e3} = OptionValue[Rframe];
 			cart = Part[metric, 2, 1, -1];
 			{a1, b1, c1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 3];
 			cd = CovDOfMetric[metric];
-			simplf[
-   				HeadOfTensor[
-					-(1/2) (-(cd[a1][e0[b1]] e0[c1] - cd[a1][e0[c1]] e0[b1]) + (cd[a1][e1[b1]] e1[c1] - cd[a1][e1[c1]] e1[b1]) + 
-					(cd[a1][e2[b1]] e2[c1] - cd[a1][e2[c1]] e2[b1]) + (cd[a1][e3[b1]] e3[c1] - cd[a1][e3[c1]] e3[b1])), {a1, b1, c1}
-	     	      		]
-	        	]
+			If[
+				e0 =!= Null && e1 =!= Null && e2 =!= Null && e3 =!= Null,
+					time = AbsoluteTime[];
+					connectionTens = -(1/2) (-(cd[a1][e0[b1]] e0[c1] - cd[a1][e0[c1]] e0[b1]) + (cd[a1][e1[b1]] e1[c1] - cd[a1][e1[c1]] e1[b1]) + 
+						(cd[a1][e2[b1]] e2[c1] - cd[a1][e2[c1]] e2[b1]) + (cd[a1][e3[b1]] e3[c1] - cd[a1][e3[c1]] e3[b1]));
+					If[vb, 
+						Print["** ReportCompute: computing \"ConnectionTensor\" in ", AbsoluteTime[] - time, " seconds:"]
+					];
+					connectionTens = HeadOfTensor[connectionTens, {a1, b1, c1}];
+					time = AbsoluteTime[];
+					connectionTens = simplf[connectionTens];
+					If[vb,
+						Print["** ReportCompute: applying  ", simplf, " to \"ConnectionTensor\" in ", AbsoluteTime[] - time, " seconds:"]
+					],
+				ptype = PetrovType[metric, opts];
+				Which[
+					ptype === "Type O",
+						Print["Type O"]
+					,
+					ptype === "Type N",
+						Print["Type N, an R-frame is needed"];
+					,
+					ptype === "Type III",
+						connectionTens = weylConcomitant["PTIIIConnectionTensor"][metric, opts];
+					,
+					ptype === "Type D",
+						Print["Type D, an R-frame is needed"];
+					,
+					ptype === "Type II",
+						connectionTens = weylConcomitant["PTIIConnectionTensor"][metric, opts];
+					,
+					True,
+						connectionTens = weylConcomitant["PTIConnectionTensor"][metric, opts];
+				]
+			];
+			connectionTens
 		]
 
 (* ::Section:: *)
