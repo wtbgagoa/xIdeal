@@ -2922,16 +2922,19 @@ ConnectionTensor[metric_CTensor, opts : OptionsPattern[]] :=
 				ptype = PetrovType[metric, opts];
 				Which[
 					ptype === "Type O",
-						Print["Type O"]
+						Print["Type O, an R-frame is needed"];
+						connectionTens = Null;
 					,
 					ptype === "Type N",
 						Print["Type N, an R-frame is needed"];
+						connectionTens = Null;
 					,
 					ptype === "Type III",
 						connectionTens = weylConcomitant["PTIIIConnectionTensor"][metric, opts];
 					,
 					ptype === "Type D",
 						Print["Type D, an R-frame is needed"];
+						connectionTens = Null;
 					,
 					ptype === "Type II",
 						connectionTens = weylConcomitant["PTIIConnectionTensor"][metric, opts];
