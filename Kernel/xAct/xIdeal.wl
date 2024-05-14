@@ -1319,7 +1319,7 @@ weylConcomitant["PTDCanonicalBivector"][metric_CTensor, opts : OptionsPattern[]]
 
 weylConcomitant["PTIICanonicalBivector1"][metric_CTensor, opts : OptionsPattern[]] :=
 (weylConcomitant["PTIICanonicalBivector1"][metric, opts] = 
-	Module[{simplf, cart, obs, X, aa, bb, rho, weylselfdual, g2form, scrq, cbv, a1, b1, i1, j1, k1, l1, vb, time},
+	Module[{simplf, cart, obs, X, aa, bb, rho, weylselfdual, weylselfdual2, g2form, scrq, cbv, a1, b1, i1, j1, k1, l1, vb, time},
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, i1, j1, k1, l1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];		
 		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
@@ -1330,8 +1330,9 @@ weylConcomitant["PTIICanonicalBivector1"][metric_CTensor, opts : OptionsPattern[
 		rho = bb / aa;
   		g2form = metricConcomitant["G2Form"][metric, opts];
     	weylselfdual = weylConcomitant["WeylSelfDual"][metric, opts];
+		weylselfdual2 = weylConcomitant["WeylSelfDual2"][metric, opts];
 		time = AbsoluteTime[];
-		scrq = (weylselfdual - rho g2form) (weylselfdual + 2 rho g2form) / (3 rho);
+		scrq = (weylselfdual2 + rho weylselfdual - 2 rho^2 g2form) / (3 rho);
 		If[vb, 
 			Print["** ReportCompute: computing Weyl concomitant \"TensorScQ\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
@@ -1903,7 +1904,7 @@ weylConcomitant["NullDirectionTypeII"][metric_CTensor, opts : OptionsPattern[]] 
 		(* In the following calls the "Observer" option is supossed to be non-Null *)
 		mq = weylConcomitant["WeylMatrixQ"][metric, opts];
 		mq2 = weylConcomitant["WeylMatrixQ2"][metric, opts];
-		bb = -weylConcomitant["TraceWeylMatrixQ3"][metric, opts];
+		bb = weylConcomitant["TraceWeylMatrixQ3"][metric, opts];
 		aa = weylConcomitant["TraceWeylMatrixQ2"][metric, opts];
 		gamma = metricConcomitant["SpatialMetric"][metric, opts];
 		time = AbsoluteTime[];
@@ -1948,7 +1949,7 @@ weylConcomitant["WNullDirectionTypeII"][metric_CTensor, opts : OptionsPattern[]]
 		{a1, b1, i1, j1, k1, l1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 6];
 		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
   		obs = OptionValue[weylConcomitant, {opts}, "Observer"];
-  		canonicalbivector = weylConcomitant["PTIICanonicalBivector1"][metric, opts]];
+  		canonicalbivector = weylConcomitant["PTIICanonicalBivector1"][metric, opts];
 		time = AbsoluteTime[];
 	 	mh = ComplexExpand[(canonicalbivector + Dagger[canonicalbivector])/Sqrt[2]];
 		If[vb, 
@@ -1965,7 +1966,7 @@ weylConcomitant["WNullDirectionTypeII"][metric_CTensor, opts : OptionsPattern[]]
 			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"TensorH2\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		time = AbsoluteTime[];
-		dir = mh2[-a1, -i1] obs[i1] / Sqrt[-mh2[i1, -j1] obs[i1] obs[j1]];
+		dir = mh2[-a1, -i1] obs[i1] / Sqrt[-mh2[-i1, -j1] obs[i1] obs[j1]];
 		If[vb, 
 			Print["** ReportCompute: computing Weyl concomitant \"WNullDirectionTypeII\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
@@ -1976,6 +1977,7 @@ weylConcomitant["WNullDirectionTypeII"][metric_CTensor, opts : OptionsPattern[]]
 			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"WNullDirectionTypeII\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		dir
+	]
 )
 
 (* This deletes the computed Weyl concomitants for all metrics  *)
