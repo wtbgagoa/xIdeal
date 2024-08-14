@@ -164,14 +164,30 @@ coordinatesystemQ[_] := False;
 
 (* TODO: finish this section *)
 
-exactSolsData["SphericalSymmetry"] = {
-	"GeneralSphericalSymmetry",
-	"Schwarzschild",
-	"StephaniSpherical"
+exactSolsData["AbelianG3onT3"] = {
+	"OsvathKoutrasI", 
+	"OsvathKoutrasII", 
+	"OsvathKoutrasIII"
 }
 
 exactSolsData["AxialSymmetry"] = {
 	"Kerr"
+}
+
+exactSolsData["BarotropicPerfectFluid"] = {
+	"Friedmann"
+}
+
+exactSolsData["ConformallyFlat"] = {
+	"BertottiRobinsonSolution", 
+	"Friedmann", 
+	"Stephani", 
+	"StephaniThermodynamic", 
+	"StephaniThermodynamicSpherical"
+}
+
+exactSolsData["ConformallyStatic"] = {
+	"Friedmann"
 }
 
 exactSolsData["PetrovTypeD"] = {
@@ -179,9 +195,182 @@ exactSolsData["PetrovTypeD"] = {
 	"Schwarzschild"
 }
 
-exactSolsData["Vacuum"] = {
-	"Kerr",
+exactSolsData["DMetrics"] = {
+	"FarnsworthKerrIII", 
+	"GeneralSphericalSymmetry", 
+	"Kerr", 
+	"KerrNUT", 
+	"LemaitreTolman", 
+	"ReissnerNordstrom"
+}
+
+exactSolsData["EinsteinMaxwellSolution"] = {
+	"BertottiRobinsonSolution", 
+	"ReissnerNordstrom"
+}
+
+exactSolsData["G3IIIonS3"] = {
+	"FarnsworthKerrII"
+}
+
+exactSolsData["G3IonT3"] = {
+	"PetrovSolution"
+} 
+
+exactSolsData["G3IVonT3"] = {
+	"OsvathKoutrasII"
+}
+
+exactSolsData["G3IXonS3"] = {
+	"FarnsworthKerrI", 
+	"FarnsworthKerrIII"
+} 
+
+exactSolsData["G3onS2"] = {
+	"StephaniThermodynamicSpherical"
+}
+
+exactSolsData["G3S2"] = {
+	"StephaniThermodynamic"
+}
+
+exactSolsData["G3VIhonS3"] = {
+	"OsvathKoutrasI", 
+	"OsvathKoutrasII"
+}
+
+exactSolsData["G3VIIhonS3"] = {
+	"OsvathKoutrasIII"
+}
+
+exactSolsData["G3VIIhonT3"] = {
+	"PetrovSolution"
+}
+
+exactSolsData["G3VIIIonT3"] = {
+	"FarnsworthKerrII"
+}
+
+exactSolsData["G3VIonT3"] = {
+	"OsvathKoutrasI"
+}
+
+exactSolsData["G4"] = {
+	"FarnsworthKerrI", 
+	"FarnsworthKerrII", 
+	"FarnsworthKerrIII", 
+	"OsvathKoutrasI", 
+	"OsvathKoutrasII", 
+	"OsvathKoutrasIII", 
+	"PetrovSolution"
+}
+
+exactSolsData["Homogeneous"] = {
+	"FarnsworthKerrI", 
+	"FarnsworthKerrII", 
+	"FarnsworthKerrIII", 
+	"OsvathKoutrasI", 
+	"OsvathKoutrasII", 
+	"OsvathKoutrasIII"
+}
+
+exactSolsData["PerfectFluid"] = {
+	"Friedmann", 
+	"FarnsworthKerrI", 
+	"FarnsworthKerrII", 
+	"FarnsworthKerrIII", 
+	"GeneralSphericalSymmetry",
+	"LemaitreTolman",
+	"OsvathKoutrasI", 
+	"OsvathKoutrasII", 
+	"OsvathKoutrasIII", 
+	"Stephani",
+	"StephaniThermodynamic",
+	"StephaniThermodynamicSpherical"
+}
+
+exactSolsData["PetrovTypeD"] = {
+	"FarnsworthKerrIII", 
+	"GeneralSphericalSymmetry", 
+	"Kerr", 
+	"KerrNUT", 
+	"LemaitreTolman", 
+	"ReissnerNordstrom",
 	"Schwarzschild"
+}
+
+exactSolsData["PetrovTypeI"] = {
+	"OsvathKoutrasI", 
+	"OsvathKoutrasII",
+	"OsvathKoutrasIII",
+	"PetrovSolution"
+}
+
+exactSolsData["PetrovTypeN"] = {
+	"BertottiRobinsonSolution"
+}
+
+exactSolsData["SpatialG6"] = {
+	"Friedmann", 
+	"Stephani", 
+	"StephaniThermodynamic", 
+	"StephaniThermodynamicSpherical"
+}
+
+exactSolsData["SpatiallyHomogeneous"] = {
+	"Friedmann"
+}
+
+exactSolsData["SphericalSymmetry"] = {
+	"GeneralSphericalSymmetry",
+	"LemaitreTolman", 
+	"ReissnerNordstrom", 
+	"Schwarzschild", 
+	"StephaniThermodynamicSpherical"
+}
+
+exactSolsData["Static"] = {
+	"ReissnerNordstrom", 
+	"Schwarzschild"
+}
+
+exactSolsData["Stationary"] = {
+	"Kerr"
+}
+
+exactSolsData["ThermodynamicPerfectFluid"] = {
+	"Friedmann", 
+	"GeneralSphericalSymmetry", 
+	"LemaitreTolman", 
+	"StephaniThermodynamic", 
+	"StephaniThermodynamicSpherical"
+}
+
+exactSolsData["Vacuum"] = {
+	"Kerr", 
+	"KerrNUT", 
+	"PetrovSolution",
+	"Schwarzschild"
+}
+
+exactSolsData["VacuumTypeD"] = {
+	"Kerr", 
+	"KerrNUT",
+	"PetrovSolution",
+	"Schwarzschild"
+}
+
+exactSolsData["Warped22"] = {
+	"GeneralSphericalSymmetry", 
+	"LemaitreTolman", 
+	"ReissnerNordstrom", 
+	"StephaniThermodynamicSpherical"
+}
+
+exactSolsData["SphericalSymmetry"] = {
+	"GeneralSphericalSymmetry",
+	"Schwarzschild",
+	"StephaniSpherical"
 }
 
 (* ::Section:: *)
