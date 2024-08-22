@@ -1179,9 +1179,9 @@ exactSolsData["Stephani", "DefaultCoordinates"] = "AdaptedCoordinates"
  
 exactSolsData["Stephani", "IsIDEAL"] = True
  
-exactSolsData["Stephani", "ParameterAssumptions"] = exactSolsData["Stephani", "ParameterAssumptions"]
+exactSolsData["Stephani", "ParameterAssumptions"] = exactSolsData["Stephani", {"AdaptedCoordinates", "ParameterAssumptions"}]
  
-exactSolsData["Stephani", "ParameterNames"] = exactSolsData["Stephani", "ParameterNames"]
+exactSolsData["Stephani", "ParameterNames"] = exactSolsData["Stephani", {"AdaptedCoordinates", "ParameterNames"}]
  
 exactSolsData["Stephani", {"AdaptedCoordinates", "CoordinateAssumptions"}] = Null
  
