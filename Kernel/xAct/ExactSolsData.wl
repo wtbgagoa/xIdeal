@@ -5,10 +5,9 @@ GenRelExactSolsData::usage = " ";
 Begin["xAct`xIdeal`Private`"]
 
 (* ::Section:: *)
-(* Data *)
-
 allmetrics = {
 	"BertottiRobinsonSolution",
+	"ElectroVacTypeD",
  	"Friedmann",
 	"FarnsworthKerrI",
 	"FarnsworthKerrII",
@@ -131,7 +130,8 @@ allcoordinatesystems = {
  	"IsotropicCoordinates",
   	"ReducedCircumferencePolarCoordinates",
  	"SchwarzschildCoordinates",
-	"SphericalCoordinates"
+	"SphericalCoordinates",
+	"TypeDCoordinates"
 }
 
 exactSolsData["Solutions"] = allmetrics
@@ -1332,6 +1332,76 @@ exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "Parame
 exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "ParameterNames"}] = {}
  
 exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "ScalarFunctionNames"}] = {"\[CapitalOmega]", "\[Alpha]", "R", "k"}
+
+(* ::Subsection:: *)
+(* General electrovac type D solution. See https://arxiv.org/abs/2407.14863v1 *)
+
+exactSolsData["ElectroVacTypeD", "Classes"] = exactSolsData["Kerr", "Classes"]
+
+exactSolsData["ElectroVacTypeD", "CoordinateSystems"] = {"TypeDCoordinates"}
+
+exactSolsData["ElectroVacTypeD", "DefaultCoordinates"] = "TypeDCoordinates"
+ 
+exactSolsData["ElectroVacTypeD", "IsIDEAL"] = True
+ 
+exactSolsData["ElectroVacTypeD", "ParameterAssumptions"] = Null
+ 
+exactSolsData["ElectroVacTypeD", "ParameterNames"] = {"m", "a", "l", "e", "g", "\[Alpha]", "\[Lambda]"}
+ 
+exactSolsData["ElectroVacTypeD", {"TypeDCoordinates", "CoordinateAssumptions"}] = -Infinity < #[[1]] < Infinity && -Infinity < #[[2]] < Infinity && 0 < #[[3]] < Pi &
+
+exactSolsData["ElectroVacTypeD", {"TypeDCoordinates", "CoordinateNames"}] = {"t", "q", "\[Theta]", "\[Phi]"}
+ 
+exactSolsData["ElectroVacTypeD", {"TypeDCoordinates", "Metric"}] = 
+	Function[{coords, params, scfuncs}, 
+    	With[{t = coords[[1]], q = coords[[2]], theta = coords[[3]], phi = coords[[4]],
+				m = params[[1]], a = params[[2]], l = params[[3]], e = params[[4]], g = params[[5]], alpha = params[[6]], lambda = params[[7]], 
+				P = scfuncs[[1]], Q = scfuncs[[2]], rho = scfuncs[[3]], Omega = scfuncs[[4]]}, 
+    			Quiet[P = 
+					Function[{theta}, 
+						1 - 2 ((alpha a / (a^2 + l^2)) m - (lambda/3) l) (l + a Cos[theta]) + 
+						((alpha^2 a^2 / (a^2 + l^2)^2) (a^2 - l^2 + e^2 + g^2) + lambda/3) (l + a Cos[theta])^2
+					]
+				]; 
+    			Quiet[Q = 
+					Function[{q}, 
+						(1 - 2 m q + (a^2 - l^2 + e^2 + g^2) q^2) (q + alpha a (a - l) / (a^2 + l^2)) (q - alpha a (a + l) / (a^2 + l^2))
+    					- (lambda / 3) (1 + 2 alpha a l (a^2 - l^2) / (a^2 + l^2) q + (a^2 + 3 l^2) q^2)
+					]
+				];
+				Quiet[Omega = 
+					Function[{q, theta}, 
+						q - alpha a / (a^2 + l^2) (l + a Cos[theta])
+					]
+				];
+				Quiet[rho = 
+					Function[{q, theta}, 
+						 1 + q^2 (l + a Cos[theta])^2
+					]
+				];
+				{
+					{
+    					-Q[q] / (rho[q, theta]^2 Omega[q, theta]^2), 0, 0, 
+    					-Q[q] / (rho[q, theta]^2 Omega[q, theta]^2) (a Sin[theta]^2 + 4 l Sin[theta/2]^2)
+  					},
+  					{
+    					0, rho[q, theta]^2 / (Q[q] Omega[q, theta]^2), 0, 0
+  					},
+					{
+    					0, 0, rho[q, theta]^2 / (P[theta] Omega[q, theta]^2), 0
+  					},
+  					{
+    					-Q[q] / (rho[q, theta]^2 Omega[q, theta]^2) (a Sin[theta]^2 + 4 l Sin[theta/2]^2), 0, 0,  P[theta] Sin[theta]^2 / (rho[q, theta]^2 Omega[q, theta]^2) (1 + (a + l)^2 q^2)
+  					}
+				}
+		]
+	]
+ 
+exactSolsData["ElectroVacTypeD", {"TypeDCoordinates", "ParameterAssumptions"}] = Null
+ 
+exactSolsData["ElectroVacTypeD", {"TypeDCoordinates", "ParameterNames"}] = {"m", "a", "l", "e", "g", "\[Alpha]", "\[Lambda]"}
+ 
+exactSolsData["ElectroVacTypeD", {"TypeDCoordinates", "ScalarFunctionNames"}] = {"P", "Q", "\[Rho]", "\[CapitalOmega]"}
 
 (* ::Section:: *)
 (* GenRelExactSolsData *)
