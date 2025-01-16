@@ -10,3 +10,8 @@
 
 Open the file `makexIdeal.wl` that is in the root folder with *Mathematica* front end and
 run all its code (just click on the button `Run Package` on the top left corner). 
+Alternatively use `wolframscript`:
+```
+wolframscript -file makexIdeal.wl
+
+```

@@ -5,10 +5,9 @@ GenRelExactSolsData::usage = " ";
 Begin["xAct`xIdeal`Private`"]
 
 (* ::Section:: *)
-(* Data *)
-
 allmetrics = {
 	"BertottiRobinsonSolution",
+	"ElectroVacTypeD",
  	"Friedmann",
 	"FarnsworthKerrI",
 	"FarnsworthKerrII",
@@ -118,6 +117,7 @@ allmetricproperties = {
 	"Metric",
 	"ParameterAssumptions",
 	"ParameterNames",
+	"ScalarFunctionValues",
 	"ScalarFunctionNames"
 }
 
@@ -131,7 +131,8 @@ allcoordinatesystems = {
  	"IsotropicCoordinates",
   	"ReducedCircumferencePolarCoordinates",
  	"SchwarzschildCoordinates",
-	"SphericalCoordinates"
+	"SphericalCoordinates",
+	"TypeDCoordinates"
 }
 
 exactSolsData["Solutions"] = allmetrics
@@ -162,16 +163,32 @@ coordinatesystemQ[_] := False;
 (* ::Section:: *)
 (* Classification of exact solutions *)
 
+(* TODO: finish this section *)
 
-
-exactSolsData["SphericalSymmetry"] = {
-	"GeneralSphericalSymmetry",
-	"Schwarzschild",
-	"StephaniSpherical"
+exactSolsData["AbelianG3onT3"] = {
+	"OsvathKoutrasI", 
+	"OsvathKoutrasII", 
+	"OsvathKoutrasIII"
 }
 
 exactSolsData["AxialSymmetry"] = {
 	"Kerr"
+}
+
+exactSolsData["BarotropicPerfectFluid"] = {
+	"Friedmann"
+}
+
+exactSolsData["ConformallyFlat"] = {
+	"BertottiRobinsonSolution", 
+	"Friedmann", 
+	"Stephani", 
+	"StephaniThermodynamic", 
+	"StephaniThermodynamicSpherical"
+}
+
+exactSolsData["ConformallyStatic"] = {
+	"Friedmann"
 }
 
 exactSolsData["PetrovTypeD"] = {
@@ -179,9 +196,182 @@ exactSolsData["PetrovTypeD"] = {
 	"Schwarzschild"
 }
 
-exactSolsData["Vacuum"] = {
-	"Kerr",
+exactSolsData["DMetrics"] = {
+	"FarnsworthKerrIII", 
+	"GeneralSphericalSymmetry", 
+	"Kerr", 
+	"KerrNUT", 
+	"LemaitreTolman", 
+	"ReissnerNordstrom"
+}
+
+exactSolsData["EinsteinMaxwellSolution"] = {
+	"BertottiRobinsonSolution", 
+	"ReissnerNordstrom"
+}
+
+exactSolsData["G3IIIonS3"] = {
+	"FarnsworthKerrII"
+}
+
+exactSolsData["G3IonT3"] = {
+	"PetrovSolution"
+} 
+
+exactSolsData["G3IVonT3"] = {
+	"OsvathKoutrasII"
+}
+
+exactSolsData["G3IXonS3"] = {
+	"FarnsworthKerrI", 
+	"FarnsworthKerrIII"
+} 
+
+exactSolsData["G3onS2"] = {
+	"StephaniThermodynamicSpherical"
+}
+
+exactSolsData["G3S2"] = {
+	"StephaniThermodynamic"
+}
+
+exactSolsData["G3VIhonS3"] = {
+	"OsvathKoutrasI", 
+	"OsvathKoutrasII"
+}
+
+exactSolsData["G3VIIhonS3"] = {
+	"OsvathKoutrasIII"
+}
+
+exactSolsData["G3VIIhonT3"] = {
+	"PetrovSolution"
+}
+
+exactSolsData["G3VIIIonT3"] = {
+	"FarnsworthKerrII"
+}
+
+exactSolsData["G3VIonT3"] = {
+	"OsvathKoutrasI"
+}
+
+exactSolsData["G4"] = {
+	"FarnsworthKerrI", 
+	"FarnsworthKerrII", 
+	"FarnsworthKerrIII", 
+	"OsvathKoutrasI", 
+	"OsvathKoutrasII", 
+	"OsvathKoutrasIII", 
+	"PetrovSolution"
+}
+
+exactSolsData["Homogeneous"] = {
+	"FarnsworthKerrI", 
+	"FarnsworthKerrII", 
+	"FarnsworthKerrIII", 
+	"OsvathKoutrasI", 
+	"OsvathKoutrasII", 
+	"OsvathKoutrasIII"
+}
+
+exactSolsData["PerfectFluid"] = {
+	"Friedmann", 
+	"FarnsworthKerrI", 
+	"FarnsworthKerrII", 
+	"FarnsworthKerrIII", 
+	"GeneralSphericalSymmetry",
+	"LemaitreTolman",
+	"OsvathKoutrasI", 
+	"OsvathKoutrasII", 
+	"OsvathKoutrasIII", 
+	"Stephani",
+	"StephaniThermodynamic",
+	"StephaniThermodynamicSpherical"
+}
+
+exactSolsData["PetrovTypeD"] = {
+	"FarnsworthKerrIII", 
+	"GeneralSphericalSymmetry", 
+	"Kerr", 
+	"KerrNUT", 
+	"LemaitreTolman", 
+	"ReissnerNordstrom",
 	"Schwarzschild"
+}
+
+exactSolsData["PetrovTypeI"] = {
+	"OsvathKoutrasI", 
+	"OsvathKoutrasII",
+	"OsvathKoutrasIII",
+	"PetrovSolution"
+}
+
+exactSolsData["PetrovTypeN"] = {
+	"BertottiRobinsonSolution"
+}
+
+exactSolsData["SpatialG6"] = {
+	"Friedmann", 
+	"Stephani", 
+	"StephaniThermodynamic", 
+	"StephaniThermodynamicSpherical"
+}
+
+exactSolsData["SpatiallyHomogeneous"] = {
+	"Friedmann"
+}
+
+exactSolsData["SphericalSymmetry"] = {
+	"GeneralSphericalSymmetry",
+	"LemaitreTolman", 
+	"ReissnerNordstrom", 
+	"Schwarzschild", 
+	"StephaniThermodynamicSpherical"
+}
+
+exactSolsData["Static"] = {
+	"ReissnerNordstrom", 
+	"Schwarzschild"
+}
+
+exactSolsData["Stationary"] = {
+	"Kerr"
+}
+
+exactSolsData["ThermodynamicPerfectFluid"] = {
+	"Friedmann", 
+	"GeneralSphericalSymmetry", 
+	"LemaitreTolman", 
+	"StephaniThermodynamic", 
+	"StephaniThermodynamicSpherical"
+}
+
+exactSolsData["Vacuum"] = {
+	"Kerr", 
+	"KerrNUT", 
+	"PetrovSolution",
+	"Schwarzschild"
+}
+
+exactSolsData["VacuumTypeD"] = {
+	"Kerr", 
+	"KerrNUT",
+	"PetrovSolution",
+	"Schwarzschild"
+}
+
+exactSolsData["Warped22"] = {
+	"GeneralSphericalSymmetry", 
+	"LemaitreTolman", 
+	"ReissnerNordstrom", 
+	"StephaniThermodynamicSpherical"
+}
+
+exactSolsData["SphericalSymmetry"] = {
+	"GeneralSphericalSymmetry",
+	"Schwarzschild",
+	"StephaniSpherical"
 }
 
 (* ::Section:: *)
@@ -225,6 +415,114 @@ exactSolsData["BertottiRobinsonSolution", {"ComplexCoordinates", "ParameterNames
  
 exactSolsData["BertottiRobinsonSolution", {"ComplexCoordinates", "ScalarFunctionNames"}] = {}
 
+exactSolsData["BertottiRobinsonSolution", {"ComplexCoordinates", "ScalarFunctionValues"}] = {}
+
+(* ::Subsection:: *)
+(* General electrovac type D solution. See https://arxiv.org/abs/2407.14863v1 *)
+
+exactSolsData["ElectroVacTypeD", "Classes"] = exactSolsData["Kerr", "Classes"]
+
+exactSolsData["ElectroVacTypeD", "CoordinateSystems"] = {"TypeDCoordinates"}
+
+exactSolsData["ElectroVacTypeD", "DefaultCoordinates"] = "TypeDCoordinates"
+ 
+exactSolsData["ElectroVacTypeD", "IsIDEAL"] = True
+ 
+exactSolsData["ElectroVacTypeD", "ParameterAssumptions"] = Null
+ 
+exactSolsData["ElectroVacTypeD", "ParameterNames"] = {"m", "a", "l", "e", "g", "\[Alpha]", "\[Lambda]"}
+ 
+exactSolsData["ElectroVacTypeD", {"TypeDCoordinates", "CoordinateAssumptions"}] = -Infinity < #[[1]] < Infinity && -Infinity < #[[2]] < Infinity && 0 < #[[3]] < Pi &
+
+exactSolsData["ElectroVacTypeD", {"TypeDCoordinates", "CoordinateNames"}] = {"t", "q", "\[Theta]", "\[Phi]"}
+ 
+exactSolsData["ElectroVacTypeD", {"TypeDCoordinates", "Metric"}] = 
+	Function[{coords, params, scfuncs}, 
+    	With[{t = coords[[1]], q = coords[[2]], theta = coords[[3]], phi = coords[[4]],
+				m = params[[1]], a = params[[2]], l = params[[3]], e = params[[4]], g = params[[5]], alpha = params[[6]], lambda = params[[7]], 
+				P = scfuncs[[1]], Q = scfuncs[[2]], rho = scfuncs[[3]], Omega = scfuncs[[4]]}, 
+    			Quiet[P = 
+					Function[{theta}, 
+						1 - 2 ((alpha a / (a^2 + l^2)) m - (lambda/3) l) (l + a Cos[theta]) + 
+						((alpha^2 a^2 / (a^2 + l^2)^2) (a^2 - l^2 + e^2 + g^2) + lambda/3) (l + a Cos[theta])^2
+					]
+				]; 
+    			Quiet[Q = 
+					Function[{q}, 
+						(1 - 2 m q + (a^2 - l^2 + e^2 + g^2) q^2) (q + alpha a (a - l) / (a^2 + l^2)) (q - alpha a (a + l) / (a^2 + l^2))
+    					- (lambda / 3) (1 + 2 alpha a l (a^2 - l^2) / (a^2 + l^2) q + (a^2 + 3 l^2) q^2)
+					]
+				];
+				Quiet[Omega = 
+					Function[{q, theta}, 
+						q - alpha a / (a^2 + l^2) (l + a Cos[theta])
+					]
+				];
+				Quiet[rho = 
+					Function[{q, theta}, 
+						 1 + q^2 (l + a Cos[theta])^2
+					]
+				];
+				{
+					{
+    					-Q[q] / (rho[q, theta]^2 Omega[q, theta]^2), 0, 0, 
+    					-Q[q] / (rho[q, theta]^2 Omega[q, theta]^2) (a Sin[theta]^2 + 4 l Sin[theta/2]^2)
+  					},
+  					{
+    					0, rho[q, theta]^2 / (Q[q] Omega[q, theta]^2), 0, 0
+  					},
+					{
+    					0, 0, rho[q, theta]^2 / (P[theta] Omega[q, theta]^2), 0
+  					},
+  					{
+    					-Q[q] / (rho[q, theta]^2 Omega[q, theta]^2) (a Sin[theta]^2 + 4 l Sin[theta/2]^2), 0, 0,  P[theta] Sin[theta]^2 / (rho[q, theta]^2 Omega[q, theta]^2) (1 + (a + l)^2 q^2)
+  					}
+				}
+		]
+	]
+ 
+exactSolsData["ElectroVacTypeD", {"TypeDCoordinates", "ParameterAssumptions"}] = Null
+ 
+exactSolsData["ElectroVacTypeD", {"TypeDCoordinates", "ParameterNames"}] = {"m", "a", "l", "e", "g", "\[Alpha]", "\[Lambda]"}
+ 
+exactSolsData["ElectroVacTypeD", {"TypeDCoordinates", "ScalarFunctionNames"}] = {"P", "Q", "\[Rho]", "\[CapitalOmega]"}
+
+exactSolsData["ElectroVacTypeD", {"TypeDCoordinates", "ScalarFunctionValues"}] =
+Function[{coords, params, scfuncs}, 
+    	With[{t = coords[[1]], q = coords[[2]], theta = coords[[3]], phi = coords[[4]],
+				m = params[[1]], a = params[[2]], l = params[[3]], e = params[[4]], g = params[[5]], alpha = params[[6]], lambda = params[[7]], 
+				P = scfuncs[[1]], Q = scfuncs[[2]], rho = scfuncs[[3]], Omega = scfuncs[[4]]}, 
+    			Quiet[P = 
+					Function[{theta}, 
+						1 - 2 ((alpha a / (a^2 + l^2)) m - (lambda/3) l) (l + a Cos[theta]) + 
+						((alpha^2 a^2 / (a^2 + l^2)^2) (a^2 - l^2 + e^2 + g^2) + lambda/3) (l + a Cos[theta])^2
+					]
+				]; 
+    			Quiet[Q = 
+					Function[{q}, 
+						(1 - 2 m q + (a^2 - l^2 + e^2 + g^2) q^2) (q + alpha a (a - l) / (a^2 + l^2)) (q - alpha a (a + l) / (a^2 + l^2))
+    					- (lambda / 3) (1 + 2 alpha a l (a^2 - l^2) / (a^2 + l^2) q + (a^2 + 3 l^2) q^2)
+					]
+				];
+				Quiet[Omega = 
+					Function[{q, theta}, 
+						q - alpha a / (a^2 + l^2) (l + a Cos[theta])
+					]
+				];
+				Quiet[rho = 
+					Function[{q, theta}, 
+						 1 + q^2 (l + a Cos[theta])^2
+					]
+				];
+				{
+					P[theta],
+					Q[q],
+					Omega[q, theta],
+					rho[q, theta]
+				}
+		]
+]
+	
 
 (* ::Subsection:: *)
 (* Farnsworth-Kerr I *)
@@ -270,6 +568,7 @@ exactSolsData["FarnsworthKerrI", {"CanonicalCoordinates", "ParameterNames"}] = e
  
 exactSolsData["FarnsworthKerrI", {"CanonicalCoordinates", "ScalarFunctionNames"}] = {}
 
+exactSolsData["FarnsworthKerrI", {"CanonicalCoordinates", "ScalarFunctionValues"}] = {}
 
 (* ::Subsection:: *)
 (* Farnsworth-Kerr II *)
@@ -315,6 +614,7 @@ exactSolsData["FarnsworthKerrII", {"CanonicalCoordinates", "ParameterNames"}] = 
  
 exactSolsData["FarnsworthKerrII", {"CanonicalCoordinates", "ScalarFunctionNames"}] = {}
 
+exactSolsData["FarnsworthKerrII", {"CanonicalCoordinates", "ScalarFunctionValues"}] = {}
 
 (* ::Subsection:: *)
 (* Farnsworth-Kerr III *)
@@ -359,6 +659,7 @@ exactSolsData["FarnsworthKerrIII", {"CanonicalCoordinates", "ParameterNames"}] =
  
 exactSolsData["FarnsworthKerrIII", {"CanonicalCoordinates", "ScalarFunctionNames"}] = {}
 
+exactSolsData["FarnsworthKerrII", {"CanonicalCoordinates", "ScalarFunctionValues"}] = {}
 
 (* ::Subsection:: *)
 (* Friedmann in reduced circumference polar coordinates *)
@@ -403,6 +704,15 @@ exactSolsData["Friedmann", {"ReducedCircumferencePolarCoordinates", "Metric"}] =
         ]
     ]
 
+exactSolsData["Friedmann", {"ReducedCircumferencePolarCoordinates", "ScalarFunctionValues"}] =
+    Function[{coords, params, scfuncs},
+        With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], 
+            phi = coords[[4]], k = params[[1]], R = scfuncs[[1]]},
+				{
+					R[t]
+				}
+			]
+        ]
 
 
 
@@ -450,6 +760,16 @@ exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "Metric"}] =
 		] 
 	]
 
+exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "ScalarFunctionValues"}] =
+	Function[{coords, params, funcs},
+		With[{nu = funcs[[3]], lambda = funcs[[1]], mu = funcs[[2]], t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]]},
+				{
+					lambda[t, r], 
+					mu[t, r], 
+					nu[t, r]
+				}
+			]
+		]
 
 (* ::Subsection:: *)
 (* Kerr *)
@@ -476,10 +796,11 @@ exactSolsData["Kerr", {"BoyerLindquistCoordinates", "CoordinateAssumptions"}] =
 	Function[{coords, params, scfuncs}, 
     	With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], 
     		phi = coords[[4]], m = params[[1]], a = params[[2]], Sigma = scfuncs[[1]]}, 
-				Sigma = 
+				Quiet[Sigma = 
 					Function[{r, a, theta}, 
 						r^2 + a^2*Cos[theta]^2
-					]; 
+					]
+				]; 
 				r > 0 && Pi > theta > 0 && Element[Cos[theta], Reals] && 
 					Sin[theta] > 0 && Sigma[r, a, theta] > 0
 		]
@@ -492,14 +813,16 @@ exactSolsData["Kerr", {"BoyerLindquistCoordinates", "Metric"}] =
     Function[{coords, params, scfuncs}, 
     	With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]], 
 			m = params[[1]], a = params[[2]], Sigma = scfuncs[[1]], Delta = scfuncs[[2]]}, 
-    			Sigma = 
+    			Quiet[Sigma = 
 					Function[{r, a, theta}, 
 						r^2 + a^2*Cos[theta]^2
-					]; 
-       			Delta = 
+					]
+				];
+       			Quiet[Delta = 
 					Function[{r, m, a}, 
 						r^2 - 2*m*r + a^2
-					]; 
+					]
+				];
         		{
 					{-(1 - (2*m*r)/Sigma[r, a, theta]), 0, 0, -((2*m*r*a*Sin[theta]^2)/Sigma[r, a, theta])}, 
         			{0, Sigma[r, a, theta]/Delta[r, m, a], 0, 0}, 
@@ -517,6 +840,16 @@ exactSolsData["Kerr", {"BoyerLindquistCoordinates", "ParameterNames"}] = exactSo
 exactSolsData["Kerr", {"BoyerLindquistCoordinates", "ScalarFunctionNames"}] = 
     {"\[CapitalSigma]", "\[CapitalDelta]"}
 
+exactSolsData["Kerr", {"BoyerLindquistCoordinates", "ScalarFunctionValues"}] =
+	Function[{coords, params}, 
+    	With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]], 
+			m = params[[1]], a = params[[2]]}, 
+        		{
+					r^2 + a^2*Cos[theta]^2,
+					r^2 - 2*m*r + a^2
+				}
+		]
+	]
 
 (* ::Subsection:: *)
 (* Kerr-NUT *)
@@ -537,14 +870,18 @@ exactSolsData["KerrNUT", {"ExpansionGradientAdaptedCoordinates", "CoordinateAssu
 	Function[{coords, params, scfuncs}, 
     	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], p = params[[1]], 
 			k = params[[2]], s = params[[3]], alpha = scfuncs[[1]], beta = scfuncs[[2]]}, 
-      			alpha = 
+
+				Quiet[alpha = 
 					Function[{p, x, k, s}, 
 						p*x^2 + k*(3 - k^2)*(x/(1 + k^2)^3) + s
-					]; 
-				beta = 
+					]
+				];
+
+				Quiet[beta = 
 					Function[{p, y, k, s}, 
 						(-p)*y^2 + (3*k^2 - 1)*(y/(1 + k^2)^3) + s
-					]; 
+					]
+				]; 
 				x^2 + y^2 > 0 && alpha[p, x, k, s] > 0 && beta[p, y, k, s] > 0
 		]
 	]
@@ -555,14 +892,16 @@ exactSolsData["KerrNUT", {"ExpansionGradientAdaptedCoordinates", "Metric"}] =
     Function[{coords, params, scfuncs}, 
     	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], p = params[[1]], 
 			k = params[[2]], s = params[[3]], alpha = scfuncs[[1]], beta = scfuncs[[2]]}, 
-      			alpha = 
+      			Quiet[alpha = 
 					Function[{p, x, k, s}, 
 						p*x^2 + k*(3 - k^2)*(x/(1 + k^2)^3) + s
-					]; 
-				beta = 
+					]
+				]; 
+				Quiet[beta = 
 					Function[{p, y, k, s}, 
 						(-p)*y^2 + (3*k^2 - 1)*(y/(1 + k^2)^3) + s
-					]; 
+					]
+				]; 
        			{
 					{-((alpha[p, x, k, s]*y^4 - beta[p, y, k, s]*x^4)/(x^2 + y^2)), 0, 0, 
         				-((alpha[p, x, k, s]*y^2 + beta[p, y, k, s]*x^2)/(x^2 + y^2))}, 
@@ -580,6 +919,16 @@ exactSolsData["KerrNUT", {"ExpansionGradientAdaptedCoordinates", "ParameterNames
  
 exactSolsData["KerrNUT", {"ExpansionGradientAdaptedCoordinates", "ScalarFunctionNames"}] = {"\[Alpha]", "\[Beta]"}
 
+exactSolsData["KerrNUT", {"ExpansionGradientAdaptedCoordinates", "ScalarFunctionValues"}] =
+	Function[{coords, params}, 
+    	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], p = params[[1]], 
+			k = params[[2]], s = params[[3]]}, 
+       			{
+					p*x^2 + k*(3 - k^2)*(x/(1 + k^2)^3) + s,
+					(-p)*y^2 + (3*k^2 - 1)*(y/(1 + k^2)^3) + s
+				}
+		]
+	]
 
 (* ::Subsection:: *)
 (* Lemaitre-Tolman *)
@@ -621,6 +970,17 @@ exactSolsData["LemaitreTolman", {"SphericalCoordinates", "ParameterNames"}] = ex
  
 exactSolsData["LemaitreTolman", {"SphericalCoordinates", "ScalarFunctionNames"}] = {"R"}
 
+exactSolsData["LemaitreTolman", {"SphericalCoordinates", "ScalarFunctionValues"}] =
+    Function[{coords, params, scfuncs},
+        With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], 
+            phi = coords[[4]], k = params[[1]], R = scfuncs[[1]]},
+				{
+					R[t, r]
+				}
+			]
+        ]
+
+
 
 (* ::Subsection:: *)
 (* Osvath-Koutras I *)
@@ -651,21 +1011,25 @@ exactSolsData["OsvathKoutrasI", {"GroupGeneratorsAdaptedCoordinates", "Metric"}]
 	Function[{coords, params, scfuncs}, 
     	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], s = params[[1]], a = params[[2]], 
 			beta = params[[3]], A = params[[4]], B = params[[5]], F = params[[6]], b = params[[7]]}, 
-      			beta = 
+      			Quiet[beta = 
 					Function[{s}, 
 						Sqrt[1 + 2*s^2*(1 - s^2)*(3 - s^2)]
-					]; 
-       			A = Function[{beta, s}, 
+					]
+				]; 
+       			Quiet[A = Function[{beta, s}, 
 						(1 - beta[s])/2
-					]; 
-       			B = 
+					]
+				]; 
+       			Quiet[B = 
 					Function[{beta, s}, 
 						(1 + beta[s])/2]; F = Function[{s}, 1 - s^2
-					]; 
-       			b = 
+					]
+				]; 
+       			Quiet[b = 
 					Function[{s}, 
 						Sqrt[2]*s*(3 - s^2)
-					]; 
+					]
+				];
     			a^2*{
 					{((4/b[s]^2)*A[beta, s]^2 - 1)*Exp[2*A[beta, s]*z], 
 						((4/b[s]^2)*A[beta, s]*B[beta, s] - 1)*Exp[(A[beta, s] + B[beta, s])*z], 0, 0}, 
@@ -683,6 +1047,7 @@ exactSolsData["OsvathKoutrasI", {"GroupGeneratorsAdaptedCoordinates", "Parameter
  
 exactSolsData["OsvathKoutrasI", {"GroupGeneratorsAdaptedCoordinates", "ScalarFunctionNames"}] = {}
 
+exactSolsData["OsvathKoutrasI", {"GroupGeneratorsAdaptedCoordinates", "ScalarFunctionValues"}] = {}
 
 (* ::Subsection:: *)
 (* Osvath-Koutras II *)
@@ -713,9 +1078,9 @@ exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "Metric"}
 	Function[{coords, params, scfuncs}, 
     	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], s = params[[1]], a = params[[2]], 
 			F = params[[3]], b = params[[4]]}, 
-				s = Sqrt[1.2296814706969093]; 
-       			F = Function[{s}, 1 - s^2]; 
-				b = Function[{s}, Sqrt[2]*s*(3 - s^2)]; 
+				Quiet[s = Sqrt[1.2296814706969093]]; 
+       			Quiet[F = Function[{s}, 1 - s^2]]; 
+				Quiet[b = Function[{s}, Sqrt[2]*s*(3 - s^2)]]; 
        			a^2*{
 					{(-4^(-1))*(b[s] - 1/b[s])^2*E^z, (-4^(-1))*(b[s] - 1/b[s])^2*E^z*z, 0, 0}, 
 					{(-4^(-1))*(b[s] - 1/b[s])^2*E^z*z, E^z*(1 - (z^2/4)*(b[s] - 1/b[s])^2), 0, 0}, 
@@ -731,6 +1096,7 @@ exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "Paramete
  
 exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "ScalarFunctionNames"}] = {}
 
+exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "ScalarFunctionValues"}] = {}
 
 (* ::Subsection:: *)
 (* Osvath-Koutras III *)
@@ -762,9 +1128,9 @@ exactSolsData["OsvathKoutrasIII", {"GroupGeneratorsAdaptedCoordinates", "Metric"
     	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], s = params[[1]], a = params[[2]], 
        		beta2 = params[[3]], F = params[[4]], b = params[[5]], k = params[[6]]}, 
 	   			beta2 = Function[{s}, 1 + 2*s^2*(1 - s^2)*(3 - s^2)]; 
-				F = Function[{s}, 1 - s^2]; 
-       			b = Function[{s}, Sqrt[2]*s*(3 - s^2)]; 
-       			k = Function[{beta2, s}, Sqrt[-beta2]/2]; 
+				Quiet[F = Function[{s}, 1 - s^2]]; 
+       			Quiet[b = Function[{s}, Sqrt[2]*s*(3 - s^2)]]; 
+       			Quiet[k = Function[{beta2, s}, Sqrt[-beta2]/2]]; 
        			a^2*{
 					{
 						E^z*((1/b[s]^2)*(Cos[k[beta2, s]*z] - 2*k[beta2, s]*Sin[k[beta2, s]*z])^2 - Cos[k[beta2, s]*z]^2), 
@@ -792,6 +1158,7 @@ exactSolsData["OsvathKoutrasIII", {"GroupGeneratorsAdaptedCoordinates", "Paramet
  
 exactSolsData["OsvathKoutrasIII", {"GroupGeneratorsAdaptedCoordinates", "ScalarFunctionNames"}] = {}
 
+exactSolsData["OsvathKoutrasIII", {"GroupGeneratorsAdaptedCoordinates", "ScalarFunctionValues"}] = {}
 
 (* ::Subsection:: *)
 (* Petrov Solution *)
@@ -830,6 +1197,7 @@ exactSolsData["PetrovSolution", {"CanonicalCoordinates", "ParameterNames"}] = {"
  
 exactSolsData["PetrovSolution", {"CanonicalCoordinates", "ScalarFunctionNames"}] = {}
 
+exactSolsData["PetrovSolution", {"CanonicalCoordinates", "ScalarFunctionValues"}] = {}
 
 (* ::Subsection:: *)
 (* Reissner-Nordström *)
@@ -862,6 +1230,8 @@ exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "CoordinateAssum
 	]
 
 exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "ScalarFunctionNames"}] = {}
+
+exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "ScalarFunctionValues"}] = {}
 
 exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "ParameterNames"}] = exactSolsData["ReissnerNordstrom", "ParameterNames"]
 
@@ -905,6 +1275,8 @@ exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ParameterAssumption
 
 exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ScalarFunctionNames"}] = {}
 
+exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ScalarFunctionValues"}] = {}
+
 defaultcoordinates["Schwarzschild"] = "SchwarzschildCoordinates"
 
 (* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
@@ -936,10 +1308,11 @@ exactSolsData["Schwarzschild", {"IsotropicCoordinates", "CoordinateAssumptions"}
     Function[{coords, params, scfuncs},
         With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = 
             coords[[4]], m = params[[1]], R = scfuncs[[1]]},
-            R =
+            Quiet[R =
                 Function[{x, y, z},
                     Sqrt[x^2 + y^2 + z^2]
-                ];
+                ]
+			];
             m >= 0 && R[x, y, z] > 2 * m
         ]
     ]
@@ -948,10 +1321,11 @@ exactSolsData["Schwarzschild", {"IsotropicCoordinates", "Metric"}] =
     Function[{coords, params, scfuncs},
         With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = 
             coords[[4]], m = params[[1]], R = scfuncs[[1]]},
-            R =
+            Quiet[R =
                 Function[{x, y, z},
                     Sqrt[x^2 + y^2 + z^2]
-                ];
+                ]
+			];
             DiagonalMatrix[
 				{
 					-((1 - m / (2 * R[x, y, z])) ^ 2 / (1 + m / (2 * R[x, y, z])) ^ 2), 
@@ -963,6 +1337,12 @@ exactSolsData["Schwarzschild", {"IsotropicCoordinates", "Metric"}] =
         ]
     ]
 
+exactSolsData["Schwarzschild", {"IsotropicCoordinates", "ScalarFunctionValues"}] =
+    Function[{coords, params},
+        With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], m = params[[1]]},
+			{Sqrt[x^2 + y^2 + z^2]}
+        ]
+    ]
 
 (* ::Subsection:: *)
 (* Stephani in adapted coordinates *)
@@ -975,9 +1355,9 @@ exactSolsData["Stephani", "DefaultCoordinates"] = "AdaptedCoordinates"
  
 exactSolsData["Stephani", "IsIDEAL"] = True
  
-exactSolsData["Stephani", "ParameterAssumptions"] = exactSolsData["Stephani", "ParameterAssumptions"]
+exactSolsData["Stephani", "ParameterAssumptions"] = exactSolsData["Stephani", {"AdaptedCoordinates", "ParameterAssumptions"}]
  
-exactSolsData["Stephani", "ParameterNames"] = exactSolsData["Stephani", "ParameterNames"]
+exactSolsData["Stephani", "ParameterNames"] = exactSolsData["Stephani", {"AdaptedCoordinates", "ParameterNames"}]
  
 exactSolsData["Stephani", {"AdaptedCoordinates", "CoordinateAssumptions"}] = Null
  
@@ -987,14 +1367,16 @@ exactSolsData["Stephani", {"AdaptedCoordinates", "Metric"}] =
     Function[{coords, params, scfuncs}, 
     	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], Omega = scfuncs[[1]], alpha = scfuncs[[2]], 
     		R = scfuncs[[3]], b1 = scfuncs[[4]], b2 = scfuncs[[5]], b3 = scfuncs[[6]], k = scfuncs[[7]]}, 
-      			Omega = 
+      			Quiet[Omega = 
 					Function[{R, t, b1, b2, b3, x, y, z, k}, 
          				R[t]/(1 + 2*(b1[t]*x + b2[t]*y + b3[t]*z) + k[t]*((x^2 + y^2 + z^2)/4))
-					]; 
-       			alpha = 
+					]
+				]; 
+       			Quiet[alpha = 
 					Function[{R, t, b1, b2, b3, x, y, z, k}, 
         				R[t]*(D[Omega[R, t, b1, b2, b3, x, y, z, k], t]/(Omega[R, t, b1, b2, b3, x, y, z, k]*D[R[t], t]))
-					]; 
+					]
+				];
        			DiagonalMatrix[
 					{
 						-alpha[R, t, b1, b2, b3, x, y, z, k]^2, 
@@ -1012,6 +1394,31 @@ exactSolsData["Stephani", {"AdaptedCoordinates", "ParameterNames"}] = {}
  
 exactSolsData["Stephani", {"AdaptedCoordinates", "ScalarFunctionNames"}] = {"\[CapitalOmega]", "\[Alpha]", "R", "b1", "b2", "b3", "K"}
 
+exactSolsData["Stephani", {"AdaptedCoordinates", "ScalarFunctionValues"}] =
+    Function[{coords, params, scfuncs}, 
+    	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], Omega = scfuncs[[1]], alpha = scfuncs[[2]], 
+    		R = scfuncs[[3]], b1 = scfuncs[[4]], b2 = scfuncs[[5]], b3 = scfuncs[[6]], k = scfuncs[[7]]},
+			Quiet[Omega = 
+					Function[{R, t, b1, b2, b3, x, y, z, k}, 
+         				R[t]/(1 + 2*(b1[t]*x + b2[t]*y + b3[t]*z) + k[t]*((x^2 + y^2 + z^2)/4))
+					]
+				]; 
+       			Quiet[alpha = 
+					Function[{R, t, b1, b2, b3, x, y, z, k}, 
+        				R[t]*(D[Omega[R, t, b1, b2, b3, x, y, z, k], t]/(Omega[R, t, b1, b2, b3, x, y, z, k]*D[R[t], t]))
+					]
+				];
+				{
+					Omega[R, t, b1, b2, b3, x, y, z, k],
+					alpha[R, t, b1, b2, b3, x, y, z, k],
+					R[t],
+					b1[t], 
+					b2[t], 
+					b3[t], 
+					k[t]	
+				}
+		]
+	]
 
 (* ::Subsection:: *)
 (* Stephani Thermodynamic in adapted coordinates *)
@@ -1038,22 +1445,26 @@ exactSolsData["StephaniThermodynamic", {"AdaptedCoordinates", "Metric"}] =
         With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = 
             coords[[4]], epsilon = params[[1]], w = scfuncs[[1]], L = scfuncs[[2]],
             Omega = scfuncs[[3]], alpha = scfuncs[[4]], R = scfuncs[[5]], b = scfuncs[[6]]},
-            w =
+            Quiet[w =
                 Function[{x, y, z},
                     2 * (z / (1 + epsilon * ((x^2 + y^2 + z^2) / 4)))            
-                ];
-            L =
+                ]
+			];
+            Quiet[L =
                 Function[{R, b, t, w, x, y, z},
                     R[t] / (1 + b[t] * w[x, y, z])
-                ];
-            Omega =
+                ]
+			];
+            Quiet[Omega =
                 Function[{w, x, y, z, L, R, b, t},
                     w[x, y, z] * (L[R, b, t, w, x, y, z] / (2 * z))
-                ];
-            alpha =
+                ]
+			];
+            Quiet[alpha =
                 Function[{R, t, L, b, w, x, y, z},
                     R[t] * (D[L[R, b, t, w, x, y, z], t] / (L[R, b, t, w, x, y, z] * D[R[t], t]))
-                ];
+                ]
+			];
             DiagonalMatrix[
 				{
 					-alpha[R, t, L, b, w, x, y, z] ^ 2, 
@@ -1071,6 +1482,41 @@ exactSolsData["StephaniThermodynamic", {"AdaptedCoordinates", "ParameterNames"}]
 
 exactSolsData["StephaniThermodynamic", {"AdaptedCoordinates", "ScalarFunctionNames"}] = {"w", "L", "\[CapitalOmega]", "\[Alpha]", "R", "b"}
 
+exactSolsData["StephaniThermodynamic", {"AdaptedCoordinates", "ScalarFunctionValues"}] =
+    Function[{coords, params, scfuncs},
+        With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = 
+            coords[[4]], epsilon = params[[1]], w = scfuncs[[1]], L = scfuncs[[2]],
+            Omega = scfuncs[[3]], alpha = scfuncs[[4]], R = scfuncs[[5]], b = scfuncs[[6]]},
+            Quiet[w =
+                Function[{x, y, z},
+                    2 * (z / (1 + epsilon * ((x^2 + y^2 + z^2) / 4)))            
+                ]
+			];
+            Quiet[L =
+                Function[{R, b, t, w, x, y, z},
+                    R[t] / (1 + b[t] * w[x, y, z])
+                ]
+			];
+            Quiet[Omega =
+                Function[{w, x, y, z, L, R, b, t},
+                    w[x, y, z] * (L[R, b, t, w, x, y, z] / (2 * z))
+                ]
+			];
+            Quiet[alpha =
+                Function[{R, t, L, b, w, x, y, z},
+                    R[t] * (D[L[R, b, t, w, x, y, z], t] / (L[R, b, t, w, x, y, z] * D[R[t], t]))
+                ]
+			];
+           {
+			w[x, y, z],
+			L[R, b, t, w, x, y, z],
+			Omega[w, x, y, z, L, R, b, t],
+			alpha[R, t, L, b, w, x, y, z],
+			R[t],
+			b[r]
+		   }
+        ]
+    ]
 
 (* ::Subsection:: *)
 (* Stephani Thermodynamic and Spherically symmetric in adapted coordinates *)
@@ -1096,14 +1542,16 @@ exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "Metric
 	Function[{coords, params, scfuncs}, 
     	With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]], 
 			Omega = scfuncs[[1]], alpha = scfuncs[[2]], R = scfuncs[[3]], k = scfuncs[[4]]}, 
-    			Omega = 
+    			Quiet[Omega = 
 					Function[{R, t, k, r}, 
 						R[t]/(1 + k[t]*(r^2/4))
-					]; 
-    			alpha = 
+					]
+				]; 
+    			Quiet[alpha = 
 					Function[{R, t, Omega, k, r}, 
 						R[t]*(D[Omega[R, t, k, r], t]/(Omega[R, t, k, r]*D[R[t], t]))
-					]; 
+					]
+				];
 				DiagonalMatrix[
        				{
 						-alpha[R, t, Omega, k, r]^2, 
@@ -1111,7 +1559,7 @@ exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "Metric
         				Omega[R, t, k, r]^2*r^2, 
 						Omega[R, t, k, r]^2*r^2*Sin[theta]^2
 					}
-				]; 
+				] 
 		]
 	]
  
@@ -1120,6 +1568,29 @@ exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "Parame
 exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "ParameterNames"}] = {}
  
 exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "ScalarFunctionNames"}] = {"\[CapitalOmega]", "\[Alpha]", "R", "k"}
+
+exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "ScalarFunctionValues"}] =
+	Function[{coords, params, scfuncs}, 
+    	With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]], 
+			Omega = scfuncs[[1]], alpha = scfuncs[[2]], R = scfuncs[[3]], k = scfuncs[[4]]}, 
+    			Quiet[Omega = 
+					Function[{R, t, k, r}, 
+						R[t]/(1 + k[t]*(r^2/4))
+					]
+				]; 
+    			Quiet[alpha = 
+					Function[{R, t, Omega, k, r}, 
+						R[t]*(D[Omega[R, t, k, r], t]/(Omega[R, t, k, r]*D[R[t], t]))
+					]
+				];
+				{
+					Omega[R, t, k, r],
+					alpha[R, t, Omega, k, r],
+					R[t],
+					k[t]
+				}
+		]
+	]
 
 (* ::Section:: *)
 (* GenRelExactSolsData *)
@@ -1241,6 +1712,13 @@ iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ScalarFunc
 		exactSolsData[metric, {coordname, "ScalarFunctionNames"}]
 	]
 
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ScalarFunctionValues"}] :=
+	If[
+		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
+		(* TODO: error control *)
+		Throw[$Failed],
+		exactSolsData[metric, {coordname, "ScalarFunctionValues"}]
+	]
 
 (* ::Subsection:: *)
 (* General definitions *)
