@@ -2316,7 +2316,7 @@ ConnectionTensorConcomitant["C111"][metric_CTensor, H_CTensor, opts : OptionsPat
 		If[vb, 
 			Print["** ReportCompute: computing Connection Tensor concomitant \"C111\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
-		HeadOfTensor[ce111, {a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -l1, -m1, -n1}];
+		ce111 = HeadOfTensor[ce111, {a1, -b1, -c1, -d1, -e1, -f1, -g1, -h1, -m1, -n1}];
 		time = AbsoluteTime[];
 		ce111 = simplf[ce111];
 		If[vb,
