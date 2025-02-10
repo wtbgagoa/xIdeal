@@ -128,6 +128,7 @@ allcoordinatesystems = {
 	"ComplexCoordinates",
 	"ExpansionGradientAdaptedCoordinates",
 	"GroupGeneratorsAdaptedCoordinates",
+	"HarmonicCoordinates",
  	"IsotropicCoordinates",
   	"ReducedCircumferencePolarCoordinates",
  	"SchwarzschildCoordinates",
@@ -1255,7 +1256,7 @@ exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "Metric"}] =
 (* Schwarzschild in Schwarzschild coordinates *)
 exactSolsData["Schwarzschild", "Classes"] = {"PetrovTypeD", "Static", "SphericalSymmetry", "Vacuum", "VacuumTypeD"}
 
-exactSolsData["Schwarzschild", "CoordinateSystems"] = {"SchwarzschildCoordinates", "IsotropicCoordinates"}
+exactSolsData["Schwarzschild", "CoordinateSystems"] = {"SchwarzschildCoordinates", "IsotropicCoordinates", "HarmonicCoordinates"}
 
 exactSolsData["Schwarzschild", "DefaultCoordinates"] = "SchwarzschildCoordinates"
 
@@ -1340,6 +1341,75 @@ exactSolsData["Schwarzschild", {"IsotropicCoordinates", "Metric"}] =
 exactSolsData["Schwarzschild", {"IsotropicCoordinates", "ScalarFunctionValues"}] =
     Function[{coords, params},
         With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], m = params[[1]]},
+			{Sqrt[x^2 + y^2 + z^2]}
+        ]
+    ]
+
+	(* ::Subsection:: *)
+(* Schwarzschild in harmonic coordinates *)
+
+exactSolsData["Schwarzschild", {"HarmonicCoordinates", "ParameterNames"}] = {"m"}
+
+exactSolsData["Schwarzschild", {"HarmonicCoordinates", "ParameterAssumptions"}] =
+    Function[{coords, params, scfuncs},
+        With[{m = params[[1]]},
+            m > 0
+        ]
+    ]
+
+exactSolsData["Schwarzschild", {"HarmonicCoordinates", "ScalarFunctionNames"}] = {"R"}
+
+exactSolsData["Schwarzschild", {"HarmonicCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
+
+exactSolsData["Schwarzschild", {"HarmonicCoordinates", "CoordinateAssumptions"}] =
+    Function[{coords, params, scfuncs},
+        With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = 
+            coords[[4]], m = params[[1]], R = scfuncs[[1]]},
+            Quiet[R =
+                Function[{x, y, z},
+                    Sqrt[x^2 + y^2 + z^2]
+                ]
+			];
+            m >= 0 && R[x, y, z] >  m
+        ]
+    ]
+
+exactSolsData["Schwarzschild", {"HarmonicCoordinates", "Metric"}] =
+    Function[{coords, params, scfuncs},
+        With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = 
+            coords[[4]], m = params[[1]], r = scfuncs[[1]]},
+            Quiet[r =
+                Function[{x, y, z},
+                    Sqrt[x^2 + y^2 + z^2]
+                ]
+			];
+			{
+				{(1 - m/r[x, y, z])/(1 + m/r[x, y, z]), 0, 0, 0}, 
+				{	
+					0, 
+					-(1 + m/r[x, y, z])^2 - (m^2 x^2 (1 + m / r[x, y, z]))/((1 - m / r[x, y, z]) r[x, y, z]^4), 
+					-((m^2 x y (1 + m/r[x, y, z]))/((1 - m/r[x, y, z]) r[x, y, z]^4)), 
+					-((m^2 x z (1 + m/r[x, y, z]))/((1 - m/r[x, y, z]) r[x, y, z]^4))
+				}, 
+				{	
+					0, 
+					-((m^2 x y (1 + m/r[x, y, z]))/((1 - m/r[x, y, z]) r[x, y, z]^4)), 
+					-(1 + m/r[x, y, z])^2 - (m^2 y^2 (1 + m/r[x, y, z]))/((1 - m/r[x, y, z]) r[x, y, z]^4), 
+					-((m^2 y z (1 + m/r[x, y, z]))/((1 - m/r[x, y, z]) r[x, y, z]^4))
+				}, 
+				{	
+					0, 
+					-((m^2 x z (1 + m/r[x, y, z]))/((1 - m/r[x, y, z]) r[x, y, z]^4)), 
+					-((m^2 y z (1 + m/r[x, y, z]))/((1 - m/r[x, y, z]) r[x, y, z]^4)), 
+					-(1 + m/r[x, y, z])^2 - (m^2 z^2 (1 + m/r[x, y, z]))/((1 - m/r[x, y, z]) r[x, y, z]^4)
+				}
+   			}
+        ]
+    ]
+
+exactSolsData["Schwarzschild", {"HarmonicCoordinates", "ScalarFunctionValues"}] =
+    Function[{coords, params},
+        With[{t = coords[[1]], x = coords[[2]], y = coords[[c3]], z = coords[[4]], m = params[[1]]},
 			{Sqrt[x^2 + y^2 + z^2]}
         ]
     ]
