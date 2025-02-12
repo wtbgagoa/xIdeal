@@ -185,6 +185,8 @@ PerfectFluidQ::usage = " ";
 
 PerfectFluidVariables::usage = " ";
 
+Rframe::usage = " ";
+
 (* ::Section:: *)
 (* Messages *)
 
