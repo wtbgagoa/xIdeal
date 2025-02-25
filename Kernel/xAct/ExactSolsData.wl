@@ -1,10 +1,22 @@
 BeginPackage["xAct`ExactSolsData`"]
 
+(* ::Section:: *)
+(* Usage information *)
+
 GenRelExactSolsData::usage = " ";
+
+(* ::Section:: *)
+(* Messages *)
+
+GenRelExactSolsData::noprop = "Unknown argument or property";
+
+(* ::Section:: *)
+(* BeginPrivate *)
 
 Begin["xAct`xIdeal`Private`"]
 
 (* ::Section:: *)
+(* all metrics, classes, properties and coordinate systems *)
 allmetrics = {
 	"BertottiRobinsonSolution",
 	"ElectroVacTypeD",
@@ -1733,62 +1745,19 @@ coordinatesystemQ[_] := False;
 
 iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "Properties"}] := allcoordinateproperties
 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "CoordinateAssumptions"}] := 
-	If[
-		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
-		(* TODO: error control *)
-		Throw[$Failed],
-		exactSolsData[metric, {coordname, "CoordinateAssumptions"}]
-	]
-	
- 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "CoordinateNames"}] := 
-	If[
-		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
-		(* TODO: error control *)
-		Throw[$Failed],
-		exactSolsData[metric, {coordname, "CoordinateNames"}]
-	]
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "CoordinateAssumptions"}] := exactSolsData[metric, {coordname, "CoordinateAssumptions"}]
+	 
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "CoordinateNames"}] := exactSolsData[metric, {coordname, "CoordinateNames"}]
 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "Metric"}] :=
-	If[
-		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
-		(* TODO: error control *)
-		Throw[$Failed],
-		exactSolsData[metric, {coordname, "Metric"}]
-	]
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "Metric"}] := exactSolsData[metric, {coordname, "Metric"}]
 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ParameterNames"}] :=
-	If[
-		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
-		(* TODO: error control *)
-		Throw[$Failed],
-		exactSolsData[metric, {coordname, "ParameterNames"}]
-	]
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ParameterNames"}] := exactSolsData[metric, {coordname, "ParameterNames"}]
 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ParameterAssumptions"}] :=
-	If[
-		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
-		(* TODO: error control *)
-		Throw[$Failed],
-		exactSolsData[metric, {coordname, "ParameterAssumptions"}]
-	]
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ParameterAssumptions"}] := exactSolsData[metric, {coordname, "ParameterAssumptions"}]
 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ScalarFunctionNames"}] :=
-	If[
-		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
-		(* TODO: error control *)
-		Throw[$Failed],
-		exactSolsData[metric, {coordname, "ScalarFunctionNames"}]
-	]
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ScalarFunctionNames"}] := exactSolsData[metric, {coordname, "ScalarFunctionNames"}]
 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ScalarFunctionValues"}] :=
-	If[
-		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
-		(* TODO: error control *)
-		Throw[$Failed],
-		exactSolsData[metric, {coordname, "ScalarFunctionValues"}]
-	]
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ScalarFunctionValues"}] := exactSolsData[metric, {coordname, "ScalarFunctionValues"}]q
 
 (* ::Subsection:: *)
 (* General definitions *)
@@ -1808,7 +1777,7 @@ iGenRelExactSolsData[class_?exactsolclassQ] := exactSolsData[class]
 iGenRelExactSolsData[___] := $Failed;
 
 (* Entry point of GenRelExactSolsData *)
-GenRelExactSolsData[args___]:= Module[{res = iGenRelExactSolsData[args]}, (res/; UnsameQ[res, $Failed])]
+GenRelExactSolsData[args___]:= Module[{res = iGenRelExactSolsData[args]}, If[UnsameQ[res, $Failed], res, Message[GenRelExactSolsData::noprop]]]
 
 (****************************************************************)
 
