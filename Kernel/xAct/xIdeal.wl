@@ -2910,12 +2910,12 @@ ConnectionTensor[metric_CTensor, opts : OptionsPattern[]] :=
 			If[
 				e0 =!= Null && e1 =!= Null && e2 =!= Null && e3 =!= Null,
 					time = AbsoluteTime[];
-					connectionTens = -(1/2) (-(cd[a1][e0[b1]] e0[c1] - cd[a1][e0[c1]] e0[b1]) + (cd[a1][e1[b1]] e1[c1] - cd[a1][e1[c1]] e1[b1]) + 
-						(cd[a1][e2[b1]] e2[c1] - cd[a1][e2[c1]] e2[b1]) + (cd[a1][e3[b1]] e3[c1] - cd[a1][e3[c1]] e3[b1]));
+					connectionTens = -(1/2) (-(cd[-a1][e0[-b1]] e0[-c1] - cd[-a1][e0[-c1]] e0[-b1]) + (cd[-a1][e1[-b1]] e1[-c1] - cd[-a1][e1[-c1]] e1[-b1]) + 
+						(cd[-a1][e2[-b1]] e2[-c1] - cd[-a1][e2[-c1]] e2[-b1]) + (cd[-a1][e3[-b1]] e3[-c1] - cd[-a1][e3[-c1]] e3[-b1]));
 					If[vb, 
 						Print["** ReportCompute: computing \"ConnectionTensor\" in ", AbsoluteTime[] - time, " seconds:"]
 					];
-					connectionTens = HeadOfTensor[connectionTens, {a1, b1, c1}];
+					connectionTens = HeadOfTensor[connectionTens, {-a1, -b1, -c1}];
 					time = AbsoluteTime[];
 					connectionTens = simplf[connectionTens];
 					If[vb,
