@@ -1,10 +1,22 @@
 BeginPackage["xAct`ExactSolsData`"]
 
+(* ::Section:: *)
+(* Usage information *)
+
 GenRelExactSolsData::usage = " ";
+
+(* ::Section:: *)
+(* Messages *)
+
+GenRelExactSolsData::noprop = "Unknown argument or property";
+
+(* ::Section:: *)
+(* BeginPrivate *)
 
 Begin["xAct`xIdeal`Private`"]
 
 (* ::Section:: *)
+(* all metrics, classes, properties and coordinate systems *)
 allmetrics = {
 	"BertottiRobinsonSolution",
 	"ElectroVacTypeD",
@@ -128,6 +140,7 @@ allcoordinatesystems = {
 	"ComplexCoordinates",
 	"ExpansionGradientAdaptedCoordinates",
 	"GroupGeneratorsAdaptedCoordinates",
+	"HarmonicCoordinates",
  	"IsotropicCoordinates",
   	"ReducedCircumferencePolarCoordinates",
  	"SchwarzschildCoordinates",
@@ -1255,7 +1268,7 @@ exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "Metric"}] =
 (* Schwarzschild in Schwarzschild coordinates *)
 exactSolsData["Schwarzschild", "Classes"] = {"PetrovTypeD", "Static", "SphericalSymmetry", "Vacuum", "VacuumTypeD"}
 
-exactSolsData["Schwarzschild", "CoordinateSystems"] = {"SchwarzschildCoordinates", "IsotropicCoordinates"}
+exactSolsData["Schwarzschild", "CoordinateSystems"] = {"SchwarzschildCoordinates", "IsotropicCoordinates", "HarmonicCoordinates"}
 
 exactSolsData["Schwarzschild", "DefaultCoordinates"] = "SchwarzschildCoordinates"
 
@@ -1340,6 +1353,75 @@ exactSolsData["Schwarzschild", {"IsotropicCoordinates", "Metric"}] =
 exactSolsData["Schwarzschild", {"IsotropicCoordinates", "ScalarFunctionValues"}] =
     Function[{coords, params},
         With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], m = params[[1]]},
+			{Sqrt[x^2 + y^2 + z^2]}
+        ]
+    ]
+
+	(* ::Subsection:: *)
+(* Schwarzschild in harmonic coordinates *)
+
+exactSolsData["Schwarzschild", {"HarmonicCoordinates", "ParameterNames"}] = {"m"}
+
+exactSolsData["Schwarzschild", {"HarmonicCoordinates", "ParameterAssumptions"}] =
+    Function[{coords, params, scfuncs},
+        With[{m = params[[1]]},
+            m > 0
+        ]
+    ]
+
+exactSolsData["Schwarzschild", {"HarmonicCoordinates", "ScalarFunctionNames"}] = {"R"}
+
+exactSolsData["Schwarzschild", {"HarmonicCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
+
+exactSolsData["Schwarzschild", {"HarmonicCoordinates", "CoordinateAssumptions"}] =
+    Function[{coords, params, scfuncs},
+        With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = 
+            coords[[4]], m = params[[1]], R = scfuncs[[1]]},
+            Quiet[R =
+                Function[{x, y, z},
+                    Sqrt[x^2 + y^2 + z^2]
+                ]
+			];
+            m >= 0 && R[x, y, z] >  m
+        ]
+    ]
+
+exactSolsData["Schwarzschild", {"HarmonicCoordinates", "Metric"}] =
+    Function[{coords, params, scfuncs},
+        With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = 
+            coords[[4]], m = params[[1]], r = scfuncs[[1]]},
+            Quiet[r =
+                Function[{x, y, z},
+                    Sqrt[x^2 + y^2 + z^2]
+                ]
+			];
+			{
+				{(1 - m/r[x, y, z])/(1 + m/r[x, y, z]), 0, 0, 0}, 
+				{	
+					0, 
+					-(1 + m/r[x, y, z])^2 - (m^2 x^2 (1 + m / r[x, y, z]))/((1 - m / r[x, y, z]) r[x, y, z]^4), 
+					-((m^2 x y (1 + m/r[x, y, z]))/((1 - m/r[x, y, z]) r[x, y, z]^4)), 
+					-((m^2 x z (1 + m/r[x, y, z]))/((1 - m/r[x, y, z]) r[x, y, z]^4))
+				}, 
+				{	
+					0, 
+					-((m^2 x y (1 + m/r[x, y, z]))/((1 - m/r[x, y, z]) r[x, y, z]^4)), 
+					-(1 + m/r[x, y, z])^2 - (m^2 y^2 (1 + m/r[x, y, z]))/((1 - m/r[x, y, z]) r[x, y, z]^4), 
+					-((m^2 y z (1 + m/r[x, y, z]))/((1 - m/r[x, y, z]) r[x, y, z]^4))
+				}, 
+				{	
+					0, 
+					-((m^2 x z (1 + m/r[x, y, z]))/((1 - m/r[x, y, z]) r[x, y, z]^4)), 
+					-((m^2 y z (1 + m/r[x, y, z]))/((1 - m/r[x, y, z]) r[x, y, z]^4)), 
+					-(1 + m/r[x, y, z])^2 - (m^2 z^2 (1 + m/r[x, y, z]))/((1 - m/r[x, y, z]) r[x, y, z]^4)
+				}
+   			}
+        ]
+    ]
+
+exactSolsData["Schwarzschild", {"HarmonicCoordinates", "ScalarFunctionValues"}] =
+    Function[{coords, params},
+        With[{t = coords[[1]], x = coords[[2]], y = coords[[c3]], z = coords[[4]], m = params[[1]]},
 			{Sqrt[x^2 + y^2 + z^2]}
         ]
     ]
@@ -1663,62 +1745,19 @@ coordinatesystemQ[_] := False;
 
 iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "Properties"}] := allcoordinateproperties
 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "CoordinateAssumptions"}] := 
-	If[
-		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
-		(* TODO: error control *)
-		Throw[$Failed],
-		exactSolsData[metric, {coordname, "CoordinateAssumptions"}]
-	]
-	
- 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "CoordinateNames"}] := 
-	If[
-		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
-		(* TODO: error control *)
-		Throw[$Failed],
-		exactSolsData[metric, {coordname, "CoordinateNames"}]
-	]
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "CoordinateAssumptions"}] := exactSolsData[metric, {coordname, "CoordinateAssumptions"}]
+	 
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "CoordinateNames"}] := exactSolsData[metric, {coordname, "CoordinateNames"}]
 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "Metric"}] :=
-	If[
-		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
-		(* TODO: error control *)
-		Throw[$Failed],
-		exactSolsData[metric, {coordname, "Metric"}]
-	]
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "Metric"}] := exactSolsData[metric, {coordname, "Metric"}]
 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ParameterNames"}] :=
-	If[
-		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
-		(* TODO: error control *)
-		Throw[$Failed],
-		exactSolsData[metric, {coordname, "ParameterNames"}]
-	]
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ParameterNames"}] := exactSolsData[metric, {coordname, "ParameterNames"}]
 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ParameterAssumptions"}] :=
-	If[
-		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
-		(* TODO: error control *)
-		Throw[$Failed],
-		exactSolsData[metric, {coordname, "ParameterAssumptions"}]
-	]
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ParameterAssumptions"}] := exactSolsData[metric, {coordname, "ParameterAssumptions"}]
 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ScalarFunctionNames"}] :=
-	If[
-		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
-		(* TODO: error control *)
-		Throw[$Failed],
-		exactSolsData[metric, {coordname, "ScalarFunctionNames"}]
-	]
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ScalarFunctionNames"}] := exactSolsData[metric, {coordname, "ScalarFunctionNames"}]
 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ScalarFunctionValues"}] :=
-	If[
-		FreeQ[exactSolsData[metric, "CoordinateSystems"], coordname],
-		(* TODO: error control *)
-		Throw[$Failed],
-		exactSolsData[metric, {coordname, "ScalarFunctionValues"}]
-	]
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ScalarFunctionValues"}] := exactSolsData[metric, {coordname, "ScalarFunctionValues"}]q
 
 (* ::Subsection:: *)
 (* General definitions *)
@@ -1738,7 +1777,7 @@ iGenRelExactSolsData[class_?exactsolclassQ] := exactSolsData[class]
 iGenRelExactSolsData[___] := $Failed;
 
 (* Entry point of GenRelExactSolsData *)
-GenRelExactSolsData[args___]:= Module[{res = iGenRelExactSolsData[args]}, (res/; UnsameQ[res, $Failed])]
+GenRelExactSolsData[args___]:= Module[{res = iGenRelExactSolsData[args]}, If[UnsameQ[res, $Failed], res, Message[GenRelExactSolsData::noprop]]]
 
 (****************************************************************)
 
