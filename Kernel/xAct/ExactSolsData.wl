@@ -1735,7 +1735,8 @@ allcoordinateproperties = {
 	"Metric",
 	"ParameterNames",
 	"ParameterAssumptions",
-	"ScalarFunctionNames"
+	"ScalarFunctionNames",
+	"ScalarFunctionValues"
 	}
 
 (* Valid coordinate systems *)
@@ -1757,7 +1758,7 @@ iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ParameterA
 
 iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ScalarFunctionNames"}] := exactSolsData[metric, {coordname, "ScalarFunctionNames"}]
 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ScalarFunctionValues"}] := exactSolsData[metric, {coordname, "ScalarFunctionValues"}]q
+iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ScalarFunctionValues"}] := exactSolsData[metric, {coordname, "ScalarFunctionValues"}]
 
 (* ::Subsection:: *)
 (* General definitions *)
