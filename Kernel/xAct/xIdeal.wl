@@ -199,6 +199,8 @@ PetrovType::nospatialmetric = "Invalid spatial metric for spacetime metric `1` o
 
 PetrovType::nopsimplify = "Value `1` for \"PSimplify\" is invalid\" ";
 
+PerfectFluidVariables::noperfectfluid = "Metric `1` is not of the perfect fluid type";
+
 (* ::Section:: *)
 (* BeginPrivate *)
 
@@ -2877,14 +2879,17 @@ PerfectFluidQ[metric_CTensor, opts : OptionsPattern[]] :=
 
 (* TODO: Add the documentation of this function *)
 (* TODO: Check that an arbitrary time-like vector is given *)
-(* TODO: Check that it is indeed a perfect fluid *)
 Options[PerfectFluidVariables] = {PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
 
 PerfectFluidVariables[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch@ 
 		Module[{edens, press, flow},
 			If[Not @ MetricQ @ metric, 
-    					Throw[Message[PetrovType::nometric, metric]]];
+    					Throw[Message[PetrovType::nometric, metric]]
+			];
+			If[Not @ PerfectFluidQ[metric, opts],
+						Throw[Message[PerfectFluidVariables::noperfectfluid, metric]]
+			];
 			edens = metricConcomitant["EnergyDensity"][metric, opts];
 			press = metricConcomitant["Pressure"][metric, opts];
 			flow = metricConcomitant["FluPerFlow"][metric, opts];
