@@ -185,6 +185,8 @@ PerfectFluidQ::usage = " ";
 
 PerfectFluidVariables::usage = " ";
 
+ThermodynamicPerfectFluidQ::usage = " ";
+
 Rframe::usage = " ";
 
 (* ::Section:: *)
@@ -630,6 +632,84 @@ metricConcomitant["FluPerFlow"][metric_CTensor, opts : OptionsPattern[]] :=
 			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"FluPerFlow\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		flow
+	]
+)
+
+metricConcomitant["IndicatrixFunction"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["IndicatrixFunction"][metric, opts] = 
+	Module[{simplf, cart, cd, flow, press, edens, indicatrix, a1, b1, vb, time},
+		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
+		cd = CovDOfMetric[metric];
+		flow = metricConcomitant["FluPerFlow"][metric, opts];
+		press = metricConcomitant["Pressure"][metric, opts];
+		edens = metricConcomitant["EnergyDensity"][metric, opts];
+		time = AbsoluteTime[];
+		indicatrix = (flow[a1] TensorDerivative[CTensor[press, {}], cd][-a1]) / (flow[b1] TensorDerivative[CTensor[edens, {}], cd][-b1]);
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"IndicatrixFunction\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		indicatrix = simplf[indicatrix];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"IndicatrixFunction\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		indicatrix
+	]
+)
+
+metricConcomitant["ThermoFluPerCond"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["ThermoFluPerCond"][metric, opts] = 
+	Module[{simplf, cart, cd, indicatrix, press, edens, dindicatrix, dpress, dedens, a1, b1, c1, cond, vb, time},
+		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 3];
+		cd = CovDOfMetric[metric];
+		press = metricConcomitant["Pressure"][metric, opts];
+		edens = metricConcomitant["EnergyDensity"][metric, opts];
+		indicatrix = metricConcomitant["IndicatrixFunction"][metric, opts];
+		time = AbsoluteTime[];
+		dpress = TensorDerivative[CTensor[press, {}], cd];
+		If[vb, 
+			Print["** ReportCompute: computing the exterior derivative of metric concomitant \"Pressure\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		dpress = simplf[dpress];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to the exterior derivative of metric concomitant \"Pressure\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		dedens = TensorDerivative[CTensor[edens, {}], cd];
+		If[vb, 
+			Print["** ReportCompute: computing the exterior derivative of metric concomitant \"EnergyDensity\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		dedens = simplf[dedens];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to the exterior derivative of metric concomitant \"EnergyDensity\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		dindicatrix = TensorDerivative[CTensor[indicatrix, {}], cd];
+		If[vb, 
+			Print["** ReportCompute: computing the exterior derivative of metric concomitant \"IndicatrixFunction\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		dindicatrix = simplf[dindicatrix];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to the exterior derivative of metric concomitant \"IndicatrixFunction\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		cond = Antisymmetrize[dindicatrix[-a1] dpress[-b1] dedens[-c1], {-a1, -b1, -c1}];
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"ThermoFluPerCond\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		cond = simplf[cond];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"ThermoFluPerCond\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		cond
 	]
 )
 
@@ -2894,6 +2974,25 @@ PerfectFluidVariables[metric_CTensor, opts : OptionsPattern[]] :=
 			press = metricConcomitant["Pressure"][metric, opts];
 			flow = metricConcomitant["FluPerFlow"][metric, opts];
 			{edens, press, flow}
+		]
+
+(* TODO: Add the documentation of this function *)
+(* TODO: Check that an arbitrary time-like vector is given *)
+Options[ThermodynamicPerfectFluidQ] = {Assumptions -> True, PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
+
+ThermodynamicPerfectFluidQ[metric_CTensor, opts : OptionsPattern[]] :=
+	Catch@
+		Module[{},
+			If[Not @ MetricQ @ metric, 
+    					Throw[Message[PetrovType::nometric, metric]]
+			];
+			If[Not @ PerfectFluidQ[metric, opts],
+						Throw[Message[PerfectFluidVariables::noperfectfluid, metric]]
+			];
+			Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
+				cond = metricConcomitant["ThermoFluPerCond"][metric, opts];
+				If[cond === 0, True, False, False]
+			]
 		]
 
 (* ::Section:: *)
