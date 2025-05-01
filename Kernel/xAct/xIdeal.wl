@@ -187,6 +187,8 @@ PerfectFluidVariables::usage = " ";
 
 ThermodynamicPerfectFluidQ::usage = " ";
 
+GenericIdealGasQ::usage = " ";
+
 Rframe::usage = " ";
 
 (* ::Section:: *)
@@ -202,6 +204,8 @@ PetrovType::nospatialmetric = "Invalid spatial metric for spacetime metric `1` o
 PetrovType::nopsimplify = "Value `1` for \"PSimplify\" is invalid\" ";
 
 PerfectFluidVariables::noperfectfluid = "Metric `1` is not of the perfect fluid type";
+
+GenericIdealGasQ::nothermodynamicperfectfluid = "Metric `1` is not of the thermodynamic perfect fluid type";
 
 (* ::Section:: *)
 (* BeginPrivate *)
@@ -708,6 +712,60 @@ metricConcomitant["ThermoFluPerCond"][metric_CTensor, opts : OptionsPattern[]] :
 		cond = simplf[cond];
 		If[vb,
 			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"ThermoFluPerCond\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		cond
+	]
+)
+
+metricConcomitant["GenericIdealGasCond"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["ThermoFluPerCond"][metric, opts] = 
+	Module[{simplf, cart, cd, indicatrix, press, edens, pi, dindicatrix, dpi, a1, b1, cond, vb, time},
+		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
+		cd = CovDOfMetric[metric];
+		press = metricConcomitant["Pressure"][metric, opts];
+		edens = metricConcomitant["EnergyDensity"][metric, opts];
+		indicatrix = metricConcomitant["IndicatrixFunction"][metric, opts];
+		time = AbsoluteTime[];
+		pi = press / edens;
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"Pi\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		pi = simplf[pi];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"Pressure\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		dpi = TensorDerivative[CTensor[pi, {}], cd];
+		If[vb, 
+			Print["** ReportCompute: computing the exterior derivative of metric concomitant \"Pi\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		dpi = simplf[dpi];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to the exterior derivative of metric concomitant \"Pi\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		dindicatrix = TensorDerivative[CTensor[indicatrix, {}], cd];
+		If[vb, 
+			Print["** ReportCompute: computing the exterior derivative of metric concomitant \"IndicatrixFunction\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		dindicatrix = simplf[dindicatrix];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to the exterior derivative of metric concomitant \"IndicatrixFunction\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		cond = Antisymmetrize[dindicatrix[-a1] dpi[-b1], {-a1, -b1}];
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"GenericIdealGasCond\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		cond = simplf[cond];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"GenericIdealGasCond\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		cond
 	]
@@ -2992,6 +3050,28 @@ ThermodynamicPerfectFluidQ[metric_CTensor, opts : OptionsPattern[]] :=
 			];
 			Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
 				cond = metricConcomitant["ThermoFluPerCond"][metric, opts];
+				If[cond === 0, True, False, False]
+			]
+		]
+
+(* TODO: Add the documentation of this function *)
+(* TODO: Check that an arbitrary time-like vector is given *)
+Options[GenericIdealGasQ] = {Assumptions -> True, PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
+
+GenericIdealGasQ[metric_CTensor, opts : OptionsPattern[]] :=
+	Catch@
+		Module[{cond},
+			If[Not @ MetricQ @ metric, 
+    					Throw[Message[PetrovType::nometric, metric]]
+			];
+			If[Not @ PerfectFluidQ[metric, opts],
+						Throw[Message[PerfectFluidVariables::noperfectfluid, metric]]
+			];
+			If[Not @ ThermodynamicPerfectFluidQ[metric, opts],
+						Throw[Message[GenericIdealGasQ::nothermodynamicperfectfluid, metric]]
+			];
+			Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
+				cond = metricConcomitant["GenericIdealGasCond"][metric, opts];
 				If[cond === 0, True, False, False]
 			]
 		]
