@@ -2821,10 +2821,10 @@ SymbolicPositiveQ[x_, OptionsPattern[]] :=
 			Simplify[x] === Zero,
 				False
 			,
-			Simplify[x + Abs[x]] === 0,
+			Simplify[ComplexExpand[x + Abs[x]]] === 0,
 				False
 			,
-			Simplify[x - Abs[x]] === 0,
+			Simplify[ComplexExpand[x - Abs[x]]] === 0,
 				True
 			,
 			True,
