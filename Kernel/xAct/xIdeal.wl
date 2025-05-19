@@ -167,7 +167,7 @@ PetrovType::usage = "PetrovType[metric] returns the Petrov Type of metric.";
 
 DebeverNullDirections::usage = "DebeverNullDirections[metric] returns the multiple Debever null directions of metric.";
 
-TypeDClassify::usage = "TypeDClassify[metric,w] returns the subfamily of vacuum Type D solutions to which metric belongs. To do so, it needs an arbitrary unitary time-like vector w.";
+TypeDClassify::usage = "TypeDClassify[metric, w] returns the subfamily of vacuum Type D solutions to which metric belongs. To do so, it needs an arbitrary unitary time-like vector w.";
 
 PSimplify::usage = " ";
 
@@ -181,13 +181,13 @@ ClearxIdealCache::usage = " ";
 
 SaveExactSolution::usage = " ";
 
-PerfectFluidQ::usage = " ";
+PerfectFluidQ::usage = "PerfectFluidQ[metric, w] returns True if metric is of the perfect fluid type. To do so, it needs an arbitrary unitary time-like vector w.";
 
-PerfectFluidVariables::usage = " ";
+PerfectFluidVariables::usage = "PerfectFluidVariables[metric, w] returns a list with the energy density, the pressure and the fluid flow of metric if it is of the perfect fluid type. To do so, it needs an arbitrary unitary time-like vector w.";
 
-ThermodynamicPerfectFluidQ::usage = " ";
+ThermodynamicPerfectFluidQ::usage = "ThermodynamicPerfectFluidQ[metric, w] returns True if metric is of the thermodynamic perfect fluid type. To do so, it needs an arbitrary unitary time-like vector w.";
 
-GenericIdealGasQ::usage = " ";
+GenericIdealGasQ::usage = "GenericIdealGasQ[metric, w] returns True if metric is of the generic ideal gas type. To do so, it needs an arbitrary unitary time-like vector w.";
 
 Rframe::usage = " ";
 
