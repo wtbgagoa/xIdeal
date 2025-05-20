@@ -1719,6 +1719,11 @@ iGenRelExactSolsData[metric_?metricQ, "ScalarFunctionNames"] := Module[{coords},
 	exactSolsData[metric, {coords, "ScalarFunctionNames"}]
 ]
 
+iGenRelExactSolsData[metric_?metricQ, "ScalarFunctionValues"] := Module[{coords},
+	coords = exactSolsData[metric, "DefaultCoordinates"];
+	exactSolsData[metric, {coords, "ScalarFunctionValues"}]
+]
+
 iGenRelExactSolsData[metric_?metricQ, "Metric"] := Module[{coords},
 	coords = exactSolsData[metric, "DefaultCoordinates"];
 	exactSolsData[metric, {coords, "Metric"}]
