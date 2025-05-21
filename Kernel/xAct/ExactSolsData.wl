@@ -1331,30 +1331,31 @@ exactSolsData["Schwarzschild", {"IsotropicCoordinates", "CoordinateAssumptions"}
     ]
 
 exactSolsData["Schwarzschild", {"IsotropicCoordinates", "Metric"}] =
-    Function[{coords, params, scfuncs},
-        With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = 
-            coords[[4]], m = params[[1]], R = scfuncs[[1]]},
-            Quiet[R =
-                Function[{x, y, z},
-                    Sqrt[x^2 + y^2 + z^2]
-                ]
-			];
-            DiagonalMatrix[
-				{
-					-((1 - m / (2 * R[x, y, z])) ^ 2 / (1 + m / (2 * R[x, y, z])) ^ 2), 
-					(1 + m / (2 * R[x, y, z])) ^ 4, 
-					(1 + m / (2 * R[x, y, z])) ^ 4, 
-					(1 + m / (2 * R[x, y, z])) ^ 4
-				}
-			]
-        ]
+  Function[
+    Module[{t, x, y, z, m, R},
+      (* unpack coords and params *)
+      {t, x, y, z} = Slot[1];
+      m = Slot[2][[1]];
+	  R = Slot[3][[1]];
+
+      (* here R is local to this Module *)
+      R = Function[{x, y, z},
+        Sqrt[x^2 + y^2 + z^2]
+      ];
+
+      (* build the metric as before *)
+      DiagonalMatrix[{
+        -((1 - m/(2 R[x, y, z]))^2/(1 + m/(2 R[x, y, z]))^2),
+         (1 + m/(2 R[x, y, z]))^4,
+         (1 + m/(2 R[x, y, z]))^4,
+         (1 + m/(2 R[x, y, z]))^4
+      }]
     ]
+  ];
 
 exactSolsData["Schwarzschild", {"IsotropicCoordinates", "ScalarFunctionValues"}] =
-    Function[{coords, params},
-        With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], m = params[[1]]},
-			{Sqrt[x^2 + y^2 + z^2]}
-        ]
+    Function[
+			{Sqrt[Slot[1][[1]]^2 + Slot[1][[2]]^2 + Slot[1][[3]]^2]}
     ]
 
 	(* ::Subsection:: *)
