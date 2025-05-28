@@ -203,9 +203,31 @@ PetrovType::nospatialmetric = "Invalid spatial metric for spacetime metric `1` o
 
 PetrovType::nopsimplify = "Value `1` for \"PSimplify\" is invalid\" ";
 
+DebeverNullDirections::nometric = "Metric `1` has not been registered as a metric";
+
+TypeDClassify::nometric = "Metric `1` has not been registered as a metric";
+
+KerrSolutionQ::nometric = "Metric `1` has not been registered as a metric";
+
+PerfectFluidQ::nometric = "Metric `1` has not been registered as a metric";
+
+PerfectFluidVariables::nometric = "Metric `1` has not been registered as a metric";
+
 PerfectFluidVariables::noperfectfluid = "Metric `1` is not of the perfect fluid type";
 
+ThermodynamicPerfectFluidQ::nometric = "Metric `1` has not been registered as a metric";
+
+ThermodynamicPerfectFluidQ::noperfectfluid = "Metric `1` is not of the perfect fluid type";
+
+GenericIdealGasQ::nometric = "Metric `1` has not been registered as a metric";
+
+GenericIdealGasQ::noperfectfluid = "Metric `1` is not of the perfect fluid type";
+
 GenericIdealGasQ::nothermodynamicperfectfluid = "Metric `1` is not of the thermodynamic perfect fluid type";
+
+ConnectionTensor::nometric = "Metric `1` has not been registered as a metric";
+
+IsometryGroupDimension::nometric = "Metric `1` has not been registered as a metric";
 
 (* ::Section:: *)
 (* BeginPrivate *)
@@ -2738,7 +2760,7 @@ DebeverNullDirections[metric_CTensor, opts : OptionsPattern[]] :=
 debeverNullDirections1[metric_CTensor, opts : OptionsPattern[]] :=
 Catch@ Module[{ptype},
 		If[Not @ MetricQ @ metric,
-			Throw[Message[PetrovType::nometric, metric]]
+			Throw[Message[DebeverNullDirections::nometric, metric]]
 		];
   		ptype = PetrovType[metric, opts];
 		Which[
@@ -2771,7 +2793,7 @@ Catch@ Module[{ptype},
 debeverNullDirections2[metric_CTensor, opts : OptionsPattern[]] :=
 Catch@ Module[{ptype},
 		If[Not @ MetricQ @ metric,
-			Throw[Message[PetrovType::nometric, metric]]
+			Throw[Message[DebeverNullDirections::nometric, metric]]
 		];
   		ptype = PetrovType[metric, opts];
 		Which[
@@ -2840,7 +2862,7 @@ TypeDClassify[metric_CTensor, w_CTensor, opts : OptionsPattern[]] :=
 		Module[{cart, cd, W, RicciCD, epsilonmetric, logrho, TrW3, rho, drho, dlogrho, alpha, S, P, Q, C3, a, b, c, d, e,
 			 f, i, j, k, l, C5, assumptions, simplf},
 			If[Not @ MetricQ @ metric,
-				Throw[Message[PetrovType::nometric, metric]]
+				Throw[Message[TypeDClassify::nometric, metric]]
 			];
 			assumptions = OptionValue[Assumptions];
    			simplf = OptionValue[PSimplify];
@@ -2950,7 +2972,7 @@ Catch @
 		Module[{cart, cd, weylcd, epsilonmetric, weyldual, weylselfdual, g2form, weylselfdual2, weylselfdual3, aa, bb,
 			 rho, a1, b1, c1, d1, e1, f1, simplf, w, z, xi, riccicd, z1, z2, modz},
 			If[Not @ MetricQ @ metric,
-				Throw[Message[PetrovType::nometric, metric]]
+				Throw[Message[KerrSolutionQ::nometric, metric]]
 			];
 			simplf = OptionValue[PSimplify];
 			cart = Part[metric, 2, 1, -1];
@@ -3008,7 +3030,7 @@ PerfectFluidQ[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch@ 
 		Module[{cond1, cond2},
 			If[Not @ MetricQ @ metric, 
-    					Throw[Message[PetrovType::nometric, metric]]];
+    					Throw[Message[PerfectFluidQ::nometric, metric]]];
 			Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
 				cond1 = metricConcomitant["FluPerCond1"][metric, opts];
 				cond2 = metricConcomitant["FluPerCond2"][metric, opts];
@@ -3024,7 +3046,7 @@ PerfectFluidVariables[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch@ 
 		Module[{edens, press, flow},
 			If[Not @ MetricQ @ metric, 
-    					Throw[Message[PetrovType::nometric, metric]]
+    					Throw[Message[PerfectFluidVariables::nometric, metric]]
 			];
 			If[Not @ PerfectFluidQ[metric, opts],
 						Throw[Message[PerfectFluidVariables::noperfectfluid, metric]]
@@ -3043,10 +3065,10 @@ ThermodynamicPerfectFluidQ[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch@
 		Module[{cond},
 			If[Not @ MetricQ @ metric, 
-    					Throw[Message[PetrovType::nometric, metric]]
+    					Throw[Message[ThermodynamicPerfectFluidQ::nometric, metric]]
 			];
 			If[Not @ PerfectFluidQ[metric, opts],
-						Throw[Message[PerfectFluidVariables::noperfectfluid, metric]]
+						Throw[Message[ThermodynamicPerfectFluidQ::noperfectfluid, metric]]
 			];
 			Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
 				cond = metricConcomitant["ThermoFluPerCond"][metric, opts];
@@ -3062,10 +3084,10 @@ GenericIdealGasQ[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch@
 		Module[{cond},
 			If[Not @ MetricQ @ metric, 
-    					Throw[Message[PetrovType::nometric, metric]]
+    					Throw[Message[GenericIdealGasQ::nometric, metric]]
 			];
 			If[Not @ PerfectFluidQ[metric, opts],
-						Throw[Message[PerfectFluidVariables::noperfectfluid, metric]]
+						Throw[Message[GenericIdealGasQ::noperfectfluid, metric]]
 			];
 			If[Not @ ThermodynamicPerfectFluidQ[metric, opts],
 						Throw[Message[GenericIdealGasQ::nothermodynamicperfectfluid, metric]]
@@ -3088,7 +3110,7 @@ ConnectionTensor[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch@ 
 		Module[{simplf, e0, e1, e2, e3, connectionTens, cart, cd, a1, b1, c1, vb, time},
 			If[Not@MetricQ@metric, 
-    				Throw[Message[IsometryGroupDimension::nometric, metric]]];
+    				Throw[Message[ConnectionTensor::nometric, metric]]];
 			{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 			{e0, e1, e2, e3} = OptionValue[Rframe];
 			cart = Part[metric, 2, 1, -1];
