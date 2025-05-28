@@ -3035,6 +3035,9 @@ PerfectFluidQ[metric_CTensor, opts : OptionsPattern[]] :=
 				cond1 = metricConcomitant["FluPerCond1"][metric, opts];
 				cond2 = metricConcomitant["FluPerCond2"][metric, opts];
 				Which[
+					SymbolicPositiveQ[cond2] === "Unknown",
+						"Unknown"
+					,
 					cond1 === Zero && SymbolicPositiveQ[cond2],
 						True
 					,
