@@ -2850,7 +2850,7 @@ SymbolicPositiveQ[x_, OptionsPattern[]] :=
 				True
 			,
 			True,
-				"Undefined"
+				"Unknown"
 		]
 	]
 
@@ -3034,13 +3034,28 @@ PerfectFluidQ[metric_CTensor, opts : OptionsPattern[]] :=
 			Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
 				cond1 = metricConcomitant["FluPerCond1"][metric, opts];
 				cond2 = metricConcomitant["FluPerCond2"][metric, opts];
-				If[cond1 === Zero && SymbolicPositiveQ[cond2], True, False, False]
+				Which[
+					cond1 === Zero && SymbolicPositiveQ[cond2],
+						True
+					,
+					Not[cond1 === Zero] && SymbolicPositiveQ[cond2],
+						False
+					,
+					cond1 === Zero && Not[SymbolicPositiveQ[cond2]],
+						False
+					,
+					Not[cond1 === Zero] && Not[SymbolicPositiveQ[cond2]],
+						False
+					,
+					True,
+						"Unknown"
+				]
 			]
 		]
 
 (* TODO: Add the documentation of this function *)
 (* TODO: Check that an arbitrary time-like vector is given *)
-Options[PerfectFluidVariables] = {PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
+Options[PerfectFluidVariables] = {Assumptions -> True, PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
 
 PerfectFluidVariables[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch@ 
