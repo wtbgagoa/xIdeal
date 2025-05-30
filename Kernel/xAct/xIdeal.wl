@@ -189,6 +189,8 @@ ThermodynamicPerfectFluidQ::usage = "ThermodynamicPerfectFluidQ[metric, w] retur
 
 GenericIdealGasQ::usage = "GenericIdealGasQ[metric, w] returns True if metric is of the generic ideal gas type. To do so, it needs an arbitrary unitary time-like vector w.";
 
+StephaniUniverseQ::usage = "StephaniUniverseQ[metric, w] returns True if metric is a Stephani Universe. To do so, it needs an arbitrary unitary time-like vector w.";
+
 Rframe::usage = " ";
 
 (* ::Section:: *)
@@ -224,6 +226,8 @@ GenericIdealGasQ::nometric = "Metric `1` has not been registered as a metric";
 GenericIdealGasQ::noperfectfluid = "Metric `1` is not of the perfect fluid type";
 
 GenericIdealGasQ::nothermodynamicperfectfluid = "Metric `1` is not of the thermodynamic perfect fluid type";
+
+StephaniUniverseQ::nometric = "Metric `1` has not been registered as a metric";
 
 ConnectionTensor::nometric = "Metric `1` has not been registered as a metric";
 
@@ -790,6 +794,27 @@ metricConcomitant["GenericIdealGasCond"][metric_CTensor, opts : OptionsPattern[]
 			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"GenericIdealGasCond\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		cond
+	]
+)
+
+metricConcomitant["dEnergyDensity"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["dEnergyDensity"][metric, opts] = 
+	Module[{simplf, cart, cd, edens, dedens, vb, time},
+		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
+		cart = Part[metric, 2, 1, -1];
+		cd = CovDOfMetric[metric];
+		edens = metricConcomitant["EnergyDensity"][metric, opts];
+		time = AbsoluteTime[];
+		dedens = TensorDerivative[CTensor[edens, {}], cd];
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"dEnergyDensity\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		dedens = simplf[dedens];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"dEnergyDensity\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		dedens
 	]
 )
 
@@ -3109,6 +3134,48 @@ GenericIdealGasQ[metric_CTensor, opts : OptionsPattern[]] :=
 			Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
 				cond = metricConcomitant["GenericIdealGasCond"][metric, opts];
 				If[cond === 0, True, False, False]
+			]
+		]
+
+(* ::Section:: *)
+(* Identification of the Stephani Universes *)
+
+(* TODO: Add the documentation of this function *)
+(* TODO: Check that an arbitrary time-like vector is given *)
+Options[StephaniUniverseQ] = {Assumptions -> True, PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
+
+StephaniUniverseQ[metric_CTensor, opts : OptionsPattern[]] :=
+	Catch@ 
+		Module[{weylcd, cond1, cond2, dedens},
+			If[Not @ MetricQ @ metric, 
+    					Throw[Message[StephaniUniverseQ::nometric, metric]]];
+			Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
+				weylcd = weylConcomitant["Weyl"][metric, opts];
+				cond1 = metricConcomitant["FluPerCond1"][metric, opts];
+				cond2 = metricConcomitant["FluPerCond2"][metric, opts];
+				dedens = metricConcomitant["dEnergyDensity"][metric, opts];
+				Which[
+					SymbolicPositiveQ[cond2] === "Unknown",
+						"Unknown"
+					,
+					weylcd === Zero && cond1 === Zero && SymbolicPositiveQ[cond2] && Not[dedens === Zero],
+						True
+					,
+					Not[weylcd === Zero],
+						False
+					,
+					Not[cond1 === Zero],
+						False
+					,
+					Not[SymbolicPositiveQ[cond2]],
+						False
+					,
+					dedens === Zero,
+						False
+					,
+					True,
+						"Unknown"
+				]
 			]
 		]
 

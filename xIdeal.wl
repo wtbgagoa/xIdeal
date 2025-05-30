@@ -167,7 +167,7 @@ PetrovType::usage = "PetrovType[metric] returns the Petrov Type of metric.";
 
 DebeverNullDirections::usage = "DebeverNullDirections[metric] returns the multiple Debever null directions of metric.";
 
-TypeDClassify::usage = "TypeDClassify[metric,w] returns the subfamily of vacuum Type D solutions to which metric belongs. To do so, it needs an arbitrary unitary time-like vector w.";
+TypeDClassify::usage = "TypeDClassify[metric, w] returns the subfamily of vacuum Type D solutions to which metric belongs. To do so, it needs an arbitrary unitary time-like vector w.";
 
 PSimplify::usage = " ";
 
@@ -181,13 +181,15 @@ ClearxIdealCache::usage = " ";
 
 SaveExactSolution::usage = " ";
 
-PerfectFluidQ::usage = " ";
+PerfectFluidQ::usage = "PerfectFluidQ[metric, w] returns True if metric is of the perfect fluid type. To do so, it needs an arbitrary unitary time-like vector w.";
 
-PerfectFluidVariables::usage = " ";
+PerfectFluidVariables::usage = "PerfectFluidVariables[metric, w] returns a list with the energy density, the pressure and the fluid flow of metric if it is of the perfect fluid type. To do so, it needs an arbitrary unitary time-like vector w.";
 
-ThermodynamicPerfectFluidQ::usage = " ";
+ThermodynamicPerfectFluidQ::usage = "ThermodynamicPerfectFluidQ[metric, w] returns True if metric is of the thermodynamic perfect fluid type. To do so, it needs an arbitrary unitary time-like vector w.";
 
-GenericIdealGasQ::usage = " ";
+GenericIdealGasQ::usage = "GenericIdealGasQ[metric, w] returns True if metric is of the generic ideal gas type. To do so, it needs an arbitrary unitary time-like vector w.";
+
+StephaniUniverseQ::usage = "StephaniUniverseQ[metric, w] returns True if metric is a Stephani Universe. To do so, it needs an arbitrary unitary time-like vector w.";
 
 Rframe::usage = " ";
 
@@ -203,9 +205,33 @@ PetrovType::nospatialmetric = "Invalid spatial metric for spacetime metric `1` o
 
 PetrovType::nopsimplify = "Value `1` for \"PSimplify\" is invalid\" ";
 
+DebeverNullDirections::nometric = "Metric `1` has not been registered as a metric";
+
+TypeDClassify::nometric = "Metric `1` has not been registered as a metric";
+
+KerrSolutionQ::nometric = "Metric `1` has not been registered as a metric";
+
+PerfectFluidQ::nometric = "Metric `1` has not been registered as a metric";
+
+PerfectFluidVariables::nometric = "Metric `1` has not been registered as a metric";
+
 PerfectFluidVariables::noperfectfluid = "Metric `1` is not of the perfect fluid type";
 
+ThermodynamicPerfectFluidQ::nometric = "Metric `1` has not been registered as a metric";
+
+ThermodynamicPerfectFluidQ::noperfectfluid = "Metric `1` is not of the perfect fluid type";
+
+GenericIdealGasQ::nometric = "Metric `1` has not been registered as a metric";
+
+GenericIdealGasQ::noperfectfluid = "Metric `1` is not of the perfect fluid type";
+
 GenericIdealGasQ::nothermodynamicperfectfluid = "Metric `1` is not of the thermodynamic perfect fluid type";
+
+StephaniUniverseQ::nometric = "Metric `1` has not been registered as a metric";
+
+ConnectionTensor::nometric = "Metric `1` has not been registered as a metric";
+
+IsometryGroupDimension::nometric = "Metric `1` has not been registered as a metric";
 
 (* ::Section:: *)
 (* BeginPrivate *)
@@ -768,6 +794,27 @@ metricConcomitant["GenericIdealGasCond"][metric_CTensor, opts : OptionsPattern[]
 			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"GenericIdealGasCond\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		cond
+	]
+)
+
+metricConcomitant["dEnergyDensity"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["dEnergyDensity"][metric, opts] = 
+	Module[{simplf, cart, cd, edens, dedens, vb, time},
+		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
+		cart = Part[metric, 2, 1, -1];
+		cd = CovDOfMetric[metric];
+		edens = metricConcomitant["EnergyDensity"][metric, opts];
+		time = AbsoluteTime[];
+		dedens = TensorDerivative[CTensor[edens, {}], cd];
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"dEnergyDensity\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		dedens = simplf[dedens];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"dEnergyDensity\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		dedens
 	]
 )
 
@@ -2738,7 +2785,7 @@ DebeverNullDirections[metric_CTensor, opts : OptionsPattern[]] :=
 debeverNullDirections1[metric_CTensor, opts : OptionsPattern[]] :=
 Catch@ Module[{ptype},
 		If[Not @ MetricQ @ metric,
-			Throw[Message[PetrovType::nometric, metric]]
+			Throw[Message[DebeverNullDirections::nometric, metric]]
 		];
   		ptype = PetrovType[metric, opts];
 		Which[
@@ -2771,7 +2818,7 @@ Catch@ Module[{ptype},
 debeverNullDirections2[metric_CTensor, opts : OptionsPattern[]] :=
 Catch@ Module[{ptype},
 		If[Not @ MetricQ @ metric,
-			Throw[Message[PetrovType::nometric, metric]]
+			Throw[Message[DebeverNullDirections::nometric, metric]]
 		];
   		ptype = PetrovType[metric, opts];
 		Which[
@@ -2828,7 +2875,7 @@ SymbolicPositiveQ[x_, OptionsPattern[]] :=
 				True
 			,
 			True,
-				"Undefined"
+				"Unknown"
 		]
 	]
 
@@ -2840,7 +2887,7 @@ TypeDClassify[metric_CTensor, w_CTensor, opts : OptionsPattern[]] :=
 		Module[{cart, cd, W, RicciCD, epsilonmetric, logrho, TrW3, rho, drho, dlogrho, alpha, S, P, Q, C3, a, b, c, d, e,
 			 f, i, j, k, l, C5, assumptions, simplf},
 			If[Not @ MetricQ @ metric,
-				Throw[Message[PetrovType::nometric, metric]]
+				Throw[Message[TypeDClassify::nometric, metric]]
 			];
 			assumptions = OptionValue[Assumptions];
    			simplf = OptionValue[PSimplify];
@@ -2950,7 +2997,7 @@ Catch @
 		Module[{cart, cd, weylcd, epsilonmetric, weyldual, weylselfdual, g2form, weylselfdual2, weylselfdual3, aa, bb,
 			 rho, a1, b1, c1, d1, e1, f1, simplf, w, z, xi, riccicd, z1, z2, modz},
 			If[Not @ MetricQ @ metric,
-				Throw[Message[PetrovType::nometric, metric]]
+				Throw[Message[KerrSolutionQ::nometric, metric]]
 			];
 			simplf = OptionValue[PSimplify];
 			cart = Part[metric, 2, 1, -1];
@@ -3000,7 +3047,6 @@ Catch @
 (* ::Section:: *)
 (* Perfect fluid characterization *)
 
-(* TODO: Add the documentation of this function *)
 (* TODO: Check that an arbitrary time-like vector is given *)
 Options[PerfectFluidQ] = {Assumptions -> True, PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
 
@@ -3008,23 +3054,40 @@ PerfectFluidQ[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch@ 
 		Module[{cond1, cond2},
 			If[Not @ MetricQ @ metric, 
-    					Throw[Message[PetrovType::nometric, metric]]];
+    					Throw[Message[PerfectFluidQ::nometric, metric]]];
 			Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
 				cond1 = metricConcomitant["FluPerCond1"][metric, opts];
 				cond2 = metricConcomitant["FluPerCond2"][metric, opts];
-				If[cond1 === Zero && SymbolicPositiveQ[cond2], True, False, False]
+				Which[
+					SymbolicPositiveQ[cond2] === "Unknown",
+						"Unknown"
+					,
+					cond1 === Zero && SymbolicPositiveQ[cond2],
+						True
+					,
+					Not[cond1 === Zero] && SymbolicPositiveQ[cond2],
+						False
+					,
+					cond1 === Zero && Not[SymbolicPositiveQ[cond2]],
+						False
+					,
+					Not[cond1 === Zero] && Not[SymbolicPositiveQ[cond2]],
+						False
+					,
+					True,
+						"Unknown"
+				]
 			]
 		]
 
-(* TODO: Add the documentation of this function *)
 (* TODO: Check that an arbitrary time-like vector is given *)
-Options[PerfectFluidVariables] = {PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
+Options[PerfectFluidVariables] = {Assumptions -> True, PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
 
 PerfectFluidVariables[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch@ 
 		Module[{edens, press, flow},
 			If[Not @ MetricQ @ metric, 
-    					Throw[Message[PetrovType::nometric, metric]]
+    					Throw[Message[PerfectFluidVariables::nometric, metric]]
 			];
 			If[Not @ PerfectFluidQ[metric, opts],
 						Throw[Message[PerfectFluidVariables::noperfectfluid, metric]]
@@ -3035,7 +3098,6 @@ PerfectFluidVariables[metric_CTensor, opts : OptionsPattern[]] :=
 			{edens, press, flow}
 		]
 
-(* TODO: Add the documentation of this function *)
 (* TODO: Check that an arbitrary time-like vector is given *)
 Options[ThermodynamicPerfectFluidQ] = {Assumptions -> True, PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
 
@@ -3043,10 +3105,10 @@ ThermodynamicPerfectFluidQ[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch@
 		Module[{cond},
 			If[Not @ MetricQ @ metric, 
-    					Throw[Message[PetrovType::nometric, metric]]
+    					Throw[Message[ThermodynamicPerfectFluidQ::nometric, metric]]
 			];
 			If[Not @ PerfectFluidQ[metric, opts],
-						Throw[Message[PerfectFluidVariables::noperfectfluid, metric]]
+						Throw[Message[ThermodynamicPerfectFluidQ::noperfectfluid, metric]]
 			];
 			Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
 				cond = metricConcomitant["ThermoFluPerCond"][metric, opts];
@@ -3054,7 +3116,6 @@ ThermodynamicPerfectFluidQ[metric_CTensor, opts : OptionsPattern[]] :=
 			]
 		]
 
-(* TODO: Add the documentation of this function *)
 (* TODO: Check that an arbitrary time-like vector is given *)
 Options[GenericIdealGasQ] = {Assumptions -> True, PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
 
@@ -3062,10 +3123,10 @@ GenericIdealGasQ[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch@
 		Module[{cond},
 			If[Not @ MetricQ @ metric, 
-    					Throw[Message[PetrovType::nometric, metric]]
+    					Throw[Message[GenericIdealGasQ::nometric, metric]]
 			];
 			If[Not @ PerfectFluidQ[metric, opts],
-						Throw[Message[PerfectFluidVariables::noperfectfluid, metric]]
+						Throw[Message[GenericIdealGasQ::noperfectfluid, metric]]
 			];
 			If[Not @ ThermodynamicPerfectFluidQ[metric, opts],
 						Throw[Message[GenericIdealGasQ::nothermodynamicperfectfluid, metric]]
@@ -3073,6 +3134,48 @@ GenericIdealGasQ[metric_CTensor, opts : OptionsPattern[]] :=
 			Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
 				cond = metricConcomitant["GenericIdealGasCond"][metric, opts];
 				If[cond === 0, True, False, False]
+			]
+		]
+
+(* ::Section:: *)
+(* Identification of the Stephani Universes *)
+
+(* TODO: Add the documentation of this function *)
+(* TODO: Check that an arbitrary time-like vector is given *)
+Options[StephaniUniverseQ] = {Assumptions -> True, PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
+
+StephaniUniverseQ[metric_CTensor, opts : OptionsPattern[]] :=
+	Catch@ 
+		Module[{weylcd, cond1, cond2, dedens},
+			If[Not @ MetricQ @ metric, 
+    					Throw[Message[StephaniUniverseQ::nometric, metric]]];
+			Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
+				weylcd = weylConcomitant["Weyl"][metric, opts];
+				cond1 = metricConcomitant["FluPerCond1"][metric, opts];
+				cond2 = metricConcomitant["FluPerCond2"][metric, opts];
+				dedens = metricConcomitant["dEnergyDensity"][metric, opts];
+				Which[
+					SymbolicPositiveQ[cond2] === "Unknown",
+						"Unknown"
+					,
+					weylcd === Zero && cond1 === Zero && SymbolicPositiveQ[cond2] && Not[dedens === Zero],
+						True
+					,
+					Not[weylcd === Zero],
+						False
+					,
+					Not[cond1 === Zero],
+						False
+					,
+					Not[SymbolicPositiveQ[cond2]],
+						False
+					,
+					dedens === Zero,
+						False
+					,
+					True,
+						"Unknown"
+				]
 			]
 		]
 
@@ -3088,7 +3191,7 @@ ConnectionTensor[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch@ 
 		Module[{simplf, e0, e1, e2, e3, connectionTens, cart, cd, a1, b1, c1, vb, time},
 			If[Not@MetricQ@metric, 
-    				Throw[Message[IsometryGroupDimension::nometric, metric]]];
+    				Throw[Message[ConnectionTensor::nometric, metric]]];
 			{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
 			{e0, e1, e2, e3} = OptionValue[Rframe];
 			cart = Part[metric, 2, 1, -1];
