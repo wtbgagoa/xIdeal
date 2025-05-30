@@ -3022,7 +3022,6 @@ Catch @
 (* ::Section:: *)
 (* Perfect fluid characterization *)
 
-(* TODO: Add the documentation of this function *)
 (* TODO: Check that an arbitrary time-like vector is given *)
 Options[PerfectFluidQ] = {Assumptions -> True, PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
 
@@ -3056,7 +3055,6 @@ PerfectFluidQ[metric_CTensor, opts : OptionsPattern[]] :=
 			]
 		]
 
-(* TODO: Add the documentation of this function *)
 (* TODO: Check that an arbitrary time-like vector is given *)
 Options[PerfectFluidVariables] = {Assumptions -> True, PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
 
@@ -3075,7 +3073,6 @@ PerfectFluidVariables[metric_CTensor, opts : OptionsPattern[]] :=
 			{edens, press, flow}
 		]
 
-(* TODO: Add the documentation of this function *)
 (* TODO: Check that an arbitrary time-like vector is given *)
 Options[ThermodynamicPerfectFluidQ] = {Assumptions -> True, PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
 
@@ -3094,7 +3091,6 @@ ThermodynamicPerfectFluidQ[metric_CTensor, opts : OptionsPattern[]] :=
 			]
 		]
 
-(* TODO: Add the documentation of this function *)
 (* TODO: Check that an arbitrary time-like vector is given *)
 Options[GenericIdealGasQ] = {Assumptions -> True, PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
 
