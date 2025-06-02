@@ -189,7 +189,7 @@ ThermodynamicPerfectFluidQ::usage = "ThermodynamicPerfectFluidQ[metric, w] retur
 
 GenericIdealGasQ::usage = "GenericIdealGasQ[metric, w] returns True if metric is of the generic ideal gas type. To do so, it needs an arbitrary unitary time-like vector w.";
 
-StephaniUniverseQ::usage = "StephaniUniverseQ[metric, w] returns True if metric is a Stephani Universe. To do so, it needs an arbitrary unitary time-like vector w.";
+StephaniUniverseQ::usage = "StephaniUniverseQ[metric, w] returns True if metric is a Stephani universe. To do so, it needs an arbitrary unitary time-like vector w.";
 
 Rframe::usage = " ";
 
@@ -815,6 +815,50 @@ metricConcomitant["dEnergyDensity"][metric_CTensor, opts : OptionsPattern[]] :=
 			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"dEnergyDensity\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		dedens
+	]
+)
+
+metricConcomitant["BarotropyCondition"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["dEnergyDensity"][metric, opts] = 
+	Module[{simplf, cart, cd, r, q, dr, dq, a1, b1, barcond, vb, time},
+		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 2];
+		cd = CovDOfMetric[metric];
+		q = metricConcomitant["qScalar"][metric, opts];
+		r = metricConcomitant["rScalar"][metric, opts];
+		time = AbsoluteTime[];
+		dr = TensorDerivative[CTensor[r, {}], cd];
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"dr\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		dr = simplf[dr];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"dr\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		dq = TensorDerivative[CTensor[q, {}], cd];
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"dq\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		dq = simplf[dq];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"dq\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		barcond = Antisymmetrize[dr[-a1] dq[-b1], {-a1, -b1}];
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"BarotropicCondition\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		barcond = HeadOfTensor[barcond, {-a1, -b1}];
+		time = AbsoluteTime[];
+		barcond = simplf[barcond];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"BarotropicCondition\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		barcond
 	]
 )
 
