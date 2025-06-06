@@ -866,6 +866,41 @@ metricConcomitant["BarotropyCondition"][metric_CTensor, opts : OptionsPattern[]]
 	]
 )
 
+metricConcomitant["ShearAndVorticityFreeCond"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["ShearAndVorticityFreeCond"][metric, opts] = 
+	Module[{simplf, cart, cd, u, cduort, gamma, a1, b1, c1, d1, cond, vb, time},
+		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
+		cd = CovDOfMetric[metric];
+		u = metricConcomitant["FluPerFlow"][metric, opts];
+		gamma = metricConcomitant["SpatialMetric"][metric, opts, "Observer"-> u];
+		time = AbsoluteTime[];
+		cduort = gamma[-a1, c1] gamma[-b1, d1] cd[-c1][u[-d1]];
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"CDuOrthogonal\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		cduort = HeadOfTensor[cduort, {-a1, -b1}];
+		time = AbsoluteTime[];
+		cduort = simplf[cduort];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"CDuOrthogonal\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		cond = cduort[-a1, -b1] gamma[-c1, -d1] - cduort[-c1, -d1] gamma[-a1, -b1];
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"ShearAndVorticityFreeCondition\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		cond = HeadOfTensor[cond, {-a1, -b1, -c1, -d1}];
+		time = AbsoluteTime[];
+		cond = simplf[cond];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"ShearAndVorticityFreeCondition\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		cond
+	]
+)
+
 (* This deletes metric concomitants for all metrics  *)
 
 ClearxIdealCache["MetricConcomitants"] := 
