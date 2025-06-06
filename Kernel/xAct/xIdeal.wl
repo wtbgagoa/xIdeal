@@ -193,6 +193,8 @@ StephaniUniverseQ::usage = "StephaniUniverseQ[metric, w] returns True if metric 
 
 FriedmannQ::usage = "FriedmannQ[metric, w] returns True if metric is a Friedmann-Lemaitre-Robertson-Walker solution. To do so, it needs an arbitrary unitary time-like vector w.";
 
+KustaanheimoQvistQ::usage = "KustaanheimoQvistQ[metric, w] returns True if metric is a Kustaanheimo-Qvist solution. To do so, it needs an arbitrary unitary time-like vector w.";
+
 Rframe::usage = " ";
 
 (* ::Section:: *)
@@ -232,6 +234,8 @@ GenericIdealGasQ::nothermodynamicperfectfluid = "Metric `1` is not of the thermo
 StephaniUniverseQ::nometric = "Metric `1` has not been registered as a metric";
 
 FriedmannQ::nometric = "Metric `1` has not been registered as a metric";
+
+KustaanheimoQvistQ::nometric = "Metric `1` has not been registered as a metric";
 
 ConnectionTensor::nometric = "Metric `1` has not been registered as a metric";
 
@@ -3264,7 +3268,6 @@ StephaniUniverseQ[metric_CTensor, opts : OptionsPattern[]] :=
 (* ::Section:: *)
 (* Identification of the FLRW spacetime *)
 
-(* TODO: Add the documentation of this function *)
 (* TODO: Check that an arbitrary time-like vector is given *)
 Options[FriedmannQ] = {Assumptions -> True, PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
 
@@ -3287,6 +3290,51 @@ FriedmannQ[metric_CTensor, opts : OptionsPattern[]] :=
 						True
 					,
 					Not[weylcd === Zero],
+						False
+					,
+					Not[cond1 === Zero],
+						False
+					,
+					Not[SymbolicPositiveQ[cond2]],
+						False
+					,
+					dedensty === Zero,
+						False
+					,
+					Not[cond3 === Zero],
+						False
+					,
+					True,
+						"Unknown"
+				]
+			]
+		]
+
+(* ::Section:: *)
+(* Identification of the Kustaanheimo-Qvist spacetimes *)
+
+(* TODO: Check that an arbitrary time-like vector is given *)
+Options[KustaanheimoQvistQ] = {Assumptions -> True, PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
+
+KustaanheimoQvistQ[metric_CTensor, opts : OptionsPattern[]] :=
+	Catch@ 
+		Module[{weylcd, cond1, cond2, dedensty, cond3},
+			If[Not @ MetricQ @ metric, 
+    					Throw[Message[KustaanheimoQvistQ::nometric, metric]]];
+			Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
+				weylcd = weylConcomitant["Weyl"][metric, opts];
+				cond1 = metricConcomitant["FluPerCond1"][metric, opts];
+				cond2 = metricConcomitant["FluPerCond2"][metric, opts];
+				dedensty = metricConcomitant["dEnergyDensity"][metric, opts];
+				cond3 = metricConcomitant["ShearAndVorticityFreeCond"][metric, opts];
+				Which[
+					SymbolicPositiveQ[cond2] === "Unknown",
+						"Unknown"
+					,
+					Not[weylcd === Zero] && cond1 === Zero && SymbolicPositiveQ[cond2] && Not[dedensty === Zero] && cond3 === Zero,
+						True
+					,
+					weylcd === Zero,
 						False
 					,
 					Not[cond1 === Zero],

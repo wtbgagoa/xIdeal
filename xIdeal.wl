@@ -193,6 +193,8 @@ StephaniUniverseQ::usage = "StephaniUniverseQ[metric, w] returns True if metric 
 
 FriedmannQ::usage = "FriedmannQ[metric, w] returns True if metric is a Friedmann-Lemaitre-Robertson-Walker solution. To do so, it needs an arbitrary unitary time-like vector w.";
 
+KustaanheimoQvistQ::usage = "KustaanheimoQvistQ[metric, w] returns True if metric is a Kustaanheimo-Qvist solution. To do so, it needs an arbitrary unitary time-like vector w.";
+
 Rframe::usage = " ";
 
 (* ::Section:: *)
@@ -232,6 +234,8 @@ GenericIdealGasQ::nothermodynamicperfectfluid = "Metric `1` is not of the thermo
 StephaniUniverseQ::nometric = "Metric `1` has not been registered as a metric";
 
 FriedmannQ::nometric = "Metric `1` has not been registered as a metric";
+
+KustaanheimoQvistQ::nometric = "Metric `1` has not been registered as a metric";
 
 ConnectionTensor::nometric = "Metric `1` has not been registered as a metric";
 
@@ -863,6 +867,41 @@ metricConcomitant["BarotropyCondition"][metric_CTensor, opts : OptionsPattern[]]
 			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"BarotropicCondition\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		barcond
+	]
+)
+
+metricConcomitant["ShearAndVorticityFreeCond"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["ShearAndVorticityFreeCond"][metric, opts] = 
+	Module[{simplf, cart, cd, u, cduort, gamma, a1, b1, c1, d1, cond, vb, time},
+		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
+		cd = CovDOfMetric[metric];
+		u = metricConcomitant["FluPerFlow"][metric, opts];
+		gamma = metricConcomitant["SpatialMetric"][metric, opts, "Observer"-> u];
+		time = AbsoluteTime[];
+		cduort = gamma[-a1, c1] gamma[-b1, d1] cd[-c1][u[-d1]];
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"CDuOrthogonal\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		cduort = HeadOfTensor[cduort, {-a1, -b1}];
+		time = AbsoluteTime[];
+		cduort = simplf[cduort];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"CDuOrthogonal\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		time = AbsoluteTime[];
+		cond = cduort[-a1, -b1] gamma[-c1, -d1] - cduort[-c1, -d1] gamma[-a1, -b1];
+		If[vb, 
+			Print["** ReportCompute: computing metric concomitant \"ShearAndVorticityFreeCondition\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		cond = HeadOfTensor[cond, {-a1, -b1, -c1, -d1}];
+		time = AbsoluteTime[];
+		cond = simplf[cond];
+		If[vb,
+			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"ShearAndVorticityFreeCondition\" in ", AbsoluteTime[] - time, " seconds:"]
+		];
+		cond
 	]
 )
 
@@ -3229,7 +3268,6 @@ StephaniUniverseQ[metric_CTensor, opts : OptionsPattern[]] :=
 (* ::Section:: *)
 (* Identification of the FLRW spacetime *)
 
-(* TODO: Add the documentation of this function *)
 (* TODO: Check that an arbitrary time-like vector is given *)
 Options[FriedmannQ] = {Assumptions -> True, PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
 
@@ -3252,6 +3290,51 @@ FriedmannQ[metric_CTensor, opts : OptionsPattern[]] :=
 						True
 					,
 					Not[weylcd === Zero],
+						False
+					,
+					Not[cond1 === Zero],
+						False
+					,
+					Not[SymbolicPositiveQ[cond2]],
+						False
+					,
+					dedensty === Zero,
+						False
+					,
+					Not[cond3 === Zero],
+						False
+					,
+					True,
+						"Unknown"
+				]
+			]
+		]
+
+(* ::Section:: *)
+(* Identification of the Kustaanheimo-Qvist spacetimes *)
+
+(* TODO: Check that an arbitrary time-like vector is given *)
+Options[KustaanheimoQvistQ] = {Assumptions -> True, PSimplify -> $CVSimplify, Verbose -> True, Parallelize -> True, "Vector" -> Null}
+
+KustaanheimoQvistQ[metric_CTensor, opts : OptionsPattern[]] :=
+	Catch@ 
+		Module[{weylcd, cond1, cond2, dedensty, cond3},
+			If[Not @ MetricQ @ metric, 
+    					Throw[Message[KustaanheimoQvistQ::nometric, metric]]];
+			Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
+				weylcd = weylConcomitant["Weyl"][metric, opts];
+				cond1 = metricConcomitant["FluPerCond1"][metric, opts];
+				cond2 = metricConcomitant["FluPerCond2"][metric, opts];
+				dedensty = metricConcomitant["dEnergyDensity"][metric, opts];
+				cond3 = metricConcomitant["ShearAndVorticityFreeCond"][metric, opts];
+				Which[
+					SymbolicPositiveQ[cond2] === "Unknown",
+						"Unknown"
+					,
+					Not[weylcd === Zero] && cond1 === Zero && SymbolicPositiveQ[cond2] && Not[dedensty === Zero] && cond3 === Zero,
+						True
+					,
+					weylcd === Zero,
 						False
 					,
 					Not[cond1 === Zero],
