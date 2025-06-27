@@ -3,12 +3,12 @@ BeginPackage["xAct`ExactSolsData`"]
 (* ::Section:: *)
 (* Usage information *)
 
-GenRelExactSolsData::usage = " ";
+GRExactSolsData::usage = " ";
 
 (* ::Section:: *)
 (* Messages *)
 
-GenRelExactSolsData::noprop = "Unknown argument or property";
+GRExactSolsData::noprop = "Unknown argument or property";
 
 (* ::Section:: *)
 (* BeginPrivate *)
@@ -1676,56 +1676,56 @@ exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "Scalar
 	]
 
 (* ::Section:: *)
-(* GenRelExactSolsData *)
+(* GRExactSolsData *)
 
 (* ::Subsection:: *)
 (* Metrics: default coordinates *)
 
-iGenRelExactSolsData[metric_?metricQ] := exactSolsData[metric, "CoordinateSystems"]
+iGRExactSolsData[metric_?metricQ] := exactSolsData[metric, "CoordinateSystems"]
 
-iGenRelExactSolsData[metric_?metricQ, "CoordinateSystems"] := exactSolsData[metric, "CoordinateSystems"]
+iGRExactSolsData[metric_?metricQ, "CoordinateSystems"] := exactSolsData[metric, "CoordinateSystems"]
 
-iGenRelExactSolsData[metric_?metricQ, "Classes"] := exactSolsData[metric, "Classes"]
+iGRExactSolsData[metric_?metricQ, "Classes"] := exactSolsData[metric, "Classes"]
 
-iGenRelExactSolsData[metric_?metricQ, coords_?coordinatesystemQ] := exactSolsData[metric, {coords, "Metric"}]
+iGRExactSolsData[metric_?metricQ, coords_?coordinatesystemQ] := exactSolsData[metric, {coords, "Metric"}]
 
 (* The syntax is GRData[args__String, {coords_List, parameters_List, functions_List}] *)
 
-iGenRelExactSolsData[metric_?metricQ, coordname_?coordinatesystemQ, {coords_List, parameters_List, functions_List}] := exactSolsData[metric, {coordname, "Metric"}][coords, parameters, functions]
+iGRExactSolsData[metric_?metricQ, coordname_?coordinatesystemQ, {coords_List, parameters_List, functions_List}] := exactSolsData[metric, {coordname, "Metric"}][coords, parameters, functions]
 
-iGenRelExactSolsData[metric_?metricQ, "Properties"] := allmetricproperties
+iGRExactSolsData[metric_?metricQ, "Properties"] := allmetricproperties
 
-iGenRelExactSolsData[metric_?metricQ, "IsIDEAL"] := exactSolsData[metric, "IsIDEAL"]
+iGRExactSolsData[metric_?metricQ, "IsIDEAL"] := exactSolsData[metric, "IsIDEAL"]
 
-iGenRelExactSolsData[metric_?metricQ, "CoordinateAssumptions"] := Module[{coords},
+iGRExactSolsData[metric_?metricQ, "CoordinateAssumptions"] := Module[{coords},
 	coords = exactSolsData[metric, "DefaultCoordinates"];
 	exactSolsData[metric, {coords, "CoordinateAssumptions"}]
 ]
 
-iGenRelExactSolsData[metric_?metricQ, "CoordinateSystemName"] := Module[{coords},
+iGRExactSolsData[metric_?metricQ, "CoordinateSystemName"] := Module[{coords},
 	coords = exactSolsData[metric, "DefaultCoordinates"]
 ]
 
-iGenRelExactSolsData[metric_?metricQ, "CoordinateNames"] := Module[{coords},
+iGRExactSolsData[metric_?metricQ, "CoordinateNames"] := Module[{coords},
 	coords = exactSolsData[metric, "DefaultCoordinates"];
 	exactSolsData[metric, {coords, "CoordinateNames"}]
 ]
 
-iGenRelExactSolsData[metric_?metricQ, "ParameterAssumptions"] := exactSolsData[metric, "ParameterAssumptions"]
+iGRExactSolsData[metric_?metricQ, "ParameterAssumptions"] := exactSolsData[metric, "ParameterAssumptions"]
 
-iGenRelExactSolsData[metric_?metricQ, "ParameterNames"] := exactSolsData[metric, "ParameterNames"]
+iGRExactSolsData[metric_?metricQ, "ParameterNames"] := exactSolsData[metric, "ParameterNames"]
 
-iGenRelExactSolsData[metric_?metricQ, "ScalarFunctionNames"] := Module[{coords},
+iGRExactSolsData[metric_?metricQ, "ScalarFunctionNames"] := Module[{coords},
 	coords = exactSolsData[metric, "DefaultCoordinates"];
 	exactSolsData[metric, {coords, "ScalarFunctionNames"}]
 ]
 
-iGenRelExactSolsData[metric_?metricQ, "ScalarFunctionValues"] := Module[{coords},
+iGRExactSolsData[metric_?metricQ, "ScalarFunctionValues"] := Module[{coords},
 	coords = exactSolsData[metric, "DefaultCoordinates"];
 	exactSolsData[metric, {coords, "ScalarFunctionValues"}]
 ]
 
-iGenRelExactSolsData[metric_?metricQ, "Metric"] := Module[{coords},
+iGRExactSolsData[metric_?metricQ, "Metric"] := Module[{coords},
 	coords = exactSolsData[metric, "DefaultCoordinates"];
 	exactSolsData[metric, {coords, "Metric"}]
 ]
@@ -1750,41 +1750,41 @@ Set[coordinatepropertyQ[#], True]& /@ allcoordinateproperties;
 coordinatesystemQ[_] := False;
 
 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "Properties"}] := allcoordinateproperties
+iGRExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "Properties"}] := allcoordinateproperties
 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "CoordinateAssumptions"}] := exactSolsData[metric, {coordname, "CoordinateAssumptions"}]
+iGRExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "CoordinateAssumptions"}] := exactSolsData[metric, {coordname, "CoordinateAssumptions"}]
 	 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "CoordinateNames"}] := exactSolsData[metric, {coordname, "CoordinateNames"}]
+iGRExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "CoordinateNames"}] := exactSolsData[metric, {coordname, "CoordinateNames"}]
 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "Metric"}] := exactSolsData[metric, {coordname, "Metric"}]
+iGRExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "Metric"}] := exactSolsData[metric, {coordname, "Metric"}]
 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ParameterNames"}] := exactSolsData[metric, {coordname, "ParameterNames"}]
+iGRExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ParameterNames"}] := exactSolsData[metric, {coordname, "ParameterNames"}]
 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ParameterAssumptions"}] := exactSolsData[metric, {coordname, "ParameterAssumptions"}]
+iGRExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ParameterAssumptions"}] := exactSolsData[metric, {coordname, "ParameterAssumptions"}]
 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ScalarFunctionNames"}] := exactSolsData[metric, {coordname, "ScalarFunctionNames"}]
+iGRExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ScalarFunctionNames"}] := exactSolsData[metric, {coordname, "ScalarFunctionNames"}]
 
-iGenRelExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ScalarFunctionValues"}] := exactSolsData[metric, {coordname, "ScalarFunctionValues"}]
+iGRExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ScalarFunctionValues"}] := exactSolsData[metric, {coordname, "ScalarFunctionValues"}]
 
 (* ::Subsection:: *)
 (* General definitions *)
-iGenRelExactSolsData[] = allmetrics;
-iGenRelExactSolsData["ExactSolutions"] = allmetrics;
-iGenRelExactSolsData[All] = allmetrics;
-iGenRelExactSolsData["Classes"] = allclasses;
-iGenRelExactSolsData[All, "Classes"] = allclasses;
-iGenRelExactSolsData["Properties"] = allmetricproperties;
-iGenRelExactSolsData[All, "Properties"] = allmetricproperties;
-iGenRelExactSolsData["CoordinateSystems"] = allcoordinatesystems;
-iGenRelExactSolsData[All, "CoordinateSystems"] = allcoordinatesystems;
+iGRExactSolsData[] = allmetrics;
+iGRExactSolsData["ExactSolutions"] = allmetrics;
+iGRExactSolsData[All] = allmetrics;
+iGRExactSolsData["Classes"] = allclasses;
+iGRExactSolsData[All, "Classes"] = allclasses;
+iGRExactSolsData["Properties"] = allmetricproperties;
+iGRExactSolsData[All, "Properties"] = allmetricproperties;
+iGRExactSolsData["CoordinateSystems"] = allcoordinatesystems;
+iGRExactSolsData[All, "CoordinateSystems"] = allcoordinatesystems;
 
 (* Metrics contained in a given class *)
-iGenRelExactSolsData[class_?exactsolclassQ] := exactSolsData[class]
+iGRExactSolsData[class_?exactsolclassQ] := exactSolsData[class]
 
-iGenRelExactSolsData[___] := $Failed;
+iGRExactSolsData[___] := $Failed;
 
-(* Entry point of GenRelExactSolsData *)
-GenRelExactSolsData[args___]:= Module[{res = iGenRelExactSolsData[args]}, If[UnsameQ[res, $Failed], res, Message[GenRelExactSolsData::noprop]]]
+(* Entry point of GRExactSolsData *)
+GRExactSolsData[args___]:= Module[{res = iGRExactSolsData[args]}, If[UnsameQ[res, $Failed], res, Message[GRExactSolsData::noprop]]]
 
 (****************************************************************)
 
