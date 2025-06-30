@@ -167,7 +167,7 @@ PetrovType::usage = "PetrovType[metric] returns the Petrov Type of metric.";
 
 DebeverNullDirections::usage = "DebeverNullDirections[metric] returns the multiple Debever null directions of metric.";
 
-TypeDClassify::usage = "TypeDClassify[metric, w] returns the subfamily of vacuum Type D solutions to which metric belongs. To do so, it needs an arbitrary unitary time-like vector w.";
+StaticVacuumTypeDClassify::usage = "StaticVacuumTypeDClassify[metric, w] returns the subfamily of vacuum Type D solutions to which metric belongs. To do so, it needs an arbitrary unitary time-like vector w.";
 
 PSimplify::usage = " ";
 
@@ -211,7 +211,7 @@ PetrovType::nopsimplify = "Value `1` for \"PSimplify\" is invalid\" ";
 
 DebeverNullDirections::nometric = "Metric `1` has not been registered as a metric";
 
-TypeDClassify::nometric = "Metric `1` has not been registered as a metric";
+StaticVacuumTypeDClassify::nometric = "Metric `1` has not been registered as a metric";
 
 KerrSolutionQ::nometric = "Metric `1` has not been registered as a metric";
 
@@ -2967,14 +2967,14 @@ SymbolicPositiveQ[x_, OptionsPattern[]] :=
 	]
 
 
-Options[TypeDClassify] = {Assumptions -> True, Method -> "Default", PSimplify -> $CVSimplify}
+Options[StaticVacuumTypeDClassify] = {Assumptions -> True, Method -> "Default", PSimplify -> $CVSimplify}
 
-TypeDClassify[metric_CTensor, w_CTensor, opts : OptionsPattern[]] :=
+StaticVacuumTypeDClassify[metric_CTensor, w_CTensor, opts : OptionsPattern[]] :=
 	Catch @
 		Module[{cart, cd, W, RicciCD, epsilonmetric, logrho, TrW3, rho, drho, dlogrho, alpha, S, P, Q, C3, a, b, c, d, e,
 			 f, i, j, k, l, C5, assumptions, simplf},
 			If[Not @ MetricQ @ metric,
-				Throw[Message[TypeDClassify::nometric, metric]]
+				Throw[Message[StaticVacuumTypeDClassify::nometric, metric]]
 			];
 			assumptions = OptionValue[Assumptions];
    			simplf = OptionValue[PSimplify];
