@@ -3099,7 +3099,7 @@ Catch @
 				If[PetrovType[metric, opts] === "Type D",
 					Print["Type D"];
 					xi = weylConcomitant["TensorXi"][metric, opts];
-					xi = Antisymmetrize[xi[-a1, -b1] xi[-c1, -d1], {-b1, -c1}];
+					xi = Antisymmetrize[xi[-a1, -b1] Dagger[xi[-c1, -d1]], {-b1, -c1}];
 					xi = HeadOfTensor[xi, {-a1, -b1, -c1, -d1}];
 					If[simplf[xi] === Zero,
 						Print["Kerr NUT"];
