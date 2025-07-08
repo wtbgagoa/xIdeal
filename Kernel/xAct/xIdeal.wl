@@ -870,9 +870,9 @@ metricConcomitant["BarotropyCondition"][metric_CTensor, opts : OptionsPattern[]]
 	]
 )
 
-metricConcomitant["ShearAndVorticityFreeCond"][metric_CTensor, opts : OptionsPattern[]] :=
-(metricConcomitant["ShearAndVorticityFreeCond"][metric, opts] = 
-	Module[{simplf, cart, cd, u, cduort, gamma, a1, b1, c1, d1, cond, vb, time},
+metricConcomitant["CDuOrthogonal"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["CDuOrthogonal"][metric, opts] = 
+	Module[{simplf, cart, cd, u, cduort, gamma, a1, b1, c1, d1, vb, time},
 		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 4];
@@ -890,12 +890,26 @@ metricConcomitant["ShearAndVorticityFreeCond"][metric_CTensor, opts : OptionsPat
 		If[vb,
 			Print["** ReportCompute: applying  ", simplf, " to metric concomitant \"CDuOrthogonal\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
+		cduort
+	]
+)
+
+metricConcomitant["ShearAndVorticityFreeCond"][metric_CTensor, opts : OptionsPattern[]] :=
+(metricConcomitant["ShearAndVorticityFreeCond"][metric, opts] = 
+	Module[{simplf, cart, cd, u, cduort, gamma, a1, b1, c1, cond, vb, time},
+		{simplf, vb} = OptionValue[metricConcomitant, {opts}, {PSimplify, Verbose}];
+		cart = Part[metric, 2, 1, -1];
+		{a1, b1, c1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 3];
+		cd = CovDOfMetric[metric];
+		u = metricConcomitant["FluPerFlow"][metric, opts];
+		gamma = metricConcomitant["SpatialMetric"][metric, opts, "Observer"-> u];
 		time = AbsoluteTime[];
-		cond = cduort[-a1, -b1] gamma[-c1, -d1] - cduort[-c1, -d1] gamma[-a1, -b1];
+		cduort = metricConcomitant["CDuOrthogonal"][metric, opts];
+		cond = cduort[-a1, -b1] - (1/3) cduort[c1, -c1] gamma[-a1, -b1];
 		If[vb, 
 			Print["** ReportCompute: computing metric concomitant \"ShearAndVorticityFreeCondition\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
-		cond = HeadOfTensor[cond, {-a1, -b1, -c1, -d1}];
+		cond = HeadOfTensor[cond, {-a1, -b1, -c1}];
 		time = AbsoluteTime[];
 		cond = simplf[cond];
 		If[vb,
@@ -3318,20 +3332,20 @@ Options[KustaanheimoQvistQ] = {Assumptions -> True, PSimplify -> $CVSimplify, Ve
 
 KustaanheimoQvistQ[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch@ 
-		Module[{weylcd, cond1, cond2, dedensty, cond3},
+		Module[{weylcd, cond1, cond2, cduort, cond3},
 			If[Not @ MetricQ @ metric, 
     					Throw[Message[KustaanheimoQvistQ::nometric, metric]]];
 			Block[{$Assumptions = $Assumptions && OptionValue[Assumptions]},
 				weylcd = weylConcomitant["Weyl"][metric, opts];
 				cond1 = metricConcomitant["FluPerCond1"][metric, opts];
 				cond2 = metricConcomitant["FluPerCond2"][metric, opts];
-				dedensty = metricConcomitant["dEnergyDensity"][metric, opts];
+				cduort = metricConcomitant["CDuOrthogonal"][metric, opts];
 				cond3 = metricConcomitant["ShearAndVorticityFreeCond"][metric, opts];
 				Which[
 					SymbolicPositiveQ[cond2] === "Unknown",
 						"Unknown"
 					,
-					Not[weylcd === Zero] && cond1 === Zero && SymbolicPositiveQ[cond2] && Not[dedensty === Zero] && cond3 === Zero,
+					Not[weylcd === Zero] && cond1 === Zero && SymbolicPositiveQ[cond2] && Not[cduort === Zero] && cond3 === Zero,
 						True
 					,
 					weylcd === Zero,
@@ -3343,7 +3357,7 @@ KustaanheimoQvistQ[metric_CTensor, opts : OptionsPattern[]] :=
 					Not[SymbolicPositiveQ[cond2]],
 						False
 					,
-					dedensty === Zero,
+					cduort === Zero,
 						False
 					,
 					Not[cond3 === Zero],
