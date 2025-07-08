@@ -142,6 +142,7 @@ allcoordinatesystems = {
 	"GroupGeneratorsAdaptedCoordinates",
 	"HarmonicCoordinates",
  	"IsotropicCoordinates",
+	"PlanarCoordinates",
   	"ReducedCircumferencePolarCoordinates",
  	"SchwarzschildCoordinates",
 	"SphericalCoordinates",
@@ -780,6 +781,113 @@ exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "ScalarFuncti
 					lambda[t, r], 
 					mu[t, r], 
 					nu[t, r]
+				}
+			]
+		]
+
+(* ::Subsection:: *)
+(* GeneralSzekeresSzafron metric in spherical coordinates *)
+
+exactSolsData["GeneralSzekeresSzafron", "Classes"] = {"PerfectFluid"}
+
+exactSolsData["GeneralSzekeresSzafron", "CoordinateSystems"] = {"PlanarCoordinates"} 
+
+exactSolsData["GeneralSzekeresSzafron", "DefaultCoordinates"] = "PlanarCoordinates"
+
+exactSolsData["GeneralSzekeresSzafron", "ParameterNames"] = {}
+
+exactSolsData["GeneralSzekeresSzafron", "ParameterAssumptions"] = Null
+
+exactSolsData["GeneralSzekeresSzafron", "IsIDEAL"] = False
+
+exactSolsData["GeneralSzekeresSzafron", {"PlanarCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
+
+exactSolsData["GeneralSzekeresSzafron", {"PlanarCoordinates", "CoordinateAssumptions"}] = 
+	-Infinity < #[[1]] < Infinity && -Infinity < #[[2]] < Infinity && -Infinity < #[[3]] < Infinity && -Infinity < #[[4]] < Infinity &
+
+exactSolsData["GeneralSzekeresSzafron", {"PlanarCoordinates", "ParameterNames"}] = exactSolsData["GeneralSzekeresSzafron", "ParameterNames"]
+
+exactSolsData["GeneralSzekeresSzafron", {"PlanarCoordinates", "ParameterAssumptions"}] = exactSolsData["GeneralSzekeresSzafron", "ParameterAssumptions"]
+
+exactSolsData["GeneralSzekeresSzafron", {"PlanarCoordinates", "ScalarFunctionNames"}] = {"\[Alpha]", "\[Beta]"}
+
+defaultcoordinates["GeneralSzekeresSzafron"] = "PlanarCoordinates"
+
+(* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
+
+exactSolsData["GeneralSzekeresSzafron", {"PlanarCoordinates", "Metric"}] =
+	Function[{coords, params, funcs},
+		With[{alpha = funcs[[1]], beta = funcs[[2]], t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]]},
+			DiagonalMatrix[
+				{
+					-1,  
+					E^(2 beta[t, x, y, z]), 
+					E^(2 beta[t, x, y, z]),
+					E^(2 alpha[t, x, y, z])
+				}
+			]
+		] 
+	]
+
+exactSolsData["GeneralSzekeresSzafron", {"PlanarCoordinates", "ScalarFunctionValues"}] =
+	Function[{coords, params, funcs},
+		With[{alpha = funcs[[1]], beta = funcs[[2]], t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]]},
+				{
+					alpha[t, x, y, z], 
+					beta[t, x, y, z]
+				}
+			]
+		]
+
+(* ::Subsection:: *)
+(* KantowskiSachs metric in spherical coordinates *)
+
+exactSolsData["KantowskiSachs", "Classes"] = {"SphericalSymmetry", "Warped22"}
+
+exactSolsData["KantowskiSachs", "CoordinateSystems"] = {"SphericalCoordinates"} 
+
+exactSolsData["KantowskiSachs", "DefaultCoordinates"] = "SphericalCoordinates"
+
+exactSolsData["KantowskiSachs", "ParameterNames"] = {}
+
+exactSolsData["KantowskiSachs", "ParameterAssumptions"] = Null
+
+exactSolsData["KantowskiSachs", "IsIDEAL"] = False
+
+exactSolsData["KantowskiSachs", {"SphericalCoordinates", "CoordinateNames"}] = {"t", "r", "\[Theta]", "\[Phi]"}
+
+exactSolsData["KantowskiSachs", {"SphericalCoordinates", "CoordinateAssumptions"}] = #[[2]] > 0 && Pi > #[[3]] > 0 &
+
+exactSolsData["KantowskiSachs", {"SphericalCoordinates", "ParameterNames"}] = exactSolsData["KantowskiSachs", "ParameterNames"]
+
+exactSolsData["KantowskiSachs", {"SphericalCoordinates", "ParameterAssumptions"}] = exactSolsData["KantowskiSachs", "ParameterAssumptions"]
+
+exactSolsData["KantowskiSachs", {"SphericalCoordinates", "ScalarFunctionNames"}] = {"R", "S"}
+
+defaultcoordinates["KantowskiSachs"] = "SphericalCoordinates"
+
+(* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
+
+exactSolsData["KantowskiSachs", {"SphericalCoordinates", "Metric"}] =
+	Function[{coords, params, funcs},
+		With[{R = funcs[[1]], S = funcs[[2]], t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]]},
+			DiagonalMatrix[
+				{
+					-1, 
+					R[t], 
+					S[t], 
+					S[t] Sin[theta]^2
+				}
+			]
+		] 
+	]
+
+exactSolsData["KantowskiSachs", {"SphericalCoordinates", "ScalarFunctionValues"}] =
+	Function[{coords, params, funcs},
+		With[{R = funcs[[1]], S = funcs[[2]], t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]]},
+				{
+					R[t], 
+					S[t]
 				}
 			]
 		]
