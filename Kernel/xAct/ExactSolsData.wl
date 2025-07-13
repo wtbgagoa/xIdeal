@@ -786,7 +786,7 @@ exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "ScalarFuncti
 		]
 
 (* ::Subsection:: *)
-(* GeneralSzekeresSzafron metric in spherical coordinates *)
+(* GeneralSzekeresSzafron metric in planar coordinates *)
 
 exactSolsData["GeneralSzekeresSzafron", "Classes"] = {"PerfectFluid"}
 
@@ -891,6 +891,59 @@ exactSolsData["KantowskiSachs", {"SphericalCoordinates", "ScalarFunctionValues"}
 				}
 			]
 		]
+
+(* ::Subsection:: *)
+(* KasnerI *)
+
+exactSolsData["KasnerI", "Classes"] = {"Vacuum", "G3IXonS3"}
+
+exactSolsData["KasnerI", "CoordinateSystems"] = {"CanonicalCoordinates"} 
+
+exactSolsData["KasnerI", "DefaultCoordinates"] = "CanonicalCoordinates"
+
+exactSolsData["KasnerI", "ParameterNames"] = {"p1", "p2", "p3"}
+
+exactSolsData["KasnerI", "ParameterAssumptions"] =  
+    Function[{coords, params, scfuncs}, 
+    	With[{p1 = params[[1]], p2 = params[[2]], p3 = params[[3]]}, 
+    		Element[p1, Reals] && Element[p2, Reals] && Element[p3, Reals] && 
+			p1 + p2 + p3 == 1 && p1^2 + p2^2 + p3^2 == 1
+		]
+	]
+
+exactSolsData["KasnerI", "IsIDEAL"] = False
+
+exactSolsData["KasnerI", {"CanonicalCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
+
+exactSolsData["KasnerI", {"CanonicalCoordinates", "CoordinateAssumptions"}] = 
+	-Infinity < #[[1]] < Infinity && -Infinity < #[[2]] < Infinity && -Infinity < #[[3]] < Infinity && -Infinity < #[[4]] < Infinity &
+
+exactSolsData["KasnerI", {"CanonicalCoordinates", "ParameterNames"}] = exactSolsData["KasnerI", "ParameterNames"]
+
+exactSolsData["KasnerI", {"CanonicalCoordinates", "ParameterAssumptions"}] = exactSolsData["KasnerI", "ParameterAssumptions"]
+
+exactSolsData["KasnerI", {"CanonicalCoordinates", "ScalarFunctionNames"}] = {}
+
+defaultcoordinates["KasnerI"] = "CanonicalCoordinates"
+
+(* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
+
+exactSolsData["KasnerI", {"CanonicalCoordinates", "Metric"}] =
+	Function[{coords, params, funcs},
+		With[{p1 = params[[1]], p2 = params[[2]], p3 = params[[3]], 
+			t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]]},
+			DiagonalMatrix[
+				{
+					-1,  
+					t^(2p1), 
+					t^(2p2),
+					t^(2p3)
+				}
+			]
+		] 
+	]
+
+exactSolsData["KasnerI", {"CanonicalCoordinates", "ScalarFunctionValues"}] = {}
 
 (* ::Subsection:: *)
 (* Kerr *)
