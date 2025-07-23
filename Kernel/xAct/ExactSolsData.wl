@@ -124,7 +124,6 @@ allmetricproperties = {
 	"CoordinateNames",
 	"CoordinateSystemName",
 	"CoordinateSystems",
-	"ExactSolutionName",
 	"IsIDEAL",
 	"Metric",
 	"ParameterAssumptions",
@@ -944,6 +943,91 @@ exactSolsData["KasnerI", {"CanonicalCoordinates", "Metric"}] =
 	]
 
 exactSolsData["KasnerI", {"CanonicalCoordinates", "ScalarFunctionValues"}] = {}
+
+(* ::Subsection:: *)
+(* KasnerII *)
+
+exactSolsData["KasnerII", "Classes"] = {"Vacuum", "G3IXonS3"}
+
+exactSolsData["KasnerII", "CoordinateSystems"] = {"CanonicalCoordinates"} 
+
+exactSolsData["KasnerII", "DefaultCoordinates"] = "CanonicalCoordinates"
+
+exactSolsData["KasnerII", "ParameterNames"] = {"p1", "p2", "p3", "b", "epsilon"}
+
+exactSolsData["KasnerII", "ParameterAssumptions"] =  
+    Function[{coords, params, scfuncs}, 
+    	With[{p1 = params[[1]], p2 = params[[2]], p3 = params[[3]]}, 
+    		Element[p1, Reals] && Element[p2, Reals] && Element[p3, Reals] && 
+			p1 + p2 + p3 == 1 && p1^2 + p2^2 + p3^2 == 1
+		]
+	]
+
+exactSolsData["KasnerII", "IsIDEAL"] = False
+
+exactSolsData["KasnerII", {"CanonicalCoordinates", "CoordinateNames"}] = {"x", "y", "z", "t"}
+
+exactSolsData["KasnerII", {"CanonicalCoordinates", "CoordinateAssumptions"}] = 
+	-Infinity < #[[1]] < Infinity && -Infinity < #[[2]] < Infinity && -Infinity < #[[3]] < Infinity && -Infinity < #[[4]] < Infinity &
+
+exactSolsData["KasnerII", {"CanonicalCoordinates", "ParameterNames"}] = exactSolsData["KasnerII", "ParameterNames"]
+
+exactSolsData["KasnerII", {"CanonicalCoordinates", "ParameterAssumptions"}] = exactSolsData["KasnerII", "ParameterAssumptions"]
+
+exactSolsData["KasnerII", {"CanonicalCoordinates", "ScalarFunctionNames"}] = {"G"}
+
+defaultcoordinates["KasnerII"] = "CanonicalCoordinates"
+
+(* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
+
+exactSolsData["KasnerII", {"CanonicalCoordinates", "Metric"}] =
+	Function[{coords, params, funcs},
+		With[{p1 = params[[1]], p2 = params[[2]], p3 = params[[3]], b = params[[4]], epsilon = params[[5]],
+			t = coords[[4]], x = coords[[1]], y = coords[[2]], z = coords[[3]], G2 = funcs[[1]]},
+			(* Define the auxiliary function G^2 *)
+			Quiet[
+				G2 = Function[{t, b, p1}, 1 + b^2 t^(4 p1)]
+			];
+
+			(* Metric in the order {x,y,z,t} *)
+			{
+  				{
+    				epsilon t^(2 p1)/G2[t, b, p1],
+    				4 epsilon p1 b z t^(2 p1)/G2[t, b, p1],
+    				0,
+    				0
+  				},
+  				{
+    				4 epsilon p1 b z t^(2 p1)/G2[t, b, p1],
+    				16 epsilon p1^2 b^2 z^2 t^(2 p1)/G2[t, b, p1] + G2[t, b, p1] t^(2 p2),
+    				0,
+    				0
+  				},
+  				{
+    				0,
+    				0,
+    				G2[t, b, p1] t^(2 p3),
+    				0
+  				},
+  				{
+    				0,
+    				0,
+    				0,
+    				-epsilon G2[t, b, p1]
+  				}
+			}
+
+		] 
+	]
+
+exactSolsData["KasnerII", {"CanonicalCoordinates", "ScalarFunctionValues"}] =
+	Function[{coords, params}, 
+    	With[{t = coords[[1]], p1 = params[[1]], b = params[[4]]}, 
+        		{
+					1 + b^2*t^(4*p1)
+				}
+		]
+	]
 
 (* ::Subsection:: *)
 (* Kerr *)
