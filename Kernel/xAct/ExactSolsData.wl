@@ -236,6 +236,8 @@ exactSolsData["G3IVonT3"] = {
 }
 
 exactSolsData["G3IXonS3"] = {
+	"KasnerI",
+	"KasnerII",
 	"FarnsworthKerrI", 
 	"FarnsworthKerrIII"
 } 
@@ -321,7 +323,8 @@ exactSolsData["PetrovTypeI"] = {
 }
 
 exactSolsData["PetrovTypeN"] = {
-	"BertottiRobinsonSolution"
+	"BertottiRobinsonSolution",
+	"PPWave"
 }
 
 exactSolsData["SpatialG6"] = {
@@ -361,6 +364,8 @@ exactSolsData["ThermodynamicPerfectFluid"] = {
 }
 
 exactSolsData["Vacuum"] = {
+	"KasnerI",
+	"KasnerII",
 	"Kerr", 
 	"KerrNUT", 
 	"PetrovSolution",
@@ -1456,6 +1461,54 @@ exactSolsData["PetrovSolution", {"CanonicalCoordinates", "ParameterNames"}] = {"
 exactSolsData["PetrovSolution", {"CanonicalCoordinates", "ScalarFunctionNames"}] = {}
 
 exactSolsData["PetrovSolution", {"CanonicalCoordinates", "ScalarFunctionValues"}] = {}
+
+(* ::Subsection:: *)
+(* PP wave *)
+
+exactSolsData["PPWave", "Classes"] = {"PetrovTypeN"}
+
+exactSolsData["PPWave", "CoordinateSystems"] = {"ComplexCoordinates"}
+
+exactSolsData["PPWave", "DefaultCoordinates"] = "ComplexCoordinates"
+ 
+exactSolsData["PPWave", "IsIDEAL"] = True
+ 
+exactSolsData["PPWave", "ParameterAssumptions"] = Null
+ 
+exactSolsData["PPWave", "ParameterNames"] = {}
+
+exactSolsData["PPWave", {"ComplexCoordinates", "CoordinateAssumptions"}] = 
+	-Infinity < #[[1]] < Infinity && -Infinity < #[[2]] < Infinity && -Infinity < #[[3]] < Infinity && -Infinity < #[[4]] < Infinity &
+ 
+exactSolsData["PPWave", {"ComplexCoordinates", "CoordinateNames"}] = {"u", "v", "x1", "x2"}
+ 
+exactSolsData["PPWave", {"ComplexCoordinates", "Metric"}] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{u = coords[[1]], v = coords[[2]], x1 = coords[[3]], x2 = coords[[4]], H = scfuncs[[1]]},
+    		{
+				{-2 H[u, x1, x2], -1, 0, 0}, 
+				{-1, 0, 0, 0}, 
+        		{0, 0, 1, 0}, 
+				{0, 0, 0, 1}
+			}
+		]
+	]
+ 
+exactSolsData["PPWave", {"ComplexCoordinates", "ParameterAssumptions"}] = Null
+ 
+exactSolsData["PPWave", {"ComplexCoordinates", "ParameterNames"}] = {}
+ 
+exactSolsData["PPWave", {"ComplexCoordinates", "ScalarFunctionNames"}] = {"H"}
+
+exactSolsData["PPWave", {"ComplexCoordinates", "ScalarFunctionValues"}] =
+    Function[{coords, scfuncs},
+        With[{u = coords[[1]], v = coords[[2]], x1 = coords[[3]], 
+            x2 = coords[[4]], H = scfuncs[[1]]},
+				{
+					H[u, x1, x2]
+				}
+			]
+        ]
 
 (* ::Subsection:: *)
 (* Reissner-Nordström *)
