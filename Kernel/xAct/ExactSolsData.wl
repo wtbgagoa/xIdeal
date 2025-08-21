@@ -2035,21 +2035,21 @@ Set[coordinatepropertyQ[#], True]& /@ allcoordinateproperties;
 coordinatesystemQ[_] := False;
 
 
-iGRExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "Properties"}] := allcoordinateproperties
+iGRExactSolsData[{metric_?metricQ, coordname_?coordinatesystemQ}, "Properties"] := allcoordinateproperties
 
-iGRExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "CoordinateAssumptions"}] := exactSolsData[metric, {coordname, "CoordinateAssumptions"}]
+iGRExactSolsData[{metric_?metricQ, coordname_?coordinatesystemQ}, "CoordinateAssumptions"] := exactSolsData[metric, {coordname, "CoordinateAssumptions"}]
 	 
-iGRExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "CoordinateNames"}] := exactSolsData[metric, {coordname, "CoordinateNames"}]
+iGRExactSolsData[{metric_?metricQ, coordname_?coordinatesystemQ}, "CoordinateNames"] := exactSolsData[metric, {coordname, "CoordinateNames"}]
 
-iGRExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "Metric"}] := exactSolsData[metric, {coordname, "Metric"}]
+iGRExactSolsData[{metric_?metricQ, coordname_?coordinatesystemQ}, "Metric"] := exactSolsData[metric, {coordname, "Metric"}]
 
-iGRExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ParameterNames"}] := exactSolsData[metric, {coordname, "ParameterNames"}]
+iGRExactSolsData[{metric_?metricQ, coordname_?coordinatesystemQ}, "ParameterNames"] := exactSolsData[metric, {coordname, "ParameterNames"}]
 
-iGRExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ParameterAssumptions"}] := exactSolsData[metric, {coordname, "ParameterAssumptions"}]
+iGRExactSolsData[{metric_?metricQ, coordname_?coordinatesystemQ}, "ParameterAssumptions"] := exactSolsData[metric, {coordname, "ParameterAssumptions"}]
 
-iGRExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ScalarFunctionNames"}] := exactSolsData[metric, {coordname, "ScalarFunctionNames"}]
+iGRExactSolsData[{metric_?metricQ, coordname_?coordinatesystemQ}, "ScalarFunctionNames"] := exactSolsData[metric, {coordname, "ScalarFunctionNames"}]
 
-iGRExactSolsData[metric_?metricQ, {coordname_?coordinatesystemQ, "ScalarFunctionValues"}] := exactSolsData[metric, {coordname, "ScalarFunctionValues"}]
+iGRExactSolsData[{metric_?metricQ, coordname_?coordinatesystemQ}, "ScalarFunctionValues"] := exactSolsData[metric, {coordname, "ScalarFunctionValues"}]
 
 (* ::Subsection:: *)
 (* General definitions *)
