@@ -3,12 +3,12 @@ BeginPackage["xAct`ExactSolsData`"]
 (* ::Section:: *)
 (* Usage information *)
 
-GRExactSolsData::usage = " ";
+xActSolutionData::usage = " ";
 
 (* ::Section:: *)
 (* Messages *)
 
-GRExactSolsData::noprop = "Unknown argument or property";
+xActSolutionData::noprop = "Unknown argument or property";
 
 (* ::Section:: *)
 (* BeginPrivate *)
@@ -1961,7 +1961,7 @@ exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "Scalar
 	]
 
 (* ::Section:: *)
-(* GRExactSolsData *)
+(* xActSolutionData *)
 
 (* ::Subsection:: *)
 (* Metrics: default coordinates *)
@@ -2068,8 +2068,8 @@ iGRExactSolsData[class_?exactsolclassQ] := exactSolsData[class]
 
 iGRExactSolsData[___] := $Failed;
 
-(* Entry point of GRExactSolsData *)
-GRExactSolsData[args___]:= Module[{res = iGRExactSolsData[args]}, If[UnsameQ[res, $Failed], res, Message[GRExactSolsData::noprop]]]
+(* Entry point of xActSolutionData *)
+xActSolutionData[args___]:= Module[{res = iGRExactSolsData[args]}, If[UnsameQ[res, $Failed], res, Message[xActSolutionData::noprop]]]
 
 (****************************************************************)
 
