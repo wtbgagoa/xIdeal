@@ -1,4 +1,5 @@
-BeginPackage["xAct`ExactSolsData`"]
+BeginPackage["xAct`ExactSolsData`",{"xAct`xCoba`", "xAct`xTensor`", "xAct`xPerm`",
+	 "xAct`xCore`"}]
 
 (* ::Section:: *)
 (* Usage information *)
@@ -129,7 +130,8 @@ allmetricproperties = {
 	"ParameterAssumptions",
 	"ParameterNames",
 	"ScalarFunctionValues",
-	"ScalarFunctionNames"
+	"ScalarFunctionNames",
+	"SignatureOfMetric"
 }
 
 allcoordinatesystems = {
@@ -1588,6 +1590,8 @@ exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ScalarFunctionNames
 
 exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ScalarFunctionValues"}] = {}
 
+exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "SignatureOfMetric"}] = {3, 1, 0}
+
 defaultcoordinates["Schwarzschild"] = "SchwarzschildCoordinates"
 
 (* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
@@ -1964,6 +1968,88 @@ exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "Scalar
 (* xActSolutionData *)
 
 (* ::Subsection:: *)
+(* Computations with MetricCompute and exact solutions *)
+
+iGRExactSolsData[
+	{
+		metric_?metricQ, 
+		coordname_?coordinatesystemQ -> chart_?ChartQ
+	}, 
+	obj_,
+	opts : OptionsPattern[]
+] := exactSolMetricCompute[metric, {coordname, obj}, chart, {}, {}, opts]
+
+iGRExactSolsData[
+	{
+		metric_?metricQ, 
+		coordname_?coordinatesystemQ -> chart_?ChartQ, 
+		"ParameterNames" -> {consts___?ConstantSymbolQ}
+	}, 
+	obj_,
+	opts : OptionsPattern[]
+] := exactSolMetricCompute[metric, {coordname, obj}, chart, {consts}, {}, opts]
+
+iGRExactSolsData[
+	{
+		metric_?metricQ, 
+		coordname_?coordinatesystemQ -> chart_?ChartQ, 
+		"ParameterNames" -> {consts___?ConstantSymbolQ}, 
+		"ScalarFunctionNames" -> {scalars___?ScalarFunctionQ}
+	}, 
+	obj_,
+	opts : OptionsPattern[]
+] := exactSolMetricCompute[metric, {coordname, obj}, chart, {consts}, {scalars}, opts]
+
+iGRExactSolsData[
+	{
+		metric_?metricQ, 
+		coordname_?coordinatesystemQ -> chart_?ChartQ, 
+		"ParameterNames" -> {consts___?ConstantSymbolQ}, 
+		"ScalarFunctionValues" -> {scalars___}
+	}, 
+	obj_,
+	opts : OptionsPattern[]
+] := exactSolMetricCompute[metric, {coordname, obj}, chart, {consts}, {scalars}, opts]
+
+exactSolMetricCompute[sol_?metricQ, {coordsys_?coordinatesystemQ, obj_}, chart_?ChartQ, {consts___?ConstantSymbolQ}, {scalars___?ScalarFunctionQ}, opts : OptionsPattern[]] :=
+	Module[{coords, ctensormetric, signature, covd, pdchart, output},
+		coords = ScalarsOfChart[chart];
+		ctensormetric = exactSolsData[sol, {coordsys, "Metric"}][coords, {consts}, {scalars}];
+		ctensormetric = CTensor[ctensormetric, {-chart, -chart}];
+		signature = exactSolsData[sol, {coordsys, "SignatureOfMetric"}];
+		SetCMetric[ctensormetric, chart, SignatureOfMetric -> signature];
+		pdchart = GiveSymbol[PD, chart];
+		Switch[obj,
+			"Metric",
+				output = ctensormetric,
+			"Christoffel", 
+				MetricCompute[ctensormetric, chart, "Christoffel"[1, -1, -1], opts];
+				covd = CovDOfMetric[ctensormetric];
+				output = Christoffel[covd, pdchart],
+			"Riemann",
+				MetricCompute[ctensormetric, chart, "Riemann"[-1, -1, -1, 1], opts];
+				covd = CovDOfMetric[ctensormetric];
+				output = Riemann[covd],
+			"Weyl",
+				MetricCompute[ctensormetric, chart, "Weyl"[-1, -1, -1, -1], opts];
+				covd = CovDOfMetric[ctensormetric];
+				output = Weyl[covd],
+			"Ricci",
+				MetricCompute[ctensormetric, chart, "Ricci"[-1, -1], opts];
+				covd = CovDOfMetric[ctensormetric];
+				output = Ricci[covd],
+			"Einstein",
+				MetricCompute[ctensormetric, chart, "Einstein"[-1, -1], opts];
+				covd = CovDOfMetric[ctensormetric];
+				output = Ricci[covd],
+			_, Message[xActSolutionData::obj, obj]; Return[$Failed]
+		];
+		UnsetCMetric[ctensormetric];
+		Map[Unset, Unevaluated[{scalars}]];
+		output
+	]
+
+(* ::Subsection:: *)
 (* Metrics: default coordinates *)
 
 iGRExactSolsData[metric_?metricQ] := exactSolsData[metric, "CoordinateSystems"]
@@ -2015,6 +2101,11 @@ iGRExactSolsData[metric_?metricQ, "Metric"] := Module[{coords},
 	exactSolsData[metric, {coords, "Metric"}]
 ]
 
+iGRExactSolsData[metric_?metricQ, "SignatureOfMetric"] := Module[{coords},
+	coords = exactSolsData[metric, "DefaultCoordinates"];
+	exactSolsData[metric, {coords, "SignatureOfMetric"}]
+]
+
 (* ::Subsection:: *)
 (* Metrics: user given coordinates *)
 
@@ -2027,13 +2118,13 @@ allcoordinateproperties = {
 	"ParameterNames",
 	"ParameterAssumptions",
 	"ScalarFunctionNames",
-	"ScalarFunctionValues"
+	"ScalarFunctionValues",
+	"SignatureOfMetric"
 	}
 
-(* Valid coordinate systems *)
+(* Valid coordinate system properties *)
 Set[coordinatepropertyQ[#], True]& /@ allcoordinateproperties;
 coordinatesystemQ[_] := False;
-
 
 iGRExactSolsData[{metric_?metricQ, coordname_?coordinatesystemQ}, "Properties"] := allcoordinateproperties
 
@@ -2050,6 +2141,8 @@ iGRExactSolsData[{metric_?metricQ, coordname_?coordinatesystemQ}, "ParameterAssu
 iGRExactSolsData[{metric_?metricQ, coordname_?coordinatesystemQ}, "ScalarFunctionNames"] := exactSolsData[metric, {coordname, "ScalarFunctionNames"}]
 
 iGRExactSolsData[{metric_?metricQ, coordname_?coordinatesystemQ}, "ScalarFunctionValues"] := exactSolsData[metric, {coordname, "ScalarFunctionValues"}]
+
+iGRExactSolsData[{metric_?metricQ, coordname_?coordinatesystemQ}, "SignatureOfMetric"] := exactSolsData[metric, {coordname, "SignatureOfMetric"}]
 
 (* ::Subsection:: *)
 (* General definitions *)
