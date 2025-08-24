@@ -4,7 +4,7 @@ BeginPackage["xAct`ExactSolsData`",{"xAct`xCoba`", "xAct`xTensor`", "xAct`xPerm`
 (* ::Section:: *)
 (* Usage information *)
 
-xActSolutionData::usage = " ";
+xActSolutionData::usage = "xActSolutionData[args]  returns information about an the exact solution as queried by args .";
 
 (* ::Section:: *)
 (* Messages *)
