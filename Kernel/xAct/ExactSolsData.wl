@@ -2016,48 +2016,21 @@ defaultcoordinates["StephaniThermodynamicSpherical"] = "SphericalCoordinates"
 iGRExactSolsData[
 	{
 		metric_?metricQ, 
-		coordname_?coordinatesystemQ -> chart_?ChartQ
+		coordname_?coordinatesystemQ -> chart_?ChartQ,
+		opts1 : OptionsPattern[exactSolMetricCompute]
 	}, 
-	obj_,
-	opts : OptionsPattern[]
-] := exactSolMetricCompute[metric, {coordname, obj}, chart, {}, {}, opts]
+	obj : "Metric" | "Christoffel" | "Riemann" | "Weyl" | "Ricci" | "Einstein",
+	opts : OptionsPattern[MetricCompute]
+] := exactSolMetricCompute[metric, {coordname, chart}, obj, {opts1}, {opts}]
 
-iGRExactSolsData[
-	{
-		metric_?metricQ, 
-		coordname_?coordinatesystemQ -> chart_?ChartQ, 
-		"ParameterNames" -> {consts___?ConstantSymbolQ}
-	}, 
-	obj_,
-	opts : OptionsPattern[]
-] := exactSolMetricCompute[metric, {coordname, obj}, chart, {consts}, {}, opts]
+Options[exactSolMetricCompute] = {"ParameterNames" -> {}, "ScalarFunctionNames" -> {}}
 
-iGRExactSolsData[
-	{
-		metric_?metricQ, 
-		coordname_?coordinatesystemQ -> chart_?ChartQ, 
-		"ParameterNames" -> {consts___?ConstantSymbolQ}, 
-		"ScalarFunctionNames" -> {scalars___?ScalarFunctionQ}
-	}, 
-	obj_,
-	opts : OptionsPattern[]
-] := exactSolMetricCompute[metric, {coordname, obj}, chart, {consts}, {scalars}, opts]
-
-iGRExactSolsData[
-	{
-		metric_?metricQ, 
-		coordname_?coordinatesystemQ -> chart_?ChartQ, 
-		"ParameterNames" -> {consts___?ConstantSymbolQ}, 
-		"ScalarFunctionValues" -> {scalars___}
-	}, 
-	obj_,
-	opts : OptionsPattern[]
-] := exactSolMetricCompute[metric, {coordname, obj}, chart, {consts}, {scalars}, opts]
-
-exactSolMetricCompute[sol_?metricQ, {coordsys_?coordinatesystemQ, obj_}, chart_?ChartQ, {consts___?ConstantSymbolQ}, {scalars___?ScalarFunctionQ}, opts : OptionsPattern[]] :=
-	Module[{coords, ctensormetric, signature, covd, pdchart, output},
+exactSolMetricCompute[sol_?metricQ, {coordsys_?coordinatesystemQ, chart_?ChartQ}, obj_, {opts1 : OptionsPattern[exactSolMetricCompute]}, {opts : OptionsPattern[MetricCompute]}] :=
+	Module[{coords, consts, scalars, ctensormetric, signature, covd, pdchart, output},
 		coords = ScalarsOfChart[chart];
-		ctensormetric = exactSolsData[sol, {coordsys, "Metric"}][coords, {consts}, {scalars}];
+		consts = OptionValue[exactSolMetricCompute, {opts1}, "ParameterNames"];
+		scalars = OptionValue[exactSolMetricCompute, {opts1}, "ScalarFunctionNames"];
+		ctensormetric = exactSolsData[sol, {coordsys, "Metric"}][coords, consts, scalars];
 		ctensormetric = CTensor[ctensormetric, {-chart, -chart}];
 		signature = exactSolsData[sol, {coordsys, "SignatureOfMetric"}];
 		SetCMetric[ctensormetric, chart, SignatureOfMetric -> signature];
