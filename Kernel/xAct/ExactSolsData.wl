@@ -397,6 +397,10 @@ exactSolsData["SphericalSymmetry"] = {
 (* ::Section:: *)
 (* Exact solutions database *)
 
+(* ::Subsection:: *)
+(* Default signature convention *)
+
+exactSolsData[metric_?metricQ, {coords_?coordinatesystemQ, "SignatureOfMetric"}] = {3, 1, 0}
 
 (* ::Subsection:: *)
 (* Bertotti-Robinson Solution *)
@@ -1589,8 +1593,6 @@ exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ParameterAssumption
 exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ScalarFunctionNames"}] = {}
 
 exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ScalarFunctionValues"}] = {}
-
-exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "SignatureOfMetric"}] = {3, 1, 0}
 
 defaultcoordinates["Schwarzschild"] = "SchwarzschildCoordinates"
 
