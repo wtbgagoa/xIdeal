@@ -12,7 +12,7 @@ PacletObject[
 			"Documentation"
 			}
 		},
-		"URL" -> "http://www.xact.es",
+		"URL" -> "https://github.com/wtbgagoa/xIdeal/tree/main",
 		"Description" -> "Identification of exact solutions in xAct",
 		"Creator" -> "Alfonso García-Parrado and Salvador Mengual © 2023 under GPL."
 	|>
