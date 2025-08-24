@@ -441,6 +441,8 @@ exactSolsData["BertottiRobinsonSolution", {"ComplexCoordinates", "ScalarFunction
 
 exactSolsData["BertottiRobinsonSolution", {"ComplexCoordinates", "ScalarFunctionValues"}] = {}
 
+defaultcoordinates["BertottiRobinsonSolution"] = "ComplexCoordinates"
+
 (* ::Subsection:: *)
 (* General electrovac type D solution. See https://arxiv.org/abs/2407.14863v1 *)
 
@@ -546,7 +548,8 @@ Function[{coords, params, scfuncs},
 				}
 		]
 ]
-	
+
+defaultcoordinates["ElectroVacTypeD"] = "TypeDCoordinates"	
 
 (* ::Subsection:: *)
 (* Farnsworth-Kerr I *)
@@ -594,6 +597,8 @@ exactSolsData["FarnsworthKerrI", {"CanonicalCoordinates", "ScalarFunctionNames"}
 
 exactSolsData["FarnsworthKerrI", {"CanonicalCoordinates", "ScalarFunctionValues"}] = {}
 
+defaultcoordinates["FarnsworthKerrI"] = "CanonicalCoordinates"
+
 (* ::Subsection:: *)
 (* Farnsworth-Kerr II *)
 
@@ -640,6 +645,8 @@ exactSolsData["FarnsworthKerrII", {"CanonicalCoordinates", "ScalarFunctionNames"
 
 exactSolsData["FarnsworthKerrII", {"CanonicalCoordinates", "ScalarFunctionValues"}] = {}
 
+defaultcoordinates["FarnsworthKerrII"] = "CanonicalCoordinates"
+
 (* ::Subsection:: *)
 (* Farnsworth-Kerr III *)
 
@@ -684,6 +691,8 @@ exactSolsData["FarnsworthKerrIII", {"CanonicalCoordinates", "ParameterNames"}] =
 exactSolsData["FarnsworthKerrIII", {"CanonicalCoordinates", "ScalarFunctionNames"}] = {}
 
 exactSolsData["FarnsworthKerrII", {"CanonicalCoordinates", "ScalarFunctionValues"}] = {}
+
+defaultcoordinates["FarnsworthKerrIII"] = "CanonicalCoordinates"
 
 (* ::Subsection:: *)
 (* Friedmann in reduced circumference polar coordinates *)
@@ -738,7 +747,7 @@ exactSolsData["Friedmann", {"ReducedCircumferencePolarCoordinates", "ScalarFunct
 			]
         ]
 
-
+defaultcoordinates["Friedmann"] = "ReducedCircumferencePolarCoordinates"
 
 (* ::Subsection:: *)
 (* GeneralSpherical metric in spherical coordinates *)
@@ -795,6 +804,8 @@ exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "ScalarFuncti
 			]
 		]
 
+defaultcoordinates["GeneralSphericalSymmetry"] = "SphericalCoordinates"
+
 (* ::Subsection:: *)
 (* GeneralSzekeresSzafron metric in planar coordinates *)
 
@@ -849,6 +860,8 @@ exactSolsData["GeneralSzekeresSzafron", {"PlanarCoordinates", "ScalarFunctionVal
 			]
 		]
 
+defaultcoordinates["GeneralSzekeresSzafron"] = "PlanarCoordinates"
+
 (* ::Subsection:: *)
 (* KantowskiSachs metric in spherical coordinates *)
 
@@ -902,6 +915,8 @@ exactSolsData["KantowskiSachs", {"SphericalCoordinates", "ScalarFunctionValues"}
 			]
 		]
 
+defaultcoordinates["KantowskiSachs"] = "SphericalCoordinates"
+
 (* ::Subsection:: *)
 (* KasnerI *)
 
@@ -954,6 +969,8 @@ exactSolsData["KasnerI", {"CanonicalCoordinates", "Metric"}] =
 	]
 
 exactSolsData["KasnerI", {"CanonicalCoordinates", "ScalarFunctionValues"}] = {}
+
+defaultcoordinates["KasnerI"] = "CanonicalCoordinates"
 
 (* ::Subsection:: *)
 (* KasnerII *)
@@ -1040,6 +1057,8 @@ exactSolsData["KasnerII", {"CanonicalCoordinates", "ScalarFunctionValues"}] =
 		]
 	]
 
+defaultcoordinates["KasnerII"] = "CanonicalCoordinates"
+
 (* ::Subsection:: *)
 (* Kerr *)
 
@@ -1120,6 +1139,8 @@ exactSolsData["Kerr", {"BoyerLindquistCoordinates", "ScalarFunctionValues"}] =
 		]
 	]
 
+defaultcoordinates["Kerr"] = "BoyerLindquistCoordinates"
+
 (* ::Subsection:: *)
 (* Kerr-NUT *)
 
@@ -1199,6 +1220,8 @@ exactSolsData["KerrNUT", {"ExpansionGradientAdaptedCoordinates", "ScalarFunction
 		]
 	]
 
+defaultcoordinates["KerrNUT"] = "ExpansionGradientAdaptedCoordinates"
+
 (* ::Subsection:: *)
 (* Lemaitre-Tolman *)
 
@@ -1249,7 +1272,7 @@ exactSolsData["LemaitreTolman", {"SphericalCoordinates", "ScalarFunctionValues"}
 			]
         ]
 
-
+defaultcoordinates["LemaitreTolman"] = "SphericalCoordinates"
 
 (* ::Subsection:: *)
 (* Osvath-Koutras I *)
@@ -1318,6 +1341,8 @@ exactSolsData["OsvathKoutrasI", {"GroupGeneratorsAdaptedCoordinates", "ScalarFun
 
 exactSolsData["OsvathKoutrasI", {"GroupGeneratorsAdaptedCoordinates", "ScalarFunctionValues"}] = {}
 
+defaultcoordinates["OsvathKoutrasI"] = "GroupGeneratorsAdaptedCoordinates"
+
 (* ::Subsection:: *)
 (* Osvath-Koutras II *)
 
@@ -1366,6 +1391,8 @@ exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "Paramete
 exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "ScalarFunctionNames"}] = {}
 
 exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "ScalarFunctionValues"}] = {}
+
+defaultcoordinates["OsvathKoutrasII"] = "GroupGeneratorsAdaptedCoordinates"
 
 (* ::Subsection:: *)
 (* Osvath-Koutras III *)
@@ -1429,6 +1456,8 @@ exactSolsData["OsvathKoutrasIII", {"GroupGeneratorsAdaptedCoordinates", "ScalarF
 
 exactSolsData["OsvathKoutrasIII", {"GroupGeneratorsAdaptedCoordinates", "ScalarFunctionValues"}] = {}
 
+defaultcoordinates["OsvathKoutrasIII"] = "GroupGeneratorsAdaptedCoordinates"
+
 (* ::Subsection:: *)
 (* Petrov Solution *)
 
@@ -1467,6 +1496,8 @@ exactSolsData["PetrovSolution", {"CanonicalCoordinates", "ParameterNames"}] = {"
 exactSolsData["PetrovSolution", {"CanonicalCoordinates", "ScalarFunctionNames"}] = {}
 
 exactSolsData["PetrovSolution", {"CanonicalCoordinates", "ScalarFunctionValues"}] = {}
+
+defaultcoordinates["PetrovSolution"] = "CanonicalCoordinates"
 
 (* ::Subsection:: *)
 (* PP wave *)
@@ -1515,6 +1546,8 @@ exactSolsData["PPWave", {"ComplexCoordinates", "ScalarFunctionValues"}] =
 				}
 			]
         ]
+
+defaultcoordinates["PPWave"] = "ComplexCoordinates"
 
 (* ::Subsection:: *)
 (* Reissner-Nordström *)
@@ -1567,6 +1600,8 @@ exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "Metric"}] =
 			]
 		]
 	]
+
+defaultcoordinates["ReissnerNordstrom"] = "SchwarzschildCoordinates"
 
 (* ::Subsection:: *)
 (* Schwarzschild in Schwarzschild coordinates *)
@@ -1794,6 +1829,8 @@ exactSolsData["Stephani", {"AdaptedCoordinates", "ScalarFunctionValues"}] =
 		]
 	]
 
+defaultcoordinates["Stephani"] = "AdaptedCoordinates"
+
 (* ::Subsection:: *)
 (* Stephani Thermodynamic in adapted coordinates *)
 
@@ -1892,6 +1929,8 @@ exactSolsData["StephaniThermodynamic", {"AdaptedCoordinates", "ScalarFunctionVal
         ]
     ]
 
+defaultcoordinates["StephaniThermodynamic"] = "AdaptedCoordinates"
+
 (* ::Subsection:: *)
 (* Stephani Thermodynamic and Spherically symmetric in adapted coordinates *)
 
@@ -1965,6 +2004,8 @@ exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "Scalar
 				}
 		]
 	]
+
+defaultcoordinates["StephaniThermodynamicSpherical"] = "SphericalCoordinates"
 
 (* ::Section:: *)
 (* xActSolutionData *)
