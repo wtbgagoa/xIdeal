@@ -1748,7 +1748,7 @@ exactSolsData["Schwarzschild", {"HarmonicCoordinates", "Metric"}] =
 
 exactSolsData["Schwarzschild", {"HarmonicCoordinates", "ScalarFunctionValues"}] =
     Function[{coords, params},
-        With[{t = coords[[1]], x = coords[[2]], y = coords[[c3]], z = coords[[4]], m = params[[1]]},
+        With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], m = params[[1]]},
 			{Sqrt[x^2 + y^2 + z^2]}
         ]
     ]
