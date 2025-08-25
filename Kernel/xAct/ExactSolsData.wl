@@ -2019,6 +2019,16 @@ iGRExactSolsData[
 		coordname_?coordinatesystemQ -> chart_?ChartQ,
 		opts1 : OptionsPattern[exactSolMetricCompute]
 	}, 
+	"Properties",
+	opts : OptionsPattern[MetricCompute]
+] := { "Metric", "Christoffel", "Riemann", "Weyl", "Ricci", "Einstein"}
+
+iGRExactSolsData[
+	{
+		metric_?metricQ, 
+		coordname_?coordinatesystemQ -> chart_?ChartQ,
+		opts1 : OptionsPattern[exactSolMetricCompute]
+	}, 
 	obj : "Metric" | "Christoffel" | "Riemann" | "Weyl" | "Ricci" | "Einstein",
 	opts : OptionsPattern[MetricCompute]
 ] := exactSolMetricCompute[metric, {coordname, chart}, obj, {opts1}, {opts}]
