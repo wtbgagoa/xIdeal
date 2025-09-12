@@ -1,15 +1,36 @@
-BeginPackage["xAct`ExactSolsData`",{"xAct`xCoba`", "xAct`xTensor`", "xAct`xPerm`",
+(* ::Section:: *)
+(* BeginPackage *)
+
+With[
+	{
+		xAct`xIdeal`Private`xIdealSymbols = 
+			DeleteCases[
+				Join[Names["xAct`xIdeal`*"], Names["xAct`xIdeal`Private`*"]], 
+				"$Version" | "xAct`xIdeal`$Version" | "$xTensorVersionExpected" | 
+				"xAct`xIdeal`$xTensorVersionExpected"
+			]
+	},
+	Unprotect /@ xAct`xIdeal`Private`xIdealSymbols;
+	Clear /@ xAct`xIdeal`Private`xIdealSymbols;
+]
+
+If[Unevaluated[xAct`xCore`Private`$LastPackage] === xAct`xCore`Private`$LastPackage,
+	
+	xAct`xCore`Private`$LastPackage = "xAct`xIdeal`"
+];
+
+BeginPackage["xAct`ExactSolsData`",{"xAct`xIdeal`", "xAct`xCoba`", "xAct`xTensor`", "xAct`xPerm`",
 	 "xAct`xCore`"}]
 
 (* ::Section:: *)
 (* Usage information *)
 
-xActSolutionData::usage = "xActSolutionData[args]  returns information about an the exact solution as queried by args .";
+xAct`xIdeal`xActSolutionData::usage = "xActSolutionData[args]  returns information about an the exact solution as queried by args .";
 
 (* ::Section:: *)
 (* Messages *)
-
-xActSolutionData::noprop = "Unknown argument or property";
+q
+xAct`xIdeal`xActSolutionData::noprop = "Unknown argument or property";
 
 (* ::Section:: *)
 (* BeginPrivate *)
@@ -2078,7 +2099,7 @@ exactSolMetricCompute[sol_?metricQ, {coordsys_?coordinatesystemQ, chart_?ChartQ}
 				MetricCompute[ctensormetric, chart, "Einstein"[-1, -1], opts];
 				covd = CovDOfMetric[ctensormetric];
 				output = Ricci[covd],
-			_, Message[xActSolutionData::obj, obj]; Return[$Failed]
+			_, Message[xAct`xIdeal`xActSolutionData::obj, obj]; Return[$Failed]
 		];
 		UnsetCMetric[ctensormetric];
 		Map[Unset, Unevaluated[{scalars}]];
@@ -2198,7 +2219,7 @@ iGRExactSolsData[class_?exactsolclassQ] := exactSolsData[class]
 iGRExactSolsData[___] := $Failed;
 
 (* Entry point of xActSolutionData *)
-xActSolutionData[args___]:= Module[{res = iGRExactSolsData[args]}, If[UnsameQ[res, $Failed], res, Message[xActSolutionData::noprop]]]
+xAct`xIdeal`xActSolutionData[args___]:= Module[{res = iGRExactSolsData[args]}, If[UnsameQ[res, $Failed], res, Message[xAct`xIdeal`xActSolutionData::noprop]]]
 
 (****************************************************************)
 
