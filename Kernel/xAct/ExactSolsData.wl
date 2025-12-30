@@ -64,6 +64,7 @@ allmetrics = {
 	"PetrovSolution",
 	"PPWave",
 	"ReissnerNordstrom",
+	"RobinsonTrautman",
 	"Schwarzschild",
    	"Stephani",
 	"StephaniThermodynamic",
@@ -1623,6 +1624,61 @@ exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "Metric"}] =
 	]
 
 defaultcoordinates["ReissnerNordstrom"] = "SchwarzschildCoordinates"
+
+(* ::Subsection:: *)
+(* Robinson Trautmann *)
+
+exactSolsData["RobinsonTrautman", "Classes"] = {"PetrovTypeD", "PetrovTypeII", "PetrovTypeIII", "PetrovTypeN"}
+
+exactSolsData["RobinsonTrautman", "CoordinateSystems"] = {"ComplexCoordinates"}
+
+exactSolsData["RobinsonTrautman", "DefaultCoordinates"] = "ComplexCoordinates"
+
+exactSolsData["RobinsonTrautman", "IsIDEAL"] = False
+ 
+exactSolsData["RobinsonTrautman", "ParameterAssumptions"] = Null
+ 
+exactSolsData["RobinsonTrautman", "ParameterNames"] = {"\[CapitalLambda]"}
+
+exactSolsData["RobinsonTrautman", {"ComplexCoordinates", "CoordinateAssumptions"}] = 
+	-Infinity < #[[1]] < Infinity && -Infinity < #[[2]] < Infinity && -Infinity < #[[3]] < Infinity && -Infinity < #[[4]] < Infinity &
+ 
+exactSolsData["RobinsonTrautman", {"ComplexCoordinates", "CoordinateNames"}] = {"u", "r", "x1", "x2"}
+ 
+exactSolsData["RobinsonTrautman", {"ComplexCoordinates", "Metric"}] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{u = coords[[1]], r = coords[[2]], x1 = coords[[3]], x2 = coords[[4]], 
+			H = scfuncs[[1]], P = scfuncs[[2]]},
+    		{
+				{-2 H[u, r, x1, x2], -1, 0, 0}, 
+				{-1, 0, 0, 0}, 
+        		{0, 0, 2 r^2 / P[u, x1, x2]^2, 0}, 
+				{0, 0, 0, 2 r^2 / P[u, x1, x2]^2}
+			}
+		]
+	]
+ 
+exactSolsData["RobinsonTrautman", {"ComplexCoordinates", "ParameterAssumptions"}] = Null
+ 
+exactSolsData["RobinsonTrautman", {"ComplexCoordinates", "ParameterNames"}] = {"\[CapitalLambda]"}
+ 
+exactSolsData["RobinsonTrautman", {"ComplexCoordinates", "ScalarFunctionNames"}] = {"H", "P", "m"}
+exactSolsData["RobinsonTrautman", {"ComplexCoordinates", "ScalarFunctionValues"}] =
+    Function[{coords, params, scfuncs},
+        With[{u = coords[[1]], r = coords[[2]], x1 = coords[[3]], 
+            x2 = coords[[4]], lambda = params[[1]], H = scfuncs[[1]], P = scfuncs[[2]], m = scfuncs[[3]]},
+				{
+					H[u, r, x1, x2] = 
+						r D[Log[P[u, x1, x2]], u] - (m[u]/r) - 
+						(P[u, x1, x2]^2 / 4) Log[P[u, x1, x2]] D[D[P[u, x1, x2], x1], x1] - 
+						(P[u, x1, x2]^2 / 4) Log[P[u, x1, x2]] D[D[P[u, x1, x2], x2], x2] - lambda r^2 / 6,
+					P[u, x1, x2],
+					m[u]
+				}
+			]
+        ]
+
+defaultcoordinates["RobinsonTrautman"] = "ComplexCoordinates"
 
 (* ::Subsection:: *)
 (* Schwarzschild in Schwarzschild coordinates *)
