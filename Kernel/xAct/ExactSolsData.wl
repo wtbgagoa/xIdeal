@@ -29,7 +29,7 @@ xAct`xIdeal`xActSolutionData::usage = "xActSolutionData[args]  returns informati
 
 (* ::Section:: *)
 (* Messages *)
-q
+
 xAct`xIdeal`xActSolutionData::noprop = "Unknown argument or property";
 
 (* ::Section:: *)
