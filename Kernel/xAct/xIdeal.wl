@@ -25,9 +25,9 @@
 
 
 (* ::Input::Initialization:: *)
-xAct`xIdeal`$xTensorVersionExpected = {"1.1.2", {2015, 8, 23}};
+xAct`xIdeal`$xTensorVersionExpected = {"1.3.0", {2025, 12, 29}};
 
-xAct`xIdeal`$Version = {"0.0.1", {2023, 10, 3}};
+xAct`xIdeal`$Version = {"0.1.0", {2025, 10, 29}};
 
 (******************************************************************************)
 
