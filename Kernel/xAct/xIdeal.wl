@@ -25,9 +25,9 @@
 
 
 (* ::Input::Initialization:: *)
-xAct`xIdeal`$xTensorVersionExpected = {"1.1.2", {2015, 8, 23}};
+xAct`xIdeal`$xTensorVersionExpected = {"1.3.0", {2025, 12, 29}};
 
-xAct`xIdeal`$Version = {"0.0.1", {2023, 10, 3}};
+xAct`xIdeal`$Version = {"0.1.0", {2025, 10, 29}};
 
 (******************************************************************************)
 
@@ -162,7 +162,6 @@ $PrePrint = ScreenDollarIndices;
 (* ::Section:: *)
 (* Usage information *)
 
-
 PetrovType::usage = "PetrovType[metric] returns the Petrov Type of metric.";
 
 DebeverNullDirections::usage = "DebeverNullDirections[metric] returns the multiple Debever null directions of metric.";
@@ -197,9 +196,11 @@ KustaanheimoQvistQ::usage = "KustaanheimoQvistQ[metric, w] returns True if metri
 
 Rframe::usage = " ";
 
+xActSolutionData::usage = "xActSolutionData[args]  returns information about an the exact solution as queried by args .";
+
+
 (* ::Section:: *)
 (* Messages *)
-
 
 PetrovType::nometric = "Metric `1` has not been registered as a metric";
 
@@ -240,6 +241,9 @@ KustaanheimoQvistQ::nometric = "Metric `1` has not been registered as a metric";
 ConnectionTensor::nometric = "Metric `1` has not been registered as a metric";
 
 IsometryGroupDimension::nometric = "Metric `1` has not been registered as a metric";
+
+xActSolutionData::noprop = "Unknown argument or property";
+
 
 (* ::Section:: *)
 (* BeginPrivate *)

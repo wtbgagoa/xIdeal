@@ -1,15 +1,36 @@
-BeginPackage["xAct`ExactSolsData`",{"xAct`xCoba`", "xAct`xTensor`", "xAct`xPerm`",
+(* ::Section:: *)
+(* BeginPackage *)
+
+With[
+	{
+		xAct`xIdeal`Private`xIdealSymbols = 
+			DeleteCases[
+				Join[Names["xAct`xIdeal`*"], Names["xAct`xIdeal`Private`*"]], 
+				"$Version" | "xAct`xIdeal`$Version" | "$xTensorVersionExpected" | 
+				"xAct`xIdeal`$xTensorVersionExpected"
+			]
+	},
+	Unprotect /@ xAct`xIdeal`Private`xIdealSymbols;
+	Clear /@ xAct`xIdeal`Private`xIdealSymbols;
+]
+
+If[Unevaluated[xAct`xCore`Private`$LastPackage] === xAct`xCore`Private`$LastPackage,
+	
+	xAct`xCore`Private`$LastPackage = "xAct`xIdeal`"
+];
+
+BeginPackage["xAct`ExactSolsData`",{"xAct`xIdeal`", "xAct`xCoba`", "xAct`xTensor`", "xAct`xPerm`",
 	 "xAct`xCore`"}]
 
 (* ::Section:: *)
 (* Usage information *)
 
-xActSolutionData::usage = "xActSolutionData[args]  returns information about an the exact solution as queried by args .";
+xAct`xIdeal`xActSolutionData::usage = "xActSolutionData[args]  returns information about an the exact solution as queried by args .";
 
 (* ::Section:: *)
 (* Messages *)
 
-xActSolutionData::noprop = "Unknown argument or property";
+xAct`xIdeal`xActSolutionData::noprop = "Unknown argument or property";
 
 (* ::Section:: *)
 (* BeginPrivate *)
@@ -43,6 +64,7 @@ allmetrics = {
 	"PetrovSolution",
 	"PPWave",
 	"ReissnerNordstrom",
+	"RobinsonTrautman",
 	"Schwarzschild",
    	"Stephani",
 	"StephaniThermodynamic",
@@ -1604,6 +1626,61 @@ exactSolsData["ReissnerNordstrom", {"SchwarzschildCoordinates", "Metric"}] =
 defaultcoordinates["ReissnerNordstrom"] = "SchwarzschildCoordinates"
 
 (* ::Subsection:: *)
+(* Robinson Trautmann *)
+
+exactSolsData["RobinsonTrautman", "Classes"] = {"PetrovTypeD", "PetrovTypeII", "PetrovTypeIII", "PetrovTypeN"}
+
+exactSolsData["RobinsonTrautman", "CoordinateSystems"] = {"ComplexCoordinates"}
+
+exactSolsData["RobinsonTrautman", "DefaultCoordinates"] = "ComplexCoordinates"
+
+exactSolsData["RobinsonTrautman", "IsIDEAL"] = False
+ 
+exactSolsData["RobinsonTrautman", "ParameterAssumptions"] = Null
+ 
+exactSolsData["RobinsonTrautman", "ParameterNames"] = {"\[CapitalLambda]"}
+
+exactSolsData["RobinsonTrautman", {"ComplexCoordinates", "CoordinateAssumptions"}] = 
+	-Infinity < #[[1]] < Infinity && -Infinity < #[[2]] < Infinity && -Infinity < #[[3]] < Infinity && -Infinity < #[[4]] < Infinity &
+ 
+exactSolsData["RobinsonTrautman", {"ComplexCoordinates", "CoordinateNames"}] = {"u", "r", "x1", "x2"}
+ 
+exactSolsData["RobinsonTrautman", {"ComplexCoordinates", "Metric"}] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{u = coords[[1]], r = coords[[2]], x1 = coords[[3]], x2 = coords[[4]], 
+			H = scfuncs[[1]], P = scfuncs[[2]]},
+    		{
+				{-2 H[u, r, x1, x2], -1, 0, 0}, 
+				{-1, 0, 0, 0}, 
+        		{0, 0, 2 r^2 / P[u, x1, x2]^2, 0}, 
+				{0, 0, 0, 2 r^2 / P[u, x1, x2]^2}
+			}
+		]
+	]
+ 
+exactSolsData["RobinsonTrautman", {"ComplexCoordinates", "ParameterAssumptions"}] = Null
+ 
+exactSolsData["RobinsonTrautman", {"ComplexCoordinates", "ParameterNames"}] = {"\[CapitalLambda]"}
+ 
+exactSolsData["RobinsonTrautman", {"ComplexCoordinates", "ScalarFunctionNames"}] = {"H", "P", "m"}
+exactSolsData["RobinsonTrautman", {"ComplexCoordinates", "ScalarFunctionValues"}] =
+    Function[{coords, params, scfuncs},
+        With[{u = coords[[1]], r = coords[[2]], x1 = coords[[3]], 
+            x2 = coords[[4]], lambda = params[[1]], H = scfuncs[[1]], P = scfuncs[[2]], m = scfuncs[[3]]},
+				{
+					H[u, r, x1, x2] = 
+						r D[Log[P[u, x1, x2]], u] - (m[u]/r) - 
+						(P[u, x1, x2]^2 / 4) Log[P[u, x1, x2]] D[D[P[u, x1, x2], x1], x1] - 
+						(P[u, x1, x2]^2 / 4) Log[P[u, x1, x2]] D[D[P[u, x1, x2], x2], x2] - lambda r^2 / 6,
+					P[u, x1, x2],
+					m[u]
+				}
+			]
+        ]
+
+defaultcoordinates["RobinsonTrautman"] = "ComplexCoordinates"
+
+(* ::Subsection:: *)
 (* Schwarzschild in Schwarzschild coordinates *)
 exactSolsData["Schwarzschild", "Classes"] = {"PetrovTypeD", "Static", "SphericalSymmetry", "Vacuum", "VacuumTypeD"}
 
@@ -2078,7 +2155,7 @@ exactSolMetricCompute[sol_?metricQ, {coordsys_?coordinatesystemQ, chart_?ChartQ}
 				MetricCompute[ctensormetric, chart, "Einstein"[-1, -1], opts];
 				covd = CovDOfMetric[ctensormetric];
 				output = Ricci[covd],
-			_, Message[xActSolutionData::obj, obj]; Return[$Failed]
+			_, Message[xAct`xIdeal`xActSolutionData::obj, obj]; Return[$Failed]
 		];
 		UnsetCMetric[ctensormetric];
 		Map[Unset, Unevaluated[{scalars}]];
@@ -2198,7 +2275,7 @@ iGRExactSolsData[class_?exactsolclassQ] := exactSolsData[class]
 iGRExactSolsData[___] := $Failed;
 
 (* Entry point of xActSolutionData *)
-xActSolutionData[args___]:= Module[{res = iGRExactSolsData[args]}, If[UnsameQ[res, $Failed], res, Message[xActSolutionData::noprop]]]
+xAct`xIdeal`xActSolutionData[args___]:= Module[{res = iGRExactSolsData[args]}, If[UnsameQ[res, $Failed], res, Message[xAct`xIdeal`xActSolutionData::noprop]]]
 
 (****************************************************************)
 
