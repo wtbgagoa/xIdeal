@@ -1722,7 +1722,7 @@ weylConcomitant["PTIConnectionTensor"][metric_CTensor, opts : OptionsPattern[]] 
 		selfdualW2 = weylConcomitant["WeylSelfDual2"][metric, opts];
 		aa = weylConcomitant["TraceWeylSelfDual2"][metric, opts];
 		bb = weylConcomitant["TraceWeylSelfDual3"][metric, opts];
-		G2form = metricConcomitant["G2Form"];
+		G2form = metricConcomitant["G2Form"][metric, opts];
 		cd = CovDOfMetric[metric];
 		time = AbsoluteTime[];
 		scX = cd[-a1][selfdualW[-b1, -c1, -d1, -e1]] selfdualW[d1, e1, c1, -f1] / 2;
