@@ -147,10 +147,12 @@ allmetricproperties = {
 	"CoordinateNames",
 	"CoordinateSystemName",
 	"CoordinateSystems",
+	"DefaultCoordinates",
 	"IsIDEAL",
 	"Metric",
 	"ParameterAssumptions",
 	"ParameterNames",
+	"ParameterValues",
 	"ScalarFunctionValues",
 	"ScalarFunctionNames",
 	"SignatureOfMetric"
@@ -164,6 +166,7 @@ allcoordinatesystems = {
 	"ExpansionGradientAdaptedCoordinates",
 	"GroupGeneratorsAdaptedCoordinates",
 	"HarmonicCoordinates",
+	"HypersphericalCoordinates",
  	"IsotropicCoordinates",
 	"PlanarCoordinates",
   	"ReducedCircumferencePolarCoordinates",
@@ -693,7 +696,7 @@ exactSolsData["Friedmann", "Classes"] = {"PerfectFluid", "ThermodynamicPerfectFl
      "ConformallyFlat", "SpatiallyHomogeneous", "SpatialG6", "BarotropicPerfectFluid",
      "ConformallyStatic"}
 
-exactSolsData["Friedmann", "CoordinateSystems"] = {"ReducedCircumferencePolarCoordinates"}
+exactSolsData["Friedmann", "CoordinateSystems"] = {"ReducedCircumferencePolarCoordinates","HypersphericalCoordinates"}
 
 exactSolsData["Friedmann", "DefaultCoordinates"] = "ReducedCircumferencePolarCoordinates"
 
@@ -733,11 +736,50 @@ exactSolsData["Friedmann", {"ReducedCircumferencePolarCoordinates", "ScalarFunct
     Function[{coords, params, scfuncs},
         With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], 
         phi = coords[[4]], k = params[[1]], R = scfuncs[[1]]},	
-			{R = Function[{t}, R[t]]}
+			{Function[{t}, R[t]]}
 		]
 	]
 
 defaultcoordinates["Friedmann"] = "ReducedCircumferencePolarCoordinates"
+
+(* ::Subsection:: *)
+(* Friedmann in hypershpherical coordinates *)
+
+exactSolsData["Friedmann", {"HypersphericalCoordinates", "CoordinateNames"}] = {"t", "r", "\[Theta]", "\[Phi]"}
+
+exactSolsData["Friedmann", {"HypersphericalCoordinates", "CoordinateAssumptions"}] = Null
+
+exactSolsData["Friedmann", {"HypersphericalCoordinates", "ParameterNames"}] = {"k"}
+
+exactSolsData["Friedmann", {"HypersphericalCoordinates", "ParameterAssumptions"}] = Null
+
+exactSolsData["Friedmann", {"HypersphericalCoordinates", "ScalarFunctionNames"}] = {"R", "S"}
+
+exactSolsData["Friedmann", {"HypersphericalCoordinates", "Metric"}] =
+    Function[{coords, params, scfuncs},
+        With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], 
+            phi = coords[[4]], k = params[[1]], R = scfuncs[[1]], S = scfuncs[[2]]},
+            DiagonalMatrix[
+				{
+					-1, 
+					R[t] ^ 2, 
+					R[t] ^ 2 * S[r] ^ 2, 
+					R[t] ^ 2 * S[r] ^ 2 * Sin[theta] ^ 2
+				}
+			]
+        ]
+    ]
+
+exactSolsData["Friedmann", {"HypersphericalCoordinates", "ScalarFunctionValues"}] =
+    Function[{coords, params, scfuncs},
+        With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], 
+        phi = coords[[4]], k = params[[1]], R = scfuncs[[1]], S = scfuncs[[2]]},	
+			{
+				Function[{t}, R[t]],
+				Function[{r}, S[r]]
+			}
+		]
+	]
 
 (* ::Subsection:: *)
 (* GeneralSpherical metric in spherical coordinates *)
@@ -1279,25 +1321,6 @@ exactSolsData["OsvathKoutrasI", {"GroupGeneratorsAdaptedCoordinates", "Metric"}]
 	Function[{coords, params, scfuncs}, 
     	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], s = params[[1]], a = params[[2]], 
 			beta = params[[3]], A = params[[4]], B = params[[5]], F = params[[6]], b = params[[7]]}, 
-      			Quiet[beta = 
-					Function[{s}, 
-						Sqrt[1 + 2*s^2*(1 - s^2)*(3 - s^2)]
-					]
-				]; 
-       			Quiet[A = Function[{beta, s}, 
-						(1 - beta[s])/2
-					]
-				]; 
-       			Quiet[B = 
-					Function[{beta, s}, 
-						(1 + beta[s])/2]; F = Function[{s}, 1 - s^2
-					]
-				]; 
-       			Quiet[b = 
-					Function[{s}, 
-						Sqrt[2]*s*(3 - s^2)
-					]
-				];
     			a^2*{
 					{((4/b[s]^2)*A[beta, s]^2 - 1)*Exp[2*A[beta, s]*z], 
 						((4/b[s]^2)*A[beta, s]*B[beta, s] - 1)*Exp[(A[beta, s] + B[beta, s])*z], 0, 0}, 
@@ -1316,6 +1339,30 @@ exactSolsData["OsvathKoutrasI", {"GroupGeneratorsAdaptedCoordinates", "Parameter
 exactSolsData["OsvathKoutrasI", {"GroupGeneratorsAdaptedCoordinates", "ScalarFunctionNames"}] = {}
 
 exactSolsData["OsvathKoutrasI", {"GroupGeneratorsAdaptedCoordinates", "ScalarFunctionValues"}] = {}
+
+exactSolsData["OsvathKoutrasI", {"GroupGeneratorsAdaptedCoordinates", "ParameterValues"}] =
+	Function[{params}, 
+    	With[{s = params[[1]], a = params[[2]], 
+			beta = params[[3]], A = params[[4]], B = params[[5]], F = params[[6]], b = params[[7]]}, 
+			Module[{beta, A, B, F, b},		
+				beta = Function[{s}, Sqrt[1 + 2*s^2*(1 - s^2)*(3 - s^2)]];
+				A = Function[{beta, s}, (1 - beta[s])/2];
+				B = Function[{beta, s}, (1 + beta[s])/2];
+				F = Function[{s}, 1 - s^2];
+				b = Function[{s}, Sqrt[2]*s*(3 - s^2)];
+				{
+					s,
+					a,
+					beta,
+					A, 
+					B, 
+					F,
+					b
+				}			
+			]
+		]
+	]
+
 
 defaultcoordinates["OsvathKoutrasI"] = "GroupGeneratorsAdaptedCoordinates"
 
@@ -1349,9 +1396,6 @@ exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "Metric"}
 	Function[{coords, params, scfuncs}, 
     	With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]], s = params[[1]], a = params[[2]], 
 			F = params[[3]], b = params[[4]]}, 
-				Quiet[s = Sqrt[1.2296814706969093]]; 
-       			Quiet[F = Function[{s}, 1 - s^2]]; 
-				Quiet[b = Function[{s}, Sqrt[2]*s*(3 - s^2)]]; 
        			a^2*{
 					{(-4^(-1))*(b[s] - 1/b[s])^2*E^z, (-4^(-1))*(b[s] - 1/b[s])^2*E^z*z, 0, 0}, 
 					{(-4^(-1))*(b[s] - 1/b[s])^2*E^z*z, E^z*(1 - (z^2/4)*(b[s] - 1/b[s])^2), 0, 0}, 
@@ -1364,7 +1408,23 @@ exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "Metric"}
 exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "ParameterAssumptions"}] = exactSolsData["OsvathKoutrasII", "ParameterAssumptions"]
  
 exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "ParameterNames"}] = exactSolsData["OsvathKoutrasII", "ParameterNames"]
- 
+
+exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "ParameterValues"}] =
+	Function[{params}, 
+    	With[{s = params[[1]], a = params[[2]], F = params[[3]], b = params[[4]]}, 
+			Module[{s, A, B, F, b},		
+				s = Sqrt[1.2296814706969093]; 
+       			F = Function[{s} ,1 - s^2]; 
+				b = Function[{s}, Sqrt[2]*s*(3 - s^2)];
+				{
+					s,
+					a,
+					F,
+					b
+				}			
+			]
+		]
+	]
 exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "ScalarFunctionNames"}] = {}
 
 exactSolsData["OsvathKoutrasII", {"GroupGeneratorsAdaptedCoordinates", "ScalarFunctionValues"}] = {}
@@ -2026,14 +2086,14 @@ iGRExactSolsData[
 	opts : OptionsPattern[MetricCompute]
 ] := exactSolMetricCompute[metric, {coordname, chart}, obj, {opts1}, {opts}]
 
-Options[exactSolMetricCompute] = {"ParameterNames" -> {}, "ScalarFunctionValues" -> {}}
+Options[exactSolMetricCompute] = {"ParameterNames" -> {}, "ParameterValues" -> {}, "ScalarFunctionValues" -> {}}
 
 exactSolMetricCompute[sol_?metricQ, {coordsys_?coordinatesystemQ, chart_?ChartQ}, obj_, {opts1 : OptionsPattern[exactSolMetricCompute]}, {opts : OptionsPattern[MetricCompute]}] :=
-	Module[{coords, consts, scalars, ctensormetric, signature, covd, pdchart, output},
+	Module[{coords, consts, constvalues, scalars, ctensormetric, signature, covd, pdchart, output},
 		coords = ScalarsOfChart[chart];
-		consts = OptionValue[exactSolMetricCompute, {opts1}, "ParameterNames"];
+		constvalues = OptionValue[exactSolMetricCompute, {opts1}, "ParameterValues"];
 		scalars = OptionValue[exactSolMetricCompute, {opts1}, "ScalarFunctionValues"];
-		ctensormetric = exactSolsData[sol, {coordsys, "Metric"}][coords, consts, scalars];
+		ctensormetric = exactSolsData[sol, {coordsys, "Metric"}][coords, constvalues, scalars];
 		ctensormetric = CTensor[ctensormetric, {-chart, -chart}];
 		signature = exactSolsData[sol, {coordsys, "SignatureOfMetric"}];
 		pdchart = GiveSymbol[PD, chart];
@@ -2091,6 +2151,10 @@ iGRExactSolsData[metric_?metricQ, "CoordinateAssumptions"] := Module[{coords},
 	exactSolsData[metric, {coords, "CoordinateAssumptions"}]
 ]
 
+iGRExactSolsData[metric_?metricQ, "DefaultCoordinates"] := Module[{coords},
+	coords = exactSolsData[metric, "DefaultCoordinates"]
+]
+
 iGRExactSolsData[metric_?metricQ, "CoordinateSystemName"] := Module[{coords},
 	coords = exactSolsData[metric, "DefaultCoordinates"]
 ]
@@ -2103,6 +2167,8 @@ iGRExactSolsData[metric_?metricQ, "CoordinateNames"] := Module[{coords},
 iGRExactSolsData[metric_?metricQ, "ParameterAssumptions"] := exactSolsData[metric, "ParameterAssumptions"]
 
 iGRExactSolsData[metric_?metricQ, "ParameterNames"] := exactSolsData[metric, "ParameterNames"]
+
+iGRExactSolsData[metric_?metricQ, "ParameterValues"] := exactSolsData[metric, "ParameterValues"]
 
 iGRExactSolsData[metric_?metricQ, "ScalarFunctionNames"] := Module[{coords},
 	coords = exactSolsData[metric, "DefaultCoordinates"];
@@ -2135,6 +2201,7 @@ allcoordinateproperties = {
 	"Metric",
 	"ParameterNames",
 	"ParameterAssumptions",
+	"ParameterValues",
 	"ScalarFunctionNames",
 	"ScalarFunctionValues",
 	"SignatureOfMetric"
@@ -2155,6 +2222,8 @@ iGRExactSolsData[{metric_?metricQ, coordname_?coordinatesystemQ}, "Metric"] := e
 iGRExactSolsData[{metric_?metricQ, coordname_?coordinatesystemQ}, "ParameterNames"] := exactSolsData[metric, {coordname, "ParameterNames"}]
 
 iGRExactSolsData[{metric_?metricQ, coordname_?coordinatesystemQ}, "ParameterAssumptions"] := exactSolsData[metric, {coordname, "ParameterAssumptions"}]
+
+iGRExactSolsData[{metric_?metricQ, coordname_?coordinatesystemQ}, "ParameterValues"] := (BreakPoint[];exactSolsData[metric, {coordname, "ParameterValues"}])
 
 iGRExactSolsData[{metric_?metricQ, coordname_?coordinatesystemQ}, "ScalarFunctionNames"] := exactSolsData[metric, {coordname, "ScalarFunctionNames"}]
 
