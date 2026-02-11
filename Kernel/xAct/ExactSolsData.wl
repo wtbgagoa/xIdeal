@@ -71,7 +71,7 @@ allmetrics = {
 	"StephaniThermodynamicSpherical",
     "SzekeresSzafronI",
     "SzekeresSzafronII",
-    "Wills",
+    "WilsSolution",
 	"WindmillI"
 }
 
@@ -224,7 +224,8 @@ exactSolsData["ConformallyFlat"] = {
 	"Friedmann", 
 	"Stephani", 
 	"StephaniThermodynamic", 
-	"StephaniThermodynamicSpherical"
+	"StephaniThermodynamicSpherical",
+	"WilsSolution"
 }
 
 exactSolsData["ConformallyStatic"] = {
@@ -2059,6 +2060,60 @@ exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "Scalar
 	]
 
 defaultcoordinates["StephaniThermodynamicSpherical"] = "SphericalCoordinates"
+
+(* ::Subsection:: *)
+(* Wils Solution *)
+
+exactSolsData["WilsSolution", "Classes"] = {"ConformallyFlat"}
+
+exactSolsData["WilsSolution", "CoordinateSystems"] = {"CanonicalCoordinates"}
+
+exactSolsData["WilsSolution", "DefaultCoordinates"] = "CanonicalCoordinates"
+ 
+exactSolsData["WilsSolution", "IsIDEAL"] = False
+ 
+exactSolsData["WilsSolution", "ParameterAssumptions"] = Null
+ 
+exactSolsData["WilsSolution", "ParameterNames"] = {}
+ 
+exactSolsData["WilsSolution", {"CanonicalCoordinates", "CoordinateAssumptions"}] = 
+	Function[{coords, params, scfuncs},
+        With[{u = coords[[1]], wx = coords[[2]], x = coords[[3]], y = 
+            coords[[4]], f = scfuncs[[1]]},
+            x > 0 && f[u] >  0
+        ]
+    ]
+ 
+exactSolsData["WilsSolution", {"CanonicalCoordinates", "CoordinateNames"}] = {"u", "w", "x", "y"}
+
+exactSolsData["WilsSolution", {"CanonicalCoordinates", "ParameterAssumptions"}] = Null
+ 
+exactSolsData["WilsSolution", {"CanonicalCoordinates", "ParameterNames"}] = {}
+ 
+exactSolsData["WilsSolution", {"CanonicalCoordinates", "ScalarFunctionNames"}] = {"f"}
+
+exactSolsData["WilsSolution", {"CanonicalCoordinates", "ScalarFunctionValues"}] = 
+	Function[{coords, params, scfuncs},
+        With[{u = coords[[1]], w = coords[[2]], x = coords[[3]], 
+        y = coords[[4]], f = scfuncs[[1]]},	
+			{Function[{u}, f[u]]}
+		]
+	]
+ 
+exactSolsData["WilsSolution", {"CanonicalCoordinates", "Metric"}] = 
+    Function[{coords, params, scfuncs}, 
+    	With[{u = coords[[1]], w = coords[[2]], x = coords[[3]], y = coords[[4]], f = scfuncs[[1]]}, 
+    		{
+				{-2*f[u]*x*(x^2 + y^2) + w^2, x, w, 0}, 
+				{-x, 0, 0, 0}, 
+        		{w, 0, 1, 0}, 
+				{0, 0, 0, 1}
+			}
+		]
+	]
+ 
+
+defaultcoordinates["WilsSolution"] = "CanonicalCoordinates"
 
 (* ::Section:: *)
 (* xActSolutionData *)
