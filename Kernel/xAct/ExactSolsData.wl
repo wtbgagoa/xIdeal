@@ -2104,7 +2104,7 @@ exactSolsData["WilsSolution", {"CanonicalCoordinates", "Metric"}] =
     Function[{coords, params, scfuncs}, 
     	With[{u = coords[[1]], w = coords[[2]], x = coords[[3]], y = coords[[4]], f = scfuncs[[1]]}, 
     		{
-				{-2*f[u]*x*(x^2 + y^2) + w^2, x, w, 0}, 
+				{-2*f[u]*x*(x^2 + y^2) + w^2, -x, w, 0}, 
 				{-x, 0, 0, 0}, 
         		{w, 0, 1, 0}, 
 				{0, 0, 0, 1}
