@@ -3135,9 +3135,10 @@ Catch @
 							z1 = simplf@ symbolicRe[z^3 Dagger[w^8]];
 							z2 = simplf@ symbolicRe[w^3 Dagger[z]];
 							modz = simplf@ symbolicComplexNorm2[z];
-							If[SymbolicPositiveQ[-z1 / (18 z2 - modz)^3, opts],
+							If[SymbolicPositiveQ[simplf[-z1 / (18 z2 - modz)^3], opts],
 								Print["Kerr"];
-								True
+								True,
+								False
 							],
 							False
 						],

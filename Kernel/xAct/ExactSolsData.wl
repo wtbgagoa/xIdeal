@@ -168,6 +168,7 @@ allcoordinatesystems = {
 	"HarmonicCoordinates",
 	"HypersphericalCoordinates",
  	"IsotropicCoordinates",
+	"KlotschStroblCoordinates",
 	"PlanarCoordinates",
   	"ReducedCircumferencePolarCoordinates",
  	"SchwarzschildCoordinates",
@@ -1706,7 +1707,7 @@ defaultcoordinates["RobinsonTrautman"] = "ComplexCoordinates"
 (* Schwarzschild in Schwarzschild coordinates *)
 exactSolsData["Schwarzschild", "Classes"] = {"PetrovTypeD", "Static", "SphericalSymmetry", "Vacuum", "VacuumTypeD"}
 
-exactSolsData["Schwarzschild", "CoordinateSystems"] = {"SchwarzschildCoordinates", "IsotropicCoordinates", "HarmonicCoordinates"}
+exactSolsData["Schwarzschild", "CoordinateSystems"] = {"SchwarzschildCoordinates", "IsotropicCoordinates", "HarmonicCoordinates", "KlotschStroblCoordinates"}
 
 exactSolsData["Schwarzschild", "DefaultCoordinates"] = "SchwarzschildCoordinates"
 
@@ -1718,7 +1719,7 @@ exactSolsData["Schwarzschild", "IsIDEAL"] = True
 
 exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "CoordinateNames"}] = {"t", "r", "\[Theta]", "\[Phi]"}
 
-exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "CoordinateAssumptions"}] = #[[2]] > 0 && Pi > #[[3]] > 0 &
+exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "CoordinateAssumptions"}] = -Infinity < #[[1]] < Infinity && #[[2]] > 0 && Pi > #[[3]] > 0 && 0 < #[[4]] < 2 Pi &
 
 exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "ParameterNames"}] = exactSolsData["Schwarzschild", "ParameterNames"]
 
@@ -1850,6 +1851,45 @@ exactSolsData["Schwarzschild", {"HarmonicCoordinates", "ScalarFunctionValues"}] 
 			]
         ]
     ]
+
+(* ::Subsection:: *)
+(* Schwarzschild in Klotsch-Ströbl coordinates *)
+
+exactSolsData["Schwarzschild", {"KlotschStroblCoordinates", "ParameterNames"}] = {"m"}
+
+exactSolsData["Schwarzschild", {"KlotschStroblCoordinates", "ParameterAssumptions"}] =
+    Function[{coords, params, scfuncs},
+        With[{m = params[[1]]},
+            m > 0
+        ]
+    ]
+
+exactSolsData["Schwarzschild", {"KlotschStroblCoordinates", "ScalarFunctionNames"}] = { }
+
+exactSolsData["Schwarzschild", {"KlotschStroblCoordinates", "CoordinateNames"}] = {"x", "y", "\[Theta]", "\[Phi]"}
+
+exactSolsData["Schwarzschild", {"KlotschStroblCoordinates", "CoordinateAssumptions"}] =
+    Function[{coords, params, scfuncs},
+        With[{x = coords[[1]], y = coords[[2]], theta = coords[[3]], 
+		phi = coords[[4]], m = params[[1]]},
+                m >= 0 && 2 m + x y > 0 && Pi > theta > 0 && 0 < phi < 2 Pi
+        ]
+    ]
+
+exactSolsData["Schwarzschild", {"KlotschStroblCoordinates", "Metric"}] =
+  Function[{coords, params, scfuncs},
+    With[{x = coords[[1]], y = coords[[2]], theta = coords[[3]], phi = coords[[4]], m = params[[1]]},
+      (* build the metric *)
+      {
+		{8 m y^2 / (2 m + x y), 4 m, 0, 0}, 
+		{4 m, 0, 0, 0}, 
+		{0, 0, (2 m + x y)^2, 0}, 
+		{0, 0, 0, (2 m + x y)^2 Sin[theta]^2}
+	  }
+    ]
+  ];
+
+exactSolsData["Schwarzschild", {"KlotschStroblCoordinates", "ScalarFunctionValues"}] = {}
 
 (* ::Subsection:: *)
 (* Stephani in adapted coordinates *)
@@ -2144,7 +2184,7 @@ iGRExactSolsData[
 Options[exactSolMetricCompute] = {"ParameterNames" -> {}, "ParameterValues" -> {}, "ScalarFunctionValues" -> {}}
 
 exactSolMetricCompute[sol_?metricQ, {coordsys_?coordinatesystemQ, chart_?ChartQ}, obj_, {opts1 : OptionsPattern[exactSolMetricCompute]}, {opts : OptionsPattern[MetricCompute]}] :=
-	Module[{coords, consts, constvalues, scalars, ctensormetric, signature, covd, pdchart, output},
+	Module[{coords, constvalues, scalars, ctensormetric, signature, covd, pdchart, output},
 		coords = ScalarsOfChart[chart];
 		constvalues = OptionValue[exactSolMetricCompute, {opts1}, "ParameterValues"];
 		scalars = OptionValue[exactSolMetricCompute, {opts1}, "ScalarFunctionValues"];
