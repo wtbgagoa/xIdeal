@@ -71,6 +71,7 @@ allmetrics = {
 	"StephaniThermodynamicSpherical",
     "SzekeresSzafronI",
     "SzekeresSzafronII",
+	"Vaidya",
     "WilsSolution",
 	"WindmillI"
 }
@@ -803,9 +804,9 @@ exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "CoordinateNa
 
 exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "CoordinateAssumptions"}] = #[[2]] > 0 && Pi > #[[3]] > 0 &
 
-exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "ParameterNames"}] = exactSolsData["GeneralSpherical", "ParameterNames"]
+exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "ParameterNames"}] = exactSolsData["GeneralSphericalSymmetry", "ParameterNames"]
 
-exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "ParameterAssumptions"}] = exactSolsData["GeneralSpherical", "ParameterAssumptions"]
+exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "ParameterAssumptions"}] = exactSolsData["GeneralSphericalSymmetry", "ParameterAssumptions"]
 
 exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "ScalarFunctionNames"}] = {"\[Lambda]", "\[Mu]", "\[Nu]"}
 
@@ -2100,6 +2101,61 @@ exactSolsData["StephaniThermodynamicSpherical", {"SphericalCoordinates", "Scalar
 	]
 
 defaultcoordinates["StephaniThermodynamicSpherical"] = "SphericalCoordinates"
+
+(* ::Subsection:: *)
+(* Vaidya in spherical coordinates *)
+
+exactSolsData["Vaidya", "Classes"] = {"SphericalSymmetry"}
+
+exactSolsData["Vaidya", "CoordinateSystems"] = {"SphericalCoordinates"} 
+
+exactSolsData["Vaidya", "DefaultCoordinates"] = "SphericalCoordinates"
+
+exactSolsData["Vaidya", "ParameterNames"] = {}
+
+exactSolsData["Vaidya", "ParameterAssumptions"] = Null
+
+exactSolsData["Vaidya", "IsIDEAL"] = False
+
+exactSolsData["Vaidya", {"SphericalCoordinates", "CoordinateNames"}] = {"t", "r", "\[Theta]", "\[Phi]"}
+
+exactSolsData["Vaidya", {"SphericalCoordinates", "CoordinateAssumptions"}] = -Infinity < #[[1]] < Infinity && #[[2]] > 0 && Pi > #[[3]] > 0 && 0 < #[[4]] < 2 Pi &
+
+exactSolsData["Vaidya", {"SphericalCoordinates", "ParameterNames"}] = exactSolsData["Vaidya", "ParameterNames"]
+
+exactSolsData["Vaidya", {"SphericalCoordinates", "ParameterAssumptions"}] = exactSolsData["Vaidya", "ParameterAssumptions"]
+
+exactSolsData["Vaidya", {"SphericalCoordinates", "ScalarFunctionNames"}] = {"M"}
+
+defaultcoordinates["Vaidya"] = "SphericalCoordinates"
+
+(* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
+
+exactSolsData["Vaidya", {"SphericalCoordinates", "Metric"}] =
+	Function[{coords, params, funcs},
+		With[{mass = funcs[[1]], t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]]},
+			{
+				{-1 + (2 mass[t]) / r, 1, 0, 0}, 
+				{1, 0, 0, 0}, 
+				{0, 0, r^2, 0}, 
+				{0, 0, 0, r^2 Sin[theta]^2}
+			}
+		] 
+	]
+
+exactSolsData["Vaidya", {"SphericalCoordinates", "ScalarFunctionValues"}] =
+	Function[{coords, params, funcs},
+		With[{mass = funcs[[1]], t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]]},
+			Module[{mass},
+				mass = Function[{t}, mass[t]];
+				{
+					mass
+				}
+			]
+		]
+	]
+
+defaultcoordinates["Vaidya"] = "SphericalCoordinates"
 
 (* ::Subsection:: *)
 (* Wils Solution *)
