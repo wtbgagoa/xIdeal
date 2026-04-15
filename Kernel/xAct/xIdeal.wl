@@ -1776,9 +1776,9 @@ weylConcomitant["PTIIConnectionTensor"][metric_CTensor, opts : OptionsPattern[]]
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 8];
 		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
-		scU = weylConcomitant["PTIICanonicalBivector2"];
-		scLp = weylConcomitant["PTIICanonicalBivector1"];
-		G2form = metricConcomitant["G2Form"];
+		scU = weylConcomitant["PTIICanonicalBivector2"][metric, opts];
+		scLp = weylConcomitant["PTIICanonicalBivector1"][metric, opts];
+		G2form = metricConcomitant["G2Form"][metric, opts];
 		cd = CovDOfMetric[metric];
 		X = OptionValue[weylConcomitant, {opts}, "Bivector"];
 		time = AbsoluteTime[];
@@ -1834,9 +1834,9 @@ weylConcomitant["PTIIIConnectionTensor"][metric_CTensor, opts : OptionsPattern[]
 		cart = Part[metric, 2, 1, -1];
 		{a1, b1, c1, d1, e1, f1, g1, h1} = GetIndicesOfVBundle[VBundleOfBasis @ cart, 8];
 		{simplf, vb} = OptionValue[weylConcomitant, {opts}, {PSimplify, Verbose}];
-		scU = weylConcomitant["PTIIICanonicalBivector2"];
-		scLp = weylConcomitant["PTIIICanonicalBivector1"];
-		G2form = metricConcomitant["G2Form"];
+		scU = weylConcomitant["PTIIICanonicalBivector2"][metric, opts];
+		scLp = weylConcomitant["PTIIICanonicalBivector1"][metric, opts];
+		G2form = metricConcomitant["G2Form"][metric, opts];
 		cd = CovDOfMetric[metric];
 		X = OptionValue[weylConcomitant, {opts}, "Bivector"];
 		time = AbsoluteTime[];
@@ -3380,7 +3380,7 @@ KustaanheimoQvistQ[metric_CTensor, opts : OptionsPattern[]] :=
 (*TODO: Add the documentation of this function*)
 (*TODO: If no R-frame is given, depending on the Petrov Type more options will be necessary*)
 (*TODO: Fix the fact that weylConcomitants do not recognize the "Rframe" option*)
-Options[ConnectionTensor] = {Rframe -> {Null, Null, Null, Null}, PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True}
+Options[ConnectionTensor] = {Rframe -> {Null, Null, Null, Null}, PSimplify -> $CVSimplify, Parallelize -> True, Verbose -> True, "Bivector" -> Null}
 
 ConnectionTensor[metric_CTensor, opts : OptionsPattern[]] :=
 	Catch@ 
