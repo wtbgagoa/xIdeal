@@ -170,6 +170,7 @@ allcoordinatesystems = {
 	"HarmonicCoordinates",
 	"HypersphericalCoordinates",
  	"IsotropicCoordinates",
+	"KerrSchildCoordinates",
 	"KlotschStroblCoordinates",
 	"PlanarCoordinates",
   	"ReducedCircumferencePolarCoordinates",
@@ -1886,6 +1887,39 @@ exactSolsData["Schwarzschild", {"HarmonicCoordinates", "ScalarFunctionValues"}] 
 			]
         ]
     ]
+
+(* ::Subsection:: *)
+(* Schwarzschild in Kerr-Schild coordinates *)
+exactSolsData["Schwarzschild", {"KerrSchildCoordinates", "CoordinateNames"}] = {"t", "r", "\[Theta]", "\[Phi]"}
+
+exactSolsData["Schwarzschild", {"KerrSchildCoordinates", "CoordinateAssumptions"}] = -Infinity < #[[1]] < Infinity && #[[2]] > 0 && Pi > #[[3]] > 0 && 0 < #[[4]] < 2 Pi &
+
+exactSolsData["Schwarzschild", {"KerrSchildCoordinates", "ParameterNames"}] = {"m", "\[Epsilon]"}
+
+exactSolsData["Schwarzschild", {"KerrSchildCoordinates", "ParameterAssumptions"}] = 
+	Function[{coords, params, scfuncs},
+        With[{m = params[[1]], epsilon = params[[2]]},
+            m > 0 && (epsilon === 1 || epsilon === -1)
+        ]
+    ]
+
+exactSolsData["Schwarzschild", {"KerrSchildCoordinates", "ScalarFunctionNames"}] = {}
+
+exactSolsData["Schwarzschild", {"KerrSchildCoordinates", "ScalarFunctionValues"}] = {}
+
+(* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
+
+exactSolsData["Schwarzschild", {"KerrSchildCoordinates", "Metric"}] = 
+	Function[{coords, params, funcs},
+		With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]], m = params[[1]], epsilon = params[[2]]},
+			{
+				{-(1 - (2 m) / r), 2 m epsilon / r, 0, 0}, 
+				{2 m epsilon / r, 1 + 2 m / r, 0, 0}, 
+				{0, 0, r^2, 0}, 
+				{0, 0, 0, r^2 Sin[theta]^2}
+			} 
+		]
+	]
 
 (* ::Subsection:: *)
 (* Schwarzschild in Klotsch-Ströbl coordinates *)
