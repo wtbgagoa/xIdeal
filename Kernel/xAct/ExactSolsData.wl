@@ -164,6 +164,7 @@ allcoordinatesystems = {
 	"BoyerLindquistCoordinates",
 	"CanonicalCoordinates",
 	"ComplexCoordinates",
+	"EddingtonFinkelsteinCoordinates",
 	"ExpansionGradientAdaptedCoordinates",
 	"GroupGeneratorsAdaptedCoordinates",
 	"HarmonicCoordinates",
@@ -1708,7 +1709,7 @@ defaultcoordinates["RobinsonTrautman"] = "ComplexCoordinates"
 (* Schwarzschild in Schwarzschild coordinates *)
 exactSolsData["Schwarzschild", "Classes"] = {"PetrovTypeD", "Static", "SphericalSymmetry", "Vacuum", "VacuumTypeD"}
 
-exactSolsData["Schwarzschild", "CoordinateSystems"] = {"SchwarzschildCoordinates", "IsotropicCoordinates", "HarmonicCoordinates", "KlotschStroblCoordinates"}
+exactSolsData["Schwarzschild", "CoordinateSystems"] = {"EddingtonFinkelsteinCoordinates", "HarmonicCoordinates", "IsotropicCoordinates", "KlotschStroblCoordinates", "SchwarzschildCoordinates"}
 
 exactSolsData["Schwarzschild", "DefaultCoordinates"] = "SchwarzschildCoordinates"
 
@@ -1738,6 +1739,39 @@ exactSolsData["Schwarzschild", {"SchwarzschildCoordinates", "Metric"}] =
 	Function[{coords, params, funcs},
 		With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]], m = params[[1]]},
 			DiagonalMatrix[{-(1 - (2 m) / r), (1 - (2 m) / r)^-1, r^2, r^2 Sin[theta]^2}] 
+		]
+	]
+
+(* ::Subsection:: *)
+(* Schwarzschild in Eddington-Finkelstein coordinates *)
+exactSolsData["Schwarzschild", {"EddingtonFinkelsteinCoordinates", "CoordinateNames"}] = {"v", "r", "\[Theta]", "\[Phi]"}
+
+exactSolsData["Schwarzschild", {"EddingtonFinkelsteinCoordinates", "CoordinateAssumptions"}] = -Infinity < #[[1]] < Infinity && #[[2]] > 0 && Pi > #[[3]] > 0 && 0 < #[[4]] < 2 Pi &
+
+exactSolsData["Schwarzschild", {"EddingtonFinkelsteinCoordinates", "ParameterNames"}] = {"m", "\[Epsilon]"}
+
+exactSolsData["Schwarzschild", {"EddingtonFinkelsteinCoordinates", "ParameterAssumptions"}] = 
+	Function[{coords, params, scfuncs},
+        With[{m = params[[1]], epsilon = params[[2]]},
+            m > 0 && (epsilon === 1 || epsilon === -1)
+        ]
+    ]
+
+exactSolsData["Schwarzschild", {"EddingtonFinkelsteinCoordinates", "ScalarFunctionNames"}] = {}
+
+exactSolsData["Schwarzschild", {"EddingtonFinkelsteinCoordinates", "ScalarFunctionValues"}] = {}
+
+(* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
+
+exactSolsData["Schwarzschild", {"EddingtonFinkelsteinCoordinates", "Metric"}] = 
+	Function[{coords, params, funcs},
+		With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]], m = params[[1]], epsilon = params[[2]]},
+			{
+				{-(1 - (2 m) / r), epsilon, 0, 0}, 
+				{epsilon, 0, 0, 0}, 
+				{0, 0, r^2, 0}, 
+				{0, 0, 0, r^2 Sin[theta]^2}
+			} 
 		]
 	]
 
