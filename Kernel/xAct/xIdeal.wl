@@ -1547,7 +1547,7 @@ weylConcomitant["PTIIICanonicalBivector2"][metric_CTensor, opts : OptionsPattern
 		g2form = metricConcomitant["G2Form"][metric, opts];
   		scrh = weylConcomitant["PTIIICanonicalBivector1"][metric, opts];
 		time = AbsoluteTime[];
-		cbv = (2 1/2 scrh[i1, j1] X[-i1, -j1] 1/2 weylselfdual[-a1, -b1, -i1, -j1] X[i1, j1] - 1/4 weylselfdual[-i1, -j1, -k1, -l1] X[i1, j1] X[k1, l1] scrh[-a1, -b1]) 
+		cbv = ( 1/2 scrh[i1, j1] X[-i1, -j1] weylselfdual[-a1, -b1, -k1, -l1] X[k1, l1] - 1/4 weylselfdual[-i1, -j1, -k1, -l1] X[i1, j1] X[k1, l1] scrh[-a1, -b1]) 
        			/ (2 (1/2 scrh[-i1, -j1] X[i1, j1])^2);
 		If[vb, 
 			Print["** ReportCompute: computing Weyl concomitant \"PTIIICanonicalBivector2\" in ", AbsoluteTime[] - time, " seconds:"]
