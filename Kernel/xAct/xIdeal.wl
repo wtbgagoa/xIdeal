@@ -1851,11 +1851,11 @@ weylConcomitant["PTIIIConnectionTensor"][metric_CTensor, opts : OptionsPattern[]
 			Print["** ReportCompute: applying  ", simplf, " to Weyl concomitant \"scStensor\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
 		time = AbsoluteTime[];
-		scLm = (scS[-a1, -b1, -c1, -d1] X[a1, b1] X[c1, d1] scLp[-e1, -f1, -g1, -h1] - 2 scLp[-e1, -f1, -a1, -b1] X[a1, b1] scS[-g1, -h1, -c1, -d1] X[c1, d1]) / (2 scLp[-a1, -b1, -c1, -d1] X[c1, d1] scLp[a1, b1, -e1, -f1] X[e1, f1]);
+		scLm = (scS[-a1, -b1, -c1, -d1] X[a1, b1] X[c1, d1] scLp[-e1, -f1] - 2 scLp[-a1, -b1] X[a1, b1] scS[-e1, -f1, -c1, -d1] X[c1, d1]) / (2 scLp[-c1, -d1] X[c1, d1] scLp[a1, b1] X[-a1, -b1]);
 		If[vb, 
 			Print["** ReportCompute: computing Weyl concomitant \"PTIIINullEigenBivectorm\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
-		scLm = HeadOfTensor[scLm, {-e1, -f1, -g1, -h1}];
+		scLm = HeadOfTensor[scLm, {-e1, -f1}];
 		time = AbsoluteTime[];
 		scLm = simplf[scLm];
 		If[vb,
