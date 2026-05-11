@@ -1521,7 +1521,7 @@ weylConcomitant["PTIIICanonicalBivector1"][metric_CTensor, opts : OptionsPattern
     	X = OptionValue[weylConcomitant, {opts}, "Bivector"];
       	weylselfdual2 = weylConcomitant["WeylSelfDual2"][metric, opts];
 		time = AbsoluteTime[];
-		cbv = weylselfdual2[-a1, -b1, -i1, -j1] X[i1, j1] / Sqrt[-weylselfdual2[-i1, -j1, -k1, -l1] X[i1, j1] X[k1, l1]];
+		cbv = -weylselfdual2[-a1, -b1, -i1, -j1] X[i1, j1] / Sqrt[-weylselfdual2[-i1, -j1, -k1, -l1] X[i1, j1] X[k1, l1]];
 		If[vb, 
 			Print["** ReportCompute: computing Weyl concomitant \"PTIIICanonicalBivector1\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
@@ -1548,7 +1548,7 @@ weylConcomitant["PTIIICanonicalBivector2"][metric_CTensor, opts : OptionsPattern
   		scrh = weylConcomitant["PTIIICanonicalBivector1"][metric, opts];
 		time = AbsoluteTime[];
 		cbv = (2 1/2 scrh[i1, j1] X[-i1, -j1] 1/2 weylselfdual[-a1, -b1, -i1, -j1] X[i1, j1] - 1/4 weylselfdual[-i1, -j1, -k1, -l1] X[i1, j1] X[k1, l1] scrh[-a1, -b1]) 
-       			/ (2 (1/4 scrg[-i1, -j1, -k1, -l1] scrh[i1, j1] X[k1, l1])^2);
+       			/ (2 (1/2 scrh[-i1, -j1] X[i1, j1])^2);
 		If[vb, 
 			Print["** ReportCompute: computing Weyl concomitant \"PTIIICanonicalBivector2\" in ", AbsoluteTime[] - time, " seconds:"]
 		];
