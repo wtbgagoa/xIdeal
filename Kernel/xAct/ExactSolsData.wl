@@ -172,6 +172,7 @@ allcoordinatesystems = {
  	"IsotropicCoordinates",
 	"KerrSchildCoordinates",
 	"KlotschStroblCoordinates",
+	"KruskalSzekeresCoordinates",
 	"PlanarCoordinates",
   	"ReducedCircumferencePolarCoordinates",
  	"SchwarzschildCoordinates",
@@ -1959,6 +1960,48 @@ exactSolsData["Schwarzschild", {"KlotschStroblCoordinates", "Metric"}] =
   ];
 
 exactSolsData["Schwarzschild", {"KlotschStroblCoordinates", "ScalarFunctionValues"}] = {}
+
+(* ::Subsection:: *)
+(* Schwarzschild in Kruskal-Szekeres coordinates coordinates *)
+
+exactSolsData["Schwarzschild", {"KruskalSzekeresCoordinates", "ParameterNames"}] = {"m"}
+
+exactSolsData["Schwarzschild", {"KruskalSzekeresCoordinates", "ParameterAssumptions"}] =
+    Function[{coords, params, scfuncs},
+        With[{m = params[[1]]},
+            m > 0
+        ]
+    ]
+
+exactSolsData["Schwarzschild", {"KruskalSzekeresCoordinates", "ScalarFunctionNames"}] = {"R"}
+
+exactSolsData["Schwarzschild", {"KruskalSzekeresCoordinates", "CoordinateNames"}] = {"T", "X", "\[Theta]", "\[Phi]"}
+
+exactSolsData["Schwarzschild", {"KruskalSzekeresCoordinates", "CoordinateAssumptions"}] =
+    Function[{coords, params, scfuncs},
+        With[{T = coords[[1]], X = coords[[2]], theta = coords[[3]], phi = coords[[4]], m = params[[1]], R = scfuncs[[1]]},
+               X^2 - T^2 == (R[T, X] / (2 m) - 1) E^(R[T, X]/(2 m))  && Pi > theta > 0 && 0 < phi < 2 Pi
+        ]
+    ]
+
+exactSolsData["Schwarzschild", {"KruskalSzekeresCoordinates", "Metric"}] =
+  Function[{coords, params, scfuncs},
+    With[{T = coords[[1]], X = coords[[2]], theta = coords[[3]], phi = coords[[4]], m = params[[1]], R = scfuncs[[1]]},
+      {
+		{-32 m^3 / R[T,X] Exp[-R[T, X]/(2 m)], 0, 0, 0}, 
+		{0, 32 m^3 / R[T,X] Exp[-R[T, X]/(2 m)], 0, 0}, 
+		{0, 0, R[T, X]^2, 0}, 
+		{0, 0, 0, (R[T, X])^2 Sin[theta]^2}
+	  }
+    ]
+  ];
+
+exactSolsData["Schwarzschild", {"KruskalSzekeresCoordinates", "ScalarFunctionValues"}] = 
+Function[{coords, params, scfuncs},
+        With[{T = coords[[1]], X = coords[[2]], theta = coords[[3]], phi = coords[[4]], m = params[[1]], R = scfuncs[[1]]},
+			{Function[{T, X}, R[T, X]]}
+        ]
+    ];
 
 (* ::Subsection:: *)
 (* Stephani in adapted coordinates *)
