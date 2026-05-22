@@ -1711,7 +1711,7 @@ defaultcoordinates["RobinsonTrautman"] = "ComplexCoordinates"
 (* Schwarzschild in Schwarzschild coordinates *)
 exactSolsData["Schwarzschild", "Classes"] = {"PetrovTypeD", "Static", "SphericalSymmetry", "Vacuum", "VacuumTypeD"}
 
-exactSolsData["Schwarzschild", "CoordinateSystems"] = {"EddingtonFinkelsteinCoordinates", "HarmonicCoordinates", "IsotropicCoordinates", "KlotschStroblCoordinates", "SchwarzschildCoordinates"}
+exactSolsData["Schwarzschild", "CoordinateSystems"] = {"EddingtonFinkelsteinCoordinates", "HarmonicCoordinates", "IsotropicCoordinates", "KlotschStroblCoordinates", "KruskalSzekeresCoordinates", "SchwarzschildCoordinates"}
 
 exactSolsData["Schwarzschild", "DefaultCoordinates"] = "SchwarzschildCoordinates"
 
