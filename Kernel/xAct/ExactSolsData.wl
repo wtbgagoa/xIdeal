@@ -55,9 +55,7 @@ allmetrics = {
 	"Kerr",
  	"KerrNUT",
 	"LemaitreTolman",
-	"TaubI",
-	"TaubII",
-	"ThermodynamicStephani",
+	"Minkowski",
 	"OsvathKoutrasI",
 	"OsvathKoutrasII",
 	"OsvathKoutrasIII",
@@ -71,6 +69,9 @@ allmetrics = {
 	"StephaniThermodynamicSpherical",
     "SzekeresSzafronI",
     "SzekeresSzafronII",
+	"TaubI",
+	"TaubII",
+	"ThermodynamicStephani",
 	"Vaidya",
     "WilsSolution",
 	"WindmillI"
@@ -173,6 +174,7 @@ allcoordinatesystems = {
 	"KerrSchildCoordinates",
 	"KlotschStroblCoordinates",
 	"KruskalSzekeresCoordinates",
+	"MinkowskiCoordinates",
 	"PlanarCoordinates",
   	"ReducedCircumferencePolarCoordinates",
  	"SchwarzschildCoordinates",
@@ -749,7 +751,7 @@ exactSolsData["Friedmann", {"ReducedCircumferencePolarCoordinates", "ScalarFunct
 defaultcoordinates["Friedmann"] = "ReducedCircumferencePolarCoordinates"
 
 (* ::Subsection:: *)
-(* Friedmann in hypershpherical coordinates *)
+(* Friedmann in hyperspherical coordinates *)
 
 exactSolsData["Friedmann", {"HypersphericalCoordinates", "CoordinateNames"}] = {"t", "r", "\[Theta]", "\[Phi]"}
 
@@ -846,8 +848,6 @@ exactSolsData["GeneralSphericalSymmetry", {"SphericalCoordinates", "ScalarFuncti
 			]
 		]
 	]
-
-defaultcoordinates["GeneralSphericalSymmetry"] = "SphericalCoordinates"
 
 (* ::Subsection:: *)
 (* GeneralSzekeresSzafron metric in planar coordinates *)
@@ -1295,6 +1295,80 @@ exactSolsData["LemaitreTolman", {"SphericalCoordinates", "ScalarFunctionValues"}
 	]
 
 defaultcoordinates["LemaitreTolman"] = "SphericalCoordinates"
+
+(* ::Subsection:: *)
+(* Minkowski metric in spherical coordinates *)
+
+exactSolsData["Minkowski", "Classes"] = {"PerfectFluid", "PetrovTypeD", 
+	"ThermodynamicPerfectFluid", "SphericalSymmetry", "Warped22"}
+
+exactSolsData["Minkowski", "CoordinateSystems"] = {"MinkowskiCoordinates", "SphericalCoordinates"} 
+
+exactSolsData["Minkowski", "DefaultCoordinates"] = "MinkowskiCoordinates"
+
+exactSolsData["Minkowski", "ParameterNames"] = {}
+
+exactSolsData["Minkowski", "ParameterAssumptions"] = Null
+
+exactSolsData["Minkowski", "IsIDEAL"] = True
+
+exactSolsData["Minkowski", {"MinkowskiCoordinates", "CoordinateNames"}] = {"t", "x", "y", "z"}
+
+exactSolsData["Minkowski", {"MinkowskiCoordinates", "CoordinateAssumptions"}] = -Infinity <#[[1]] < Infinity && 
+																				-Infinity <#[[2]] < Infinity &&
+																				-Infinity <#[[3]] < Infinity &&
+																				-Infinity <#[[4]] < Infinity &
+
+exactSolsData["Minkowski", {"MinkowskiCoordinates", "ParameterNames"}] = exactSolsData["Minkowski", "ParameterNames"]
+
+exactSolsData["Minkowski", {"MinkowskiCoordinates", "ParameterAssumptions"}] = exactSolsData["Minkowski", "ParameterAssumptions"]
+
+exactSolsData["Minkowski", {"MinkowskiCoordinates", "ScalarFunctionNames"}] = {}
+
+(* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
+
+exactSolsData["Minkowski", {"MinkowskiCoordinates", "Metric"}] =
+	Function[{coords, params, funcs},
+		With[{t = coords[[1]], x = coords[[2]], y = coords[[3]], z = coords[[4]]},
+			DiagonalMatrix[
+				{
+					-1, 
+					1, 
+					1, 
+					1
+				}
+			]
+		] 
+	]
+
+exactSolsData["Minkowski", {"SphericalCoordinates", "CoordinateNames"}] = {"t", "r", "\[Theta]", "\[Phi]"}
+
+exactSolsData["Minkowski", {"SphericalCoordinates", "CoordinateAssumptions"}] = #[[2]] > 0 && Pi > #[[3]] > 0 &
+
+exactSolsData["Minkowski", {"SphericalCoordinates", "ParameterNames"}] = exactSolsData["Minkowski", "ParameterNames"]
+
+exactSolsData["Minkowski", {"SphericalCoordinates", "ParameterAssumptions"}] = exactSolsData["Minkowski", "ParameterAssumptions"]
+
+exactSolsData["Minkowski", {"SphericalCoordinates", "ScalarFunctionNames"}] = {}
+
+
+(* The syntax is exactSolsData[args__][{coords_List, parameters_List, functions_List}] *)
+
+exactSolsData["Minkowski", {"SphericalCoordinates", "Metric"}] =
+	Function[{coords, params, funcs},
+		With[{t = coords[[1]], r = coords[[2]], theta = coords[[3]], phi = coords[[4]]},
+			DiagonalMatrix[
+				{
+					-1, 
+					1, 
+					r^2, 
+					r^2 Sin[theta]^2
+				}
+			]
+		] 
+	]
+
+defaultcoordinates["Minkowski"] = "MinkowskiCoordinates"
 
 (* ::Subsection:: *)
 (* Osvath-Koutras I *)
