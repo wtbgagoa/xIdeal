@@ -1,5 +1,11 @@
 (* ::Package:: *)
 
-PacletUninstall["xIdeal"]
-xIdeal=CreatePacletArchive[DirectoryName[$InputFileName]]
-PacletInstall[xIdeal]
+(* Build the authored documentation before installing the paclet. *)
+Needs["PacletTools`"];
+With[{result = PacletBuild[DirectoryName[$InputFileName]]},
+	If[MatchQ[result, _Success],
+		xIdeal = result["PacletArchive"];
+		PacletInstall[xIdeal, ForceVersionInstall -> True],
+		result
+	]
+]

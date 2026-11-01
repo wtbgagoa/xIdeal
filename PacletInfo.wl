@@ -9,7 +9,10 @@ PacletObject[
 				Context -> {"xAct`xIdeal`", "xAct`ExactSolsData`"}
 			},
 			{
-			"Documentation"
+			"Documentation",
+			"Language" -> "English",
+			"MainPage" -> "Guides/xIdeal",
+			"LinkBase" -> "xIdeal"
 			}
 		},
 		"URL" -> "https://github.com/wtbgagoa/xIdeal/tree/main",
